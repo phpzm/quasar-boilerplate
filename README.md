@@ -4,7 +4,7 @@
 
 > Disclaimer: as estruturas são sugeridas e não uma forma obrigatória de se fazer as coisas
 
-## Por onde começar
+## Por onde começar?
 
 ### Você pode seguir as instruções da ferramenta (http://quasar-framework.org/guide/):
 
@@ -19,13 +19,13 @@ $ quasar dev
 $ docker-compose up
 ```
 
-### Como publicar o projeto
+## Como publicar o projeto?
 
-##### Local
+### Local
 ``` bash
 $ quasar build
 ```
-##### Docker
+### Docker
 ```bash
 $ docker exec -it network-node npm run build
 ```
