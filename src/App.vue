@@ -9,7 +9,15 @@
 /*
  * Root component
  */
-export default {}
+export default {
+  name: 'root',
+  data: () => ({
+    title: 'Title'
+  }),
+  created () {
+    window.document.title = this.title
+  }
+}
 </script>
 
 <style></style>

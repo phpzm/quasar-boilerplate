@@ -1,50 +1,62 @@
 <template>
-  <q-layout>
-    <!-- Header -->
-    <div slot="header" class="toolbar">
-      <!-- opens left-side drawer using its ref -->
-      <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()">
-        <i>menu</i>
-      </button>
-      <q-toolbar-title :padding="1">
-        Title
-      </q-toolbar-title>
-      <!-- opens right-side drawer using its ref -->
-      <button class="hide-on-drawer-visible" @click="$refs.rightDrawer.open()">
-        <i>menu</i>
-      </button>
-    </div>
-
-    <!-- Left-side Drawer -->
-    <q-drawer ref="leftDrawer">
-      <div class="toolbar">
-        <q-toolbar-title>
-          Drawer Title
-        </q-toolbar-title>
+  <div class="auth">
+    <app-layout :left="false" :right="false" :footer="false">
+      <div slot="content" class="row small-gutter form-container">
+        <div class="width-1of2" style="text-align: center">
+          <img src="/statics/logo.png" alt="logo" style="height: 200px">
+          <br>
+          <form @submit.prevent="submit" class="form" style="max-width: 420px; margin: 0 auto;">
+            <component :is="schemas.user.component" :schema="schemas.user" class="field"></component>
+            <component :is="schemas.password.component" :schema="schemas.password" class="field"></component>
+            <component :is="schemas.remember.component" :schema="schemas.remember" class="field"></component>
+            <div class="field">
+              <button class="primary raised full-width">Log In</button>
+            </div>
+          </form>
+        </div>
+        <div class="width-1of2">
+          <stars></stars>
+        </div>
       </div>
-      <div class="list no-border platform-delimiter">
-        <q-drawer-link icon="mail" :to="{path: '/', exact: true}">
-          Link
-        </q-drawer-link>
-      </div>
-    </q-drawer>
-    <!-- IF USING subRoutes only: -->
-    <router-view class="layout-view"></router-view>
-    <!-- OR ELSE, IF NOT USING subRoutes: -->
-    <div class="layout-view"></div>
-    <!-- Right-side Drawer -->
-    <q-drawer ref="rightDrawer">
-      ...
-    </q-drawer>
-    <!-- Footer -->
-    <div slot="footer" class="toolbar">
-      ....
-    </div>
-  </q-layout>
+    </app-layout>
+  </div>
 </template>
 
 <script type="text/javascript">
+  import AppLayout from 'modules/Common/Layout/AppLayout.vue'
+  import Stars from 'src/modules/Foolish/Stars.vue'
+
+  export default {
+    name: 'auth-index',
+    components: {
+      AppLayout, Stars
+    },
+    data: () => ({
+      schemas: {
+        user: {
+          component: 'field-text',
+          label: 'Login'
+        },
+        password: {
+          component: 'field-password',
+          label: 'Password'
+        },
+        remember: {
+          component: 'field-checkbox',
+          label: 'Remember'
+        }
+      }
+    }),
+    methods: {
+      submit () {
+        this.$router.push('/dashboard')
+      }
+    }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .auth
+    .form-container
+      width 100%
 </style>

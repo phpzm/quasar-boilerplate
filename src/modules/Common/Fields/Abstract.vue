@@ -1,11 +1,9 @@
 <template>
   <div :class="classNames">
-    <slot name="label">
-      <label :for="id" v-if="schema.label"> {{ label }} </label>
-    </slot>
     <slot name="component">
-      <input ref="input" :name="schema.name" :id="schema.id" :value="value"
+      <input ref="input" :name="schema.name" :id="schema.id" :value="value" :class="['full-width']"
              :disabled="schema.disabled" :placeholder="schema.placeholder" :title="schema.title"
+             :required="schema.required"
              @keydown="fieldKeyDown(arguments[0])"
              @keypress="fieldKeyPress(arguments[0])"
              @keyup="fieldKeyUp(arguments[0])"
@@ -18,14 +16,16 @@
              @paste="fieldPaste(arguments[0])"
              @blur="fieldBlur(arguments[0])"/>
     </slot>
+    <slot name="label">
+      <label :for="schema.id" v-if="schema.label">{{ label }}</label>
+    </slot>
     <slot name="error">
-
     </slot>
   </div>
 </template>
 
 <script type="text/javascript">
-  import {Utils} from 'quasar-framework'
+  import { Utils } from 'quasar-framework'
 
   const schema = {
     id: Utils.uid(),
@@ -34,8 +34,9 @@
     placeholder: '',
     mask: '',
     disabled: false,
-    required: false
+    required: true
   }
+
   const Abstract = {
     name: 'input-text',
     props: {
@@ -50,7 +51,7 @@
     data: () => ({}),
     computed: {
       classNames () {
-        return []
+        return ['floating-label']
       },
       label () {
         return this.schema.label + ' ' + (this.schema.required ? '*' : '')
