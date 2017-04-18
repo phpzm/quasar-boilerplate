@@ -4,6 +4,7 @@ module.exports = {
   // Webpack aliases
   aliases: {
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
+    themes: path.resolve(__dirname, '../themes'),
     src: path.resolve(__dirname, '../src'),
     assets: path.resolve(__dirname, '../src/assets'),
     modules: path.resolve(__dirname, '../src/modules')

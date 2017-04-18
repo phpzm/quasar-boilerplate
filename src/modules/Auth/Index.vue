@@ -3,7 +3,7 @@
     <app-layout :left="false" :right="false" :footer="false">
       <div slot="content" class="row small-gutter form-container">
         <div class="width-1of2" style="text-align: center">
-          <img src="/statics/logo.png" alt="logo" style="height: 200px">
+          <img src="/statics/logo.png" alt="logo" style="margin: 40px 0 0 0">
           <br>
           <form @submit.prevent="submit" class="form" style="max-width: 420px; margin: 0 auto;">
             <component :is="schemas.user.component" :schema="schemas.user" class="field"></component>
