@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-layout :left="true" :right="true" :footer="false"></app-layout>
+    <app-layout :left="true" :right="true" :footer="false" :flat="true"></app-layout>
   </div>
 </template>
 

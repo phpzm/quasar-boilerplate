@@ -4,7 +4,12 @@
     <div id="stars2"></div>
     <div id="stars3"></div>
     <div id="title">
-      <span>Fagoc</span><br><br><span>Network</span>
+      <span>Rápido</span>
+      <br>
+      <span>Elegante</span>
+      <br>
+      <span>Simples</span>
+      <br>
     </div>
   </div>
 </template>
@@ -92,7 +97,7 @@
 
     #title
       color: #FFF
-      text-align: center
+      text-align: right
       font-family: lato, sans-serif
       font-weight: 300
       font-size: 50px
@@ -102,7 +107,7 @@
       padding-left: 10px
 
       span
-        text-transform: uppercase
+        /*text-transform: uppercase*/
         background: -webkit-linear-gradient(white, #38495a)
         -webkit-background-clip: text
         -webkit-text-fill-color: transparent

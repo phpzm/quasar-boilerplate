@@ -1,12 +1,14 @@
 <template>
-  <q-layout>
+  <q-layout :class="classNames">
 
     <div v-if="header" slot="header" class="toolbar">
 
       <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()" v-if="left">
         <i>menu</i>
       </button>
+
       <app-toolbar></app-toolbar>
+
       <button @click="$refs.rightDrawer.open()" v-if="right">
         <i>menu</i>
       </button>
@@ -54,10 +56,18 @@
       footer: {
         type: Boolean,
         default: true
+      },
+      flat: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({}),
-    computed: {},
+    computed: {
+      classNames () {
+        return this.flat ? 'flat-header' : ''
+      }
+    },
     methods: {},
     mounted () {
     },
@@ -67,4 +77,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .flat-header
+    .layout-header
+      box-shadow none
 </style>

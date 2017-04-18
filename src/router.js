@@ -1,11 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import {router as Auth} from 'src/modules/Auth'
+import {router as Dashboard} from 'src/modules/Dashboard'
+
 Vue.use(VueRouter)
 
-function load (component) {
+const load = (component) => {
+  // noinspection ES6ModulesDependencies, JSUnresolvedVariable
   return () => System.import(`modules/${component}.vue`)
 }
+const configure = (routes) => {
+  return routes.map(route => {
+    route.component = load(route.component)
+    if (route.children) {
+      route.children = configure(route.children)
+    }
+    return route
+  })
+}
+
+const routes = configure([
+  ...Auth,
+  ...Dashboard,
+  { path: '*', component: 'Error404' }
+])
 
 export default new VueRouter({
   /*
@@ -19,10 +38,5 @@ export default new VueRouter({
    * If switching back to default "hash" mode, don't forget to set the
    * build publicPath back to '' so Cordova builds work again.
    */
-
-  routes: [
-    { path: '/', component: load('Auth/Index') }, // Default
-    { path: '/dashboard', component: load('Dashboard/Index') }, // Default
-    { path: '*', component: load('Error404') } // Not found
-  ]
+  routes
 })
