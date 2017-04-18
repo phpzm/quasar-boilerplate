@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 function load (component) {
-  return () => System.import(`components/${component}.vue`)
+  return () => System.import(`modules/${component}.vue`)
 }
 
 export default new VueRouter({
