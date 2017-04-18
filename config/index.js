@@ -32,7 +32,7 @@ module.exports = {
     env: require('./dev.env'),
     cssSourceMap: true,
     // auto open browser or not
-    openBrowser: true,
+    openBrowser: false,
     publicPath: '/',
     port: 8080,
 
