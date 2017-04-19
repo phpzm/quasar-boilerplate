@@ -4,7 +4,7 @@
       Header
     </div>
     <div class="app-container">
-      Content
+      Index
     </div>
   </div>
 </template>

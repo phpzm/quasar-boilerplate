@@ -17,7 +17,9 @@
     <app-drawer-left ref="leftDrawer" v-if="left"></app-drawer-left>
 
     <slot name="content">
-      <router-view class="layout-view"></router-view>
+      <transition name="slide">
+        <router-view class="layout-view"></router-view>
+      </transition>
     </slot>
 
     <app-drawer-right ref="rightDrawer" v-if="right"></app-drawer-right>
@@ -62,10 +64,19 @@
         default: false
       }
     },
-    data: () => ({}),
+    data: () => ({
+      scrolled: false
+    }),
     computed: {
       classNames () {
-        return this.flat ? 'flat-header' : ''
+        const classNames = []
+        if (this.flat) {
+          classNames.push('flat-header')
+        }
+        if (!this.scrolled) {
+          classNames.push('no-scroll')
+        }
+        return classNames
       }
     },
     methods: {},
@@ -78,6 +89,9 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .flat-header
+    &.no-scroll
+      .layout-header
+        box-shadow none
     .layout-header
-      box-shadow none
+      padding-left 280px
 </style>

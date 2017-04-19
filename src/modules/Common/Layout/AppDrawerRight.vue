@@ -16,7 +16,7 @@
 <script type="text/javascript">
   import Drawer from 'src/modules/Common/Layout/Drawer'
 
-  export default Drawer('app-drawer-left')
+  export default Drawer('right')
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

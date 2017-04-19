@@ -17,7 +17,8 @@
     "quasar-framework": "^0.13.4",
     "roboto-fontface": "^0.7.0",
     "vue": "^2.2.2",
-    "vue-router": "^2.0.0"
+    "vue-router": "^2.0.0",
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

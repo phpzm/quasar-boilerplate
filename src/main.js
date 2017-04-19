@@ -10,6 +10,7 @@ require(`./themes/app.${__THEME}.styl`)
 import Vue from 'vue'
 import Quasar from 'quasar-framework'
 import router from 'src/router'
+import store from 'src/store'
 import 'src/modules/Common/Fields'
 
 Vue.use(Quasar) // Install Quasar Framework
@@ -20,6 +21,7 @@ Quasar.start(() => {
   new Vue({
     el: '#q-app',
     router,
+    store,
     render: h => h(require('./App'))
   })
 })
