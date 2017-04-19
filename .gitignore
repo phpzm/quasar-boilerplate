@@ -2,6 +2,7 @@
 /node_modules
 /.idea
 /dist
+/deploy
 npm-debug.log
 npm-debug.log.*
 selenium-debug.log

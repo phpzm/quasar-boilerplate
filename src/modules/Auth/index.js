@@ -1,1 +1,1 @@
-export {default as router} from 'src/modules/Auth/router/index'
+export {default as router} from 'src/modules/Auth/Router/index'

@@ -2,12 +2,12 @@ version: '2'
 
 services:
 
-  network-node:
+  phpzm-node:
     image: ambientum/node:7
-    container_name: network-node
-    command: ./start.sh
+    container_name: phpzm-node
+    command: ./script.start.sh
     volumes:
       - .:/var/www/app
     ports:
-      - 80:8080
+      - 5000:8080
 
