@@ -3,23 +3,23 @@
 
     <div v-if="header" slot="header" class="toolbar">
 
-      <button class="hide-on-drawer-visible" @click="$refs.leftDrawer.open()" v-if="left">
-        <i>menu</i>
-      </button>
+      <app-drawer-toggle v-if="left" :drawer="leftDrawer"
+                         side="left" class="hide-on-drawer-visible"></app-drawer-toggle>
 
       <app-toolbar></app-toolbar>
 
-      <button @click="$refs.rightDrawer.open()" v-if="right">
-        <i>menu</i>
-      </button>
+      <app-drawer-toggle v-if="right" :drawer="rightDrawer"
+                         side="right" class=""></app-drawer-toggle>
     </div>
 
     <app-drawer-left ref="leftDrawer" v-if="left"></app-drawer-left>
 
     <slot name="content">
-      <transition name="slide">
-        <router-view class="layout-view"></router-view>
-      </transition>
+      <div class="layout-view">
+        <transition name="slide-left">
+          <router-view class="layout-router"></router-view>
+        </transition>
+      </div>
     </slot>
 
     <app-drawer-right ref="rightDrawer" v-if="right"></app-drawer-right>
@@ -33,6 +33,7 @@
 
 <script type="text/javascript">
   import AppToolbar from 'src/modules/Common/Layout/AppToolbar.vue'
+  import AppDrawerToggle from 'src/modules/Common/Layout/AppDrawerToggle.vue'
   import AppDrawerLeft from 'src/modules/Common/Layout/AppDrawerLeft.vue'
   import AppDrawerRight from 'src/modules/Common/Layout/AppDrawerRight.vue'
   import AppFooter from 'src/modules/Common/Layout/AppFooter.vue'
@@ -40,7 +41,7 @@
   export default {
     name: 'app-layout',
     components: {
-      AppToolbar, AppDrawerLeft, AppDrawerRight, AppFooter
+      AppToolbar, AppDrawerToggle, AppDrawerLeft, AppDrawerRight, AppFooter
     },
     props: {
       header: {
@@ -65,11 +66,13 @@
       }
     },
     data: () => ({
-      scrolled: false
+      scrolled: false,
+      rightDrawer: {},
+      leftDrawer: {}
     }),
     computed: {
       classNames () {
-        const classNames = []
+        const classNames = ['app-layout']
         if (this.flat) {
           classNames.push('flat-header')
         }
@@ -81,6 +84,8 @@
     },
     methods: {},
     mounted () {
+      this.leftDrawer = this.$refs.leftDrawer
+      this.rightDrawer = this.$refs.rightDrawer
     },
     created () {
     }
@@ -92,6 +97,11 @@
     &.no-scroll
       .layout-header
         box-shadow none
-    .layout-header
-      padding-left 280px
+        padding-left 28px
+
+  @media (min-width: 768px)
+    .flat-header
+      &.no-scroll
+        .layout-header
+          padding-left 280px
 </style>

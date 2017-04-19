@@ -23,9 +23,6 @@ const Abstract = {
   },
   data: () => ({}),
   computed: {
-    classNames () {
-      return ['floating-label']
-    },
     label () {
       return this.schema.label + ' ' + (this.schema.required ? '*' : '')
     }

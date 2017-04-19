@@ -1,17 +1,8 @@
-import AbstractInput from 'src/modules/Common/Fields/AbstractInput.vue'
+import AbstractCheckbox from 'src/modules/Common/Fields/Contracts/AbstractCheckbox.vue'
 
 const FieldCheckbox = {
-  extends: AbstractInput,
-  name: 'field-checkbox',
-  template:
-    `<div>
-      <label>
-        <q-checkbox v-model="checked" disable></q-checkbox>
-        Checkbox Label
-      </label>
-    </div>`,
-  data: () => ({
-  })
+  extends: AbstractCheckbox,
+  name: 'field-checkbox'
 }
 
 export default FieldCheckbox

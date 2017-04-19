@@ -1,4 +1,4 @@
-import AbstractInput from 'src/modules/Common/Fields/AbstractInput.vue'
+import AbstractInput from 'src/modules/Common/Fields/Contracts/AbstractInput.vue'
 
 const FieldPassword = {
   extends: AbstractInput,

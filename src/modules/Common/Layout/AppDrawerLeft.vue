@@ -26,7 +26,7 @@
       color #fff
     .field-search::placeholder
       color #fff
-  @media screen and (min-width: 921px)
+  @media screen and (min-width: 768px)
     .sidebar.drawer:not(.active):not(.swipe-only)
       .drawer-content.left-side
         position fixed !important

@@ -1,3 +1,4 @@
+
 <template>
   <div :class="classNames">
     <slot name="component">
@@ -25,14 +26,19 @@
 </template>
 
 <script type="text/javascript">
-  import Abstract from 'src/modules/Common/Fields/Abstract'
+  import Abstract from 'src/modules/Common/Fields/Contracts/Abstract'
 
   export default {
     extends: Abstract,
     name: 'abstract-input',
     data: () => ({
       type: 'text'
-    })
+    }),
+    computed: {
+      classNames () {
+        return ['floating-label']
+      }
+    }
   }
 </script>
 
