@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-layout :left="true" :right="true" :footer="false" :flat="true"></app-layout>
+    <app-layout :left="true" :right="true" :footer="false" :swipe="false" :flat="true"></app-layout>
   </div>
 </template>
 
@@ -26,11 +26,25 @@
           label: 'Home'
         },
         {
-          icon: 'book',
+          icon: 'web',
           to: {
-            path: '/dashboard/academic', exact: true
+            path: '/dashboard/forms', exact: true
           },
-          label: 'Acadêmico'
+          label: 'Forms'
+        },
+        {
+          icon: 'pie_chart_outlined',
+          to: {
+            path: '/dashboard/charts', exact: true
+          },
+          label: 'Charts'
+        },
+        {
+          icon: 'pets',
+          to: {
+            path: '/dashboard/crud', exact: true
+          },
+          label: 'CRUD'
         },
         {
           icon: 'power_settings_new',

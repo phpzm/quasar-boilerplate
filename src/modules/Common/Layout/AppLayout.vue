@@ -4,18 +4,18 @@
     <div v-if="header" slot="header" class="toolbar">
 
       <app-drawer-toggle v-if="left" :drawer="leftDrawer"
-                         side="left" class="hide-on-drawer-visible"></app-drawer-toggle>
+                         side="left" v-show="swipe"></app-drawer-toggle>
 
       <app-toolbar></app-toolbar>
 
       <app-drawer-toggle v-if="right" :drawer="rightDrawer"
-                         side="right" class=""></app-drawer-toggle>
+                         side="right"></app-drawer-toggle>
     </div>
 
-    <app-drawer-left ref="leftDrawer" v-if="left"></app-drawer-left>
+    <app-drawer-left ref="leftDrawer" v-if="left" :flat="flat" :swipe="swipe"></app-drawer-left>
 
     <slot name="content">
-      <div class="layout-view">
+      <div class="layout-view" ref="layoutView">
         <transition name="slide-left">
           <router-view class="layout-router"></router-view>
         </transition>
@@ -63,6 +63,10 @@
       flat: {
         type: Boolean,
         default: false
+      },
+      swipe: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -79,29 +83,41 @@
         if (!this.scrolled) {
           classNames.push('no-scroll')
         }
+        if (this.swipe) {
+          classNames.push('swipe-header')
+        }
         return classNames
       }
     },
-    methods: {},
+    methods: {
+      handleScroll () {
+        this.scrolled = this.$refs.layoutView.scrollTop > 0
+      }
+    },
     mounted () {
       this.leftDrawer = this.$refs.leftDrawer
       this.rightDrawer = this.$refs.rightDrawer
+      if (this.$refs.layoutView) {
+        this.$refs.layoutView.addEventListener('scroll', this.handleScroll)
+      }
     },
-    created () {
+    destroyed () {
+      if (this.$refs.layoutView) {
+        this.$refs.layoutView.removeEventListener('scroll', this.handleScroll)
+      }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   .flat-header
-    &.no-scroll
-      .layout-header
+    &.no-scroll .layout-header
         box-shadow none
-        padding-left 28px
+    .layout-header
+      padding-left 28px
 
   @media (min-width: 768px)
-    .flat-header
-      &.no-scroll
-        .layout-header
-          padding-left 280px
+    .flat-header:not(.swipe-header)
+      .layout-header
+        padding-left 280px
 </style>

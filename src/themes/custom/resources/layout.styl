@@ -12,15 +12,15 @@
   background #0a537f
 
 .sub-toolbar
-  box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
   align-items baseline
 .layout-view
-  .sub-toolbar
+  .toolbar.sub-toolbar
     min-height 200px
-    padding 0 20px
-.sidebar
-  .sub-toolbar
+    padding 10px 20px 0 20px
+.flat
+  .toolbar.sub-toolbar
     min-height 250px
+    box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 
 .app-content
   background #F5F5F5
@@ -38,8 +38,11 @@
 .layout-view
   overflow hidden
   overflow-y scroll
-  background #0d81bf
-  background linear-gradient(to bottom,  #0d81bf 0%,#2989d8 200px,#ffffff 200px,#ffffff 200px,#ffffff 100%)
+  background: #0D81BF;
+  background: -moz-linear-gradient(top,  #0D81BF 0%, #0D81BF 200px, #adadad 200px, #ffffff 210px, #ffffff 100%);
+  background: -webkit-linear-gradient(top,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
+  background: linear-gradient(to bottom,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
+
 
 .layout-router
   transition: .2s

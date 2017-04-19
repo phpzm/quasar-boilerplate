@@ -4,7 +4,7 @@ export default [
     component: 'Dashboard/Index',
     children: [
       { path: '', component: 'Dashboard/Components/Index' },
-      { path: 'academic', component: 'Dashboard/Components/Academic' }
+      { path: 'forms', component: 'Dashboard/Components/Forms' }
     ]
   }
 ]
