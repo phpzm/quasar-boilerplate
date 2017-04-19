@@ -2,17 +2,18 @@
   <q-layout :class="classNames">
 
     <div v-if="header" slot="header" class="toolbar">
+        <app-drawer-toggle v-if="left" :drawer="leftDrawer"
+                           side="left" v-show="swipe"></app-drawer-toggle>
 
-      <app-drawer-toggle v-if="left" :drawer="leftDrawer"
-                         side="left" v-show="swipe"></app-drawer-toggle>
+        <slot name="header">
+          <app-toolbar></app-toolbar>
+        </slot>
 
-      <app-toolbar></app-toolbar>
-
-      <app-drawer-toggle v-if="right" :drawer="rightDrawer"
-                         side="right"></app-drawer-toggle>
+        <app-drawer-toggle v-if="right" :drawer="rightDrawer"
+                           side="right"></app-drawer-toggle>
     </div>
 
-    <app-drawer-left ref="leftDrawer" v-if="left" :flat="flat" :swipe="swipe"></app-drawer-left>
+    <app-drawer-left ref="leftDrawer" v-show="left" :flat="flat" :swipe="swipe"></app-drawer-left>
 
     <slot name="content">
       <div class="layout-view" ref="layoutView">
@@ -22,7 +23,7 @@
       </div>
     </slot>
 
-    <app-drawer-right ref="rightDrawer" v-if="right"></app-drawer-right>
+    <app-drawer-right ref="rightDrawer" v-show="right"></app-drawer-right>
 
     <div slot="footer" v-if="footer">
       <app-footer></app-footer>
@@ -80,11 +81,11 @@
         if (this.flat) {
           classNames.push('flat-header')
         }
-        if (!this.scrolled) {
-          classNames.push('no-scroll')
-        }
         if (this.swipe) {
           classNames.push('swipe-header')
+        }
+        if (!this.scrolled) {
+          classNames.push('no-scroll')
         }
         return classNames
       }
@@ -113,6 +114,7 @@
   .flat-header
     &.no-scroll .layout-header
         box-shadow none
+  .flat-header, .swipe-header
     .layout-header
       padding-left 28px
 

@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
   export default {
-    name: '',
+    name: 'dashboard-home',
     props: {},
     data: () => ({}),
     computed: {},

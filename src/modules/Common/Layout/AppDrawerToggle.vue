@@ -41,11 +41,11 @@
     cursor pointer
   .icon-bar
     display block
+    position absolute
     height 3px
     background #fff
     border-radius: 1px
     width 30px
-    margin 5px 0
     transform rotate(0deg)
     transition all .25s
   .button-toggle
@@ -57,21 +57,25 @@
     &.right
       right 0
 
-  .button-toggle:hover .icon-bar
-    /*top 16px*/
-    position absolute
+  .icon-bar:nth-child(1)
+    top 0
+  .icon-bar:nth-child(2)
+    top 7px
+  .icon-bar:nth-child(3)
+    top 14px
   .button-toggle.left:hover .icon-bar:nth-child(1),
   .button-toggle.left:hover .icon-bar:nth-child(3)
-    transform translate(-95px, 0)
+    transform translate(-45px, 0)
     opacity 0
   .button-toggle.right:hover .icon-bar:nth-child(1),
   .button-toggle.right:hover .icon-bar:nth-child(3)
-    transform translate(95px, 0)
+    transform translate(45px, 0)
     opacity 0
   .button-toggle:hover .icon-bar:nth-child(2)
-    top 0
-    margin 0 5px
-    width 20px
-    height 20px
+    margin -9px 5px 0 5px
+    width 21px
+    height 21px
     border-radius 10px
+    background #89bede
+    border 3px solid #fff
 </style>

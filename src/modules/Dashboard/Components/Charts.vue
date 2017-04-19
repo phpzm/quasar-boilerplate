@@ -4,8 +4,7 @@
       Header
     </div>
     <div class="app-container">
-      Forms
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      Charts
       <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
   </div>
@@ -13,7 +12,7 @@
 
 <script type="text/javascript">
   export default {
-    name: 'dashboard-forms',
+    name: 'dashboard-charts',
     props: {},
     data: () => ({}),
     computed: {},
