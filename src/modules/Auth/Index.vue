@@ -18,6 +18,7 @@
             <div class="field">
               <button class="primary raised full-width">Log In</button>
             </div>
+            <small style="color: #b4b4b4">Just click to log in</small>
           </form>
         </div>
       </stars>
@@ -66,4 +67,6 @@
       margin 20px auto 0 auto
       max-width 420px
       padding 0 40px 40px 40px
+      border-radius 3px
+      border 1px solid #092735
 </style>
