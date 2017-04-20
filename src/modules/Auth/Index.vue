@@ -7,8 +7,8 @@
       alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png"></a>
 
     <app-layout :left="false" :right="false" :footer="false">
-      <div slot="content" class="row small-gutter sm-column form-container">
-        <div class="width-1of2 form-login">
+      <stars slot="content">
+        <div class="form-login">
           <img src="/statics/logo.png" alt="logo" style="margin: 40px 0 0 0; height: 200px">
           <br>
           <form @submit.prevent="submit" class="form" style="max-width: 420px; margin: 0 auto;">
@@ -20,10 +20,7 @@
             </div>
           </form>
         </div>
-        <div class="width-1of2 desktop-only">
-          <stars></stars>
-        </div>
-      </div>
+      </stars>
     </app-layout>
   </div>
 </template>
@@ -63,11 +60,10 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .auth
-    .form-container
-      width 100%
     .form-login
+      background #fff
       text-align center
-      margin 0 15px
-      height 100%
-      overflow auto
+      margin 20px auto 0 auto
+      max-width 420px
+      padding 0 40px 40px 40px
 </style>

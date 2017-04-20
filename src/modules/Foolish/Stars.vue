@@ -3,14 +3,15 @@
     <div id="stars"></div>
     <div id="stars2"></div>
     <div id="stars3"></div>
-    <div id="title">
-      <span>Rápido</span>
-      <br>
-      <span>Elegante</span>
-      <br>
-      <span>Simples</span>
-      <br>
-    </div>
+    <slot></slot>
+    <!--<div id="title">-->
+      <!--<span>Rápido</span>-->
+      <!--<br>-->
+      <!--<span>Elegante</span>-->
+      <!--<br>-->
+      <!--<span>Simples</span>-->
+      <!--<br>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -43,9 +44,10 @@
 
   .sky
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)
-    height: calc(100% + 8px)
+    height: 100%
+    width: 100%
+    position: absolute
     overflow: hidden
-    margin: 0 -8px
 
     #stars
       width: 1px

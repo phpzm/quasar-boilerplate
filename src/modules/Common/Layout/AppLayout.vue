@@ -84,6 +84,9 @@
         if (this.swipe) {
           classNames.push('swipe-header')
         }
+        if (!this.left) {
+          classNames.push('no-left')
+        }
         if (!this.scrolled) {
           classNames.push('no-scroll')
         }
@@ -114,12 +117,15 @@
   .flat-header
     &.no-scroll .layout-header
         box-shadow none
-  .flat-header, .swipe-header
+  .flat-header
+    .layout-header
+      padding-left 28px
+  .swipe-header:not(.no-left)
     .layout-header
       padding-left 28px
 
   @media (min-width: 768px)
-    .flat-header:not(.swipe-header)
+    .flat-header:not(.swipe-header):not(.no-left)
       .layout-header
         padding-left 280px
 </style>
