@@ -1,8 +1,14 @@
 <template>
   <div class="auth">
+
+    <a href="https://github.com/phpzm/quasar-boilerplate"><img
+      style="position: absolute; top: 0; left: 0; border: 0; z-index: 20"
+      src="https://camo.githubusercontent.com/121cd7cbdc3e4855075ea8b558508b91ac463ac2/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677265656e5f3030373230302e706e67"
+      alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png"></a>
+
     <app-layout :left="false" :right="false" :footer="false">
-      <div slot="content" class="row small-gutter form-container">
-        <div class="width-1of2" style="text-align: center">
+      <div slot="content" class="row small-gutter sm-column form-container">
+        <div class="width-1of2 form-login">
           <img src="/statics/logo.png" alt="logo" style="margin: 40px 0 0 0; height: 200px">
           <br>
           <form @submit.prevent="submit" class="form" style="max-width: 420px; margin: 0 auto;">
@@ -14,7 +20,7 @@
             </div>
           </form>
         </div>
-        <div class="width-1of2">
+        <div class="width-1of2 desktop-only">
           <stars></stars>
         </div>
       </div>
@@ -59,4 +65,9 @@
   .auth
     .form-container
       width 100%
+    .form-login
+      text-align center
+      margin 0 15px
+      height 100%
+      overflow auto
 </style>

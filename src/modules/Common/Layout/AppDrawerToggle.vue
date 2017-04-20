@@ -2,7 +2,9 @@
   <div :class="classNames">
     <label class="menu-toggle" @click="open">
       <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+      <span class="icon-bar">
+        <i>arrow_forward</i>
+      </span>
       <span class="icon-bar"></span>
     </label>
   </div>
@@ -43,11 +45,17 @@
     display block
     position absolute
     height 3px
+    overflow hidden
     background #fff
     border-radius: 1px
     width 30px
     transform rotate(0deg)
     transition all .25s
+    i
+      color #627f9e
+      margin 6px
+      font-size 1px
+      transition all .3s
   .button-toggle
     position fixed
     z-index 2
@@ -56,6 +64,8 @@
       left 0
     &.right
       right 0
+      i
+        transform rotate(180deg)
 
   .icon-bar:nth-child(1)
     top 0
@@ -72,10 +82,9 @@
     transform translate(45px, 0)
     opacity 0
   .button-toggle:hover .icon-bar:nth-child(2)
-    margin -9px 5px 0 5px
-    width 21px
-    height 21px
-    border-radius 10px
-    background #89bede
-    border 3px solid #fff
+    margin -14px 0 0 0
+    height 30px
+    border-radius 15px
+    i
+      font-size 18px
 </style>
