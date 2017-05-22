@@ -1,27 +1,21 @@
 <template>
   <div class="app-content" style="position: relative">
     <div class="toolbar sub-toolbar">
-      Home
+      Header
     </div>
     <div class="app-container">
-      Home
-      {{ record }}
-      <component v-for="__schema in schemas" :is="__schema['component']" :schema="__schema"
-                 v-model="record[__schema.field]"></component>
+      Forms
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  import { schemas, record } from 'src/modules/Dashboard/model/Aluno'
-
   export default {
-    name: '',
+    name: 'dashboard-forms',
     props: {},
-    data: () => ({
-      record: record,
-      schemas: schemas
-    }),
+    data: () => ({}),
     computed: {},
     methods: {},
     created () {

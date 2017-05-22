@@ -1,8 +1,11 @@
 <template>
   <div class="app-toolbar">
-    <q-toolbar-title :padding="1">
-      Title
-    </q-toolbar-title>
+    <div class="on-left">
+      <slot name="left">{{ title }}</slot>
+    </div>
+    <div class="on-right">
+      <slot name="right"></slot>
+    </div>
   </div>
 </template>
 
@@ -10,7 +13,9 @@
   export default {
     name: 'app-toolbar',
     props: {},
-    data: () => ({}),
+    data: () => ({
+      title: 'Title'
+    }),
     computed: {},
     methods: {},
     created () {
@@ -21,4 +26,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .app-toolbar
+    width 100%
+    padding 0 50px 0 10px
+    .on-left
+      float left
+    .on-right
+      float right
 </style>

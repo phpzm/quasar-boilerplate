@@ -1,7 +1,7 @@
-import Abstract from 'src/modules/Common/Fields/Abstract.vue'
+import AbstractInput from 'src/modules/Common/Fields/Contracts/AbstractInput.vue'
 
 const FieldText = {
-  extends: Abstract,
+  extends: AbstractInput,
   name: 'field-text'
 }
 

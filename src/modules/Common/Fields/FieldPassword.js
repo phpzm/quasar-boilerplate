@@ -1,8 +1,11 @@
-import Abstract from 'src/modules/Common/Fields/Abstract.vue'
+import AbstractInput from 'src/modules/Common/Fields/Contracts/AbstractInput.vue'
 
-const FieldText = {
-  extends: Abstract,
-  name: 'field-password'
+const FieldPassword = {
+  extends: AbstractInput,
+  name: 'field-password',
+  data: () => ({
+    type: 'password'
+  })
 }
 
-export default FieldText
+export default FieldPassword

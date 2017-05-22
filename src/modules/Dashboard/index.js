@@ -1,1 +1,1 @@
-export {default as router} from 'src/modules/Dashboard/router/index'
+export {default as router} from 'src/modules/Dashboard/Router/index'

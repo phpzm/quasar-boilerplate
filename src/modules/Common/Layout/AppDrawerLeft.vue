@@ -1,5 +1,5 @@
 <template>
-  <q-drawer ref="drawer" :class="['sidebar']">
+  <q-drawer ref="drawer" :class="classNames" :swipe-only="swipe">
     <div class="toolbar sub-toolbar">
       <q-toolbar-title>
         <input type="text" placeholder="Search" class="field-search full-width">
@@ -21,13 +21,16 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .sidebar
+  .drawer
     .field-search
       color #fff
     .field-search::placeholder
       color #fff
-  @media screen and (min-width: 921px)
-    .sidebar.drawer:not(.active):not(.swipe-only)
+  @media screen and (min-width: 768px)
+    .drawer:not(.active):not(.swipe-only)
+      .drawer-content
+        z-index 1
+    .flat.drawer:not(.active):not(.swipe-only)
       .drawer-content.left-side
         position fixed !important
         top 0

@@ -1,8 +1,8 @@
-import Abstract from 'src/modules/Common/Fields/Abstract.vue'
+import AbstractCheckbox from 'src/modules/Common/Fields/Contracts/AbstractCheckbox.vue'
 
-const FieldText = {
-  extends: Abstract,
+const FieldCheckbox = {
+  extends: AbstractCheckbox,
   name: 'field-checkbox'
 }
 
-export default FieldText
+export default FieldCheckbox
