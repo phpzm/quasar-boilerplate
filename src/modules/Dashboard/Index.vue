@@ -9,7 +9,7 @@
   import {mapActions} from 'vuex'
 
   export default {
-    name: 'auth-index',
+    name: 'dashboard-index',
     components: {
       AppLayout
     },

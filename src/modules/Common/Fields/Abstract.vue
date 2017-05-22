@@ -1,7 +1,7 @@
 <template>
   <div :class="classNames">
     <slot name="component">
-      <input ref="input" :name="schema.name" :id="schema.id" :value="value" :class="['full-width']"
+      <input ref="input" v-model="model" :name="schema.name" :id="schema.id" :value="value" :class="['full-width']"
              :disabled="schema.disabled" :placeholder="schema.placeholder" :title="schema.title"
              :required="schema.required"
              @keydown="fieldKeyDown(arguments[0])"
@@ -14,7 +14,9 @@
              @cut="fieldCut(arguments[0])"
              @copy="fieldCopy(arguments[0])"
              @paste="fieldPaste(arguments[0])"
-             @blur="fieldBlur(arguments[0])"/>
+             @blur="fieldBlur(arguments[0])"
+             @input="setValue(model)"
+      />
     </slot>
     <slot name="label">
       <label :for="schema.id" v-if="schema.label">{{ label }}</label>
@@ -48,7 +50,9 @@
         default: () => schema
       }
     },
-    data: () => ({}),
+    data: () => ({
+      model: undefined
+    }),
     computed: {
       classNames () {
         return ['floating-label']
