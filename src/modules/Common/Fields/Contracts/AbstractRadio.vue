@@ -9,11 +9,11 @@
 </template>
 
 <script type="text/javascript">
-  import Abstract from 'src/modules/Common/Fields/Abstract.vue'
+  import Abstract from 'src/modules/Common/Fields/Contracts/Abstract'
 
-  const FieldText = {
+  export default {
     extends: Abstract,
-    name: 'field-checkbox',
+    name: 'abstract-radio',
     data: () => ({
       model: undefined,
       options: []
@@ -23,8 +23,6 @@
       this.options = this.schema.options
     }
   }
-
-  export default FieldText
 </script>
 
 <style></style>
