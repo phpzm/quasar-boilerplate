@@ -4,7 +4,8 @@
       Forms
     </div>
     <div class="app-container">
-      <resource-form title="Form" :environment="environment" :schemas="schemas"></resource-form>
+      <resource-form :title="title" :service="service" :action="action"
+                     :environment="environment" :schemas="schemas"></resource-form>
     </div>
   </div>
 </template>
@@ -18,6 +19,10 @@
       ResourceForm
     },
     data: () => ({
+      title: 'Form',
+      base: '/dashboard/forms',
+      service: {},
+      action: 'create',
       environment: 'create',
       schemas: [
         {
