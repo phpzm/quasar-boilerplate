@@ -3,13 +3,13 @@
   width 4px
 ::-webkit-scrollbar-track
   border-radius 4px
-  box-shadow inset 0 0 3px #0D81BF
+  box-shadow inset 0 0 3px $primary
   background #fff
 ::-webkit-scrollbar-thumb
   border-radius 4px
-  background #0a537f
+  background darken($primary, 10%)
 ::-webkit-scrollbar-thumb:window-inactive
-  background #0a537f
+  background darken($primary, 10%)
 
 .sub-toolbar
   align-items baseline
@@ -38,10 +38,10 @@
 .layout-view
   overflow hidden
   overflow-y scroll
-  background: #0D81BF;
-  background: -moz-linear-gradient(top,  #0D81BF 0%, #0D81BF 200px, #adadad 200px, #ffffff 210px, #ffffff 100%);
-  background: -webkit-linear-gradient(top,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
-  background: linear-gradient(to bottom,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
+  background: $primary;
+  background: -moz-linear-gradient(top,  $primary 0%, $primary 200px, #adadad 200px, #ffffff 210px, #ffffff 100%);
+  background: -webkit-linear-gradient(top,  $primary 0%,$primary 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
+  background: linear-gradient(to bottom,  $primary 0%,$primary 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
 
 
 .layout-router

@@ -4,24 +4,16 @@
       Home
     </div>
     <div class="app-container">
-      Home
-      {{ record }}
-      <component v-for="__schema in schemas" :is="__schema['component']" :schema="__schema"
-                 v-model="record[__schema.field]"></component>
+
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  import { schemas, record } from 'src/modules/Dashboard/model/Aluno'
-
   export default {
     name: 'dashboard-home',
     props: {},
-    data: () => ({
-      record: record,
-      schemas: schemas
-    }),
+    data: () => ({}),
     computed: {},
     methods: {},
     created () {
