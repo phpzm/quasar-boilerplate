@@ -27,7 +27,7 @@ const FormProps = {
       default: () => ([
         {
           position: ['top', 'bottom'],
-          classNames: ['primary'],
+          classNames: ['primary', 'raised'],
           label: 'Salvar',
           click: vm => {
             vm.apply()
@@ -35,19 +35,19 @@ const FormProps = {
         },
         {
           position: ['top', 'bottom'],
-          classNames: ['link'],
+          classNames: ['link', 'raised'],
           label: 'Fechar',
           click: vm => {
-            console.log(vm)
+            vm.$router.push(vm.$parent.base)
           }
         },
         {
           position: ['floating'],
-          classNames: ['primary', 'circular', 'button-bottom-right'],
+          classNames: ['primary', 'circular', 'button-bottom-right', 'raised'],
           label: '',
           icon: 'add',
           click: vm => {
-            console.log(vm)
+            vm.$router.push(`${vm.$parent.base}/create`)
           }
         }
       ])
@@ -55,6 +55,14 @@ const FormProps = {
     params: {
       type: Array,
       default: () => (['id'])
+    },
+    success: {
+      type: String,
+      default: ''
+    },
+    debug: {
+      type: Boolean,
+      default: false
     }
   }
 }

@@ -4,7 +4,7 @@
       Forms
     </div>
     <div class="app-container">
-      <resource-form :title="title" :service="service" :action="action"
+      <resource-form :title="title" :base="base" :service="service" :action="action"
                      :environment="environment" :schemas="schemas"></resource-form>
     </div>
   </div>

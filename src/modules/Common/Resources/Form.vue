@@ -6,10 +6,9 @@
         <form-action :actions="buttonsTop"></form-action>
       </div>
       <div class="form-body">
-        <pre>{{ items }}</pre>
         <div class="form">
           <component v-for="__item in items" :key="__item.field" :ref="__item.field" :is="__item.component"
-                     :schema="__item.schema" v-model="record[__item.field]" :state="state"></component>
+                     v-bind="__item.schema" v-model="record[__item.field]" :state="state"></component>
         </div>
       </div>
       <div slot="buttons-bottom" class="form-bottom">
@@ -19,6 +18,9 @@
     <slot name="buttons-floating">
       <form-action :actions="buttonsFloating"></form-action>
     </slot>
+
+    <pre v-if="debug">{{ items }}</pre>
+    <pre v-if="debug">{{ record }}</pre>
   </div>
 </template>
 
