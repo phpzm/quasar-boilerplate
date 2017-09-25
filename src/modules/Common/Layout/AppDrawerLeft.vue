@@ -26,16 +26,16 @@
       color #fff
     .field-search::placeholder
       color #fff
+
   @media screen and (min-width: 768px)
     .drawer:not(.active):not(.swipe-only)
-      .drawer-content
-        z-index 1
-    .flat.drawer:not(.active):not(.swipe-only)
-      .drawer-content.left-side
-        position fixed !important
-        top 0
-        z-index 12
-        user-select none
-        .toolbar
-          box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+      z-index 1
+    .flat.drawer.left-side:not(.active):not(.swipe-only)
+      position fixed !important
+      top 0
+      bottom 0
+      z-index 12
+      user-select none
+      .toolbar
+        box-shadow 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
 </style>

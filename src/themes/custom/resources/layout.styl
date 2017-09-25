@@ -1,15 +1,14 @@
 
 ::-webkit-scrollbar
-  width 4px
+  width: 4px
 ::-webkit-scrollbar-track
-  border-radius 4px
-  box-shadow inset 0 0 3px #0D81BF
-  background #fff
+  border-radius: 4px
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3)
 ::-webkit-scrollbar-thumb
-  border-radius 4px
-  background #0a537f
+  border-radius: 4px
+  background: rgba(0, 0, 0, .4)
 ::-webkit-scrollbar-thumb:window-inactive
-  background #0a537f
+  background: rgba(0, 0, 0, .3)
 
 .sub-toolbar
   align-items baseline
@@ -34,20 +33,35 @@
   width 96%
   min-height 200px
 
-
 .layout-view
   overflow hidden
   overflow-y scroll
-  background: #0D81BF;
-  background: -moz-linear-gradient(top,  #0D81BF 0%, #0D81BF 200px, #adadad 200px, #ffffff 210px, #ffffff 100%);
-  background: -webkit-linear-gradient(top,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
-  background: linear-gradient(to bottom,  #0D81BF 0%,#0D81BF 200px,#adadad 200px,#ffffff 210px,#ffffff 100%);
 
+.flat-header
+  .layout-view
+    background $primary
+    background linear-gradient(to bottom,  $primary 0%,$primary 200px,#adadad 200px,#ffffff 210px,#ffffff 100%)
+.flat-header
+  &.no-scroll .layout-header
+    box-shadow none
+.flat-header
+  .layout-header
+    padding-left 28px
+  .swipe-header:not(.no-left)
+    .layout-header
+      padding-left 28px
+
+@media (min-width: $drawer-screen-width-threshold)
+  .flat-header
+    .layout-view
+      margin-left $drawer-width
+  .flat-header:not(.swipe-header):not(.no-left)
+    .layout-header
+      padding-left $drawer-width
 
 .layout-router
   transition: .2s
   background #f5f5f5
-
 
 /* container */
 .container

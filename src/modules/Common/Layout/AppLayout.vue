@@ -2,15 +2,15 @@
   <q-layout :class="classNames">
 
     <div v-if="header" slot="header" class="toolbar">
-        <app-drawer-toggle v-if="left" :drawer="leftDrawer"
-                           side="left" v-show="swipe"></app-drawer-toggle>
+      <app-drawer-toggle v-if="left" :drawer="leftDrawer"
+                         side="left"></app-drawer-toggle>
 
-        <slot name="header">
-          <app-toolbar></app-toolbar>
-        </slot>
+      <slot name="header">
+        <app-toolbar></app-toolbar>
+      </slot>
 
-        <app-drawer-toggle v-if="right" :drawer="rightDrawer"
-                           side="right"></app-drawer-toggle>
+      <app-drawer-toggle v-if="right" :drawer="rightDrawer"
+                         side="right"></app-drawer-toggle>
     </div>
 
     <app-drawer-left ref="leftDrawer" v-show="left" :flat="flat" :swipe="swipe"></app-drawer-left>
@@ -114,18 +114,4 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .flat-header
-    &.no-scroll .layout-header
-        box-shadow none
-  .flat-header
-    .layout-header
-      padding-left 28px
-  .swipe-header:not(.no-left)
-    .layout-header
-      padding-left 28px
-
-  @media (min-width: 768px)
-    .flat-header:not(.swipe-header):not(.no-left)
-      .layout-header
-        padding-left 280px
 </style>
