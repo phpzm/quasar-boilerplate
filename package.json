@@ -18,7 +18,8 @@
     "roboto-fontface": "^0.7.0",
     "vue": "^2.2.2",
     "vue-router": "^2.0.0",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "lodash": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

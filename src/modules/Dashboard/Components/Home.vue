@@ -1,10 +1,10 @@
 <template>
   <div class="app-content" style="position: relative">
     <div class="toolbar sub-toolbar">
-      Header
+      Home
     </div>
     <div class="app-container">
-      Index
+
     </div>
   </div>
 </template>

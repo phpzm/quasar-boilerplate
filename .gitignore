@@ -3,6 +3,7 @@
 /.idea
 /dist
 /deploy
+/docker-compose.yml
 npm-debug.log
 npm-debug.log.*
 selenium-debug.log

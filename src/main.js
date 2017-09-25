@@ -11,7 +11,6 @@ import Vue from 'vue'
 import Quasar from 'quasar-framework'
 import router from 'src/router'
 import store from 'src/store'
-import 'src/modules/Common/Fields'
 
 Vue.use(Quasar) // Install Quasar Framework
 
