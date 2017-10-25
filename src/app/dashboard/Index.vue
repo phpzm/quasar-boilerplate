@@ -8,7 +8,7 @@
 <script type="text/javascript">
   import { mapActions } from 'vuex'
   import LayoutDefault from 'src/app/common/layout/Default.vue'
-  import { menu } from 'src/domains/bootstrap'
+  import { menu } from 'src/bootstrap'
 
   export default {
     name: 'dashboard',

@@ -8,6 +8,10 @@ import store from 'src/infra/store'
 import i18n from 'src/support/i18n'
 import 'src/support/quasar/index'
 
+import { beforeUnload } from 'src/bootstrap/events'
+
+export { default as menu } from 'src/bootstrap/menu'
+
 // Require Froala Editor js file
 require('froala-editor/js/froala_editor.pkgd.min')
 require('froala-editor/js/plugins/code_view.min')
@@ -18,46 +22,14 @@ require('froala-editor/css/froala_editor.pkgd.min.css')
 require('font-awesome/css/font-awesome.css')
 require('froala-editor/css/froala_style.min.css')
 
-export const menu = [
-  {
-    to: '/dashboard',
-    label: 'Página Inicial',
-    exact: true,
-    left: {
-      icon: 'home'
-    }
-  },
-  {
-    to: '/dashboard/forms',
-    label: 'Formulários',
-    exact: true,
-    left: {
-      icon: 'subtitles'
-    }
-  },
-  {
-    to: '/dashboard/graphics',
-    label: 'Gráficos',
-    exact: true,
-    left: {
-      icon: 'pie_chart'
-    }
-  },
-  {
-    to: '/dashboard/user',
-    label: 'Usuários',
-    left: {
-      icon: 'supervisor_account'
-    }
-  }
-]
-
 export default (Vue) => {
   Vue.use(Vuelidate)
   Vue.use(VueFroala)
   Vue.use(Http, { store, router })
 
   moment.locale('pt-BR')
+
+  window.addEventListener('beforeunload', beforeUnload(store, i18n))
 
   Vue.config.productionTip = false
 

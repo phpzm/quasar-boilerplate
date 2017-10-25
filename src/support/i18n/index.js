@@ -5,6 +5,12 @@ Vue.use(VueI18n)
 
 const messages = {
   pt_BR: {
+    events: {
+      modified: {
+        title: 'Modificações pendentes',
+        message: 'Você possui modificações pendentes. Deseja realmente sair?'
+      }
+    },
     validation: {
       required: 'Campo obrigatório',
       minLength: 'Informe pelo menos {min} caracteres',
@@ -34,7 +40,12 @@ const messages = {
   }
 }
 
-export default new VueI18n({
+const i18n = new VueI18n({
   locale: process.env.LOCALE,
   messages
 })
+
+console.log(i18n.t)
+export const inter = i18n.t
+
+export default i18n

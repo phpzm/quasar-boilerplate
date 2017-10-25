@@ -12,7 +12,7 @@ require(`./themes/app.${__THEME}.styl`)
 
 import Vue from 'vue'
 import Quasar from 'quasar-framework'
-import bootstrap from 'domains/bootstrap'
+import bootstrap from 'bootstrap'
 
 Vue.use(Quasar)
 

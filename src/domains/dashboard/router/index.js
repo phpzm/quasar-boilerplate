@@ -8,7 +8,7 @@ export default [
     component: 'app/dashboard/Index',
     props: {
       view: 'hHh Lpr lFf',
-      reveal: false,
+      reveal: true,
       leftBreakpoint: 996
     },
     children: [

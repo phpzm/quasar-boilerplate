@@ -2,6 +2,7 @@ import store from 'src/infra/store'
 import { abort } from 'src/infra/services/http'
 import { PATH_LOGIN } from 'src/support'
 import { confirm } from 'src/support/message'
+import i18n from 'src/support/i18n'
 
 /**
  * @param {Array} routes
@@ -38,7 +39,8 @@ export const checkModified = (next) => {
   const modified = store.getters.AppModified
   if (modified) {
     window.setTimeout(() => {
-      confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
+      // noinspection JSCheckFunctionSignatures
+      confirm(i18n.t('events.modified.title'), i18n.t('events.modified.message'), () => {
         store.dispatch('changeModified', false)
         next()
       })
