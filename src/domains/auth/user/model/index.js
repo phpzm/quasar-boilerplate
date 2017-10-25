@@ -5,6 +5,8 @@ export const entity = 'user'
 
 export const title = 'Usuários'
 
+export const icon = 'supervisor_account'
+
 export const api = '/auth/user'
 
 export const path = '/dashboard/user'

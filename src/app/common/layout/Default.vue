@@ -61,6 +61,10 @@
       </slot>
     </q-scroll-area>
 
+    <slot name="breadcrumb">
+      <breadcrumb></breadcrumb>
+    </slot>
+
     <slot name="content">
       <transition :name="transition">
         <router-view :key="$route" class="router-view"></router-view>
@@ -72,8 +76,12 @@
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
   import { actions } from 'src/app/dashboard/model'
+  import Breadcrumb from 'src/app/common/layout/Breadcrumb.vue'
 
   export default {
+    components: {
+      Breadcrumb
+    },
     name: 'layout-default',
     data: () => ({
       menus: actions,
@@ -119,6 +127,10 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .layout-default
+    .layout-page > .common-card
+      padding 0 10px 10px 10px
+    .layout-page > .breadcrumb
+      margin 10px 20px -10px 20px
     .q-drawer-logo
       background #F7F7F7
       text-align center
@@ -151,4 +163,11 @@
       transform translate(-100%, 0)
     .slide-right-leave-to
       transform translate(100%, 0)
+
+  @media screen and (max-width 768px)
+    .layout-default
+      .layout-page > .common-card
+        padding 0
+      .layout-page > .breadcrumb
+        margin 10px 10px -10px 10px
 </style>

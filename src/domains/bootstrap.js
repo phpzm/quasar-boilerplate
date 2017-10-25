@@ -18,6 +18,40 @@ require('froala-editor/css/froala_editor.pkgd.min.css')
 require('font-awesome/css/font-awesome.css')
 require('froala-editor/css/froala_style.min.css')
 
+export const menu = [
+  {
+    to: '/dashboard',
+    label: 'Início',
+    exact: true,
+    left: {
+      icon: 'home'
+    }
+  },
+  {
+    to: '/dashboard/forms',
+    label: 'Formulários',
+    exact: true,
+    left: {
+      icon: 'subtitles'
+    }
+  },
+  {
+    to: '/dashboard/graphics',
+    label: 'Gráficos',
+    exact: true,
+    left: {
+      icon: 'pie_chart'
+    }
+  },
+  {
+    to: '/dashboard/user',
+    label: 'Usuários',
+    left: {
+      icon: 'supervisor_account'
+    }
+  }
+]
+
 export default (Vue) => {
   Vue.use(Vuelidate)
   Vue.use(VueFroala)
