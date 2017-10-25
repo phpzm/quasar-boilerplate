@@ -1,7 +1,10 @@
 import axios from 'axios'
+import canceler from 'axios-cancel'
+import configure from 'src/infra/services/http/configure'
 import { URL_API } from 'src/support/index'
+import { loading } from 'src/support/message/index'
 
-const api = axios.create({
+const http = axios.create({
   baseURL: URL_API,
   headers: {
     'Accept': 'application/json',
@@ -9,11 +12,25 @@ const api = axios.create({
   }
 })
 
+configure(http)
+
+canceler(http, {
+  debug: false // process.env.DEV
+})
+
 /**
  * @param {string} token
  */
 export const setToken = token => {
-  api.defaults.headers.common.Authorization = `Bearer ${token}`
+  http.defaults.headers.common.Authorization = `Bearer ${token}`
 }
 
-export default api
+/**
+ * @param {string} reason
+ */
+export const abort = reason => {
+  http.cancelAll(reason)
+  loading(false)
+}
+
+export default http

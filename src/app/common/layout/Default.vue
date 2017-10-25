@@ -143,16 +143,12 @@
       transition transform .3s
 
     .slide-left-enter
-      opacity 0
       transform translate(100%, 0)
     .slide-left-leave-to
-      opacity 0
       transform translate(-100%, 0)
 
     .slide-right-enter
-      opacity 0
       transform translate(-100%, 0)
     .slide-right-leave-to
-      opacity 0
-      transform translate(-100%, 0)
+      transform translate(100%, 0)
 </style>

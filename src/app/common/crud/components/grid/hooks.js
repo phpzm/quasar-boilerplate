@@ -1,6 +1,8 @@
 export default {
   mounted () {
-    this.mount()
-    this.fetchAll()
+    window.setTimeout(() => {
+      this.mount()
+      this.fetchAll()
+    }, 100)
   }
 }

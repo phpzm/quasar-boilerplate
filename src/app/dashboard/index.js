@@ -10,6 +10,14 @@ export const menu = [
     }
   },
   {
+    to: '/dashboard/graphics',
+    label: 'Gráficos',
+    exact: true,
+    left: {
+      icon: 'pie_chart'
+    }
+  },
+  {
     to: '/dashboard/user',
     label: 'Usuários',
     left: {

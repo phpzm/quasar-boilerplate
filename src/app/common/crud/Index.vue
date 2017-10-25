@@ -13,7 +13,7 @@
 </template>
 
 <script type="text/javascript">
-  import CommonCard from 'src/app/common/card/index.vue'
+  import CommonCard from 'src/app/common/card/Index.vue'
 
   export default {
     components: {

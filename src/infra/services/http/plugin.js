@@ -42,7 +42,7 @@ export const interceptors = (http, store, router) => {
   const error = error => {
     loading(false)
     const {response} = error
-    if ([401, 400].indexOf(response.status) > -1) {
+    if (response && [401, 400].indexOf(response.status) > -1) {
       router.push(PATH_LOGIN)
     }
     return Promise.reject(error)
