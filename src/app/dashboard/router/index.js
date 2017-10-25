@@ -1,5 +1,6 @@
 import user from 'src/domains/auth/user/router'
 import graphics from 'src/domains/graphics/router'
+import forms from 'src/domains/forms/router'
 
 export default [
   {
@@ -11,6 +12,7 @@ export default [
         component: 'app/dashboard/components/Home',
         name: 'dashboard.home'
       },
+      ...forms,
       ...graphics,
       ...user
     ]

@@ -10,6 +10,14 @@ export const menu = [
     }
   },
   {
+    to: '/dashboard/forms',
+    label: 'Formulários',
+    exact: true,
+    left: {
+      icon: 'subtitles'
+    }
+  },
+  {
     to: '/dashboard/graphics',
     label: 'Gráficos',
     exact: true,
