@@ -24,10 +24,22 @@ export default [
     }
   },
   {
-    to: '/dashboard/user',
-    label: 'Usuários',
-    left: {
-      icon: 'supervisor_account'
-    }
+    label: 'Administração',
+    icon: 'format_quote',
+    children: [
+      {
+        label: 'Autenticação',
+        icon: 'vpn_key',
+        children: [
+          {
+            to: '/dashboard/user',
+            label: 'Usuários',
+            left: {
+              icon: 'supervisor_account'
+            }
+          }
+        ]
+      }
+    ]
   }
 ]

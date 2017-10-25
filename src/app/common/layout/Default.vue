@@ -40,24 +40,7 @@
       </div>
       <slot name="left">
         <!--<q-list-header>Left Panel</q-list-header>-->
-        <template v-for="menu in AppMenu">
-
-          <q-collapsible v-if="menu.children" :icon="menu.icon" :label="menu.label" class="q-collapsible-drawer">
-
-            <q-side-link v-for="(child, index) in menu.children" :key="index" :to="child.to" :exact="child.exact" item>
-              <q-item-side v-if="child.left" v-bind="child.left"></q-item-side>
-              <q-item-main :label="child.label" :sublabel="child.sublabel"></q-item-main>
-              <q-item-side v-if="child.right" v-bind="child.right" right></q-item-side>
-            </q-side-link>
-
-          </q-collapsible>
-
-          <q-side-link v-else :to="menu.to" :exact="menu.exact" item>
-            <q-item-side v-if="menu.left" v-bind="menu.left"></q-item-side>
-            <q-item-main :label="menu.label" :sublabel="menu.sublabel"></q-item-main>
-            <q-item-side v-if="menu.right" v-bind="menu.right" right></q-item-side>
-          </q-side-link>
-        </template>
+        <drawer-menu :menus="AppMenu"></drawer-menu>
       </slot>
     </q-scroll-area>
 
@@ -77,10 +60,11 @@
   import { mapGetters } from 'vuex'
   import { actions } from 'src/app/dashboard/model'
   import Breadcrumb from 'src/app/common/layout/Breadcrumb.vue'
+  import DrawerMenu from 'src/app/common/layout/DrawerMenu.vue'
 
   export default {
     components: {
-      Breadcrumb
+      Breadcrumb, DrawerMenu
     },
     name: 'layout-default',
     data: () => ({
@@ -135,15 +119,6 @@
       border-bottom 1px #ddd solid
     .q-toolbar-title
       font-family play
-    .q-collapsible-drawer
-      .q-collapsible-sub-item
-        padding 8px 2px
-        border-width 0 0 1px 0
-        border-color #ddd
-        border-style solid
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,cccccc+3,f3f1f1+8,f3f1f1+100 */
-        background #f3f1f1
-        background linear-gradient(to bottom, #d0d0d0 0%, #e6e6e6 3%, #f3f1f1 8%, #f3f1f1 100%)
 
     .router-view
       position absolute
