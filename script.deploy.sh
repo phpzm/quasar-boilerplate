@@ -18,7 +18,8 @@ rm -rf deploy/*
 
 echo "~> copy dist"
 cp -R dist/. deploy/
-cp .htaccess deploy/
+cp ./deploy/.htaccess deploy/
+cp ./deploy/api deploy/
 
 echo "~> add changes"
 cd "deploy/"
