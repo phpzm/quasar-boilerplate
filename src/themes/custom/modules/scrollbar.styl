@@ -1,0 +1,35 @@
+
+::-webkit-scrollbar
+  width 7px
+  height 7px
+::-webkit-scrollbar-track
+  background #DDDDDD
+  border 3px solid transparent
+  background-clip content-box
+::-webkit-scrollbar-thumb
+  border-radius 1px
+  background #dddddd
+  border 1px solid #DDDDDD
+::-webkit-scrollbar-thumb:window-inactive
+  background #DDDDDD
+
+.mini-scroll
+  overflow-y scroll
+  overflow-x hidden
+  &::-webkit-scrollbar
+    width 5px
+  &::-webkit-scrollbar-track
+    background #DDDDDD
+    border 2px solid transparent
+    background-clip content-box
+  &::-webkit-scrollbar-thumb
+    border-radius 1px
+    background #DDDDDD
+    border 1px solid #DDDDDD
+  &::-webkit-scrollbar-thumb:window-inactive
+    background #d1d1d1
+
+.layout-aside.fixed
+  z-index 2001
+.layout-page
+  background #eaeaea

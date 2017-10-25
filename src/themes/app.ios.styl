@@ -10,7 +10,7 @@
 // App iOS Design Variables
 // --------------------------------------------------
 // iOS Design only Stylus variables can go here
-// http://quasar-framework.org/api/css-stylus-variables.html
+// resource://quasar-framework.org/api/css-stylus-variables.html
 
 $typography-font-family ?= '-apple-system', 'Helvetica Neue', Helvetica, Arial, sans-serif
 
@@ -25,4 +25,5 @@ $toolbar-faded-color ?= composite-color($toolbar-color)
 // Quasar will use its default values when a custom variable isn't provided.
 @import '~quasar-framework/dist/quasar.ios.styl'
 
-@import 'custom/ios.styl'
+// import custom modules
+@import 'custom/index.styl'

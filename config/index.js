@@ -3,11 +3,13 @@ var path = require('path')
 module.exports = {
   // Webpack aliases
   aliases: {
+    vue: 'vue/dist/vue.js',
     quasar: path.resolve(__dirname, '../node_modules/quasar-framework/'),
-    themes: path.resolve(__dirname, '../themes'),
     src: path.resolve(__dirname, '../src'),
     assets: path.resolve(__dirname, '../src/assets'),
-    modules: path.resolve(__dirname, '../src/modules')
+    '@': path.resolve(__dirname, '../src/modules'),
+    variables: path.resolve(__dirname, '../src/themes/quasar.variables.styl'),
+    vue: 'vue/dist/vue.js'
   },
 
   // Progress Bar Webpack plugin format
@@ -19,15 +21,12 @@ module.exports = {
 
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
     publicPath: '',
     productionSourceMap: false,
-    // Gzip off by default as many popular static hosts such as
-    // Surge or Netlify already gzip all static assets for you.
-    // Before setting to `true`, make sure to:
-    // npm install --save-dev compression-webpack-plugin
-    productionGzip: false,
-    productionGzipExtensions: ['js', 'css']
+
+    // Remove unused CSS
+    // Disable it if it has side-effects for your specific app
+    purifyCSS: true
   },
   dev: {
     env: require('./dev.env'),

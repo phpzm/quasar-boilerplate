@@ -107,6 +107,10 @@ module.exports = {
     }),
     new ProgressBarPlugin({
       format: config.progressFormat
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
     })
   ],
   performance: {

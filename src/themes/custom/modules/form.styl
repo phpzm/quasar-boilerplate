@@ -1,0 +1,31 @@
+
+.form
+  display flex
+  min-width 260px
+  width 100%
+  flex-wrap wrap
+  flex-flow row wrap
+  .field
+    padding 5px
+    width 100%
+    .primary-label
+      display block
+      text-align left
+      font-size 14px
+      padding 2px 0 4px 0
+      color #474747
+      margin 0 0 5px 0
+
+.form
+  .field
+    for width in (1..20)
+      &.xs-{width * 5}
+        max-width width * 5%
+        min-width width * 5%
+
+@media (min-width 768px)
+  .form
+    .field
+      for width in (1..20)
+        &.has-{width * 5}
+          max-width width * 5%
