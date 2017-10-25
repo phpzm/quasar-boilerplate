@@ -45,7 +45,4 @@ const i18n = new VueI18n({
   messages
 })
 
-console.log(i18n.t)
-export const inter = i18n.t
-
 export default i18n
