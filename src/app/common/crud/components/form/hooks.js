@@ -6,10 +6,12 @@ export default {
     // window.removeEventListener('keyup', this.keyup, false)
   },
   mounted () {
-    this.mount()
-    if (this.api) {
-      return this.fetchRecord(this.$update)
-    }
-    this.$update()
+    window.setTimeout(() => {
+      this.mount()
+      if (this.api) {
+        return this.fetchRecord(this.$update)
+      }
+      this.$update()
+    }, 100)
   }
 }

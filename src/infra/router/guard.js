@@ -1,5 +1,7 @@
 import store from 'src/infra/store'
+import { abort } from 'src/infra/services/http'
 import { PATH_LOGIN } from 'src/support'
+import { confirm } from 'src/support/message'
 
 /**
  * @param {Array} routes
@@ -29,6 +31,20 @@ export const checkSession = () => {
 }
 
 /**
+ * @param {function} next
+ * @returns {*}
+ */
+export const checkModified = (next) => {
+  const modified = store.getters.AppModified
+  if (modified) {
+    return confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
+      store.dispatch('changeModified', false).then(() => next())
+    })
+  }
+  return modified
+}
+
+/**
  * @param {Route} to
  * @param {Route} from
  * @param {Function} next
@@ -38,9 +54,16 @@ export const beforeEach = (to, from, next) => {
   // noinspection JSUnresolvedVariable
   const security = to.meta.security
 
+  abort('The route where request was started was leaved, all requests was canceled')
+
   if (!security) {
     return next()
   }
+
+  if (checkModified(next)) {
+    return
+  }
+
   if (checkSession()) {
     return next()
   }

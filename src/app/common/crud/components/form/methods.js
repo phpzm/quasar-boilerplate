@@ -1,4 +1,4 @@
-import api from 'src/infra/services/http/index'
+import api from 'src/infra/services/http'
 import { set as _set, findIndex as _findIndex, each as _each, unset as _unset, isObject as _isObject } from 'lodash'
 import { actions } from 'src/app/common/crud/model'
 import { confirm, toast, undo } from 'src/support/message'

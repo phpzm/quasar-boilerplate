@@ -1,7 +1,7 @@
 <template>
   <common-card>
     <div slot="title">
-      Início
+      Home
     </div>
     <div slot="content">
       <q-icon name="home"></q-icon>
@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/javascript">
-  import CommonCard from 'src/app/common/card/index.vue'
+  import CommonCard from 'src/app/common/card/Index.vue'
 
   export default {
     components: {

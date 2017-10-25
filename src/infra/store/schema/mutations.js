@@ -38,5 +38,12 @@ export default {
    */
   [types.setAppToken] (state, token) {
     state.app.token = token
+  },
+  /**
+   * @param state
+   * @param modified
+   */
+  [types.setAppModified] (state, modified) {
+    state.app.modified = modified
   }
 }

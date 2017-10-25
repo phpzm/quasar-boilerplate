@@ -26,3 +26,8 @@ export const AppUser = ({ app }) => app.user
  * @param app
  */
 export const AppToken = ({ app }) => app.token
+
+/**
+ * @param app
+ */
+export const AppModified = ({ app }) => app.modified

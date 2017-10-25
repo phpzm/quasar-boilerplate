@@ -45,3 +45,11 @@ export const changeToken = (context, payload) => {
   setToken(payload)
   set(APP_TOKEN, payload)
 }
+
+/**
+ * @param context
+ * @param {Object} payload
+ */
+export const changeModified = (context, payload) => {
+  context.commit(types.setAppModified, payload)
+}

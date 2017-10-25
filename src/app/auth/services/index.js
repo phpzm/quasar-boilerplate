@@ -1,4 +1,4 @@
-import http from 'src/infra/services/http/index'
+import http from 'src/infra/services/http'
 import store from 'src/infra/store'
 
 /**

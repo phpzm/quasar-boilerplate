@@ -11,6 +11,7 @@ export default {
     title: label,
     menu: [],
     user: undefined,
-    token: process.env.DEV ? 'dev' : undefined
+    token: process.env.DEV ? 'dev' : undefined,
+    modified: false
   }
 }

@@ -1,4 +1,4 @@
-import api from 'src/infra/services/http/index'
+import http from 'src/infra/services/http'
 import { actions } from 'src/app/common/crud/model'
 import { map as _map } from 'lodash'
 import { defaults } from 'src/app/common/crud/components/grid/data'
@@ -62,7 +62,9 @@ export default {
         }
       }
 
-      api.get(this.api, Object.assign(params, extraParams))
+      // noinspection JSCheckFunctionSignatures
+      http
+        .get(this.api, Object.assign(params, extraParams))
         .then(response => {
           this.populate(response.data)
           this.loaded = 'complete'
@@ -96,7 +98,9 @@ export default {
      * @param {String} _id
      */
     remove (_id) {
-      api.delete(this.api + '/' + _id)
+      // noinspection JSCheckFunctionSignatures
+      http
+        .delete(this.api + '/' + _id)
         .then(response => {
           this.fetchAll()
         })
@@ -125,7 +129,9 @@ export default {
      */
     changeSort (sorted) {
       if (this.api) {
-        api.patch(this.api, {op: 'sort', docs: _map(sorted, '_id')})
+        // noinspection JSCheckFunctionSignatures
+        http
+          .patch(this.api, {op: 'sort', docs: _map(sorted, '_id')})
           .then(response => {
             if (response.status === 204) {
               this.records = sorted
@@ -160,11 +166,11 @@ export default {
 
       const error = () => {
         undo(this.$t('crud.run.error'), () => {
-          api(settings).then(run).catch(error)
+          http(settings).then(run).catch(error)
         })
       }
 
-      api(settings).then(run).catch(error)
+      http(settings).then(run).catch(error)
     }
   }
 }

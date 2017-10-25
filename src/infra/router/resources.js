@@ -28,15 +28,15 @@ export const crud = (entity, title, grid, form) => {
   return [
     {
       path: entity,
-      component: 'app/common/crud/index',
+      component: 'app/common/crud/Index',
       props: {
         title: title
       },
       children: [
-        route(grid, entity, 'index', '', 'app/common/crud/grid'),
-        route(form, entity, 'create', 'create', 'app/common/crud/form'),
-        route(form, entity, 'view', ':id', 'app/common/crud/form'),
-        route(form, entity, 'edit', ':id/edit', 'app/common/crud/form')
+        route(grid, entity, 'index', '', 'app/common/crud/Grid'),
+        route(form, entity, 'create', 'create', 'app/common/crud/Form'),
+        route(form, entity, 'view', ':id', 'app/common/crud/Form'),
+        route(form, entity, 'edit', ':id/edit', 'app/common/crud/Form')
       ]
     }
   ]

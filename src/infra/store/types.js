@@ -22,3 +22,8 @@ export const setAppUser = 'app/setAppUser'
  * @type {string}
  */
 export const setAppToken = 'app/setAppToken'
+
+/**
+ * @type {string}
+ */
+export const setAppModified = 'app/setAppModified'

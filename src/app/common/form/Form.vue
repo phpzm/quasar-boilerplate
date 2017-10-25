@@ -104,8 +104,4 @@
   .common-form
     .fixed-bottom-right
       margin 20px
-    .field-label
-      font-weight bold
-      color #3b7e3b
-      font-family Roboto, serif
 </style>
