@@ -1,5 +1,10 @@
 <template>
-  <q-layout ref="layout" :class="['layout-default', environment]" :view="view">
+  <q-layout
+    ref="layout"
+    :class="['layout-default', environment]"
+    :view="view"
+    :left-breakpoint="leftBreakpoint"
+    :reveal="reveal">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
@@ -76,7 +81,16 @@
     }),
     props: {
       view: {
-        default: 'lHh Lpr fff'
+        default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
+      },
+      reveal: {
+        default: false
+      },
+      leftBreakpoint: {
+        default: 996
+      },
+      hideTabs: {
+        default: false
       }
     },
     computed: {
@@ -135,5 +149,4 @@
     .slide-left-leave-active, .slide-right-enter
       opacity .3
       transform: translate(-30px, 0)
-
 </style>

@@ -9,35 +9,39 @@
       src="https://camo.githubusercontent.com/121cd7cbdc3e4855075ea8b558508b91ac463ac2/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677265656e5f3030373230302e706e67"
       alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png"></a>
 
-    <q-card class="card-form">
-      <q-card-media>
-        <!--suppress HtmlUnknownTarget -->
-        <img src="statics/logo/big.png" alt="logo"/>
-      </q-card-media>
+    <div class="card-wrapper">
 
-      <q-card-separator></q-card-separator>
+      <q-card class="card-form">
+        <q-card-media>
+          <!--suppress HtmlUnknownTarget -->
+          <img src="statics/logo/big.png" alt="logo"/>
+        </q-card-media>
 
-      <q-card-title>
-        <p class="text-right"><i>{{ title }}</i></p>
-      </q-card-title>
+        <q-card-separator></q-card-separator>
 
-      <q-card-separator></q-card-separator>
+        <q-card-title>
+          <p class="text-right"><i>{{ title }}</i></p>
+        </q-card-title>
 
-      <q-card-main class="form">
-        <field-text v-model="user" v-bind="{label: 'Login'}"></field-text>
-        <field-text v-model="password" v-bind="{label: 'Senha', type: 'password'}"></field-text>
-        <div class="field has-100">
-          <hr class="light">
-        </div>
-        <div class="field has-100">
-          <q-btn big class="full-width" color="primary" @click="attempt">Entrar</q-btn>
-        </div>
-        <div class="field has-100">
-          <small>Apenas pressione Entrar</small>
-        </div>
-      </q-card-main>
+        <q-card-separator></q-card-separator>
 
-    </q-card>
+        <q-card-main class="form">
+          <field-text v-model="user" v-bind="{label: 'Login'}"></field-text>
+          <field-text v-model="password" v-bind="{label: 'Senha', type: 'password'}"></field-text>
+          <div class="field has-100">
+            <hr class="light">
+          </div>
+          <div class="field has-100">
+            <q-btn big class="full-width" color="primary" @click="attempt">Entrar</q-btn>
+          </div>
+          <div class="field has-100">
+            <small>Apenas pressione Entrar</small>
+          </div>
+        </q-card-main>
+
+      </q-card>
+
+    </div>
 
   </div>
 </template>
@@ -68,24 +72,29 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .card-form
-    max-width 380px
-    margin 10px auto
-    background #ffffff
-    .q-card-media
-      background #F7F7F7
-      & > img
-        width auto
-        margin 20px auto
-        max-height 100px
-    .q-card-main
-      small
-        color #ababab
-        font-style italic
-    p
-      font-family play
-    .q-form-login
-      max-width 500px
+  .sky
+    .card-wrapper
+      width 100vw
+      height 100vh
+      overflow auto
+    .card-form
+      max-width 380px
+      margin 10px auto
+      background #ffffff
+      .q-card-media
+        background #F7F7F7
+        & > img
+          width auto
+          margin 20px auto
+          max-height 100px
+      .q-card-main
+        small
+          color #ababab
+          font-style italic
+      p
+        font-family play
+      .q-form-login
+        max-width 500px
 </style>
 
 <style lang="sass">
