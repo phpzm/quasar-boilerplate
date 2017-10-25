@@ -142,11 +142,17 @@
       height 100%
       transition transform .3s
 
-    .slide-left-enter, .slide-right-leave-active
-      opacity .3
-      transform: translate(30px, 0)
+    .slide-left-enter
+      opacity 0
+      transform translate(100%, 0)
+    .slide-left-leave-to
+      opacity 0
+      transform translate(-100%, 0)
 
-    .slide-left-leave-active, .slide-right-enter
-      opacity .3
-      transform: translate(-30px, 0)
+    .slide-right-enter
+      opacity 0
+      transform translate(-100%, 0)
+    .slide-right-leave-to
+      opacity 0
+      transform translate(-100%, 0)
 </style>
