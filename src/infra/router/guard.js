@@ -37,11 +37,12 @@ export const checkSession = () => {
 export const checkModified = (next) => {
   const modified = store.getters.AppModified
   if (modified) {
-    return confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
+    confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
       store.dispatch('changeModified', false).then(() => next())
     })
+    return true
   }
-  return modified
+  return false
 }
 
 /**

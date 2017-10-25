@@ -18,7 +18,7 @@
 <script type="text/javascript">
   import Field from 'src/app/common/fields/components/field.vue'
   import FieldAbstract from 'src/app/common/fields/abstract'
-  import { mask } from 'src/app/common/utils'
+  import { mask } from 'src/support/utils/index'
 
   export default {
     components: {

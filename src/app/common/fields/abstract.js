@@ -1,6 +1,6 @@
 import { uid } from 'quasar-framework'
 import { alert } from 'src/support/message'
-import { unMask } from 'src/app/common/utils'
+import { unMask } from 'src/support/utils/index'
 
 export default {
   props: {

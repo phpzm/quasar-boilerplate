@@ -12,34 +12,9 @@ require(`./themes/app.${__THEME}.styl`)
 
 import Vue from 'vue'
 import Quasar from 'quasar-framework'
-import Vuelidate from 'vuelidate'
-import VueFroala from 'vue-froala-wysiwyg'
-import moment from 'moment'
-
-import Http from 'src/infra/services/http/plugin'
-import router from 'src/infra/router'
-import store from 'src/infra/store'
-import i18n from 'src/app/common/i18n'
-import 'src/support/quasar/index'
-
-// Require Froala Editor js file
-require('froala-editor/js/froala_editor.pkgd.min')
-require('froala-editor/js/plugins/code_view.min')
-require('froala-editor/js/languages/pt_br')
-
-// Require Froala Editor css files
-require('froala-editor/css/froala_editor.pkgd.min.css')
-require('font-awesome/css/font-awesome.css')
-require('froala-editor/css/froala_style.min.css')
-
-Vue.config.productionTip = false
+import bootstrap from 'domains/bootstrap'
 
 Vue.use(Quasar)
-Vue.use(Vuelidate)
-Vue.use(VueFroala)
-Vue.use(Http, { store, router })
-
-moment.locale('pt-BR')
 
 if (__THEME === 'mat') {
   require('quasar-extras/roboto-font')
@@ -49,13 +24,13 @@ import 'quasar-extras/material-icons'
 // import 'quasar-extras/fontawesome'
 // import 'quasar-extras/animate'
 
+const base = {
+  el: '#q-app',
+  render: h => h(require('root.vue'))
+}
+const options = Object.assign({}, base, bootstrap(Vue))
+
 Quasar.start(() => {
   /* eslint-disable no-new */
-  new Vue({
-    el: '#q-app',
-    i18n,
-    router,
-    store,
-    render: h => h(require('root.vue'))
-  })
+  new Vue(options)
 })

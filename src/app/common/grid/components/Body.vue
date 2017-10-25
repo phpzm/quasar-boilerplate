@@ -32,7 +32,7 @@
   // https://github.com/SortableJS/Vue.Draggable
   import draggable from 'vuedraggable'
   import { get as _get } from 'lodash'
-  import { mask } from 'src/app/common/utils'
+  import { mask } from 'src/support/utils/index'
 
   const GridBody = {
     components: {
