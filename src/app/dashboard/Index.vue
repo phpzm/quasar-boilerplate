@@ -1,5 +1,8 @@
 <template>
-  <layout-default></layout-default>
+  <layout-default
+    :view="view"
+    :left-breakpoint="leftBreakpoint"
+    :reveal="reveal"></layout-default>
 </template>
 
 <script type="text/javascript">
@@ -11,6 +14,17 @@
     name: 'dashboard',
     components: {
       LayoutDefault
+    },
+    props: {
+      view: {
+        default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
+      },
+      reveal: {
+        default: false
+      },
+      leftBreakpoint: {
+        default: 996
+      }
     },
     methods: {
       /**

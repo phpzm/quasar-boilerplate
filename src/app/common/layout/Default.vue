@@ -96,9 +96,6 @@
       },
       leftBreakpoint: {
         default: 996
-      },
-      hideTabs: {
-        default: false
       }
     },
     computed: {
@@ -151,7 +148,7 @@
     .router-view
       position absolute
       width 100%
-      height 100%
+      height calc(100vh - 96px)
       transition transform .3s
 
     .slide-left-enter
