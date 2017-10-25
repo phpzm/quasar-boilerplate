@@ -37,9 +37,12 @@ export const checkSession = () => {
 export const checkModified = (next) => {
   const modified = store.getters.AppModified
   if (modified) {
-    confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
-      store.dispatch('changeModified', false).then(() => next())
-    })
+    window.setTimeout(() => {
+      confirm('Alterações sem salvar', 'Deseja perder tudo?', () => {
+        store.dispatch('changeModified', false)
+        next()
+      })
+    }, 100)
     return true
   }
   return false
@@ -62,7 +65,7 @@ export const beforeEach = (to, from, next) => {
   }
 
   if (checkModified(next)) {
-    return
+    return next(false)
   }
 
   if (checkSession()) {
