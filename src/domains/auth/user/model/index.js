@@ -3,9 +3,11 @@ import { resource } from 'src/infra/services/http/resource'
 
 export const entity = 'user'
 
-export const title = 'Usuários'
-
-export const icon = 'supervisor_account'
+export const meta = {
+  icon: 'supervisor_account',
+  label: 'Usuários',
+  tooltip: 'Cadastro de Usuários'
+}
 
 export const api = '/auth/user'
 

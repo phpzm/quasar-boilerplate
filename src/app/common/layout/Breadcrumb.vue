@@ -4,12 +4,14 @@
       <!--suppress HtmlUnknownAnchorTarget -->
       <router-link to="/dashboard">
         <q-icon name="home"></q-icon>
+        <q-tooltip>Página Inicial</q-tooltip>
       </router-link>
     </li>
     <li v-for="item in items">
       <router-link :to="item.to">
         <q-icon :name="item.icon"></q-icon>
         <small>{{ item.label }}</small>
+        <q-tooltip v-if="item.tooltip">{{ item.tooltip }}</q-tooltip>
       </router-link>
     </li>
   </ul>
@@ -48,6 +50,7 @@
           accumulate.push({
             icon: match.meta.icon,
             label: match.meta.label,
+            tooltip: match.meta.tooltip,
             path: match.path,
             to: to
           })

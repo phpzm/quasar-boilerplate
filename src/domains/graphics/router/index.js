@@ -6,7 +6,8 @@ export default [
     component: 'domains/graphics/components/Index',
     meta: {
       icon: 'pie_chart',
-      label: title
+      label: title,
+      tooltip: 'Gráficos de exemplo usando e-charts'
     },
     name: 'dashboard.graphics'
   }

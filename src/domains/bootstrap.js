@@ -21,7 +21,7 @@ require('froala-editor/css/froala_style.min.css')
 export const menu = [
   {
     to: '/dashboard',
-    label: 'Início',
+    label: 'Página Inicial',
     exact: true,
     left: {
       icon: 'home'

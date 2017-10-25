@@ -6,7 +6,8 @@ export default [
     component: 'domains/forms/components/Index',
     meta: {
       icon: 'subtitles',
-      label: title
+      label: title,
+      tooltip: 'Formulários de exemplo usando os componentes do projeto'
     },
     name: 'dashboard.forms'
   }
