@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
   import { mapActions } from 'vuex'
-  import CommonCard from 'src/app/modules/common/card/Index.vue'
+  import CommonCard from 'src/app/components/card/Index.vue'
 
   export default {
     components: {

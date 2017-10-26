@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/javascript">
-  import LayoutDefault from 'src/app/modules/common/layout/Default.vue'
+  import LayoutDefault from 'src/app/components/layout/Default.vue'
   import { configureDashboard } from 'src/bootstrap/settings'
 
   export default {

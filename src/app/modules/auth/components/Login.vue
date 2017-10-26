@@ -47,7 +47,7 @@
 </template>
 
 <script type="text/javascript">
-  import 'src/app/modules/common/fields'
+  import 'src/app/components/fields'
   import { login } from 'src/app/modules/auth/services'
 
   export default {
