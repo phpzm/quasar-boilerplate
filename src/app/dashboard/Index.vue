@@ -6,9 +6,8 @@
 </template>
 
 <script type="text/javascript">
-  import { mapActions } from 'vuex'
   import LayoutDefault from 'src/app/common/layout/Default.vue'
-  import { menu } from 'src/bootstrap'
+  import { configureDashboard } from 'src/bootstrap/settings'
 
   export default {
     name: 'dashboard',
@@ -26,17 +25,9 @@
         default: 996
       }
     },
-    methods: {
-      /**
-       * @method changeTitle ({String})
-       * @method changeMenu ({Array})
-       */
-      ...mapActions(['changeTitle', 'changeMenu'])
-    },
     created () {
       // noinspection JSCheckFunctionSignatures
-      this.changeTitle('Painel de Controle')
-      this.changeMenu(menu)
+      configureDashboard(this)
     }
   }
 </script>

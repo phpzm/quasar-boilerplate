@@ -1,3 +1,5 @@
+import { login } from 'src/bootstrap/events'
+
 export default {
   actions: {
     /**
@@ -5,7 +7,7 @@ export default {
      * @param payload
      */
     login: (context, payload) => {
-      context.dispatch('changeUser', payload.user)
+      context.dispatch('changeUser', login(payload.user))
       context.dispatch('changeToken', payload.token)
     },
     /**

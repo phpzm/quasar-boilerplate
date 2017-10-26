@@ -7,6 +7,7 @@
 </template>
 
 <script type="text/javascript">
+  import { mapGetters } from 'vuex'
   import DrawerMenuItem from 'src/app/common/layout/DrawerMenuItem.vue'
 
   export default {
@@ -19,9 +20,24 @@
         required: true,
         type: Array
       }
+    },
+    computed: {
+      badges () {
+        return this.getBadges.reduce((accumulate, item) => {
+          if (item.id) {
+            accumulate[item.id] = item.count
+          }
+          return accumulate
+        }, {})
+      },
+      ...mapGetters(['getBadges'])
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .drawer-menu
+    border-width 0 0 1px 0
+    border-color #ddd
+    border-style solid
 </style>

@@ -1,4 +1,4 @@
-export default [
+export default to => [
   {
     to: '/dashboard',
     label: 'Página Inicial',
@@ -8,7 +8,7 @@ export default [
     }
   },
   {
-    to: '/dashboard/forms',
+    to: to('/dashboard/forms'),
     label: 'Formulários',
     exact: true,
     left: {
@@ -16,7 +16,7 @@ export default [
     }
   },
   {
-    to: '/dashboard/graphics',
+    to: to('/dashboard/graphics'),
     label: 'Gráficos',
     exact: true,
     left: {
@@ -32,7 +32,7 @@ export default [
         icon: 'vpn_key',
         children: [
           {
-            to: '/dashboard/user',
+            to: to('/dashboard/user'),
             label: 'Usuários',
             left: {
               icon: 'supervisor_account'

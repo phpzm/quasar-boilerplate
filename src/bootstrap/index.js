@@ -1,28 +1,24 @@
+// main dependencies
 import Vuelidate from 'vuelidate'
 import VueFroala from 'vue-froala-wysiwyg'
 import moment from 'moment'
 
+// modules to install
 import Http from 'src/infra/services/http/plugin'
 import router from 'src/infra/router'
 import store from 'src/infra/store'
 import i18n from 'src/support/i18n'
-import 'src/support/quasar/index'
 
-import { beforeUnload } from 'src/bootstrap/events'
+// settings of vendors
+import 'src/bootstrap/vendor/quasar'
+import 'src/bootstrap/vendor/froala'
 
-export { default as menu } from 'src/bootstrap/menu'
+// events to boot
+import { beforeUnload, errorHandler } from 'src/bootstrap/events'
 
-// Require Froala Editor js file
-require('froala-editor/js/froala_editor.pkgd.min')
-require('froala-editor/js/plugins/code_view.min')
-require('froala-editor/js/languages/pt_br')
+const dev = process.env.DEV
 
-// Require Froala Editor css files
-require('froala-editor/css/froala_editor.pkgd.min.css')
-require('font-awesome/css/font-awesome.css')
-require('froala-editor/css/froala_style.min.css')
-
-export default (Vue) => {
+const boot = (Vue) => {
   Vue.use(Vuelidate)
   Vue.use(VueFroala)
   Vue.use(Http, { store, router })
@@ -31,7 +27,11 @@ export default (Vue) => {
 
   window.addEventListener('beforeunload', beforeUnload(store, i18n))
 
-  Vue.config.productionTip = false
+  Vue.config.productionTip = !dev
+  Vue.config.silent = !dev
+  Vue.config.devtools = dev
+  Vue.config.productionTip = dev
+  Vue.config.errorHandler = errorHandler
 
   return {
     router,
@@ -39,3 +39,5 @@ export default (Vue) => {
     i18n
   }
 }
+
+export default boot
