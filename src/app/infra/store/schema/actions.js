@@ -1,6 +1,7 @@
 import { APP_USER, APP_TOKEN } from 'src/app/support/index'
 import { set } from 'src/app/infra/storage'
 import { setToken } from 'src/app/infra/services/http/index'
+import { Events } from 'quasar-framework'
 
 /**
  * Vuex actions
@@ -52,4 +53,12 @@ export const changeToken = (context, payload) => {
  */
 export const changeModified = (context, payload) => {
   context.commit(types.setAppModified, payload)
+}
+
+/**
+ * @param context
+ */
+export const clear = (context) => {
+  // clear messages
+  Events.$emit('app:clear')
 }

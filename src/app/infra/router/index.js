@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import routes from 'src/routes'
-
-import { beforeEach } from 'src/app/infra/router/guard'
+import { routes, beforeEach, afterEach } from 'src/routes'
 
 Vue.use(Router)
 
@@ -32,5 +30,6 @@ const router = new Router({
 })
 
 router.beforeEach(beforeEach)
+router.afterEach(afterEach)
 
 export default router

@@ -1,3 +1,6 @@
+/**
+ * @type Array
+ */
 export default [
   {
     path: '*',

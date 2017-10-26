@@ -2,6 +2,9 @@ import user from 'src/domains/auth/user/routes'
 import graphics from 'src/domains/graphics/routes'
 import forms from 'src/domains/forms/routes'
 
+/**
+ * @type Array
+ */
 export default [
   {
     path: '/dashboard',

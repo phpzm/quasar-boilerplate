@@ -75,3 +75,13 @@ export const beforeEach = (to, from, next) => {
   }
   return next(PATH_LOGIN)
 }
+
+/**
+ * @param {Route} to
+ * @param {Route} from
+ * @returns {*}
+ */
+export const afterEach = (to, from) => {
+  // noinspection JSIgnoredPromiseFromCall
+  store.dispatch('clear')
+}
