@@ -1,5 +1,5 @@
-import { field, filter } from 'src/support/model/index'
-import { resource } from 'src/infra/services/http/resource'
+import { field, filter } from 'src/app/support/model/index'
+import { resource } from 'src/app/infra/services/http/resource'
 
 export const entity = 'user'
 

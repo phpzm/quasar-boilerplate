@@ -1,12 +1,15 @@
 <template>
   <common-card>
     <div slot="title">
-      Gráficos
+      <slot name="header">
+        {{ title }}
+      </slot>
     </div>
     <div slot="content">
-      <q-icon name="pie_chart"></q-icon>
+      <router-view></router-view>
     </div>
   </common-card>
+
 </template>
 
 <script type="text/javascript">
@@ -16,9 +19,11 @@
     components: {
       CommonCard
     },
-    name: 'graphics'
+    name: 'crud',
+    props: {
+      title: {
+        default: ''
+      }
+    }
   }
 </script>
-
-<style lang="stylus" rel="stylesheet/stylus">
-</style>

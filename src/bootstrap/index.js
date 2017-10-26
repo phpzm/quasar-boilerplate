@@ -4,10 +4,10 @@ import VueFroala from 'vue-froala-wysiwyg'
 import moment from 'moment'
 
 // modules to install
-import Http from 'src/infra/services/http/plugin'
-import router from 'src/infra/router'
-import store from 'src/infra/store'
-import i18n from 'src/support/i18n'
+import Http from 'src/app/infra/services/http/plugin'
+import router from 'src/app/infra/router'
+import store from 'src/app/infra/store'
+import i18n from 'src/app/support/i18n'
 
 // settings of vendors
 import 'src/bootstrap/vendor/quasar'

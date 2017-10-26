@@ -1,10 +1,10 @@
 <template>
   <common-card>
     <div slot="title">
-      Gráficos
+      Home
     </div>
     <div slot="content">
-      <q-icon name="pie_chart"></q-icon>
+      <q-icon name="home"></q-icon>
     </div>
   </common-card>
 </template>
@@ -16,7 +16,7 @@
     components: {
       CommonCard
     },
-    name: 'graphics'
+    name: 'dashboard-home'
   }
 </script>
 

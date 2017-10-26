@@ -1,5 +1,5 @@
 import menu from 'src/bootstrap/menu'
-import store from 'src/infra/store'
+import store from 'src/app/infra/store'
 
 /**
  * @param {string} path

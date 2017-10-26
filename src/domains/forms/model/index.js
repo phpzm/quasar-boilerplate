@@ -1,4 +1,4 @@
-import { resource } from 'src/infra/services/http/resource'
+import { resource } from 'src/app/infra/services/http/resource'
 
 export const title = 'Gráficos'
 
