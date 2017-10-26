@@ -1,6 +1,6 @@
-import user from 'src/domains/auth/user/router/index'
-import graphics from 'src/domains/graphics/router/index'
-import forms from 'src/domains/forms/router/index'
+import user from 'src/domains/auth/user/routes'
+import graphics from 'src/domains/graphics/routes'
+import forms from 'src/domains/forms/routes'
 
 export default [
   {

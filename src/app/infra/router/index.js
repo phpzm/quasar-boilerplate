@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import { router as auth } from 'src/app/modules/auth/index'
-import { router as dashboard } from 'src/app/modules/dashboard/index'
-import { router as errors } from 'src/app/modules/errors/index'
+import routes from 'src/routes'
 
-import { protect, beforeEach } from 'src/app/infra/router/guard'
+import { beforeEach } from 'src/app/infra/router/guard'
 
 Vue.use(Router)
 
@@ -29,14 +27,8 @@ const configure = (routes) => {
   })
 }
 
-const routes = configure([
-  ...auth,
-  ...protect(dashboard),
-  ...errors
-])
-
 const router = new Router({
-  routes: routes
+  routes: configure(routes)
 })
 
 router.beforeEach(beforeEach)
