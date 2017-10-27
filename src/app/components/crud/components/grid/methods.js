@@ -3,6 +3,7 @@ import { actions } from 'src/app/components/crud/model'
 import { map as _map } from 'lodash'
 import { defaults } from 'src/app/components/crud/components/grid/data'
 import { toast, undo } from 'src/app/support/message'
+import { populateGrid } from 'src/bootstrap/settings'
 
 export default {
   methods: {
@@ -78,19 +79,7 @@ export default {
      * @param {Object} response
      */
     populate (response) {
-      let records = []
-      if (this.pagination) {
-        if (!response.data) {
-          return
-        }
-        records = response['data']
-        this.page = response['current_page']
-        this.pages = response['last_page']
-      }
-      if (!records.length && Array.isArray(response)) {
-        records = response
-      }
-      this.records = records
+      this.records = populateGrid(this, response)
 
       this.$emit('populate', response)
     },
