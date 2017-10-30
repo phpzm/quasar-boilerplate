@@ -10,7 +10,7 @@ export default [
     path: '/dashboard',
     component: 'app/modules/dashboard/Index',
     props: {
-      view: 'hHh Lpr lFf',
+      view: 'lHh Lpr lFf',
       reveal: true,
       leftBreakpoint: 996
     },
