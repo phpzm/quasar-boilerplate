@@ -9,9 +9,10 @@ export default {
   app: {
     name: label,
     title: label,
+    width: 0,
+    height: 0,
+    modified: false,
     menu: [],
-    user: undefined,
-    token: process.env.DEV ? 'dev' : undefined,
-    modified: false
+    messages: []
   }
 }

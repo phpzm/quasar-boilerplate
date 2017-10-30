@@ -20,24 +20,17 @@ export default {
   },
   /**
    * @param state
-   * @param menu
+   * @param width
    */
-  [types.setAppMenu] (state, menu) {
-    state.app.menu = menu
+  [types.setAppWidth] (state, width) {
+    state.app.width = width
   },
   /**
    * @param state
-   * @param user
+   * @param height
    */
-  [types.setAppUser] (state, user) {
-    state.app.user = user
-  },
-  /**
-   * @param state
-   * @param token
-   */
-  [types.setAppToken] (state, token) {
-    state.app.token = token
+  [types.setAppHeight] (state, height) {
+    state.app.height = height
   },
   /**
    * @param state
@@ -45,5 +38,19 @@ export default {
    */
   [types.setAppModified] (state, modified) {
     state.app.modified = modified
+  },
+  /**
+   * @param state
+   * @param menu
+   */
+  [types.setAppMenu] (state, menu) {
+    state.app.menu = menu
+  },
+  /**
+   * @param state
+   * @param modified
+   */
+  [types.setAppMessages] (state, modified) {
+    state.app.messages = modified
   }
 }

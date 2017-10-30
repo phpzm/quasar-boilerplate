@@ -15,19 +15,24 @@ export const AppTitle = ({ app }) => app.title
 /**
  * @param app
  */
-export const AppMenu = ({ app }) => app.menu
+export const AppWidth = ({ app }) => app.width
 
 /**
  * @param app
  */
-export const AppUser = ({ app }) => app.user
-
-/**
- * @param app
- */
-export const AppToken = ({ app }) => app.token
+export const AppHeight = ({ app }) => app.height
 
 /**
  * @param app
  */
 export const AppModified = ({ app }) => app.modified
+
+/**
+ * @param app
+ */
+export const AppMenu = ({ app }) => app.menu
+
+/**
+ * @param app
+ */
+export const AppMessages = ({ app }) => app.messages

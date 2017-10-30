@@ -1,4 +1,5 @@
-import menu from 'src/bootstrap/menu'
+import menu from 'src/bootstrap/model/menu'
+import options from 'src/bootstrap/model/options'
 import store from 'src/app/infra/store'
 
 /**
@@ -18,14 +19,16 @@ export const to = (path, query = {}) => {
  */
 export const configureDashboard = $component => {
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('changeTitle', 'Painel de Controle')
+  store.dispatch('setAppTitle', 'Painel de Controle')
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('changeMenu', menu(to))
+  store.dispatch('setAppMenu', menu(to))
+  // noinspection JSIgnoredPromiseFromCall
+  store.dispatch('setDashboardOptions', options())
 }
 
 /**
- * @param $component
- * @param response
+ * @param {Vue} $component
+ * @param {Object} response
  * @returns {Array}
  */
 export const populateGrid = ($component, response) => {
@@ -42,4 +45,12 @@ export const populateGrid = ($component, response) => {
     records = response
   }
   return records
+}
+
+/**
+ * @param {Object} user
+ * @returns {*}
+ */
+export const configureUser = (user) => {
+  return user
 }

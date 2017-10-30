@@ -22,11 +22,3 @@ export const errorHandler = (error, component, context) => {
   console.warn('[component] ~> ', component.$options.name)
   console.error('[error] ~> ', error.message)
 }
-
-/**
- * @param {*} user
- * @returns {*}
- */
-export const login = user => {
-  return user
-}

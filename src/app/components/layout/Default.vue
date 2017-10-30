@@ -23,7 +23,7 @@
           <q-popover ref="popover" class="q-popover-menu">
             <q-list item-separator highlight link>
               <!--suppress CommaExpressionJS -->
-              <q-item v-for="(menu, index) in menus" :key="index" @click="handlerMenu(menu)" separator>
+              <q-item v-for="(menu, index) in getDashboardOptions" :key="index" @click="handlerMenu(menu)" separator>
                 <q-item-side :icon="menu.icon"></q-item-side>
                 <q-item-main>{{ menu.label }}</q-item-main>
               </q-item>
@@ -58,7 +58,6 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
-  import { actions } from 'src/app/modules/dashboard/model'
   import Breadcrumb from 'src/app/components/layout/Breadcrumb.vue'
   import DrawerMenu from 'src/app/components/layout/DrawerMenu.vue'
 
@@ -68,7 +67,6 @@
     },
     name: 'layout-default',
     data: () => ({
-      menus: actions,
       transition: 'slide-left'
     }),
     props: {
@@ -83,11 +81,11 @@
       }
     },
     computed: {
-      ...mapGetters(['AppTitle', 'AppName', 'AppMenu']),
       environment () {
         // noinspection ES6ModulesDependencies
         return process.env.NODE_ENV
-      }
+      },
+      ...mapGetters(['AppTitle', 'AppName', 'AppMenu', 'getDashboardOptions'])
     },
     methods: {
       handlerMenu (menu) {

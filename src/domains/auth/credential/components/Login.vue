@@ -28,6 +28,7 @@
         <q-card-main class="form">
           <field-text v-model="user" v-bind="{label: 'Login'}"></field-text>
           <field-text v-model="password" v-bind="{label: 'Senha', type: 'password'}"></field-text>
+          <field-checkbox v-model="remember" v-bind="{label: 'Lembrar neste dispositivo'}"></field-checkbox>
           <div class="field has-100">
             <hr class="light">
           </div>
@@ -47,25 +48,27 @@
 </template>
 
 <script type="text/javascript">
-  import 'src/app/components/fields'
-  import { login } from 'src/app/modules/auth/services'
+  import 'src/app/components/fields/index'
+  import { login } from 'src/domains/auth/credential/services'
 
   export default {
     name: 'auth-login',
     data: () => ({
       title: 'Painel de Controle',
       user: '',
-      password: ''
+      password: '',
+      remember: false
     }),
     methods: {
       attempt () {
-        const success = response => {
-          this.$router.push({name: 'dashboard.home'})
+        const credential = {
+          user: this.user,
+          password: this.password
         }
-        const fail = error => {
-          console.log('~> error', error)
-        }
-        login(this.user, this.password, success, fail)
+        login(credential, this.remember, this.success)
+      },
+      success (response) {
+        this.$router.push({name: 'dashboard.home'})
       }
     }
   }

@@ -11,19 +11,24 @@ export const setAppTitle = 'app/setAppTitle'
 /**
  * @type {string}
  */
-export const setAppMenu = 'app/setAppMenu'
+export const setAppWidth = 'app/setAppWidth'
 
 /**
  * @type {string}
  */
-export const setAppUser = 'app/setAppUser'
-
-/**
- * @type {string}
- */
-export const setAppToken = 'app/setAppToken'
+export const setAppHeight = 'app/setAppHeight'
 
 /**
  * @type {string}
  */
 export const setAppModified = 'app/setAppModified'
+
+/**
+ * @type {string}
+ */
+export const setAppMenu = 'app/setAppMenu'
+
+/**
+ * @type {string}
+ */
+export const setAppMessages = 'app/setAppMessages'

@@ -1,8 +1,3 @@
-import { APP_USER, APP_TOKEN } from 'src/app/support/index'
-import { set } from 'src/app/infra/storage'
-import { setToken } from 'src/app/infra/services/http/index'
-import { Events } from 'quasar-framework'
-
 /**
  * Vuex actions
  */
@@ -10,55 +5,48 @@ import * as types from 'src/app/infra/store/types'
 
 /**
  * @param context
- * @param {string} payload
+ * @param {string} title
  */
-export const changeTitle = (context, payload) => {
-  context.commit(types.setAppTitle, payload)
+export const setAppTitle = (context, title) => {
+  context.commit(types.setAppTitle, title)
 }
 
 /**
  * @param context
- * @param {Array} payload
+ * @param {Object} width
  */
-export const changeMenu = (context, payload) => {
-  context.commit(types.setAppMenu, payload)
+export const setAppWidth = (context, width) => {
+  context.commit(types.setAppWidth, width)
 }
 
 /**
  * @param context
- * @param {Object} payload
+ * @param {Object} height
  */
-export const changeUser = (context, payload) => {
-  context.commit(types.setAppUser, payload)
-  if (!payload) {
-    return set(APP_USER, payload)
-  }
-  // noinspection JSUnresolvedVariable
-  set(APP_USER, payload, payload.remember)
+export const setAppHeight = (context, height) => {
+  context.commit(types.setAppHeight, height)
 }
 
 /**
  * @param context
- * @param {Object} payload
+ * @param {Object} modified
  */
-export const changeToken = (context, payload) => {
-  context.commit(types.setAppToken, payload)
-  setToken(payload)
-  set(APP_TOKEN, payload)
+export const setAppModified = (context, modified) => {
+  context.commit(types.setAppModified, modified)
 }
 
 /**
  * @param context
- * @param {Object} payload
+ * @param {Array} menu
  */
-export const changeModified = (context, payload) => {
-  context.commit(types.setAppModified, payload)
+export const setAppMenu = (context, menu) => {
+  context.commit(types.setAppMenu, menu)
 }
 
 /**
  * @param context
+ * @param messages
  */
-export const clear = (context) => {
-  // clear messages
-  Events.$emit('app:clear')
+export const setAppMessages = (context, messages) => {
+  context.commit(types.setAppMessages, messages)
 }

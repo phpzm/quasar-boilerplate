@@ -41,7 +41,7 @@ export const checkModified = (next) => {
     window.setTimeout(() => {
       // noinspection JSCheckFunctionSignatures
       confirm(i18n.t('events.modified.title'), i18n.t('events.modified.message'), () => {
-        store.dispatch('changeModified', false)
+        store.dispatch('setAppModified', false)
         next()
       })
     }, 100)
@@ -83,5 +83,5 @@ export const beforeEach = (to, from, next) => {
  */
 export const afterEach = (to, from) => {
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('clear')
+  store.dispatch('setAppMessages', [])
 }

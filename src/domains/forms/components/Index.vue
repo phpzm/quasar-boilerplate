@@ -6,7 +6,7 @@
     <div slot="content">
       <q-icon name="pie_chart"></q-icon>
       <hr>
-      <q-btn @click="changeModified(true)">Forçar estado modificado</q-btn>
+      <q-btn @click="setAppModified(true)">Forçar estado modificado</q-btn>
     </div>
   </common-card>
 </template>
@@ -21,7 +21,7 @@
     },
     name: 'forms',
     methods: {
-      ...mapActions(['changeModified'])
+      ...mapActions(['setAppModified'])
     }
   }
 </script>

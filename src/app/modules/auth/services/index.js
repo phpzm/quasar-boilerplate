@@ -1,27 +1,26 @@
-import http from 'src/app/infra/services/http'
 import store from 'src/app/infra/store'
+import { configureUser } from 'src/bootstrap/settings'
 
 /**
- * @param {string} user
- * @param {string} password
- * @param {function} success
- * @param {function} fail
+ * @param {Object} user
+ * @param {string} token
+ * @param {boolean} remember
+ * @param {Function} success
  */
-export const login = (user, password, success, fail) => {
-  const credentials = {}
-  credentials['email'] = user
-  credentials['password'] = password
-  http
-    .post('/auth/login', credentials)
-    .then(({data}) => {
-      store
-        .dispatch('login', {
-          user: user,
-          token: data.token
-        })
-        .then(() => {
-          success(data)
-        })
+export const register = (user, token, remember, success) => {
+  store.dispatch('changeUser', configureUser(user), remember)
+    .then(() => {
+      store.dispatch('changeToken', token, remember).then(success)
     })
-    .catch(fail)
+}
+
+/**
+ * @param {Object} user
+ * @param {string} token
+ */
+export const unRegister = (user, token) => {
+  store.dispatch('changeUser', undefined)
+    .then(() => {
+      store.dispatch('changeToken', undefined)
+    })
 }
