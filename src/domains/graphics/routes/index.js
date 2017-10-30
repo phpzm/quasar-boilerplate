@@ -7,6 +7,7 @@ export default [
     meta: {
       icon: 'pie_chart',
       label: title,
+      title: 'Gráficos de exemplo usando e-charts',
       tooltip: 'Gráficos de exemplo usando e-charts'
     },
     name: 'dashboard.graphics'

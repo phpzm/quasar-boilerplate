@@ -6,10 +6,10 @@ import {LocalStorage, SessionStorage} from 'quasar-framework'
  * @returns {*}
  */
 export const get = (index) => {
-  if (LocalStorage.get.item(index)) {
+  if (LocalStorage.get.item(index) !== 'undefined') {
     return LocalStorage.get.item(index)
   }
-  if (SessionStorage.get.item(index)) {
+  if (SessionStorage.get.item(index) !== 'undefined') {
     return SessionStorage.get.item(index)
   }
 }

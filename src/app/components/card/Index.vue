@@ -31,7 +31,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .common-card
-    padding 20px
     & > .q-card
       background #ffffff
       & .q-card--title

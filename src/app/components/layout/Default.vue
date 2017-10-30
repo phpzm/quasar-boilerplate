@@ -1,15 +1,10 @@
 <template>
-  <q-layout
-    ref="layout"
-    :class="['layout-default', environment]"
-    :view="view"
-    :left-breakpoint="leftBreakpoint"
-    :reveal="reveal">
+  <q-layout ref="layout" :class="classNames" :view="view" :left-breakpoint="leftBreakpoint" :reveal="reveal">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
         <!--suppress JSUnresolvedVariable -->
-        <q-btn flat @click="$refs.layout.toggleLeft()">
+        <q-btn flat @click="toggleLeft">
           <q-icon name="menu"></q-icon>
         </q-btn>
 
@@ -33,25 +28,29 @@
       </slot>
     </q-toolbar>
 
-    <q-scroll-area slot="left" style="width: 100%; height: 100%">
-      <div class="q-drawer-logo">
-        <!--suppress HtmlUnknownTarget -->
-        <img src="statics/logo/big.png" alt="logo" style="width: 200px">
-      </div>
-      <slot name="left">
+    <q-scroll-area v-if="left" slot="left" style="width: 100%; height: 100%">
+      <slot name="drawer-left-top">
+        <div class="q-drawer-logo">
+          <!--suppress HtmlUnknownTarget -->
+          <img src="statics/logo/big.png" alt="logo" style="width: 200px">
+        </div>
+      </slot>
+      <slot name="drawer-left">
         <!--<q-list-header>Left Panel</q-list-header>-->
         <drawer-menu :menus="AppMenu"></drawer-menu>
       </slot>
     </q-scroll-area>
 
     <slot name="breadcrumb">
-      <breadcrumb></breadcrumb>
+      <div style="padding: 0 17px">
+        <breadcrumb></breadcrumb>
+      </div>
     </slot>
 
     <slot name="content">
-      <transition :name="transition">
-        <router-view :key="$route" class="router-view"></router-view>
-      </transition>
+      <div style="margin: 10px 0 0 0">
+        <transition-slide :height="'calc(100vh - 105px)'" :padding="'0 10px'"></transition-slide>
+      </div>
     </slot>
   </q-layout>
 </template>
@@ -60,21 +59,22 @@
   import { mapGetters } from 'vuex'
   import Breadcrumb from 'src/app/components/layout/Breadcrumb.vue'
   import DrawerMenu from 'src/app/components/layout/DrawerMenu.vue'
+  import TransitionSlide from 'src/app/components/transition/Slide.vue'
 
   export default {
     components: {
-      Breadcrumb, DrawerMenu
+      Breadcrumb, DrawerMenu, TransitionSlide
     },
     name: 'layout-default',
-    data: () => ({
-      transition: 'slide-left'
-    }),
     props: {
       view: {
         default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
       },
       reveal: {
         default: false
+      },
+      left: {
+        default: true
       },
       leftBreakpoint: {
         default: 996
@@ -85,6 +85,9 @@
         // noinspection ES6ModulesDependencies
         return process.env.NODE_ENV
       },
+      classNames () {
+        return ['layout-default', this.environment]
+      },
       ...mapGetters(['AppTitle', 'AppName', 'AppMenu', 'getDashboardOptions'])
     },
     methods: {
@@ -92,13 +95,11 @@
         menu.handler(this)
         // noinspection JSUnresolvedVariable
         this.$refs.popover.close()
-      }
-    },
-    watch: {
-      '$route' (to, from) {
-        const toDepth = to.path.split('/').length
-        const fromDepth = from.path.split('/').length
-        this.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      },
+      toggleLeft () {
+        if (this.left) {
+          this.$refs.layout.toggleLeft()
+        }
       }
     }
   }
@@ -106,10 +107,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .layout-default
-    .layout-page > .common-card
-      padding 0 10px 10px 10px
-    .layout-page > .breadcrumb
-      margin 10px 20px -10px 20px
     .q-drawer-logo
       background #F7F7F7
       text-align center
@@ -117,22 +114,6 @@
       border-bottom 1px #ddd solid
     .q-toolbar-title
       font-family play
-
-    .router-view
-      position absolute
-      width 100%
-      height calc(100vh - 96px)
-      transition transform .3s
-
-    .slide-left-enter
-      transform translate(100%, 0)
-    .slide-left-leave-to
-      transform translate(-100%, 0)
-
-    .slide-right-enter
-      transform translate(-100%, 0)
-    .slide-right-leave-to
-      transform translate(100%, 0)
 
   @media screen and (max-width 768px)
     .layout-default

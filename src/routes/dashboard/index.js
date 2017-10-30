@@ -18,7 +18,11 @@ export default [
       {
         path: '',
         component: 'app/modules/dashboard/components/Home',
-        name: 'dashboard.home'
+        name: 'dashboard.home',
+        meta: {
+          label: 'Página Inicial',
+          title: 'Página Inicial'
+        }
       },
       ...forms,
       ...graphics,

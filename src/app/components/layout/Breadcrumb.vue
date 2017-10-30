@@ -70,4 +70,6 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  ul.breadcrumb li
+    margin 0
 </style>

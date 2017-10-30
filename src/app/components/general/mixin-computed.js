@@ -23,7 +23,7 @@ const gridWidth = (gridViewport, schema) => {
 export default {
   computed: {
     gridViewport () {
-      return this.getAppWidth - WIDTH_EXTRA
+      return this.AppWidth - WIDTH_EXTRA
     },
     available () {
       return this.schemas
@@ -77,6 +77,6 @@ export default {
       classNames.push(this.$options.name)
       return classNames
     },
-    ...mapGetters(['getAppWidth'])
+    ...mapGetters(['AppWidth'])
   }
 }

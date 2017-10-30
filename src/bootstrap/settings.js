@@ -19,8 +19,6 @@ export const to = (path, query = {}) => {
  */
 export const configureDashboard = $component => {
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('setAppTitle', 'Painel de Controle')
-  // noinspection JSIgnoredPromiseFromCall
   store.dispatch('setAppMenu', menu(to))
   // noinspection JSIgnoredPromiseFromCall
   store.dispatch('setDashboardOptions', options())
