@@ -42,13 +42,13 @@
     </q-scroll-area>
 
     <slot name="breadcrumb">
-      <div style="padding: 0 17px">
+      <div class="breadcrumb-wrapper">
         <breadcrumb></breadcrumb>
       </div>
     </slot>
 
     <slot name="content">
-      <div style="margin: 10px 0 0 0">
+      <div class="transition-wrapper">
         <transition-slide :height="'calc(100vh - 105px)'" :padding="'0 10px'"></transition-slide>
       </div>
     </slot>
@@ -114,11 +114,22 @@
       border-bottom 1px #ddd solid
     .q-toolbar-title
       font-family play
+    .breadcrumb-wrapper
+      position absolute
+      padding 0 17px 10px 17px
+      box-shadow 0 0 4px 2px rgba(0,0,0,0.3)
+      background #fff
+      width 100%
+      height 55px
+      z-index 2
+    .transition-wrapper
+      position relative
+      margin 55px 0 0 0
 
   @media screen and (max-width 768px)
     .layout-default
-      .layout-page > .common-card
-        padding 0
-      .layout-page > .breadcrumb
-        margin 10px 10px -10px 10px
+      .breadcrumb-wrapper
+        padding 0 7px 10px 7px
+      .layout-page > .transition-wrapper > div > .common-card.router-view
+        padding 0 !important
 </style>
