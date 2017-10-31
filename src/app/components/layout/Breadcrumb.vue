@@ -50,7 +50,7 @@
         Object.keys(this.$route.params).forEach(key => {
           to = to.replace(':' + key, this.$route.params[key])
         })
-        if (match.meta.label) {
+        if (match.meta.icon) {
           accumulate.push({
             icon: match.meta.icon,
             label: match.meta.label,
