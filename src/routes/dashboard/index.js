@@ -10,7 +10,7 @@ export default [
     path: '/dashboard',
     component: 'app/modules/dashboard/Index',
     props: {
-      view: 'hHh Lpr lFf',
+      view: 'lHh Lpr lFf',
       reveal: true,
       leftBreakpoint: 996
     },
@@ -18,7 +18,11 @@ export default [
       {
         path: '',
         component: 'app/modules/dashboard/components/Home',
-        name: 'dashboard.home'
+        name: 'dashboard.home',
+        meta: {
+          label: 'Página Inicial',
+          title: 'Página Inicial'
+        }
       },
       ...forms,
       ...graphics,

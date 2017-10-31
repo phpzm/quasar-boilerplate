@@ -8,15 +8,15 @@
 
 <script type="text/javascript">
   import { mapGetters, mapActions } from 'vuex'
-  import { dom } from 'quasar-framework'
+  import { Events, dom } from 'quasar-framework'
 
   export default {
     name: 'root',
     computed: {
-      ...mapGetters(['AppTitle'])
+      ...mapGetters(['AppTitle', 'AppName'])
     },
     methods: {
-      ...mapActions(['setAppWidth', 'setAppHeight']),
+      ...mapActions(['setAppWidth', 'setAppHeight', 'setAppRoute']),
       resize () {
         let {width, height} = dom.viewport()
         this.setAppWidth(width)
@@ -28,7 +28,10 @@
        * @param {String} title
        */
       AppTitle (title) {
-        document.title = title
+        document.title = title + ' | ' + this.AppName
+      },
+      '$route' (to, from) {
+        Events.$emit('app.route.update', from.path, to.path)
       }
     },
     created () {

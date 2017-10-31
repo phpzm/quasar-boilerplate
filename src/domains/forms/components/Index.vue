@@ -1,12 +1,12 @@
 <template>
   <common-card>
     <div slot="title">
-      Formulários
+      <q-icon name="subtitles"></q-icon> Formulários
     </div>
     <div slot="content">
-      <q-icon name="pie_chart"></q-icon>
       <hr>
       <q-btn @click="setAppModified(true)">Forçar estado modificado</q-btn>
+      <hr>
     </div>
   </common-card>
 </template>

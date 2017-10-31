@@ -42,7 +42,7 @@ export const crud = (entity, grid, form, meta) => {
       },
       meta: meta,
       children: [
-        route(grid, entity, 'index', '', 'app/components/crud/Grid'),
+        route(grid, entity, 'index', '', 'app/components/crud/Grid', '', '', meta.tooltip),
         route(form, entity, 'create', 'create', 'app/components/crud/Form', 'Criar', 'add',
           'Cria um novo registro no(a) ' + meta.tooltip),
         route(form, entity, 'view', ':id', 'app/components/crud/Form', 'Visualizar', 'search',

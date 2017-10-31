@@ -3,6 +3,7 @@ import { abort } from 'src/app/infra/services/http'
 import { PATH_LOGIN } from 'src/app/support'
 import { confirm } from 'src/app/support/message'
 import i18n from 'src/app/support/i18n'
+import { Events } from 'quasar-framework'
 
 /**
  * @param {Array} routes
@@ -63,7 +64,7 @@ export const beforeEach = (to, from, next) => {
   abort('The route where request was started was leaved, all requests was canceled')
 
   if (!security) {
-    return next()
+    return toNext(to, next)
   }
 
   if (checkModified(next)) {
@@ -71,9 +72,24 @@ export const beforeEach = (to, from, next) => {
   }
 
   if (checkSession()) {
-    return next()
+    return toNext(to, next)
   }
-  return next(PATH_LOGIN)
+
+  return toNext(to, next, PATH_LOGIN)
+}
+
+/**
+ * @param {Route} to
+ * @param {Function} next
+ * @param {string} path
+ * @returns {*}
+ */
+const toNext = (to, next, path = '') => {
+  Events.$emit('app.route.before', to, path)
+  if (path) {
+    return next(path)
+  }
+  next()
 }
 
 /**
@@ -84,4 +100,24 @@ export const beforeEach = (to, from, next) => {
 export const afterEach = (to, from) => {
   // noinspection JSIgnoredPromiseFromCall
   store.dispatch('setAppMessages', [])
+
+  if (to.meta.title) {
+    return setTitle(to.meta.title)
+  }
+  if (to.meta.tooltip) {
+    return setTitle(to.meta.tooltip)
+  }
+  if (to.meta.label) {
+    return setTitle(to.meta.label)
+  }
+}
+
+/**
+ * @param {string} title
+ */
+const setTitle = (title) => {
+  if (title) {
+    // noinspection JSIgnoredPromiseFromCall
+    store.dispatch('setAppTitle', String(title))
+  }
 }

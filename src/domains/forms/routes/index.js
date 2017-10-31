@@ -7,6 +7,7 @@ export default [
     meta: {
       icon: 'subtitles',
       label: title,
+      title: 'Formulários de exemplo usando os componentes do projeto',
       tooltip: 'Formulários de exemplo usando os componentes do projeto'
     },
     name: 'dashboard.forms'
