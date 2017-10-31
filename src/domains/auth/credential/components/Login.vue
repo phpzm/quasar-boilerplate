@@ -50,6 +50,7 @@
 <script type="text/javascript">
   import 'src/app/components/fields/index'
   import { login } from 'src/domains/auth/credential/services'
+  import { PATH_HOME } from 'src/app/support'
 
   export default {
     name: 'auth-login',
@@ -68,7 +69,7 @@
         login(credential, this.remember, this.success)
       },
       success (response) {
-        this.$router.push({name: 'dashboard.home'})
+        this.$router.push(PATH_HOME)
       }
     }
   }
