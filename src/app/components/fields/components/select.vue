@@ -2,7 +2,7 @@
   <field :class="classNames"
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
-      <div v-show="editable" :class="[problems.length ? 'has-error' : '']">
+      <div v-show="editable" :class="{'has-error': problems.length}">
         <q-select ref="input" v-model="model" :disable="disabled" :options="allOptions" :type="type" :name="name"
                   class="input full-width" :placeholder="placeholder" @input="$emit('input', model)"></q-select>
       </div>
@@ -109,13 +109,6 @@
   .field-select
     .q-select.q-if
       padding 6px 8px
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
     .has-error .q-picker-textfield
       background rgba(249, 125, 125, 0.2)
     .html
@@ -124,6 +117,4 @@
       padding 9px 8px
       font-family Roboto
       font-size 14.4px
-    input:-webkit-autofill
-      -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
 </style>

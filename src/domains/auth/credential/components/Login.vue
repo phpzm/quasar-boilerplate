@@ -19,12 +19,6 @@
 
         <q-card-separator></q-card-separator>
 
-        <q-card-title>
-          <p class="text-right"><i>{{ title }}</i></p>
-        </q-card-title>
-
-        <q-card-separator></q-card-separator>
-
         <q-card-main class="form">
           <field-text v-model="user" v-bind="{label: 'Login'}"></field-text>
           <field-text v-model="password" v-bind="{label: 'Senha', type: 'password'}"></field-text>
@@ -55,7 +49,6 @@
   export default {
     name: 'auth-login',
     data: () => ({
-      title: 'Painel de Controle',
       user: '',
       password: '',
       remember: false

@@ -131,3 +131,8 @@ export const clone = (data, remove = []) => {
 
   return $clear(clone, remove)
 }
+
+/**
+ * @param {Function} executor
+ */
+export const promise = executor => new Promise(executor)

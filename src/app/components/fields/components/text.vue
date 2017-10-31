@@ -5,10 +5,9 @@
       <div v-show="editable" :class="{'has-error': problems.length}">
         <!--suppress HtmlFormInputWithoutLabel -->
         <input :id="id" ref="input" :type="type" :name="name" class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="max" @mouseup="$emit('mouseup', $event.target.value)" :disabled="disabled"
-               @keypress="$emit('keypress', $event.target.value)" @keyup="$emit('keyup', $event.target.value)"
-               @blur="$emit('blur', $event.target.value)" @focus="$emit('focus', $event.target.value)"
-               @keydown.enter.stop.prevent="$emit('enter', value, $event)" @input="updateValue($event.target.value)"/>
+               autocomplete="off" :maxlength="max" :disabled="disabled"
+               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
+               @keydown.enter.stop.prevent="enter" @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
       <div v-show="!editable" class="html" v-html="html"></div>
@@ -26,7 +25,6 @@
       Field
     },
     data: () => ({
-      title: 'Este campo possui critérios de validação',
       html: '',
       max: ''
     }),

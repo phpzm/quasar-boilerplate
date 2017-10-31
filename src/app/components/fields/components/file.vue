@@ -3,7 +3,7 @@
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
       <!--@fail="fail" @finish="finish"  @start="start" -->
-      <div v-if="download" style="padding: 10px 0">
+      <div v-if="download" class="file-link">
         {{ uid }}
         <a href="#">{{ download }}</a>
       </div>
@@ -25,7 +25,6 @@
     },
     name: 'field-file',
     props: {
-      title: 'Este campo possui critérios de validação',
       name: {
         default: 'file'
       },
@@ -98,11 +97,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-file
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
+    .file-link
+      padding 10px 0
 </style>
