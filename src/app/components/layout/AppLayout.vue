@@ -28,11 +28,11 @@
       </slot>
     </q-toolbar>
 
-    <q-scroll-area v-if="left" slot="left" style="width: 100%; height: 100%">
+    <q-scroll-area v-if="left" slot="left" class="q-scroll-area">
       <slot name="drawer-left-top">
         <div class="q-drawer-logo">
           <!--suppress HtmlUnknownTarget -->
-          <img src="statics/logo/big.png" alt="logo" style="width: 200px">
+          <img src="statics/logo/big.png" alt="logo">
         </div>
       </slot>
       <slot name="drawer-left">
@@ -49,7 +49,7 @@
 
     <slot name="content">
       <div class="transition-wrapper">
-        <transition-slide :height="'calc(100vh - 105px)'" :padding="'0 10px'"></transition-slide>
+        <transition-slide v-bind="transition"></transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -65,7 +65,7 @@
     components: {
       Breadcrumb, DrawerMenu, TransitionSlide
     },
-    name: 'layout-default',
+    name: 'app-layout',
     props: {
       view: {
         default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
@@ -78,6 +78,12 @@
       },
       leftBreakpoint: {
         default: 996
+      },
+      transition: {
+        default: () => ({
+          height: 'calc(100vh - 105px)',
+          padding: '0 10px'
+        })
       }
     },
     computed: {
@@ -107,11 +113,16 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .layout-default
+    .q-scroll-area
+      swidth 100%
+      height 100%
     .q-drawer-logo
       background #F7F7F7
       text-align center
       padding 20px
       border-bottom 1px #ddd solid
+      img
+        width 200px
     .q-toolbar-title
       font-family play
     .breadcrumb-wrapper

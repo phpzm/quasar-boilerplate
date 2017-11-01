@@ -65,10 +65,7 @@
     .q-collapsible-drawer
       .q-collapsible-sub-item
         padding 0
-        border-width 0 0 0 0
-        border-color #ddd
-        border-style solid
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,cccccc+3,f3f1f1+8,f3f1f1+100 */
-        background #f3f1f1
-        background linear-gradient(to bottom, #d0d0d0 0%, #e6e6e6 3%, #f3f1f1 8%, #f3f1f1 100%)
+        background #fafafa
+        background linear-gradient(to bottom, #d4d4d4e8 0%, #eaeaea 3%, #fafafa 8%, #fafafa 100%)
 </style>

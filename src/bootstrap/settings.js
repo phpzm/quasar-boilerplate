@@ -52,3 +52,12 @@ export const populateGrid = ($component, response) => {
 export const configureUser = (user) => {
   return user
 }
+
+export const httpRequest = () => {
+}
+
+export const httpResponse = () => {
+}
+
+export const httpError = () => {
+}

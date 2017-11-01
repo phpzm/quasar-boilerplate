@@ -1,6 +1,7 @@
 import http from 'src/app/infra/services/http/index'
 import { loading } from 'src/app/support/message/index'
 import { PATH_LOGIN } from 'src/app/support/index'
+import { httpRequest, httpResponse, httpError } from 'src/bootstrap/settings'
 
 /**
  * @param http
@@ -17,7 +18,7 @@ export const interceptors = (http, store, router) => {
     if (!config.noLoading) {
       loading(true, 1000)
     }
-    return config
+    return httpRequest(config)
   }
   http.interceptors.request.use(request)
 
@@ -32,7 +33,7 @@ export const interceptors = (http, store, router) => {
       // noinspection JSUnresolvedVariable
       store.dispatch('changeToken', response.headers.authorization)
     }
-    return response
+    return httpResponse(response)
   }
 
   /**
@@ -45,7 +46,7 @@ export const interceptors = (http, store, router) => {
     if (response && [401, 400].indexOf(response.status) > -1) {
       router.push(PATH_LOGIN)
     }
-    return Promise.reject(error)
+    return Promise.reject(httpError(error, router, store))
   }
 
   http.interceptors.response.use(response, error)
