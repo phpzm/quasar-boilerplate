@@ -73,7 +73,7 @@
       GeneralComputed, GeneralMethods,
       MixinComputed, MixinData, MixinHooks, MixinMethods, MixinProps
     ],
-    name: 'common-form',
+    name: 'app-form',
     validations () {
       const validations = this.generateValidations(this.schemas)
       return {

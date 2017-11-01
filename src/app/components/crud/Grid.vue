@@ -1,17 +1,17 @@
 <template>
-  <common-grid v-bind="bind"
-               @reload-records="fetchAll"
-               @change-search="changeSearch"
-               @change-page="changePage"
-               @change-sort="changeSort">
+  <app-grid v-bind="bind"
+            @reload-records="fetchAll"
+            @change-search="changeSearch"
+            @change-page="changePage"
+            @change-sort="changeSort">
     <div slot="custom">
       <slot name="custom"></slot>
     </div>
-  </common-grid>
+  </app-grid>
 </template>
 
 <script type="text/javascript">
-  import CommonGrid from 'src/app/components/grid/Grid.vue'
+  import AppGrid from 'src/app/components/grid/AppGrid.vue'
   import Data from 'src/app/components/crud/components/grid/data'
   import Hooks from 'src/app/components/crud/components/grid/hooks'
   import Methods from 'src/app/components/crud/components/grid/methods'
@@ -20,7 +20,7 @@
 
   export default {
     components: {
-      CommonGrid
+      AppGrid
     },
     computed: {
       bind () {

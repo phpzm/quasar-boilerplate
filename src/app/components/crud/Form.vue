@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/javascript">
-  import CommonForm from 'src/app/components/form/Form.vue'
+  import CommonForm from 'src/app/components/form/AppForm.vue'
   import Data from 'src/app/components/crud/components/form/data'
   import Hooks from 'src/app/components/crud/components/form/hooks'
   import Methods from 'src/app/components/crud/components/form/methods'

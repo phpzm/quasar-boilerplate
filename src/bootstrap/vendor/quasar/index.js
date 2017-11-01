@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import * as imports from 'src/bootstrap/vendor/quasar/imports'
+import AppButton from 'src/app/components/button/AppButton.vue'
 
-Object.keys(imports).forEach(key => {
+const components = Object.assign({}, imports, {QButton: AppButton})
+
+Object.keys(components).forEach(key => {
   Vue.component(key, imports[key])
 })

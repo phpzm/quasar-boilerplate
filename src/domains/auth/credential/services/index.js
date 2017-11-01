@@ -1,4 +1,5 @@
 import http from 'src/app/infra/services/http'
+import store from 'src/app/infra/store'
 import { register, unRegister } from 'src/app/modules/auth/services'
 
 /**
@@ -15,9 +16,9 @@ export const login = (credentials, remember, success) => {
 }
 
 /**
- * @param {Object} credentials
+ * @param {Function} success
  */
-export const logout = (credentials) => {
+export const logout = (success) => {
   unRegister(success)
     .then(() => {
       http.post('/auth/logout', store.getters.getAuthUser, {requestId: ''})

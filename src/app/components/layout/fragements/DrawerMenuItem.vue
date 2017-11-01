@@ -2,7 +2,7 @@
   <div class="drawer-menu-item">
     <q-collapsible ref="collapsible" v-if="hasChildren" :icon="menu.icon" :label="menu.label" :class="classNames">
       <template v-for="child in menu.children">
-        <drawer-menu-item :menu="child"></drawer-menu-item>
+        <drawer-menu-item :menu="child" :badges="badges"></drawer-menu-item>
       </template>
     </q-collapsible>
 
@@ -16,10 +16,9 @@
 
 <script type="text/javascript">
   export default {
-    name: 'drawer-menu-item',
+    name: 'app-drawer-menu-item',
     props: {
       menu: {
-        required: true,
         type: Object
       },
       badges: {
@@ -36,6 +35,10 @@
       }
     },
     methods: {
+      /**
+       * @param {Object} child
+       * @returns {boolean}
+       */
       filterChildren (child) {
         if (child.children) {
           return child.children.filter(this.filterChildren).length > 0

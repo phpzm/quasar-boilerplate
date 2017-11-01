@@ -14,7 +14,7 @@
 <script type="text/javascript">
   import { mapActions } from 'vuex'
   import AppLayout from 'src/app/components/layout/AppLayout.vue'
-  import CommonCard from 'src/app/components/card/Index.vue'
+  import CommonCard from 'src/app/components/card/AppCard.vue'
   import { icon, title } from '../model'
 
   export default {

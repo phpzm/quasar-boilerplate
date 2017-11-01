@@ -37,19 +37,19 @@
       </slot>
       <slot name="drawer-left">
         <!--<q-list-header>Left Panel</q-list-header>-->
-        <drawer-menu :menus="AppMenu"></drawer-menu>
+        <app-drawer-menu :menus="AppMenu"></app-drawer-menu>
       </slot>
     </q-scroll-area>
 
     <slot name="breadcrumb">
       <div class="breadcrumb-wrapper">
-        <breadcrumb></breadcrumb>
+        <app-breadcrumb></app-breadcrumb>
       </div>
     </slot>
 
     <slot name="content">
       <div class="transition-wrapper">
-        <transition-slide v-bind="transition"></transition-slide>
+        <app-transition-slide v-bind="transition"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -57,13 +57,13 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
-  import Breadcrumb from 'src/app/components/layout/Breadcrumb.vue'
-  import DrawerMenu from 'src/app/components/layout/DrawerMenu.vue'
-  import TransitionSlide from 'src/app/components/transition/Slide.vue'
+  import AppBreadcrumb from 'src/app/components/breadcrumb/AppBreadcrumb.vue'
+  import AppDrawerMenu from 'src/app/components/layout/fragements/DrawerMenu.vue'
+  import AppTransitionSlide from 'src/app/components/transition/AppTransitionSlide.vue'
 
   export default {
     components: {
-      Breadcrumb, DrawerMenu, TransitionSlide
+      AppBreadcrumb, AppDrawerMenu, AppTransitionSlide
     },
     name: 'app-layout',
     props: {

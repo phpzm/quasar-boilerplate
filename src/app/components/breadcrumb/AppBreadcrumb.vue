@@ -19,10 +19,10 @@
 
 <script type="text/javascript">
   import { Events } from 'quasar-framework'
-  import { PATH_HOME } from 'src/app/support'
+  import { PATH_HOME } from 'src/app/support/index'
 
   export default {
-    name: 'breadcrumb',
+    name: 'app-breadcrumb',
     data: () => ({
       home: PATH_HOME,
       items: []

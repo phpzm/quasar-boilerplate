@@ -1,20 +1,20 @@
 <template>
   <div class="drawer-menu">
     <template v-for="menu in menus">
-      <drawer-menu-item :menu="menu"></drawer-menu-item>
+      <app-drawer-menu-item v-bind="{menu, badges}"></app-drawer-menu-item>
     </template>
   </div>
 </template>
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
-  import DrawerMenuItem from 'src/app/components/layout/DrawerMenuItem.vue'
+  import AppDrawerMenuItem from 'src/app/components/layout/fragements/DrawerMenuItem.vue'
 
   export default {
     components: {
-      DrawerMenuItem
+      AppDrawerMenuItem
     },
-    name: 'drawer-menu',
+    name: 'app-drawer-menu',
     props: {
       menus: {
         required: true,

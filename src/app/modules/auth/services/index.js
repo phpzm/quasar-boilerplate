@@ -10,10 +10,10 @@ import { promise } from 'src/app/support/utils'
  */
 export const register = (user, token, remember, success) => {
   // noinspection JSUnresolvedFunction
-  store.dispatch('changeUser', configureUser(user), remember)
+  store.dispatch('setAuthUser', configureUser(user), remember)
     .then(() => {
       // noinspection JSUnresolvedFunction
-      store.dispatch('changeToken', token, remember).then(success)
+      store.dispatch('setAuthToken', token, remember).then(success)
     })
 }
 

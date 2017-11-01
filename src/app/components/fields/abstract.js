@@ -5,7 +5,6 @@ import { unMask } from 'src/app/support/utils/index'
 export default {
   props: {
     value: {
-      required: true,
       default: undefined
     },
     label: {
@@ -38,9 +37,11 @@ export default {
       default: ''
     },
     title: {
+      type: String,
       default: 'Este campo possui critérios de validação'
     },
     mask: {
+      type: String,
       default: ''
     },
     className: {
@@ -63,10 +64,17 @@ export default {
       type: Array,
       default: () => ([])
     },
-    dependsOn: null,
+    dependsOn: {
+      type: Object,
+      default: null
+    },
     dependsIsOk: {
       type: Boolean,
       default: true
+    },
+    events: {
+      type: Object,
+      default: () => ({})
     }
   },
   computed: {
@@ -134,6 +142,36 @@ export default {
         errors.push(' - ' + this.$t(problem.path, problem.parameters))
       })
       alert('Validação', errors.join('<br>'))
+    },
+    focus ($event) {
+      if (this.events.focus && typeof this.events.focus === 'function') {
+        this.events.focus($event.target.value, this)
+      }
+    },
+    blur ($event) {
+      if (this.events.blur && typeof this.events.blur === 'function') {
+        this.events.blur($event.target.value, this)
+      }
+    },
+    keypress ($event) {
+      if (this.events.keypress && typeof this.events.keypress === 'function') {
+        this.events.keypress($event.target.value, this)
+      }
+    },
+    keyup ($event) {
+      if (this.events.keyup && typeof this.events.keyup === 'function') {
+        this.events.keyup($event.target.value, this)
+      }
+    },
+    enter ($event) {
+      if (this.events.enter && typeof this.events.enter === 'function') {
+        this.events.enter($event.target.value, this)
+      }
+    },
+    mouseup ($event) {
+      if (this.events.mouseup && typeof this.events.mouseup === 'function') {
+        this.events.mouseup($event.target.value, this)
+      }
     }
   }
 }

@@ -31,7 +31,7 @@ export const interceptors = (http, store, router) => {
     // noinspection JSUnresolvedVariable
     if (response.headers && response.headers.authorization) {
       // noinspection JSUnresolvedVariable
-      store.dispatch('changeToken', response.headers.authorization)
+      store.dispatch('setAuthToken', response.headers.authorization)
     }
     return httpResponse(response)
   }

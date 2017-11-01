@@ -14,17 +14,17 @@ import modules from 'src/app/infra/store/schema/modules'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({state, mutations, actions, getters, modules, strict})
+const AppStore = new Vuex.Store({state, mutations, actions, getters, modules, strict})
 
 const user = get(APP_USER)
 if (user) {
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('changeUser', user)
+  AppStore.dispatch('setAuthUser', user)
 }
 const token = get(APP_TOKEN)
 if (token) {
   // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('changeToken', token)
+  AppStore.dispatch('setAuthToken', token)
 }
 
-export default store
+export default AppStore

@@ -1,5 +1,5 @@
 <template>
-  <div class="common-grid">
+  <div class="app-grid">
 
     <slot name="toolbar">
 
@@ -43,10 +43,10 @@
           </div>
         </div>
 
-        <common-grid-body v-show="records.length" :action="action" :actions="middle" :editable="editable"
-                          :schemas="available" :records="records" :height="height" class="grid-body"
-                          :widthFields="widthFields" :handler="handlerAction" :sortable="sortable"
-                          @sorted="changeSort"></common-grid-body>
+        <app-grid-body v-show="records.length" :action="action" :actions="middle" :editable="editable"
+                       :schemas="available" :records="records" :height="height" class="grid-body"
+                       :widthFields="widthFields" :handler="handlerAction" :sortable="sortable"
+                       @sorted="changeSort"></app-grid-body>
       </div>
 
       <div v-else>
@@ -65,7 +65,7 @@
 </template>
 
 <script type="text/javascript">
-  import CommonGridBody from 'src/app/components/grid/components/Body.vue'
+  import AppGridBody from 'src/app/components/grid/components/Body.vue'
 
   import GeneralComputed from 'src/app/components/general/mixin-computed'
   import GeneralMethods from 'src/app/components/general/mixin-methods'
@@ -82,18 +82,18 @@
   export default {
     components: {
       FieldSelect,
-      CommonGridBody
+      AppGridBody
     },
     mixins: [
       GeneralComputed, GeneralMethods,
       MixinMethods, MixinProps, MixinData, MixinHooks, MixinComputed, MixinWatch, MixinComponents
     ],
-    name: 'common-grid'
+    name: 'app-grid'
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .common-grid
+  .app-grid
     display block
     .grid-refresh
       max-width 50px
