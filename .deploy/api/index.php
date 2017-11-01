@@ -35,6 +35,6 @@ $body = isset($returns[$uri]) ? $returns[$uri] : json_decode(file_get_contents(_
 
 echo json_encode([
     'body' => $body,
-    'meta' => ['output' => ''],
+    'meta' => ['total' => 100, 'page' => 1, 'last' => 4],
     'status' => ['code' => '200'],
 ]);

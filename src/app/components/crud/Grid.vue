@@ -1,9 +1,11 @@
 <template>
-  <app-grid v-bind="bind"
-            @reload-records="fetchAll"
-            @change-search="changeSearch"
-            @change-page="changePage"
-            @change-sort="changeSort">
+  <app-grid
+    v-bind="bind"
+    @reload-records="fetchAll"
+    @change-search="changeSearch"
+    @change-page="changePage"
+    @change-sort="changeSort"
+  >
     <div slot="custom">
       <slot name="custom"></slot>
     </div>
