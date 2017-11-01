@@ -127,6 +127,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '~variables'
+
   .field-time
     .component
       position relative
@@ -137,21 +139,24 @@
         cursor pointer
         right 0
         top 0
-        background #ef0000
+        background $primary
         color #ffffff
-        padding 3px 10px
+        padding 7px 10px
         font-size 20px
         z-index 10
         border-radius 2px
-      & > .q-picker-textfield
+      & > .q-datetime-input
         position absolute
         top 0
         right 0
         width 38px
-        min-width inherit
-        height 28px
-        min-height inherit
+        height 34px
         padding 0
+        margin 0
+        overflow hidden
+        border none
+        min-width inherit
+        min-height inherit
         box-shadow none
     .html
       height 35px

@@ -1,12 +1,13 @@
 <template>
-  <div class="common-card">
+  <div class="app-card">
     <slot name="top"></slot>
     <q-card>
       <q-card-title class="q-card--title">
         <slot name="title">
-          <span v-html="title"></span>
+          <q-icon :name="icon"></q-icon> <span v-html="title"></span>
         </slot>
       </q-card-title>
+      <q-card-separator v-if="separator"/>
       <q-card-main class="q-card--main">
         <slot name="content"></slot>
       </q-card-main>
@@ -19,13 +20,21 @@
   export default {
     name: 'app-card',
     props: {
-      title: ''
+      title: {
+        default: ''
+      },
+      icon: {
+        default: ''
+      },
+      separator: {
+        default: true
+      }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .common-card
+  .app-card
     & > .q-card
       background #ffffff
       & .q-card--title

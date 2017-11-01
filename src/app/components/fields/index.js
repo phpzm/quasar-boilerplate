@@ -11,7 +11,6 @@ import FieldHtml from 'src/app/components/fields/components/html.vue'
 import FieldDate from 'src/app/components/fields/components/date.vue'
 import FieldToggle from 'src/app/components/fields/components/toggle.vue'
 import FieldColor from 'src/app/components/fields/components/color.vue'
-import FieldRange from 'src/app/components/fields/components/range.vue'
 import FieldTime from 'src/app/components/fields/components/time.vue'
 import FieldFile from 'src/app/components/fields/components/file.vue'
 
@@ -28,7 +27,6 @@ Vue.component('field-html', FieldHtml)
 Vue.component('field-date', FieldDate)
 Vue.component('field-toggle', FieldToggle)
 Vue.component('field-color', FieldColor)
-Vue.component('field-range', FieldRange)
 Vue.component('field-time', FieldTime)
 Vue.component('field-file', FieldFile)
 

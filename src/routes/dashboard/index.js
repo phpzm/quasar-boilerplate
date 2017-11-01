@@ -5,7 +5,7 @@ import forms from 'src/domains/forms/routes'
 const root = [
   {
     path: '',
-    component: 'domains/dashboard/components/Home',
+    component: 'domains/@/dashboard/components/Home',
     name: 'dashboard.home',
     meta: {
       label: 'Página Inicial',

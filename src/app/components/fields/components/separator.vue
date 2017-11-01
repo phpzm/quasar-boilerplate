@@ -1,6 +1,7 @@
 <template>
   <div :class="classNames" v-show="dependsIsOk">
-    <label v-if="!inline && label">{{ label }}</label>
+    <small v-if="!inline && label">{{ label }}</small>
+    <hr>
   </div>
 </template>
 
@@ -15,9 +16,11 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-separator
-    label
-      color #666
+    position relative
+    hr
+      margin 0 0 10px 0
+    small
+      color #9f9f9f
       display block
-      text-transform: uppercase
       padding 10px 0
 </style>

@@ -3,13 +3,13 @@
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
       <div v-show="editable" class="color-wrapper grid" :class="{'has-error': problems.length}">
-        <div class="color" :style="{'background': value}"></div>
-        <button class="color-button">
-          <i>search</i>
+        <div class="color" :style="{'background': model.hex}"></div>
+        <q-btn color="primary" class="color-button">
+          <q-icon name="search"></q-icon>
           <q-popover ref="popover">
             <sketch :value="model" @input="updateValue"></sketch>
           </q-popover>
-        </button>
+        </q-btn>
       </div>
       <div v-show="!editable" class="html grid">
         <div class="color" :style="{'background': value}"></div>
@@ -36,6 +36,7 @@
     extends: FieldAbstract,
     methods: {
       updateValue (color) {
+        this.model.hex = color.hex
         this.$emit('input', color.hex)
       }
     },
@@ -53,6 +54,7 @@
     .color-wrapper
       height 40px
     .color-button
+      height 37px
       color #89919E
     .color
       display inline-block
