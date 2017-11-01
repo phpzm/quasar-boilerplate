@@ -16,7 +16,7 @@ export default [
       },
       {
         path: 'login',
-        component: 'domains/auth/credential/components/Login',
+        component: 'domains/auth/components/Login',
         name: 'auth.login'
       }
     ]
