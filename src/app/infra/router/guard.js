@@ -29,7 +29,7 @@ export const protect = (routes) => {
  */
 export const checkSession = () => {
   // noinspection JSUnresolvedVariable
-  return store.getters.AppToken
+  return store.getters.getAuthToken
 }
 
 /**
@@ -42,6 +42,7 @@ export const checkModified = (next) => {
     window.setTimeout(() => {
       // noinspection JSCheckFunctionSignatures
       confirm(i18n.t('events.modified.title'), i18n.t('events.modified.message'), () => {
+        // noinspection JSIgnoredPromiseFromCall
         store.dispatch('setAppModified', false)
         next()
       })

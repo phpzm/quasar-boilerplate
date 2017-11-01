@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import FieldText from 'src/app/components/fields/components/input.vue'
+import FieldText from 'src/app/components/fields/components/text.vue'
 import FieldMoney from 'src/app/components/fields/components/money.vue'
 import FieldCheckbox from 'src/app/components/fields/components/checkbox.vue'
 import FieldSelect from 'src/app/components/fields/components/select.vue'

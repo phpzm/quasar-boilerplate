@@ -1,11 +1,10 @@
 <template>
   <field :class="classNames"
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
-
     <div slot="component">
-      <div v-show="editable" style="height: 40px" :class="[problems.length ? 'has-error' : '', 'grid']">
+      <div v-show="editable" class="color-wrapper grid" :class="{'has-error': problems.length}">
         <div class="color" :style="{'background': value}"></div>
-        <button style="color: #89919E">
+        <button class="color-button">
           <i>search</i>
           <q-popover ref="popover">
             <sketch :value="model" @input="updateValue"></sketch>
@@ -51,6 +50,10 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-color
+    .color-wrapper
+      height 40px
+    .color-button
+      color #89919E
     .color
       display inline-block
       width 60px
@@ -59,20 +62,9 @@
       border-radius 3px
       border 1px solid #e8e5e5
       box-shadow 0 2px 3px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.24)
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
-    .has-error input
-      background rgba(249, 125, 125, 0.2)
     .html
       height 40px
       color #515151
       font-family Roboto
       font-size 14.4px
-    input:-webkit-autofill
-      -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
 </style>

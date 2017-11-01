@@ -1,5 +1,5 @@
 import http from 'src/app/infra/services/http'
-import { register } from 'src/app/modules/auth/services/index'
+import { register, unRegister } from 'src/app/modules/auth/services'
 
 /**
  * @param {Object} credentials
@@ -18,5 +18,8 @@ export const login = (credentials, remember, success) => {
  * @param {Object} credentials
  */
 export const logout = (credentials) => {
-  return http.post('/auth/logout', credentials)
+  unRegister(success)
+    .then(() => {
+      http.post('/auth/logout', store.getters.getAuthUser, {requestId: ''})
+    })
 }

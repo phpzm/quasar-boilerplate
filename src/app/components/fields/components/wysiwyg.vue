@@ -1,5 +1,6 @@
 <template>
-  <field :class="classNames" v-bind="{dependsIsOk, id, inline, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames"
+         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
       <div id="editor" :class="{'html': !editable}">
         <froala :tag="'textarea'" :config="config" v-model="model"></froala>
@@ -91,13 +92,6 @@
       color #bdbdbd
     textarea
       min-height 100px
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
     .fr-toolbar
       border-top none
     .html
@@ -107,6 +101,7 @@
       padding 9px 8px
       font-family Roboto
       font-size 14.4px
+
   .production
     .fr-wrapper > div:first-child
       display none

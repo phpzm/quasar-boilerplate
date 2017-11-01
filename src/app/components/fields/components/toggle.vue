@@ -1,12 +1,11 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
-      <div v-show="editable" :class="[problems.length ? 'has-error' : '']" style="margin-top: 10px">
+      <div v-show="editable" class="toggle-wrapper" :class="{'has-error': problems.length}">
         <label>
-          <q-toggle ref="input" v-model="model" :type="type" :name="name"
-                    :disable="disable" @input="$emit('input', model)"></q-toggle>
-          <span :class="[disable ? 'disabled' : '']" v-html="info"></span>
+          <q-toggle ref="input" v-model="model" :type="type" :name="name" :disable="disable"
+                    @input="$emit('input', model)"></q-toggle>
+          <span :class="{'disabled': disabled}" v-html="info"></span>
         </label>
       </div>
       <div v-show="!editable" class="html" v-html="info"></div>
@@ -69,6 +68,8 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-toggle
+    .toggle-wrapper
+      margin-top 10px
     .html
       color #515151
       margin-top 10px

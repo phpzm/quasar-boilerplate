@@ -101,3 +101,18 @@
   width: 50%
 .input.has-error ~ .input-bar:before, .input.has-error ~ .input-bar:after
   background: $negative
+
+.field-base
+  .error-message, .label-with-error
+    color darkred
+  .error-message
+    font-size 12px
+    i
+      font-size 14px
+      cursor pointer
+  .has-error input
+    background rgba(249, 125, 125, 0.2)
+
+  input:-webkit-autofill
+    -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
+
