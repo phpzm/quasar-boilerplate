@@ -80,7 +80,7 @@ export const noDuplicates = (array) => {
  * @param {string} char
  * @returns {string}
  */
-export const padLet = (value, length, char = '0') => {
+export const padLeft = (value, length, char = '0') => {
   const string = String(value)
   const pad = Array.from({length: length}, () => char).join('')
   return pad.substring(0, pad.length - string.length) + string
@@ -131,3 +131,8 @@ export const clone = (data, remove = []) => {
 
   return $clear(clone, remove)
 }
+
+/**
+ * @param {Function} executor
+ */
+export const promise = executor => new Promise(executor)

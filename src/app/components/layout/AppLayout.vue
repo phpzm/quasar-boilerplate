@@ -28,28 +28,28 @@
       </slot>
     </q-toolbar>
 
-    <q-scroll-area v-if="left" slot="left" style="width: 100%; height: 100%">
+    <q-scroll-area v-if="left" slot="left" class="q-scroll-area">
       <slot name="drawer-left-top">
         <div class="q-drawer-logo">
           <!--suppress HtmlUnknownTarget -->
-          <img src="statics/logo/big.png" alt="logo" style="width: 200px">
+          <img src="statics/logo/big.png" alt="logo">
         </div>
       </slot>
       <slot name="drawer-left">
         <!--<q-list-header>Left Panel</q-list-header>-->
-        <drawer-menu :menus="AppMenu"></drawer-menu>
+        <app-drawer-menu :menus="AppMenu"></app-drawer-menu>
       </slot>
     </q-scroll-area>
 
     <slot name="breadcrumb">
       <div class="breadcrumb-wrapper">
-        <breadcrumb></breadcrumb>
+        <app-breadcrumb></app-breadcrumb>
       </div>
     </slot>
 
     <slot name="content">
       <div class="transition-wrapper">
-        <transition-slide :height="'calc(100vh - 105px)'" :padding="'0 10px'"></transition-slide>
+        <app-transition-slide v-bind="transition"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -57,15 +57,15 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
-  import Breadcrumb from 'src/app/components/layout/Breadcrumb.vue'
-  import DrawerMenu from 'src/app/components/layout/DrawerMenu.vue'
-  import TransitionSlide from 'src/app/components/transition/Slide.vue'
+  import AppBreadcrumb from 'src/app/components/breadcrumb/AppBreadcrumb.vue'
+  import AppDrawerMenu from 'src/app/components/layout/fragements/DrawerMenu.vue'
+  import AppTransitionSlide from 'src/app/components/transition/AppTransitionSlide.vue'
 
   export default {
     components: {
-      Breadcrumb, DrawerMenu, TransitionSlide
+      AppBreadcrumb, AppDrawerMenu, AppTransitionSlide
     },
-    name: 'layout-default',
+    name: 'app-layout',
     props: {
       view: {
         default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
@@ -78,6 +78,12 @@
       },
       leftBreakpoint: {
         default: 996
+      },
+      transition: {
+        default: () => ({
+          height: 'calc(100vh - 105px)',
+          padding: '0 10px'
+        })
       }
     },
     computed: {
@@ -107,11 +113,16 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .layout-default
+    .q-scroll-area
+      swidth 100%
+      height 100%
     .q-drawer-logo
       background #F7F7F7
       text-align center
       padding 20px
       border-bottom 1px #ddd solid
+      img
+        width 200px
     .q-toolbar-title
       font-family play
     .breadcrumb-wrapper

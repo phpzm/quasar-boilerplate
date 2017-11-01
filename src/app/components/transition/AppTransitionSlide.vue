@@ -10,7 +10,7 @@
   import { Events, uid } from 'quasar-framework'
 
   export default {
-    name: 'transition-slide',
+    name: 'app-transition-slide',
     props: {
       width: {
         default: '100%'

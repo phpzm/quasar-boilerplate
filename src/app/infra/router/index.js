@@ -25,11 +25,11 @@ const configure = (routes) => {
   })
 }
 
-const router = new Router({
+const AppRouter = new Router({
   routes: configure(routes)
 })
 
-router.beforeEach(beforeEach)
-router.afterEach(afterEach)
+AppRouter.beforeEach(beforeEach)
+AppRouter.afterEach(afterEach)
 
-export default router
+export default AppRouter

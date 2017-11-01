@@ -17,7 +17,7 @@ export const to = (path, query = {}) => {
 /**
  * @param {Vue} $component
  */
-export const configureDashboard = $component => {
+export const configureDashboard = ($component) => {
   // noinspection JSIgnoredPromiseFromCall
   store.dispatch('setAppMenu', menu(to))
   // noinspection JSIgnoredPromiseFromCall
@@ -26,23 +26,45 @@ export const configureDashboard = $component => {
 
 /**
  * @param {Vue} $component
- * @param {Object} response
+ * @param {AxiosResponse} response
  * @returns {Array}
  */
 export const populateGrid = ($component, response) => {
   let records = []
   if ($component.pagination) {
-    if (!response.data) {
+    const {body, meta} = response.data
+    if (!Array.isArray(body)) {
       return []
     }
-    records = response['data']
-    $component.page = response['current_page']
-    $component.pages = response['last_page']
+    records = body
+    // noinspection JSUndefinedPropertyAssignment
+    $component.page = parseInt(meta.page)
+    // noinspection JSUndefinedPropertyAssignment
+    $component.pages = parseInt(meta.last)
   }
   if (!records.length && Array.isArray(response)) {
     records = response
   }
-  return records
+  // noinspection JSUndefinedPropertyAssignment
+  $component.records = records
+}
+
+/**
+ * @param {Vue} $component
+ * @param {AxiosResponse} response
+ * @param {Function} callback
+ */
+export const populateForm = ($component, response, callback) => {
+  let record = {}
+  const {body} = response.data
+  if (Array.isArray(body)) {
+    record = body[0]
+  }
+  // noinspection JSUndefinedPropertyAssignment
+  $component.record = record
+  if (typeof callback === 'function') {
+    callback()
+  }
 }
 
 /**
@@ -51,4 +73,30 @@ export const populateGrid = ($component, response) => {
  */
 export const configureUser = (user) => {
   return user
+}
+
+/**
+ * @param {AxiosRequestConfig} config
+ * @returns {AxiosRequestConfig}
+ */
+export const httpRequest = (config) => {
+  return config
+}
+
+/**
+ * @param {AxiosResponse} response
+ * @returns {AxiosResponse}
+ */
+export const httpResponse = (response) => {
+  return response
+}
+
+/**
+ * @param {AxiosError} error
+ * @param {AppRouter} router
+ * @param {AppStore} store
+ * @returns {AxiosError}
+ */
+export const httpError = (error, router, store) => {
+  return error
 }

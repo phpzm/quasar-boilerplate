@@ -2,16 +2,15 @@
   <field :class="classNames"
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
-
       <div v-show="editable" :class="{'component': true, 'has-error': problems.length}">
         <i class="material-icons" @click="openWidget">access_time</i>
-        <q-datetime ref="widget" v-model="widget" type="time"
-                    ok-label="Ok" cancel-label="Cancelar" clear-label="Limpar"></q-datetime>
+        <q-datetime ref="widget" v-model="widget" type="time" ok-label="Ok" cancel-label="Cancelar"
+                    clear-label="Limpar"></q-datetime>
+        <!--suppress HtmlFormInputWithoutLabel -->
         <input :id="id" ref="input" :type="'text'" :name="name" class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="5" @mouseup="$emit('mouseup', $event.target.value)" :disabled="disabled"
-               @keypress="keypress" @keyup="$emit('keyup', $event.target.value)"
-               @blur="blur" @focus="$emit('focus', $event.target.value)"
-               @keydown.enter.stop.prevent="$emit('enter', value, $event)" @input="updateValue($event.target.value)"/>
+               autocomplete="off" :maxlength="5" :disabled="disabled"
+               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
+               @keydown.enter.stop.prevent="enter" @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
       <div v-show="!editable" class="html" v-html="html"></div>
@@ -22,7 +21,7 @@
 <script type="text/javascript">
   import Field from 'src/app/components/fields/components/field.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
-  import { mask, unMask, padLet } from 'src/app/support/utils/index'
+  import { mask, unMask, padLeft } from 'src/app/support/utils/index'
   import moment from 'moment'
 
   const pattern = '##:##'
@@ -32,7 +31,6 @@
       Field
     },
     data: () => ({
-      title: 'Este campo possui critérios de validação',
       html: '',
       widget: '',
       updated: false
@@ -79,7 +77,9 @@
           $event.preventDefault()
           return $event.stopPropagation()
         }
-        this.$emit('keypress', $event.target.value)
+        if (this.events.keypress) {
+          this.events.keypress(this, $event.target.value)
+        }
       },
       /**
        * @param {object} $event
@@ -87,9 +87,19 @@
       blur ($event) {
         const value = String($event.target.value)
         if ($event.target.value !== '') {
-          this.applyValue(padLet(value, 4))
+          this.applyValue(padLeft(value, 4))
         }
-        this.$emit('blur', value)
+        if (this.events.blur) {
+          this.events.blur(this, $event.target.value)
+        }
+      },
+      /**
+       * @param {object} $event
+       */
+      focus ($event) {
+        if (this.events.focus) {
+          this.events.focus(this, $event)
+        }
       }
     },
     mounted () {
@@ -99,7 +109,7 @@
     watch: {
       value (value) {
         if (!this.updated) {
-          value = padLet(String(value), 4)
+          value = padLeft(String(value), 4)
           this.updated = true
         }
         this.applyValue(value)
@@ -118,15 +128,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-time
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
-    .has-error input
-      background rgba(249, 125, 125, 0.2)
     .component
       position relative
       & > input
@@ -158,6 +159,4 @@
       padding 8px
       font-family Roboto
       font-size 14.4px
-    input:-webkit-autofill
-      -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
 </style>

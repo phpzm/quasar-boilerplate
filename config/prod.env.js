@@ -2,10 +2,11 @@ module.exports = {
   NODE_ENV: '"production"',
   LOCALE: '"pt_BR"',
   APP: {
-    NAME: '"Quasar Boilerplate"',
+    NAME: '"PHPZM Quasar Boilerplate"',
     DEVICE: '"appDevice"',
     TOKEN: '"appAuth"',
-    USER: '"appUser"'
+    USER: '"appUser"',
+    REMEMBER: '"appRemember"',
   },
   API: {
     PROTOCOL: '"https"',
@@ -15,6 +16,14 @@ module.exports = {
   },
   OAUTH: {
     FACEBOOK: '""'
+  },
+  ROUTES: {
+    LOGIN: {
+      name: "'auth.login'"
+    },
+    HOME: {
+      name: "'dashboard.home'"
+    }
   },
   DEV: false
 }

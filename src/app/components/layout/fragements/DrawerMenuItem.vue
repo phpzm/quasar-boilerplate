@@ -2,7 +2,7 @@
   <div class="drawer-menu-item">
     <q-collapsible ref="collapsible" v-if="hasChildren" :icon="menu.icon" :label="menu.label" :class="classNames">
       <template v-for="child in menu.children">
-        <drawer-menu-item :menu="child"></drawer-menu-item>
+        <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
       </template>
     </q-collapsible>
 
@@ -16,10 +16,9 @@
 
 <script type="text/javascript">
   export default {
-    name: 'drawer-menu-item',
+    name: 'app-drawer-menu-item',
     props: {
       menu: {
-        required: true,
         type: Object
       },
       badges: {
@@ -36,6 +35,10 @@
       }
     },
     methods: {
+      /**
+       * @param {Object} child
+       * @returns {boolean}
+       */
       filterChildren (child) {
         if (child.children) {
           return child.children.filter(this.filterChildren).length > 0
@@ -65,10 +68,7 @@
     .q-collapsible-drawer
       .q-collapsible-sub-item
         padding 0
-        border-width 0 0 0 0
-        border-color #ddd
-        border-style solid
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,cccccc+3,f3f1f1+8,f3f1f1+100 */
-        background #f3f1f1
-        background linear-gradient(to bottom, #d0d0d0 0%, #e6e6e6 3%, #f3f1f1 8%, #f3f1f1 100%)
+        background #fafafa
+        background linear-gradient(to bottom, #d4d4d4e8 0%, #eaeaea 3%, #fafafa 8%, #fafafa 100%)
 </style>

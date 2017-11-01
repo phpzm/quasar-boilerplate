@@ -1,16 +1,29 @@
 // quasar wrappers
 import {LocalStorage, SessionStorage} from 'quasar-framework'
 
+const parse = value => value === 'undefined' ? undefined : value
+
+const isValid = value => value !== 'undefined' && value !== undefined && value !== null
+
 /**
  * @param {string} index
+ * @param {*} keep
  * @returns {*}
  */
-export const get = (index) => {
-  if (LocalStorage.get.item(index) !== 'undefined') {
-    return LocalStorage.get.item(index)
+export const get = (index, keep = null) => {
+  if (keep === true) {
+    return parse(LocalStorage.get.item(index))
   }
-  if (SessionStorage.get.item(index) !== 'undefined') {
-    return SessionStorage.get.item(index)
+  if (keep === false) {
+    return parse(LocalStorage.get.item(index))
+  }
+  const local = LocalStorage.get.item(index)
+  if (isValid(local)) {
+    return local
+  }
+  const session = SessionStorage.get.item(index)
+  if (isValid(session)) {
+    return session
   }
 }
 

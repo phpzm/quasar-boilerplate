@@ -1,3 +1,5 @@
+import { menu as user } from 'src/domains/admin/user/model'
+
 export default to => [
   {
     to: '/dashboard',
@@ -31,13 +33,7 @@ export default to => [
         label: 'Autenticação',
         icon: 'vpn_key',
         children: [
-          {
-            to: to('/dashboard/user'),
-            label: 'Usuários',
-            left: {
-              icon: 'supervisor_account'
-            }
-          }
+          user(to)
         ]
       }
     ]

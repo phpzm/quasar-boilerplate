@@ -37,7 +37,7 @@ export const url = (base, uri, parameters) => {
 
 /**
  * @param {string} path
- * @returns {function(data, uri, parameters)}
+ * @returns {Function}
  */
 export const create = (path) => {
   /**
@@ -52,7 +52,7 @@ export const create = (path) => {
 
 /**
  * @param {string} path
- * @returns {function(uri, parameters)}
+ * @returns {Function}
  */
 export const read = (path) => {
   /**
@@ -66,7 +66,7 @@ export const read = (path) => {
 
 /**
  * @param {string} path
- * @returns {function(id, data, parameters)}
+ * @returns {Function}
  */
 export const update = (path) => {
   /**
@@ -81,7 +81,7 @@ export const update = (path) => {
 
 /**
  * @param {string} path
- * @returns {function(id, parameters)}
+ * @returns {Function}
  */
 export const destroy = (path) => {
   /**
@@ -95,29 +95,15 @@ export const destroy = (path) => {
 }
 
 /**
- * @param path
- * @returns {{post: (function(data, uri, parameters)), get: (function(uri, parameters)), put: (function(id, data, parameters)), patch: (function(id, data, parameters)), delete: (function(id, parameters))}}
- */
-export const resource = path => {
-  return {
-    post: create(path),
-    get: read(path),
-    put: update(path),
-    patch: update(path),
-    delete: destroy(path)
-  }
-}
-
-/**
  * @param {string} api - endpoint of api
  * @param {string} value - property what is the value in options
  * @param {string} label - property what is the label in options
  * @param {Object} extra - properties do be mapped
- * @return {function}
+ * @return {Function}
  */
 export const source = (api, value, label, extra = {}) => {
   /**
-   * @param {function} callback
+   * @param {Function} callback
    */
   return (callback) => {
     return read(api)('')
@@ -141,5 +127,25 @@ export const source = (api, value, label, extra = {}) => {
         }
         callback(source)
       })
+  }
+}
+
+/**
+ * @param path
+ * @returns {Resource}
+ */
+export const resource = path => {
+  return new Resource(path)
+}
+
+/**
+ */
+class Resource {
+  constructor (path) {
+    this.post = create(path)
+    this.get = read(path)
+    this.put = update(path)
+    this.patch = update(path)
+    this.delete = destroy(path)
   }
 }

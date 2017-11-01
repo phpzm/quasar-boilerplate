@@ -2,13 +2,12 @@
   <field :class="classNames"
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
-      <div v-show="editable" :class="[problems.length ? 'has-error' : '']">
+      <div v-show="editable" :class="{'has-error': problems.length}">
+        <!--suppress HtmlFormInputWithoutLabel -->
         <input :id="id" :name="name" ref="input" v-model.lazy="amount" v-money="settings"
-               class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="max" @mouseup="$emit('mouseup', $event.target.value)"
-               @keypress="$emit('keypress', $event.target.value)" @keyup="$emit('keyup', $event.target.value)"
-               @blur="$emit('blur', $event.target.value)" @focus="$emit('focus', $event.target.value)"
-               @change="updateValue"/>
+               class="input full-width" :placeholder="placeholder" autocomplete="off" :maxlength="max"
+               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
+               @keydown.enter.stop.prevent="enter" @change="updateValue"/>
         <div class="input-bar"></div>
       </div>
       <div v-show="!editable" class="html" v-html="html"></div>
@@ -78,21 +77,10 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-money
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
-    .has-error input
-      background rgba(249, 125, 125, 0.2)
     .html
       height 38px
       color #515151
       padding 9px 8px
       font-family Roboto
       font-size 14.4px
-    input:-webkit-autofill
-      -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
 </style>

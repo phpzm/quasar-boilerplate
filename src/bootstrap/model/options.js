@@ -1,5 +1,4 @@
-import store from 'src/app/infra/store/index'
-import { logout } from 'src/domains/auth/credential/services/index'
+import { logout } from 'src/domains/auth/services'
 
 export default () => {
   return [
@@ -14,7 +13,7 @@ export default () => {
       icon: 'power_settings_new',
       label: 'Sair',
       handler ($component) {
-        logout(store.getters.AppUser).then(response => {
+        logout(() => {
           $component.$router.push('/auth/login')
         })
       }

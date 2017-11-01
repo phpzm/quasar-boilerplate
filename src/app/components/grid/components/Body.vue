@@ -125,7 +125,7 @@
     mounted () {
       this.options.disabled = !this.sortable
     },
-    name: 'common-grid-body',
+    name: 'app-grid-body',
     props: {
       schemas: {
         default: () => ([])
@@ -170,7 +170,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .common-grid-body
+  .app-grid-body
     .draggable-ghost, .sortable-ghost, .sortable-drag
       opacity 1 !important
       background #cdcdcd !important
@@ -214,7 +214,7 @@
       width 40px
 
   @media (max-width 768px)
-    .common-grid-body
+    .app-grid-body
       .grid-row
         display block
         .grid-data
@@ -224,7 +224,7 @@
             text-align left !important
 
   .production
-    .common-grid-body .grid-options
+    .app-grid-body .grid-options
       .q-btn-round.q-btn-standard
         .q-icon, .q-btn-round.q-btn-standard .q-spinner
           margin 6px 0 0 0

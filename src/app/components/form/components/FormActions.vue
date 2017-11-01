@@ -6,7 +6,7 @@
 </template>
 
 <script type="text/javascript">
-  import QButton from 'src/app/components/button/Button.vue'
+  import QButton from 'src/app/components/button/AppButton.vue'
 
   const FormActions = {
     name: 'common-form-actions',

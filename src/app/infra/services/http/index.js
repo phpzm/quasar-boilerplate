@@ -33,4 +33,12 @@ export const abort = reason => {
   loading(false)
 }
 
+/**
+ * @param {string} requestId
+ */
+export const cancel = (requestId) => {
+  http.cancel(requestId)
+  loading(false)
+}
+
 export default http

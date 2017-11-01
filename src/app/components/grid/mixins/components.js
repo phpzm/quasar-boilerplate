@@ -1,5 +1,5 @@
 import { QDialogSelect, QSearch, QPagination } from 'quasar-framework'
-import QButton from 'src/app/components/button/Button.vue'
+import QButton from 'src/app/components/button/AppButton.vue'
 
 export default {
   components: {

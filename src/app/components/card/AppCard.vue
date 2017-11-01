@@ -16,13 +16,8 @@
 </template>
 
 <script type="text/javascript">
-  import { QCard, QCardTitle, QCardMain } from 'quasar-framework'
-
   export default {
-    components: {
-      QCard, QCardTitle, QCardMain
-    },
-    name: 'common-card',
+    name: 'app-card',
     props: {
       title: ''
     }

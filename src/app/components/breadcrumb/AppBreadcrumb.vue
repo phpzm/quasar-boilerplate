@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li>
       <!--suppress HtmlUnknownAnchorTarget -->
-      <router-link to="/dashboard">
+      <router-link :to="home">
         <q-icon name="home"></q-icon>
         <q-tooltip>Página Inicial</q-tooltip>
       </router-link>
@@ -11,16 +11,20 @@
       <router-link :to="item.to">
         <q-icon :name="item.icon"></q-icon>
         <small>{{ item.label }}</small>
-        <q-tooltip v-if="item.tooltip">{{ item.tooltip }}</q-tooltip>
       </router-link>
+      <q-tooltip :disable="!item.tooltip">{{ item.tooltip }}</q-tooltip>
     </li>
   </ul>
 </template>
 
 <script type="text/javascript">
+  import { Events } from 'quasar-framework'
+  import { PATH_HOME } from 'src/app/support/index'
+
   export default {
-    name: 'breadcrumb',
+    name: 'app-breadcrumb',
     data: () => ({
+      home: PATH_HOME,
       items: []
     }),
     methods: {
@@ -34,7 +38,7 @@
        * @returns {boolean}
        */
       filterBreadcrumb (match) {
-        return match.name !== 'dashboard.home'
+        return match.path !== this.home
       },
       /**
        * @param {Array} accumulate
@@ -46,7 +50,7 @@
         Object.keys(this.$route.params).forEach(key => {
           to = to.replace(':' + key, this.$route.params[key])
         })
-        if (match.meta.label) {
+        if (match.meta.icon) {
           accumulate.push({
             icon: match.meta.icon,
             label: match.meta.label,
@@ -58,13 +62,14 @@
         return accumulate
       }
     },
-    watch: {
-      '$route' () {
-        this.updateBreadcrumb()
-      }
+    created () {
+      Events.$on('app.route.update', this.updateBreadcrumb)
     },
     mounted () {
       this.updateBreadcrumb()
+    },
+    destroyed () {
+      Events.$off('app.route.update')
     }
   }
 </script>
@@ -72,4 +77,6 @@
 <style lang="stylus" rel="stylesheet/stylus">
   ul.breadcrumb li
     margin 0
+  ul.breadcrumb li:last-child a
+    border-radius 2px
 </style>

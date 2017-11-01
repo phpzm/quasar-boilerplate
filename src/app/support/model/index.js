@@ -1,6 +1,7 @@
 /**
  * @param {Array} fields
  * @param {string} scope
+ * @returns {Array}
  */
 export const filter = (fields, scope) => {
   return fields.filter(field => scope ? field.scopes.includes(scope) : true)
@@ -88,4 +89,36 @@ export const field = (name, label, component, scopes = []) => {
       }
     }
   }
+}
+
+/**
+ * @param {string} icon
+ * @param {string} label
+ * @param {string} tooltip
+ * @returns {Object}
+ */
+export const meta = (icon, label, tooltip) => {
+  return {icon, label, tooltip}
+}
+
+/**
+ * @param {string} icon
+ * @param {string} label
+ * @param {string} path
+ * @returns {Function}
+ */
+export const menu = (icon, label, path) => {
+  return to => {
+    return {
+      to: to(path),
+      label: label,
+      left: {
+        icon: icon
+      }
+    }
+  }
+}
+
+export default {
+  filter, field, meta, menu
 }

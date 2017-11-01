@@ -1,5 +1,6 @@
 import store from 'src/app/infra/store'
 import { configureUser } from 'src/bootstrap/settings'
+import { promise } from 'src/app/support/utils'
 
 /**
  * @param {Object} user
@@ -8,19 +9,31 @@ import { configureUser } from 'src/bootstrap/settings'
  * @param {Function} success
  */
 export const register = (user, token, remember, success) => {
-  store.dispatch('changeUser', configureUser(user), remember)
+  // noinspection JSUnresolvedFunction
+  store.dispatch('setAuthUser', configureUser(user), remember)
     .then(() => {
-      store.dispatch('changeToken', token, remember).then(success)
+      // noinspection JSUnresolvedFunction
+      store.dispatch('setAuthToken', token, remember).then(success)
     })
 }
 
 /**
- * @param {Object} user
- * @param {string} token
+ * @param {Function} success
  */
-export const unRegister = (user, token) => {
-  store.dispatch('changeUser', undefined)
-    .then(() => {
-      store.dispatch('changeToken', undefined)
-    })
+export const unRegister = (success) => {
+  return promise((resolve, reject) => {
+    const solver = () => {
+      success()
+      resolve()
+    }
+    // noinspection JSUnresolvedFunction
+    store.dispatch('setAuthUser', undefined)
+      .then(() => {
+        // noinspection JSUnresolvedFunction
+        store.dispatch('setAuthToken', undefined)
+          .then(solver)
+          .catch(reject)
+      })
+      .catch(reject)
+  })
 }

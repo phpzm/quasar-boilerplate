@@ -2,16 +2,16 @@
   <field :class="classNames"
          v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
     <div slot="component">
-
-      <div v-show="editable" :class="['component', problems.length ? 'has-error' : '']">
+      <div v-show="editable" class="component" :class="{'has-error': problems.length}">
         <i class="material-icons" @click="openWidget">&#xE878;</i>
         <q-datetime ref="widget" v-model="widget"
                     type="date" ok-label="Ok" cancel-label="Cancelar" clear-label="Limpar"></q-datetime>
+        <!--suppress HtmlFormInputWithoutLabel -->
         <input :id="id" ref="input" :type="type" :name="name" class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="max" @mouseup="$emit('mouseup', $event.target.value)" :disabled="disabled"
-               @keypress="$emit('keypress', $event.target.value)" @keyup="$emit('keyup', $event.target.value)"
-               @blur="$emit('blur', $event.target.value)" @focus="$emit('focus', $event.target.value)"
-               @keydown.enter.stop.prevent="$emit('enter', value, $event)" @input="updateValue($event.target.value)"/>
+               autocomplete="off" :maxlength="max" :disabled="disabled"
+               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
+               @keydown.enter.stop.prevent="enter"
+               @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
 
@@ -32,7 +32,6 @@
       this.max = this.mask.length
     },
     data: () => ({
-      title: 'Este campo possui critérios de validação',
       widget: '',
       html: '',
       max: ''
@@ -117,15 +116,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-date
-    .error-message, .label-with-error
-      color darkred
-    .error-message
-      font-size 12px
-      i
-        font-size 14px
-        cursor pointer
-    .has-error input
-      background rgba(249, 125, 125, 0.2)
     .component
       position relative
       & > input
@@ -159,6 +149,4 @@
       padding 9px 8px
       font-family Roboto
       font-size 14.4px
-    input:-webkit-autofill
-      -webkit-box-shadow 0 0 0 1000px #ffffff inset, 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important
 </style>
