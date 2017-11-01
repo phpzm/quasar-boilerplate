@@ -1,27 +1,35 @@
-// Types
-export const CHANGE_MENU = 'CHANGE_MENU'
-export const CHANGE_WIDTH = 'CHANGE_WIDTH'
-export const CHANGE_HEIGHT = 'CHANGE_HEIGHT'
+export const CHANGE_OPTIONS = 'setDashboardOptions'
+export const CHANGE_BADGES = 'setDashboardBadges'
 
 const state = {
-  options: []
+  options: [],
+  badges: []
 }
 
 const getters = {
   getDashboardOptions (state) {
     return state.options
+  },
+  getDashboardBadges (state) {
+    return state.badges
   }
 }
 
 const actions = {
-  setDashboardOptions ({commit}, payload) {
-    commit(CHANGE_MENU, payload)
+  setDashboardOptions ({commit}, options) {
+    commit(CHANGE_OPTIONS, options)
+  },
+  setDashboardBadges ({commit}, badges) {
+    commit(CHANGE_BADGES, badges)
   }
 }
 
 const mutations = {
-  [CHANGE_MENU] (state, menu) {
-    state.options = menu
+  [CHANGE_OPTIONS] (state, options) {
+    state.options = options
+  },
+  [CHANGE_BADGES] (state, badges) {
+    state.badges = badges
   }
 }
 

@@ -11,16 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
     exit(0);
 }
 
+$token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL3YxL2F1dGgvbG9naW4' .
+    'iLCJpYXQiOjE1MDg4OTg5OTYsImV4cCI6MTUwODkwMjU5NiwibmJmIjoxNTA4ODk4OTk2LCJqdGkiOiI5WHNOcGpickdVeXdGVGlvIn0.QH4Y' .
+    '5DurBTgqekfyjx3ssdduqKBMIH5zeZztRkJdZI0';
+
 header("Access-Control-Expose-Headers: Authorization");
 header("Content-Type: application/json");
-header("Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE1MDg4OTg5OTYsImV4cCI6MTUwODkwMjU5NiwibmJmIjoxNTA4ODk4OTk2LCJqdGkiOiI5WHNOcGpickdVeXdGVGlvIn0.QH4Y5DurBTgqekfyjx3ssdduqKBMIH5zeZztRkJdZI0");
+header("Authorization: {$token}");
+
+$uri = $_SERVER['REQUEST_URI'];
+
+$returns = [
+    '/api/v1/auth/login' => [
+        'user' => [
+            'name' => 'Grupo de PHP da Zona da Mata',
+            'email' => 'contato@phpzm.rocks',
+        ],
+        'token' => $token
+    ]
+];
+
+$body = isset($returns[$uri]) ? $returns[$uri] : json_decode(file_get_contents(__DIR__ . '/fake.json'));
 
 echo json_encode([
-    'body' => [
-        'user' => [
-          'name' => 'Grupo de PHP da Zona da Mata',
-          'email' => 'contato@phpzm.rocks',
-        ],
-        'token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE1MDg4OTg5OTYsImV4cCI6MTUwODkwMjU5NiwibmJmIjoxNTA4ODk4OTk2LCJqdGkiOiI5WHNOcGpickdVeXdGVGlvIn0.QH4Y5DurBTgqekfyjx3ssdduqKBMIH5zeZztRkJdZI0'
-    ]
+    'body' => $body,
+    'meta' => ['output' => ''],
+    'status' => ['code' => '200'],
 ]);

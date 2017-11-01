@@ -2,7 +2,7 @@
   <div class="drawer-menu-item">
     <q-collapsible ref="collapsible" v-if="hasChildren" :icon="menu.icon" :label="menu.label" :class="classNames">
       <template v-for="child in menu.children">
-        <drawer-menu-item :menu="child" :badges="badges"></drawer-menu-item>
+        <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
       </template>
     </q-collapsible>
 

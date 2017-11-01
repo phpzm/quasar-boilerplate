@@ -23,14 +23,14 @@
     },
     computed: {
       badges () {
-        return this.getBadges.reduce((accumulate, item) => {
+        return this.getDashboardBadges.reduce((accumulate, item) => {
           if (item.id) {
             accumulate[item.id] = item.count
           }
           return accumulate
         }, {})
       },
-      ...mapGetters(['getBadges'])
+      ...mapGetters(['getDashboardBadges'])
     }
   }
 </script>

@@ -1,20 +1,20 @@
 <template>
-  <common-card>
+  <app-card>
     <div slot="title">
       Home
     </div>
     <div slot="content">
       <q-icon name="home"></q-icon>
     </div>
-  </common-card>
+  </app-card>
 </template>
 
 <script type="text/javascript">
-  import CommonCard from 'src/app/components/card/AppCard.vue'
+  import AppCard from 'src/app/components/card/AppCard.vue'
 
   export default {
     components: {
-      CommonCard
+      AppCard
     },
     name: 'dashboard-home'
   }

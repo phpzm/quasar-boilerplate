@@ -3,6 +3,7 @@ import { set as _set, findIndex as _findIndex, each as _each, unset as _unset, i
 import { actions } from 'src/app/components/crud/model'
 import { confirm, toast, undo } from 'src/app/support/message'
 import { defaults } from 'src/app/components/crud/components/form/data'
+import { populateForm } from 'src/bootstrap/settings'
 
 export default {
   methods: {
@@ -124,14 +125,7 @@ export default {
       const url = this.api + '/' + this.$route.params.id
 
       const fetch = (response) => {
-        let record = response.data
-        if (Array.isArray(response.data)) {
-          record = response.data[0]
-        }
-        this.record = record
-        if (typeof callback === 'function') {
-          callback()
-        }
+        populateForm(this, response, callback)
       }
 
       const error = () => {

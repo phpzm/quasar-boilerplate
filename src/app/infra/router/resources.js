@@ -1,19 +1,19 @@
 /**
  * @param {Function} props
- * @param {string} entity
- * @param {string} scope
  * @param {string} path
+ * @param {string} uri
+ * @param {string} scope
  * @param {string} component
  * @param {string} label
  * @param {string} icon
  * @param {string} tooltip
  * @returns {Object}
  */
-export const route = (props, entity, scope, path, component, label = '', icon = '', tooltip = '') => {
+export const route = (props, path, uri, scope, component, label = '', icon = '', tooltip = '') => {
   return {
-    path: path,
+    path: uri,
     component: component,
-    name: entity + '.' + scope,
+    name: String(path).replace(/\\/g, '.') + '.' + scope,
     props: (route) => {
       return props(scope, route)
     },
@@ -26,29 +26,29 @@ export const route = (props, entity, scope, path, component, label = '', icon = 
 }
 
 /**
- * @param {string} entity
+ * @param {string} path
  * @param {Function} grid
  * @param {Function} form
  * @param {Object} meta
  * @returns {Array}
  */
-export const crud = (entity, grid, form, meta) => {
+export const crud = (path, grid, form, meta) => {
+  const create = 'Cria um novo registro no(a) ' + meta.tooltip
+  const view = 'Visualiza um registro do(a) ' + meta.tooltip
+  const edit = 'Edita um novo registro do(a) ' + meta.tooltip
   return [
     {
-      path: entity,
+      path: path,
       component: 'app/components/crud/Index',
       props: {
         title: meta.label
       },
       meta: meta,
       children: [
-        route(grid, entity, 'index', '', 'app/components/crud/Grid', '', '', meta.tooltip),
-        route(form, entity, 'create', 'create', 'app/components/crud/Form', 'Criar', 'add',
-          'Cria um novo registro no(a) ' + meta.tooltip),
-        route(form, entity, 'view', ':id', 'app/components/crud/Form', 'Visualizar', 'search',
-          'Visualiza um registro do(a) ' + meta.tooltip),
-        route(form, entity, 'edit', ':id/edit', 'app/components/crud/Form', 'Editar', 'edit',
-          'Edita um novo registro do(a) ' + meta.tooltip)
+        route(grid, path, '', 'index', 'app/components/crud/Grid', '', '', meta.tooltip),
+        route(form, path, 'create', 'create', 'app/components/crud/Form', 'Criar', 'add', create),
+        route(form, path, ':id', 'view', 'app/components/crud/Form', 'Visualizar', 'search', view),
+        route(form, path, ':id/edit', 'edit', 'app/components/crud/Form', 'Editar', 'edit', edit)
       ]
     }
   ]

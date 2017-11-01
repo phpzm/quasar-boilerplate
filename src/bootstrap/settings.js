@@ -32,19 +32,39 @@ export const configureDashboard = ($component) => {
 export const populateGrid = ($component, response) => {
   let records = []
   if ($component.pagination) {
-    if (!response.data) {
+    const {body, meta} = response.data
+    if (!Array.isArray(body)) {
       return []
     }
-    records = response['data']
+    records = body
     // noinspection JSUndefinedPropertyAssignment
-    $component.page = response['current_page']
+    $component.page = parseInt(meta.page)
     // noinspection JSUndefinedPropertyAssignment
-    $component.pages = response['last_page']
+    $component.pages = parseInt(meta.last)
   }
   if (!records.length && Array.isArray(response)) {
     records = response
   }
-  return records
+  // noinspection JSUndefinedPropertyAssignment
+  $component.records = records
+}
+
+/**
+ * @param {Vue} $component
+ * @param {AxiosResponse} response
+ * @param {Function} callback
+ */
+export const populateForm = ($component, response, callback) => {
+  let record = {}
+  const {body} = response.data
+  if (Array.isArray(body)) {
+    record = body[0]
+  }
+  // noinspection JSUndefinedPropertyAssignment
+  $component.record = record
+  if (typeof callback === 'function') {
+    callback()
+  }
 }
 
 /**

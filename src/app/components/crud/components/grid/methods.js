@@ -67,7 +67,7 @@ export default {
       http
         .get(this.api, Object.assign(params, extraParams))
         .then(response => {
-          this.populate(response.data)
+          this.populate(response)
           this.loaded = 'complete'
         })
         .catch(error => {
@@ -79,7 +79,7 @@ export default {
      * @param {Object} response
      */
     populate (response) {
-      this.records = populateGrid(this, response)
+      populateGrid(this, response)
 
       this.$emit('populate', response)
     },

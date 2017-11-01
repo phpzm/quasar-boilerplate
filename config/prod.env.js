@@ -5,7 +5,8 @@ module.exports = {
     NAME: '"PHPZM Quasar Boilerplate"',
     DEVICE: '"appDevice"',
     TOKEN: '"appAuth"',
-    USER: '"appUser"'
+    USER: '"appUser"',
+    REMEMBER: '"appRemember"',
   },
   API: {
     PROTOCOL: '"https"',
