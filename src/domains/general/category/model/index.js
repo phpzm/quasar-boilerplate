@@ -5,30 +5,37 @@ import { resource } from 'src/app/infra/services/http/resource'
  * @type {string}
  */
 export const icon = 'extension'
+
 /**
  * @type {string}
  */
 export const label = 'Categorias'
+
 /**
  * @type {string}
  */
 export const api = '/general/category'
+
 /**
  * @type {string}
  */
 export const path = '/dashboard/general/user'
+
 /**
  * @type {Resource}
  */
 export const service = resource(api)
+
 /**
  * @type {Object}
  */
 export const meta = model.meta(icon, label, 'Cadastro de Categorias')
+
 /**
  * @type {Function}
  */
 export const menu = model.menu(icon, label, path)
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -43,6 +50,7 @@ export const grid = (scope, route) => {
     schemas: fields('index')
   }
 }
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -59,6 +67,7 @@ export const form = (scope, route) => {
     }
   }
 }
+
 /**
  * @param {string} scope
  * @returns {Array}

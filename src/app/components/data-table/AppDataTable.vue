@@ -1,11 +1,11 @@
 <template>
-  <div class="app-data-table">
+  <div class="app-data-table" :style="style">
     <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
       <template v-if="actions.length" slot="col-options" scope="cell">
         <div class="app-data-table-options">
           <q-fab color="primary" direction="right">
             <q-fab-action v-if="permission(action, cell.row)" v-for="action in actions" :key="action.id"
-                          @click="click(action, cell.row)" :color="action.color" :icon="action.icon">
+                          @click="handler(action, cell.row)" :color="action.color" :icon="action.icon">
               <q-tooltip :disabled="!action.tooltip">
                 {{ action.tooltip }}
               </q-tooltip>
@@ -13,14 +13,15 @@
           </q-fab>
         </div>
       </template>
-      <slot>
-      </slot>
     </q-data-table>
   </div>
 </template>
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
+
+  const containerHeight = 'calc(100vh - 270px)'
+  const tableHeight = 'calc(100vh - 320px)'
 
   export default {
     name: 'app-data-table',
@@ -48,7 +49,9 @@
       }
     },
     data: () => ({
-      pagination: true,
+      style: {
+        height: containerHeight
+      },
       config: {
         refresh: false,
         noHeader: false,
@@ -56,22 +59,22 @@
         leftStickyColumns: 0,
         rightStickyColumns: 0,
         bodyStyle: {
-          maxHeight: 'calc(100vh - 290px)'
+          height: tableHeight
         },
         rowHeight: '50px',
         responsive: false,
         pagination: undefined,
         messages: {
-          noData: '<i class="material-icons">error</i> Nenhum dado para exibir.',
-          noDataAfterFiltering: '<i>error</i> Nenhum resultado. Por favor revise os dados informados.'
+          noData: '<i class="material-icons">error</i> Nenhum dado para exibir',
+          noDataAfterFiltering: '<i>error</i> Nenhum resultado. Por favor revise os dados informados'
         },
         labels: {
           columns: 'Colunas',
           allCols: 'Todas',
           rows: 'Linhas',
           selected: {
-            singular: 'item selecionado.',
-            plural: 'itens selecionados.'
+            singular: 'item selecionado',
+            plural: 'itens selecionados'
           },
           clear: 'Limpar',
           search: 'Pesquisar',
@@ -109,7 +112,7 @@
        * @param {Object} action
        * @param {Object} row
        */
-      click (action, row) {
+      handler (action, row) {
         if (typeof action.handler === 'function') {
           action.handler(row, this.columns, this)
         }
@@ -121,7 +124,6 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .app-data-table
     font-family Roboto
-    padding 16px 0
     .app-data-table-options
       position absolute
       margin-top -20px

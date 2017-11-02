@@ -1,33 +1,21 @@
 import { confirm } from 'src/app/support/message/index'
-import { url } from 'src/app/infra/services/http/resource'
 
-/**
- * @param {Vue} $this
- * @param {*} actions
- * @returns {Array}
- */
-export const actions = ($this, actions) => {
-  if (Array.isArray(actions)) {
-    return actions
-  }
-  if (typeof actions === 'function') {
-    return actions($this, buttons($this))
-  }
-  return buttons($this)
-}
+export { default as methods } from 'src/app/components/crud/model/mixin/MixinMethods'
+export { default as data } from 'src/app/components/crud/model/mixin/MixinData'
+export { default as props } from 'src/app/components/crud/model/mixin/MixinProps'
 
 /**
  * @param {Object} $this
  * @param {string} id
  * @return {Array}
  */
-export const buttons = ($this) => {
+const buttons = ($this) => {
   return [
     {
       id: 'view',
       permission: 1,
       color: 'white',
-      scopes: ['index', 'create', 'view', 'edit'],
+      scopes: ['index'],
       positions: ['middle'],
       icon: 'search',
       label: 'Detalhes',
@@ -53,15 +41,28 @@ export const buttons = ($this) => {
       id: 'destroy',
       permission: 3,
       color: 'negative',
-      scopes: ['index', 'create', 'view', 'edit'],
+      scopes: ['index'],
       positions: ['middle'],
       icon: 'delete',
       label: 'Apagar',
       tooltip: 'Apague este registro',
       handler: (record, schemas, $component) => {
         confirm('Confirmação', 'Deseja apagar este registro?', () => {
-          $this.remove(record[$this.id])
+          $this.delete(record[$this.id])
         })
+      }
+    },
+    {
+      id: 'refresh',
+      permission: 1,
+      color: 'primary',
+      outline: true,
+      scopes: ['index'],
+      positions: ['top', 'bottom'],
+      icon: 'refresh',
+      tooltip: 'Recarrega a tabela',
+      handler: (record, schemas, $component) => {
+        $this.search()
       }
     },
     {
@@ -70,11 +71,12 @@ export const buttons = ($this) => {
       color: 'primary',
       scopes: ['index'],
       positions: ['floating'],
+      round: true,
       icon: 'add',
       label: '',
-      tooltip: 'Navegue para a tela a fim de criar um novo registro',
+      tooltip: 'Inicie a criação de um novo registro',
       handler: (record, schemas, $component) => {
-        $component.navigate(url($this.path, 'create', $component.$route.query))
+        $this.browse($this.path + '/' + 'create')
       }
     },
     {
@@ -83,14 +85,14 @@ export const buttons = ($this) => {
       color: 'primary',
       scopes: ['create', 'view', 'edit'],
       positions: ['top', 'bottom'],
-      disabled: (valid) => {
-        return !valid
-      },
-      hidden: $this.scope !== 'create',
       icon: '',
       label: 'Salvar',
+      tooltip: 'Salvar as alterações feitas a este registro',
       handler: (record, schemas, $component) => {
-        $this.save(record)
+        if ($this.scope === 'create') {
+          return $this.create(record)
+        }
+        return $this.update(record)
       }
     },
     {
@@ -102,33 +104,51 @@ export const buttons = ($this) => {
       positions: ['top', 'bottom'],
       icon: '',
       label: 'Voltar',
+      tooltip: 'Voltar para a tela anterior',
       handler: (record, schemas, $component) => {
         window.history.back()
       }
     },
     {
-      id: 'create',
+      id: 'add',
       permission: 2,
       color: 'primary',
-      scopes: ['index'],
-      positions: ['begin'],
-      icon: '',
+      scopes: ['empty'],
+      positions: ['center'],
+      icon: 'add',
       label: 'Criar um novo registro',
+      tooltip: 'Inicie a criação de um novo registro',
       handler: (record, schemas, $component) => {
-        $component.navigate(url($this.path, 'create', $component.$route.query))
+        $this.browse($this.path + '/' + 'create')
       }
     },
     {
       id: 'retry',
       permission: 2,
       color: 'primary',
-      scopes: ['index'],
-      positions: ['retry'],
+      scopes: ['retry'],
+      positions: ['center'],
       icon: '',
       label: 'Tentar novamente',
+      tooltip: 'Realizar uma nova tentativa de recuperação de dados',
       handler: (record, schemas, $component) => {
-        $this.fetchAll()
+        $this.read()
       }
     }
   ]
+}
+
+/**
+ * @param {Vue} $this
+ * @param {*} actions
+ * @returns {Array}
+ */
+export const actions = ($this, actions) => {
+  if (Array.isArray(actions)) {
+    return actions
+  }
+  if (typeof actions === 'function') {
+    return actions($this, buttons($this))
+  }
+  return buttons($this)
 }

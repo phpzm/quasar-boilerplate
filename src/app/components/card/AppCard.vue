@@ -2,7 +2,7 @@
   <div class="app-card">
     <slot name="top"></slot>
     <q-card>
-      <q-card-title class="q-card--title">
+      <q-card-title v-if="header" class="q-card--title">
         <slot name="title">
           <q-icon :name="icon"></q-icon> <span v-html="title"></span>
         </slot>
@@ -27,6 +27,9 @@
         default: ''
       },
       separator: {
+        default: true
+      },
+      header: {
         default: true
       }
     }

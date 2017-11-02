@@ -1,13 +1,7 @@
 <template>
-  <app-card>
-    <div slot="title">
-      <slot name="header">
-        {{ title }}
-      </slot>
-    </div>
+  <app-card v-bind="{header: false}">
     <router-view slot="content"></router-view>
   </app-card>
-
 </template>
 
 <script type="text/javascript">

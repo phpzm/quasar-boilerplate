@@ -54,7 +54,7 @@ export const populateGrid = ($component, response) => {
  * @param {AxiosResponse} response
  * @param {Function} callback
  */
-export const populateForm = ($component, response, callback) => {
+export const populateForm = ($component, response, callback = null) => {
   let record = {}
   const {body} = response.data
   if (Array.isArray(body)) {

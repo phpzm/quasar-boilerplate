@@ -1,107 +1,88 @@
 <template>
-  <div class="common-form" :style="stylish">
-    <div slot="content">
-      <div class="form-default">
-
-        <div class="group text-right" v-if="top.length">
-          <form-actions :actions="top" :handler="handlerAction" :valid="$valid"></form-actions>
-          <hr>
-        </div>
-
-        <div :class="tabs.length ? 'tabs' : 'form'">
-          <div v-if="tabs.length" class="q-tabs in-line row justified">
-            <div class="q-tabs-scroller row">
-              <div v-for="tab in tabs" @click="selected = tab.value"
-                   :class="['q-tab', 'items-center', 'justify-center', selected === tab.value ? 'active': '']">
-                <span class="q-tab-label">{{ tab.label }}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="form" v-for="tab in (tabs.length ? tabs : [{value: ''}])" :key="tab.value"
-               v-show="tab.value === selected">
-            <component v-for="item in (tabs.length ? itemsFromTab[tab.value] : items)" :key="item.name"
-                       :is="item.component"
-                       v-bind="item" v-model="record[item.name]" :scope="scope" :errors="getErrors(item.name)"
-                       @input="changeRecord(item.name)" @mouseup="mouseupRecord(item.name)"
-                       @keypress="keypressRecord(item.name)" @keyup="keyupRecord(item.name)"
-                       @blur="blurRecord(item.name)" @focus="focusRecord(item.name)"></component>
-          </div>
-        </div>
-
-        <div class="group text-right" v-if="bottom.length">
-          <hr>
-          <form-actions :actions="bottom" :handler="handlerAction" :valid="$valid"></form-actions>
-        </div>
-
-      </div>
-
-      <div class="fixed-bottom-right" v-if="floating.length" style="margin: 20px">
-        <slot name="action-floating">
-          <form-actions :actions="floating" :handler="handlerAction" :valid="$valid"></form-actions>
-        </slot>
-      </div>
-
-      <div v-if="debug">
-        <pre>{{ record }}</pre>
-      </div>
-
+  <div class="app-form">
+    <q-tabs v-if="tabs.length">
+      <!-- Tabs - notice slot="title" -->
+      <q-tab v-for="tab in tabs" :key="tab.name" slot="title" v-bind="tab"/>
+      <!-- Targets -->
+      <q-tab-pane v-for="tab in tabs" :name="tab.name">
+        <component v-for="field in fields[tab.name]" :key="field.field" :is="field.component"
+                   v-bind="field" v-model="record[field.name]" @input="input(field.name)"></component>
+      </q-tab-pane>
+    </q-tabs>
+    <div v-else :class="'form'">
+      <component v-for="field in fields" :key="field.field" :is="field.component"
+                 v-bind="field" v-model="record[field.name]" @input="input(field.name)"></component>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  import 'src/app/components/fields'
-  import { validationMixin } from 'vuelidate'
-  import GeneralComputed from 'src/app/components/general/mixin-computed'
-  import GeneralMethods from 'src/app/components/general/mixin-methods'
-
-  import MixinComputed from 'src/app/components/form/mixins/computed'
-  import MixinHooks from 'src/app/components/form/mixins/hooks'
-  import MixinMethods from 'src/app/components/form/mixins/methods'
-  import MixinProps from 'src/app/components/form/mixins/props'
-  import MixinData from 'src/app/components/form/mixins/data'
-
-  import FormActions from 'src/app/components/form/components/FormActions.vue'
+  import * as Validators from 'vuelidate/lib/validators'
 
   export default {
-    components: {
-      FormActions
-    },
-    mixins: [
-      validationMixin,
-      GeneralComputed, GeneralMethods,
-      MixinComputed, MixinData, MixinHooks, MixinMethods, MixinProps
-    ],
     name: 'app-form',
+    props: {
+      tabs: {
+        type: Array,
+        default: () => ([])
+      },
+      fields: {
+        type: Array,
+        default: () => ([])
+      },
+      data: {
+        type: Array,
+        default: () => ([])
+      }
+    },
+    data: () => ({
+      record: {}
+    }),
     validations () {
-      const validations = this.generateValidations(this.schemas)
+      const validations = this.generateValidations(this.fields)
       return {
         record: validations
       }
     },
-    watch: {
-      value: {
-        handler () {
-          this.updateForm()
-        },
-        deep: true
+    methods: {
+      input (name) {
+        // react
       },
-      scope () {
-        this.updateForm()
+      /**
+       * @param fields
+       * @returns {Object}
+       */
+      generateValidations (fields) {
+        if (!Array.isArray(fields)) {
+          return {}
+        }
+        const validations = {}
+        fields
+          .filter(schema => !!schema.validate)
+          .forEach(schema => {
+            validations[schema.field] = this.configureValidation(schema.validate)
+          })
+        return validations
+      },
+      /**
+       * @param {Object} validate
+       * @return {Object}
+       */
+      configureValidation (validate) {
+        const configure = {}
+        Object.keys(validate).forEach(property => {
+          let action = Validators[property]
+          if (!action.length) {
+            configure[property] = action
+            return true
+          }
+          configure[property] = action((validate[property]))
+        })
+        return configure
       }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .form-default > .tabs
-    > .q-tabs
-      padding 10px 5px
-    > .form
-      margin-top 5px
-
-  .common-form
-    .fixed-bottom-right
-      margin 20px
 </style>
