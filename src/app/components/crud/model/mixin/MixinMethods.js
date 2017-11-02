@@ -25,7 +25,7 @@ export default {
      */
     update (record) {
       this.service
-        .put(record)
+        .put(record[this.id], record)
         .then(response => this.then(response, 'update'))
         .catch(error => this.catch(error, 'update', [record]))
     },
@@ -66,7 +66,14 @@ export default {
       if (!Array.isArray(_actions)) {
         return
       }
-      const buttons = _actions.filter(button => button.scopes.includes(this.scope))
+      const buttons = _actions
+        .filter(button => button.scopes.includes(this.scope))
+        .map(button => {
+          if (typeof button.validate === 'function') {
+            button.disabled = button.validate(this.record, this.schemas, this)
+          }
+          return button
+        })
 
       this.buttons.top = buttons.filter(button => button.positions.includes('top'))
       this.buttons.middle = buttons.filter(button => button.positions.includes('middle'))

@@ -8,14 +8,14 @@
         <div class="form">
           <component v-for="schema in components[tab]" :key="schema.field" :is="schema.component"
                      v-bind="schema" v-model="record[schema.field]"
-                     @input="input(schema.field)" @event="event"></component>
+                     @input="inputRecord(schema.field)" @event="event"></component>
         </div>
       </q-tab-pane>
     </q-tabs>
     <div v-else class="form">
       <component v-for="schema in schemas" :key="schema.field" :is="schema.component"
                  v-bind="schema" v-model="record[schema.field]"
-                 @input="input(schema.field)" @event="event"></component>
+                 @input="inputRecord(schema.field)" @event="event"></component>
     </div>
   </div>
 </template>

@@ -26,7 +26,8 @@
     },
     data: () => ({
       html: '',
-      max: ''
+      pattern: '',
+      max: '16'
     }),
     extends: FieldAbstract,
     methods: {
@@ -41,11 +42,11 @@
           return
         }
         value = String(value)
-        let pattern = '(##) ####-####'
-        if (value.length > 10) {
-          pattern = '(##) #####-####'
+        this.pattern = '(##) ####-####'
+        if (value.length >= 15) {
+          this.pattern = '(##) #-####-####'
         }
-        value = mask(pattern, value)
+        value = mask(this.pattern, value)
 
         this.html = value
         if (this.$refs.input) {

@@ -7,7 +7,7 @@ const reduce = (accumulate, item) => {
 
 export default {
   methods: {
-    input (field) {
+    inputRecord (field) {
       if (this.$v.record[field]) {
         this.$v.record[field].$touch()
       }
@@ -17,6 +17,8 @@ export default {
       }
 
       this.schemas[field].errors = this.getErrors(field)
+
+      this.$emit('input', this.record)
     },
     event (event, field) {
       // TODO: handler to generic events

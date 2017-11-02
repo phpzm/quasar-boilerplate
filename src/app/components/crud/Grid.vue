@@ -2,7 +2,7 @@
   <div class="app-crud-grid">
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <hr>
-    <app-data-table v-bind="{columns, data, actions: buttons.middle}"></app-data-table>
+    <app-data-table ref="grid" v-bind="{columns, data, actions: buttons.middle}"></app-data-table>
     <hr>
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <div class="fixed-bottom-right">
@@ -55,7 +55,8 @@
        */
       then (response, method) {
         const handlers = {
-          read: (response) => populateGrid(this, response)
+          read: (response) => populateGrid(this, response),
+          delete: () => this.search()
         }
         if (handlers[method]) {
           handlers[method](response)

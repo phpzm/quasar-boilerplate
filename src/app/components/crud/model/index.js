@@ -85,6 +85,9 @@ const buttons = ($this) => {
       color: 'primary',
       scopes: ['create', 'view', 'edit'],
       positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
       icon: '',
       label: 'Salvar',
       tooltip: 'Salvar as alterações feitas a este registro',

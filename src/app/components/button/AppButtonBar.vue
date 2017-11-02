@@ -23,6 +23,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .app-button-bar
+    text-align right 
     button
       margin 0 5px
     button:first-child

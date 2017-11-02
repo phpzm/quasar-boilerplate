@@ -2,7 +2,7 @@
   <div class="app-crud-grid">
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <hr>
-    <app-form v-bind="{fields, data}"></app-form>
+    <app-form ref="form" v-bind="{fields, data}" @input="data = $event" @form-valid="valid"></app-form>
     <hr>
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <div class="fixed-bottom-right">
@@ -31,7 +31,8 @@
     },
     data: () => ({
       fields: {},
-      data: {}
+      data: {},
+      status: false
     }),
     methods: {
       /**
@@ -66,6 +67,17 @@
         if (handlers[method]) {
           handlers[method](error)
         }
+      },
+      /**
+       * @param {boolean} valid
+       */
+      valid (valid) {
+        this.status = valid
+      }
+    },
+    watch: {
+      status () {
+        this.renderActions()
       }
     },
     created () {
