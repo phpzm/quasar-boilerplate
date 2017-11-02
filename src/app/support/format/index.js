@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { money } from 'src/app/support/utils/index'
+import { money, mask } from 'src/app/support/utils'
 
 /**
  * @param value
@@ -48,4 +48,16 @@ export const formatBoolean = (value) => {
  */
 export const formatMoney = (value) => {
   return '<div style="text-align: right;">' + money(value) + '</div>'
+}
+
+/**
+ * @param value
+ * @return {string}
+ */
+export const formatPhone = (value) => {
+  let pattern = '(##) ####-####'
+  if (length > 13) {
+    pattern = '(##) #-####-####'
+  }
+  return mask(pattern, value)
 }

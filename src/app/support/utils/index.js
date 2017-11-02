@@ -87,6 +87,18 @@ export const padLeft = (value, length, char = '0') => {
 }
 
 /**
+ * @param {String} value
+ * @param {int} length
+ * @param {String} char
+ * @returns {String}
+ */
+export const padRight = (value, length, char = '0') => {
+  const string = String(value)
+  const pad = Array.from({length: length}, () => char).join('')
+  return string + pad.substring(string.length, pad.length)
+}
+
+/**
  * @param value
  * @param precision
  * @return {string}

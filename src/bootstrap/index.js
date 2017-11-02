@@ -12,6 +12,8 @@ import i18n from 'src/app/support/i18n'
 // settings of vendors
 import 'src/bootstrap/vendor/quasar'
 import 'src/bootstrap/vendor/froala'
+import 'src/themes/phpzm/components/fields'
+import 'src/themes/quasar/components/fields'
 
 // events to boot
 import { beforeUnload, errorHandler } from 'src/bootstrap/events'

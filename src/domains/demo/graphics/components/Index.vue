@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/javascript">
-  import AppCard from 'src/app/components/card/AppCard.vue'
+  import AppCard from 'src/themes/phpzm/components/card/AppCard.vue'
 
   export default {
     components: {
