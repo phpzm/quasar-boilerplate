@@ -1,6 +1,5 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" class="color-wrapper grid" :class="{'has-error': problems.length}">
         <div class="color" :style="{'background': model.hex}"></div>
@@ -15,32 +14,31 @@
         <div class="color" :style="{'background': value}"></div>
       </div>
     </div>
-
   </field>
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
   import { Sketch } from 'vue-color'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field, Sketch
     },
+    name: 'field-color',
     data: () => ({
       model: {
         hex: '#ffffff'
       }
     }),
-    extends: FieldAbstract,
     methods: {
       updateValue (color) {
         this.model.hex = color.hex
         this.$emit('input', color.hex)
       }
     },
-    name: 'field-color',
     watch: {
       value (color) {
         this.model.hex = color

@@ -1,6 +1,5 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
         <q-numeric v-model="model" v-bind="bind" @input="updateValue"></q-numeric>
@@ -11,13 +10,31 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
+    name: 'field-numeric',
+    props: {
+      options: {
+        type: Array,
+        default: () => ([])
+      },
+      min: {
+        type: Number
+      },
+      max: {
+        type: Number
+      }
+    },
+    data: () => ({
+      updated: false,
+      model: undefined
+    }),
     computed: {
       bind () {
         return {
@@ -29,11 +46,6 @@
         return this.model
       }
     },
-    data: () => ({
-      updated: false,
-      model: undefined
-    }),
-    extends: FieldAbstract,
     methods: {
       /**
        * @param {Number} value
@@ -49,26 +61,6 @@
         this.$emit('input', this.model)
       }
     },
-    mounted () {
-      this.applyValue(this.value)
-    },
-    name: 'field-numeric',
-    props: {
-      options: {
-        type: Array,
-        default: () => ([])
-      },
-      title: {
-        type: String,
-        default: 'Este campo possui critérios de validação'
-      },
-      min: {
-        type: Number
-      },
-      max: {
-        type: Number
-      }
-    },
     watch: {
       value (value) {
         this.applyValue(value)
@@ -76,6 +68,9 @@
       mask () {
         this.applyValue(this.value)
       }
+    },
+    mounted () {
+      this.applyValue(this.value)
     }
   }
 </script>

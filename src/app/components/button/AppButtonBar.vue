@@ -1,6 +1,8 @@
 <template>
   <div class="app-button-bar" :style="style">
-    <q-button v-for="button in buttons" :key="button.id" v-bind="button" @click="handler(button)"></q-button>
+    <q-button v-for="button in buttons" :key="button.id" v-bind="button" @click="handler(button)">
+      <q-tooltip>{{ button.tooltip }}</q-tooltip>
+    </q-button>
   </div>
 </template>
 

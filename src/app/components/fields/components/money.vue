@@ -1,13 +1,12 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
-        <!--suppress HtmlFormInputWithoutLabel -->
-        <input :id="id" :name="name" ref="input" v-model.lazy="amount" v-money="settings"
-               class="input full-width" :placeholder="placeholder" autocomplete="off" :maxlength="max"
-               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
-               @keydown.enter.stop.prevent="enter" @change="updateValue"/>
+        <input v-model.lazy="amount" v-money="settings"
+               ref="input" class="input full-width" autocomplete="off"
+               v-bind="{id, type, name, placeholder, maxlength, disabled}"
+               @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
+               @change="updateValue"/>
         <div class="input-bar"></div>
       </div>
       <div v-show="!editable" class="html" v-html="html"></div>
@@ -16,22 +15,21 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import { VMoney } from 'v-money'
   import FieldAbstract from 'src/app/components/fields/abstract'
   import { money } from 'src/app/support/utils'
 
   export default {
-    computed: {
-      html () {
-        return money(this.value, 2)
-      }
-    },
+    extends: FieldAbstract,
     components: {
       Field
     },
+    directives: {
+      money: VMoney
+    },
+    name: 'field-money',
     data: () => ({
-      title: 'Este campo possui critérios de validação',
       settings: {
         // The character used to show the decimal place.
         decimal: ',',
@@ -49,10 +47,11 @@
       amount: 0,
       max: ''
     }),
-    directives: {
-      money: VMoney
+    computed: {
+      html () {
+        return money(this.value, 2)
+      }
     },
-    extends: FieldAbstract,
     methods: {
       /**
        */
@@ -63,14 +62,13 @@
         }
       }
     },
-    mounted () {
-      this.amount = Number(this.value).toFixed(this.settings.precision)
-    },
-    name: 'field-money',
     watch: {
       value (value) {
         this.amount = Number(value).toFixed(this.settings.precision)
       }
+    },
+    mounted () {
+      this.amount = Number(this.value).toFixed(this.settings.precision)
     }
   }
 </script>

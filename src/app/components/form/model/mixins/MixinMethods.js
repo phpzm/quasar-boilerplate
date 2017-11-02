@@ -7,7 +7,7 @@ const reduce = (accumulate, item) => {
 
 export default {
   methods: {
-    inputRecord (field) {
+    formInput (field) {
       if (this.$v.record[field]) {
         this.$v.record[field].$touch()
       }
@@ -20,8 +20,15 @@ export default {
 
       this.$emit('input', this.record)
     },
-    event (event, field) {
-      // TODO: handler to generic events
+    /**
+     * @param {string} event
+     * @param {Vue} schema
+     */
+    formEvent (event, schema) {
+      const field = schema.field
+      if (this.schemas[field].events && typeof this.schemas[field].events[event] === 'function') {
+        this.schemas[field].events[event](this.record, this.schemas, this)
+      }
     },
     /**
      */

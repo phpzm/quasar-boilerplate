@@ -1,42 +1,37 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" class="component" :class="{'has-error': problems.length}">
         <i class="material-icons" @click="openWidget">&#xE878;</i>
         <q-datetime ref="widget" v-model="widget"
                     type="date" ok-label="Ok" cancel-label="Cancelar" clear-label="Limpar"></q-datetime>
         <!--suppress HtmlFormInputWithoutLabel -->
-        <input :id="id" ref="input" :type="type" :name="name" class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="max" :disabled="disabled"
-               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
-               @keydown.enter.stop.prevent="enter"
+        <input ref="input" class="input full-width" autocomplete="off"
+               v-bind="{id, type, name, placeholder, maxlength, disabled}"
+               @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
                @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
-
       <div v-show="!editable" class="html" v-html="html"></div>
     </div>
   </field>
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
-    created () {
-      this.max = this.mask.length
-    },
+    name: 'field-date',
     data: () => ({
       widget: '',
       html: '',
-      max: ''
+      maxlength: ''
     }),
-    extends: FieldAbstract,
     methods: {
       /**
        * @param {*} value
@@ -91,10 +86,6 @@
         return value.split('-').reverse().join('/')
       }
     },
-    mounted () {
-      this.applyValue(this.value)
-    },
-    name: 'field-date',
     watch: {
       value (value) {
         this.applyValue(value)
@@ -110,6 +101,12 @@
         this.applyValue(value)
         this.updateValue(value)
       }
+    },
+    created () {
+      this.maxlength = this.mask.length
+    },
+    mounted () {
+      this.applyValue(this.value)
     }
   }
 </script>

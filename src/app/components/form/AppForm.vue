@@ -15,7 +15,7 @@
     <div v-else class="form">
       <component v-for="schema in schemas" :key="schema.field" :is="schema.component"
                  v-bind="schema" v-model="record[schema.field]"
-                 @input="inputRecord(schema.field)" @event="event"></component>
+                 @input="formInput(schema.field)" @event="formEvent"></component>
     </div>
   </div>
 </template>

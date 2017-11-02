@@ -1,9 +1,9 @@
 <template>
-  <field :class="classNames" v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" class="toggle-wrapper" :class="{'has-error': problems.length}">
         <label>
-          <q-toggle ref="input" v-model="model" :type="type" :name="name" :disable="disable"
+          <q-toggle ref="input" v-model="model" v-bind="{type, name, disable}"
                     @input="$emit('input', model)"></q-toggle>
           <span :class="{'disabled': disabled}" v-html="info"></span>
         </label>
@@ -14,13 +14,28 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
+    name: 'field-toggle',
+    props: {
+      placeholderTrue: {
+        type: String,
+        default: 'Sim'
+      },
+      placeholderFalse: {
+        type: String,
+        default: 'Não'
+      }
+    },
+    data: () => ({
+      model: false
+    }),
     computed: {
       disable () {
         if (this.disabled) {
@@ -39,29 +54,14 @@
         return this[info]
       }
     },
-    created () {
-      this.model = !!this.value
-      this.$emit('input', this.model)
-    },
-    data: () => ({
-      model: false
-    }),
-    extends: FieldAbstract,
-    name: 'field-toggle',
-    props: {
-      placeholderTrue: {
-        type: String,
-        default: 'Sim'
-      },
-      placeholderFalse: {
-        type: String,
-        default: 'Não'
-      }
-    },
     watch: {
       value (value) {
         this.model = !!value
       }
+    },
+    created () {
+      this.model = !!this.value
+      this.$emit('input', this.model)
     }
   }
 </script>

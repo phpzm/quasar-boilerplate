@@ -143,3 +143,23 @@ export const clone = (element) => {
  * @param {Function} executor
  */
 export const promise = executor => new Promise(executor)
+
+/**
+ * @param {string} prefix
+ * @param {boolean} entropy
+ * @returns {string}
+ */
+export const uniqid = (prefix = '', entropy = false) => {
+  let result
+  this.seed = (s, w) => {
+    s = parseInt(s, 10).toString(16)
+    return w < s.length ? s.slice(s.length - w) : (w > s.length) ? new Array(1 + (w - s.length)).join('0') + s : s
+  }
+  const start = this.seed(parseInt(new Date().getTime() / 1000, 10), 8)
+  const end = this.seed(Math.floor(Math.random() * 0x75bcd15) + 1, 5)
+  result = prefix + start + end
+  if (entropy) {
+    result += (Math.random() * 10).toFixed(8).toString()
+  }
+  return result
+}

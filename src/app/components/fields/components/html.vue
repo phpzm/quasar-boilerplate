@@ -1,8 +1,9 @@
 <template>
-  <div :class="classNames">
-    <label v-if="!inline" class="field-label">{{ label }}</label>
-    <div v-html="html"></div>
-  </div>
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
+    <div slot="component">
+      <div v-html="html"></div>
+    </div>
+  </field>
 </template>
 
 <script type="text/javascript">

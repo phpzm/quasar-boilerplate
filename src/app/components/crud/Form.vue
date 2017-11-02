@@ -12,7 +12,6 @@
 </template>
 
 <script type="text/javascript">
-  import { first } from 'src/app/infra/services/http/resource'
   import { populateForm } from 'src/bootstrap/settings'
   import AppForm from 'src/app/components/form/AppForm.vue'
   import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
@@ -32,9 +31,6 @@
         type: Object,
         default () {
           return {
-            create: (response) => {
-              this.browse(this.path + '/' + first(response)[this.id])
-            },
             read: (response) => populateForm(this, response),
             delete: (response) => this.browse(this.path)
           }

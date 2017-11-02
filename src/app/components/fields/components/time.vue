@@ -1,16 +1,14 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'component': true, 'has-error': problems.length}">
         <i class="material-icons" @click="openWidget">access_time</i>
         <q-datetime ref="widget" v-model="widget" type="time" ok-label="Ok" cancel-label="Cancelar"
                     clear-label="Limpar"></q-datetime>
-        <!--suppress HtmlFormInputWithoutLabel -->
-        <input :id="id" ref="input" :type="'text'" :name="name" class="input full-width" :placeholder="placeholder"
-               autocomplete="off" :maxlength="5" :disabled="disabled"
-               @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
-               @keydown.enter.stop.prevent="enter" @input="updateValue($event.target.value)"/>
+        <input ref="input" class="input full-width" autocomplete="off"
+               v-bind="{id, name, placeholder, maxlength, disabled}"
+               @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
+               @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
       <div v-show="!editable" class="html" v-html="html"></div>
@@ -19,7 +17,7 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
   import { mask, unMask, padLeft } from 'src/app/support/utils/index'
   import moment from 'moment'
@@ -27,15 +25,17 @@
   const pattern = '##:##'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
+    name: 'field-time',
     data: () => ({
       html: '',
       widget: '',
+      maxlength: 5,
       updated: false
     }),
-    extends: FieldAbstract,
     methods: {
       beforeSend (value) {
         return Number(unMask(pattern, value))
@@ -102,10 +102,6 @@
         }
       }
     },
-    mounted () {
-      this.applyValue(this.value)
-    },
-    name: 'field-time',
     watch: {
       value (value) {
         if (!this.updated) {
@@ -122,6 +118,9 @@
         this.applyValue(value)
         this.updateValue(value)
       }
+    },
+    mounted () {
+      this.applyValue(this.value)
     }
   }
 </script>

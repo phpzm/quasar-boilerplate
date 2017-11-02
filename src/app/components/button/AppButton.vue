@@ -3,16 +3,12 @@
          @click="$emit('click')">
     <span v-if="label" v-html="label"></span>
     <q-icon v-else :name="icon"></q-icon>
+    <slot></slot>
   </q-btn>
 </template>
 
 <script type="text/javascript">
-  import { QBtn, QIcon } from 'quasar-framework'
-
   export default {
-    components: {
-      QBtn, QIcon
-    },
     computed: {
       inherit () {
         return this.label ? this.icon : ''

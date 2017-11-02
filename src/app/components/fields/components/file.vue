@@ -1,10 +1,7 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
-      <!--@fail="fail" @finish="finish"  @start="start" -->
       <div v-if="download" class="file-link">
-        {{ uid }}
         <a href="#">{{ download }}</a>
       </div>
       <q-uploader ref="input" v-bind="options" @add="add" @uploaded="uploaded"></q-uploader>
@@ -13,7 +10,7 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
   import { URL_FILE_UPLOAD } from 'src/app/support/index'
   import { uid } from 'quasar-framework'

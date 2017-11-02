@@ -1,4 +1,5 @@
 import { actions } from '../../model'
+import { uniqid } from 'src/app/support/utils/index'
 
 export default {
   methods: {
@@ -123,6 +124,12 @@ export default {
     browse (path, query = {}) {
       if (query !== undefined) {
         query = Object.assign({}, query, this.$route.query)
+      }
+      if (query === undefined) {
+        query = {}
+      }
+      if (path === this.$route.path) {
+        query.new = uniqid()
       }
       this.$router.push({path, query})
     }

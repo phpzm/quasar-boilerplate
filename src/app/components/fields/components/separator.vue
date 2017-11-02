@@ -1,8 +1,10 @@
 <template>
-  <div :class="classNames" v-show="dependsIsOk">
-    <small v-if="!inline && label">{{ label }}</small>
-    <hr>
-  </div>
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
+    <div slot="component">
+      <small v-if="!inline && label">{{ label }}</small>
+      <hr>
+    </div>
+  </field>
 </template>
 
 <script type="text/javascript">

@@ -1,6 +1,5 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div id="editor" :class="{'html': !editable}">
         <froala :tag="'textarea'" :config="config" v-model="model"></froala>
@@ -14,7 +13,7 @@
   import { mapGetters } from 'vuex'
   import { URL_IMAGE_MANAGER, URL_IMAGE_UPLOAD } from 'src/app/support/index'
   import 'vue-froala-wysiwyg'
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
@@ -59,11 +58,6 @@
     }),
     extends: FieldAbstract,
     name: 'field-wysiwyg',
-    props: {
-      title: {
-        default: 'Este campo possui critérios de validação'
-      }
-    },
     mounted () {
       if (this.value) {
         this.model = this.value

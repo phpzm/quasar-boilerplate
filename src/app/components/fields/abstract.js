@@ -1,5 +1,4 @@
 import { uid } from 'quasar-framework'
-import { alert } from 'src/app/support/message'
 import { unMask } from 'src/app/support/utils/index'
 
 export default {
@@ -15,7 +14,7 @@ export default {
       type: String,
       default: 'text'
     },
-    name: {
+    field: {
       type: String,
       default: 'text'
     },
@@ -64,17 +63,16 @@ export default {
       type: Array,
       default: () => ([])
     },
-    dependsOn: {
-      type: Object,
-      default: null
-    },
-    dependsIsOk: {
+    visible: {
       type: Boolean,
       default: true
     },
     events: {
       type: Object,
       default: () => ({})
+    },
+    max: {
+      default: () => undefined
     }
   },
   computed: {
@@ -88,30 +86,27 @@ export default {
       return classNames
     },
     /**
-     * @return {Object}
-     */
-    problem () {
-      if (!this.problems.length) {
-        return {}
-      }
-      // noinspection JSPotentiallyInvalidTargetOfIndexedPropertyAccess
-      return this.parseProblem(this.problems[0])
-    },
-    /**
      * @return {Array}
      */
     problems () {
       if (!Array.isArray(this.errors)) {
         return []
       }
-      return this.errors.filter(_error => !_error.status)
+      return this.errors.filter(error => !error.status).map(error => ({
+        path: 'validation.' + error.rule,
+        parameters: error.parameters
+      }))
+    },
+    /**
+     * @returns {string}
+     */
+    name () {
+      return this.field
     }
   },
-  created () {
-    this.id = uid()
-  },
   data: () => ({
-    id: ''
+    id: '',
+    maxlength: ''
   }),
   methods: {
     /**
@@ -127,54 +122,48 @@ export default {
       this.$emit('input', value, this)
     },
     /**
-     * @param {Object} problem
-     * @return {Object}
+     * @param {Object} $event
      */
-    parseProblem (problem) {
-      return {
-        path: 'validation.' + problem.rule,
-        parameters: problem.parameters
+    focus ($event) {
+      if (this.events.focus && typeof this.events.focus === 'function') {
+        this.$emit('event', 'focus', this)
       }
     },
     /**
+     * @param {Object} $event
      */
-    showErrors () {
-      const errors = []
-      this.problems.forEach(_problem => {
-        let problem = this.parseProblem(_problem)
-        errors.push(' - ' + this.$t(problem.path, problem.parameters))
-      })
-      alert('Validação', errors.join('<br>'))
-    },
-    focus ($event) {
-      if (this.events.focus && typeof this.events.focus === 'function') {
-        this.events.focus($event.target.value, this)
-      }
-    },
     blur ($event) {
       if (this.events.blur && typeof this.events.blur === 'function') {
-        this.events.blur($event.target.value, this)
+        this.$emit('event', 'blur', this)
       }
     },
+    /**
+     * @param {Object} $event
+     */
     keypress ($event) {
       if (this.events.keypress && typeof this.events.keypress === 'function') {
-        this.events.keypress($event.target.value, this)
+        this.$emit('event', 'keypress', this)
       }
     },
+    /**
+     * @param {Object} $event
+     */
     keyup ($event) {
       if (this.events.keyup && typeof this.events.keyup === 'function') {
-        this.events.keyup($event.target.value, this)
+        this.$emit('event', 'keyup', this)
       }
     },
+    /**
+     * @param {Object} $event
+     */
     enter ($event) {
       if (this.events.enter && typeof this.events.enter === 'function') {
-        this.events.enter($event.target.value, this)
-      }
-    },
-    mouseup ($event) {
-      if (this.events.mouseup && typeof this.events.mouseup === 'function') {
-        this.events.mouseup($event.target.value, this)
+        this.$emit('event', 'enter', this)
       }
     }
+  },
+  created () {
+    this.id = uid()
+    this.maxlength = this.max
   }
 }

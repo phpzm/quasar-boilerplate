@@ -1,13 +1,10 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
-        <!--suppress HtmlFormInputWithoutLabel -->
-        <textarea ref="input" :type="type" :name="name" :value="value" :placeholder="placeholder"
-                  class="input full-width"
-                  @keypress="keypress" @keyup="keyup" @mouseup="mouseup" @blur="blur" @focus="focus"
-                  @keydown.enter.stop.prevent="enter"
+        <textarea ref="input" class="input full-width" autocomplete="off"
+                  v-bind="{id, name, placeholder, maxlength, disabled}"
+                  @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
                   @input="updateValue($event.target.value)"></textarea>
         <div class="input-bar"></div>
       </div>
@@ -17,20 +14,20 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
+    name: 'field-textarea',
     computed: {
       html () {
         return this.value
       }
-    },
-    extends: FieldAbstract,
-    name: 'field-textarea'
+    }
   }
 </script>
 

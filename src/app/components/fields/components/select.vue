@@ -1,10 +1,10 @@
 <template>
-  <field :class="classNames"
-         v-bind="{dependsIsOk, id, inline, problem, problems, label, validate, title, tooltip, editable}">
+  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
-        <q-select ref="input" v-model="model" :disable="disabled" :options="allOptions" :type="type" :name="name"
-                  class="input full-width" :placeholder="placeholder" @input="$emit('input', model)"></q-select>
+        <q-select ref="input" class="input full-width"
+                  v-model="model" v-bind="{disable, options, type, name, placeholder}"
+                  @input="$emit('input', model)"></q-select>
       </div>
       <div v-show="!editable" class="html ellipsis" v-html="html"></div>
     </div>
@@ -12,14 +12,36 @@
 </template>
 
 <script type="text/javascript">
-  import Field from 'src/app/components/fields/components/field.vue'
+  import Field from 'src/app/components/fields/components/base.vue'
   import FieldAbstract from 'src/app/components/fields/abstract'
 
   export default {
+    extends: FieldAbstract,
     components: {
       Field
     },
+    name: 'field-select',
+    props: {
+      type: {
+        type: String,
+        default: 'radio'
+      },
+      options: {
+        type: Array,
+        default: () => ([])
+      },
+      source: {
+        type: Function
+      },
+      empty: {
+        type: String,
+        default: ''
+      }
+    },
     computed: {
+      disable () {
+        return this.disabled
+      },
       html () {
         if (typeof this.model === 'undefined') {
           return ''
@@ -40,20 +62,14 @@
             return _item.label
           })
           .join(', ')
-      },
-      allOptions () {
-        if (!this.empty) {
-          return this.options
-        }
-
-        const empty = {
-          value: '',
-          label: this.empty
-        }
-        if (this.options.length) {
-          return [empty, ...this.options]
-        }
-        return [empty]
+      }
+    },
+    data: () => ({
+      model: ''
+    }),
+    watch: {
+      value (value) {
+        this.model = value
       }
     },
     created () {
@@ -67,33 +83,6 @@
             this.options.push(_option)
           })
         })
-      }
-    },
-    data: () => ({
-      model: ''
-    }),
-    extends: FieldAbstract,
-    name: 'field-select',
-    props: {
-      type: {
-        type: String,
-        default: 'radio'
-      },
-      options: {
-        type: Array,
-        default: () => ([])
-      },
-      source: {
-        type: Function
-      },
-      empty: {
-        type: String,
-        default: ''
-      }
-    },
-    watch: {
-      value (value) {
-        this.model = value
       }
     }
   }

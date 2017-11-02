@@ -1,4 +1,5 @@
 import { confirm } from 'src/app/support/message/index'
+import { first } from 'src/app/infra/services/http/resource'
 
 export { default as methods } from 'src/app/components/crud/model/mixin/MixinMethods'
 export { default as data } from 'src/app/components/crud/model/mixin/MixinData'
@@ -11,6 +12,7 @@ export { default as props } from 'src/app/components/crud/model/mixin/MixinProps
  */
 const buttons = ($this) => {
   return [
+    // middle
     {
       id: 'view',
       permission: 1,
@@ -52,11 +54,11 @@ const buttons = ($this) => {
         })
       }
     },
+    // grid
     {
       id: 'refresh',
       permission: 1,
       color: 'primary',
-      outline: true,
       scopes: ['index'],
       positions: ['top', 'bottom'],
       icon: 'refresh',
@@ -66,24 +68,55 @@ const buttons = ($this) => {
       }
     },
     {
-      id: 'add',
+      id: 'retry',
       permission: 2,
       color: 'primary',
-      scopes: ['index'],
-      positions: ['floating'],
-      round: true,
+      scopes: ['retry'],
+      positions: ['center'],
+      icon: '',
+      label: 'Tentar novamente',
+      tooltip: 'Realizar uma nova tentativa de recuperação de dados',
+      handler: (record, schemas, $component) => {
+        $this.read()
+      }
+    },
+    {
+      id: 'first',
+      permission: 2,
+      color: 'primary',
+      scopes: ['empty'],
+      positions: ['center'],
       icon: 'add',
-      label: '',
+      label: 'Criar um novo registro',
       tooltip: 'Inicie a criação de um novo registro',
       handler: (record, schemas, $component) => {
         $this.browse($this.path + '/' + 'create')
       }
     },
+    // form
     {
-      id: 'save',
+      id: 'create',
       permission: 2,
       color: 'primary',
-      scopes: ['create', 'view', 'edit'],
+      scopes: ['create'],
+      positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
+      icon: '',
+      label: 'Salvar',
+      tooltip: 'Salvar as alterações feitas a este registro',
+      handler: (record, schemas, $component) => {
+        $this.save(record, (response) => {
+          $this.browse($this.path + '/' + first(response)[$this.id] + '/' + 'edit')
+        })
+      }
+    },
+    {
+      id: 'update',
+      permission: 2,
+      color: 'primary',
+      scopes: ['edit'],
       positions: ['top', 'bottom'],
       validate: (record, schemas, $component) => {
         return !$component.status
@@ -96,10 +129,10 @@ const buttons = ($this) => {
       }
     },
     {
-      id: 'save-and-create',
+      id: 'create-and-add',
       permission: 2,
       color: 'white',
-      scopes: ['create', 'view', 'edit'],
+      scopes: ['create', 'edit'],
       positions: ['top', 'bottom'],
       validate: (record, schemas, $component) => {
         return !$component.status
@@ -114,10 +147,37 @@ const buttons = ($this) => {
       }
     },
     {
+      id: 'start',
+      permission: 1,
+      color: 'white',
+      scopes: ['create', 'view', 'edit'],
+      positions: ['top', 'bottom'],
+      icon: 'subject',
+      label: '',
+      tooltip: 'Abre a lista de registros',
+      handler: (record, schemas, $component) => {
+        $this.browse($this.path)
+      }
+    },
+    // general
+    {
+      id: 'add',
+      permission: 2,
+      color: 'primary',
+      scopes: ['index', 'create', 'view', 'edit'],
+      positions: ['floating'],
+      round: true,
+      icon: 'add',
+      label: '',
+      tooltip: 'Inicie a criação de um novo registro',
+      handler: (record, schemas, $component) => {
+        $this.browse($this.path + '/' + 'create')
+      }
+    },
+    {
       id: 'back',
       permission: 1,
-      color: 'primary',
-      outline: true,
+      color: 'white',
       scopes: ['index', 'create', 'view', 'edit'],
       positions: ['top', 'bottom'],
       icon: '',
@@ -125,32 +185,6 @@ const buttons = ($this) => {
       tooltip: 'Voltar para a tela anterior',
       handler: (record, schemas, $component) => {
         window.history.back()
-      }
-    },
-    {
-      id: 'add',
-      permission: 2,
-      color: 'primary',
-      scopes: ['empty'],
-      positions: ['center'],
-      icon: 'add',
-      label: 'Criar um novo registro',
-      tooltip: 'Inicie a criação de um novo registro',
-      handler: (record, schemas, $component) => {
-        $this.browse($this.path + '/' + 'create')
-      }
-    },
-    {
-      id: 'retry',
-      permission: 2,
-      color: 'primary',
-      scopes: ['retry'],
-      positions: ['center'],
-      icon: '',
-      label: 'Tentar novamente',
-      tooltip: 'Realizar uma nova tentativa de recuperação de dados',
-      handler: (record, schemas, $component) => {
-        $this.read()
       }
     }
   ]
