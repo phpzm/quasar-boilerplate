@@ -3,14 +3,13 @@
 
     <q-toolbar slot="header" class="">
       <slot name="header">
-        <!--suppress JSUnresolvedVariable -->
         <q-btn flat @click="toggleLeft">
           <q-icon name="menu"></q-icon>
         </q-btn>
 
         <q-toolbar-title>
           {{ AppName }}
-          <div slot="subtitle">{{ AppTitle }}</div>
+          <div slot="subtitle">{{ AppTitle }} {{ $q.version }}</div>
         </q-toolbar-title>
 
         <q-btn flat @click="">
