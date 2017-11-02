@@ -9,9 +9,28 @@
       <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
 
+    <pre>{{ filter.columns }}</pre>
+    <!--<q-modal ref="filter" position="right" :content-css="filter.css">-->
+      <!--<div class="text-right">-->
+        <!--<q-btn round small color="tertiary" icon="close" @click="filterClose()" class="btn-x-small"></q-btn>-->
+      <!--</div>-->
+      <!--<hr class="light">-->
+      <!--<h6>Filtros</h6>-->
+      <!--<div class="form">-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div class="form">-->
+        <!--<field class="has-100 text-right">-->
+          <!--<q-btn color="primary" icon="search" @click="filterApply">Pesquisar</q-btn>-->
+          <!--<q-btn color="white" icon="cancel" @click="filterClear">Limpar</q-btn>-->
+        <!--</field>-->
+      <!--</div>-->
+    <!--</q-modal>-->
+
     <template v-if="debug">
       <app-debugger v-bind="{label: 'data', inspect: data}"></app-debugger>
       <app-debugger v-bind="{label: 'columns', inspect: columns}"></app-debugger>
+      <app-debugger v-bind="{label: 'filter', inspect: filter.record}"></app-debugger>
     </template>
   </div>
 </template>
@@ -22,12 +41,15 @@
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
   import { data, methods, props } from './model'
+  import filter from 'src/themes/phpzm/components/crud/model/grid/MixinFilter'
 
   export default {
     components: {
       AppDataTable, AppButtonBar, AppDebugger
     },
-    mixins: [data, methods, props],
+    mixins: [
+      data, methods, props, filter
+    ],
     name: 'app-crud-grid',
     props: {
       scope: {
@@ -41,6 +63,10 @@
             delete: (response) => this.search()
           }
         }
+      },
+      filters: {
+        type: Array,
+        default: () => ([])
       },
       pagination: {
         default: () => true
@@ -67,8 +93,24 @@
         }
         const filter = item => item.scopes.includes(this.scope)
 
-        this.columns = this.schemas.filter(filter).map(map)
+        const columns = this.schemas.filter(filter).map(map)
+
+        this.columns = columns.filter(column => true)
         this.columns.unshift({field: 'options', label: 'Opções', width: '70px'})
+
+        this.filter.columns = columns.filter(column => column.filter).map(column => {
+          column.width = 100
+          column.component = this.component + '-' + column.filter.component
+          column.value = column.filter.value
+          delete column.filter
+          return column
+        })
+
+        const record = this.filter.columns.reduce((accumulate, filter) => {
+          accumulate[filter.field] = filter.value
+          return accumulate
+        }, {})
+        this.$set(this.filter, 'record', record)
       },
       /**
        * @returns {boolean}
@@ -89,7 +131,7 @@
       this.renderAll()
     },
     mounted () {
-      window.setTimeout(this.search, 100)
+      // window.setTimeout(this.search, 100)
     }
   }
 </script>

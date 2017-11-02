@@ -24,7 +24,7 @@
     },
     data: () => ({
       html: '',
-      max: ''
+      maxlength: ''
     }),
     extends: FieldAbstract,
     methods: {
@@ -39,7 +39,7 @@
           return
         }
         if (this.mask) {
-          this.max = this.mask.length
+          this.maxlength = this.mask.length
           value = mask(this.mask, String(value))
         }
         this.html = value

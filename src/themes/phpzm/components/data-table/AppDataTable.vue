@@ -1,7 +1,7 @@
 <template>
   <div class="app-data-table" :style="style">
     <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
-      <template v-if="actions.length" slot="col-options" scope="cell">
+      <div v-if="actions.length" slot="col-options" slot-scope="cell">
         <div class="app-data-table-options">
           <q-fab color="primary" direction="right">
             <q-fab-action v-if="permission(action, cell.row)" v-for="action in actions" :key="action.id"
@@ -12,7 +12,7 @@
             </q-fab-action>
           </q-fab>
         </div>
-      </template>
+      </div>
     </q-data-table>
   </div>
 </template>

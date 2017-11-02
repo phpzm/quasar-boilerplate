@@ -58,6 +58,10 @@ export const field = (field, label, component = 'text', scopes = []) => {
       this[property] = Object.assign({}, this[property], value)
       return this
     },
+    $filter (value = '', component = '') {
+      this.grid.filter = {value, component}
+      return this
+    },
     $validate (rule, value = true) {
       if (!this.form.validate) {
         this.form.validate = {}
@@ -152,6 +156,9 @@ export const field = (field, label, component = 'text', scopes = []) => {
       const base = {
         field: this.field,
         label: this.label
+      }
+      if (this.grid.filter && !this.grid.filter.component) {
+        this.grid.filter.component = this.form.component
       }
       return {
         ...base,

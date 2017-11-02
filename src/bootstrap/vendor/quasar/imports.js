@@ -35,5 +35,6 @@ export {
   QInput,
   QToggle,
   QDataTable,
-  QSlider
+  QSlider,
+  QModal
 } from 'quasar-framework'
