@@ -12,10 +12,10 @@
 </template>
 
 <script type="text/javascript">
-  import AppDataTable from 'src/app/components/data-table/AppDataTable.vue'
-  import { data, methods, props } from './model'
   import { populateGrid } from 'src/bootstrap/settings'
-  import AppButtonBar from '../button/AppButtonBar.vue'
+  import AppDataTable from 'src/app/components/data-table/AppDataTable.vue'
+  import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
+  import { data, methods, props } from './model'
 
   export default {
     components: {
@@ -77,12 +77,7 @@
       this.renderAll()
     },
     mounted () {
-      if (this.id && this.$route.params[this.id]) {
-        const fetch = () => {
-          this.read(this.$route.params[this.id])
-        }
-        window.setTimeout(fetch, 100)
-      }
+      window.setTimeout(this.search, 100)
     }
   }
 </script>

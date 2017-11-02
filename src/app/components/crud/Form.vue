@@ -2,7 +2,7 @@
   <div class="app-crud-grid">
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <hr>
-    <app-form v-bind="{fields, record}"></app-form>
+    <app-form v-bind="{fields, data}"></app-form>
     <hr>
     <app-button-bar :buttons="buttons.top" :handler="handler"/>
     <div class="fixed-bottom-right">
@@ -12,10 +12,10 @@
 </template>
 
 <script type="text/javascript">
-  import AppForm from 'src/app/components/form/AppForm.vue'
-  import { data, methods, props } from './model'
   import { populateForm } from 'src/bootstrap/settings'
-  import AppButtonBar from '../button/AppButtonBar.vue'
+  import AppForm from 'src/app/components/form/AppForm.vue'
+  import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
+  import { data, methods, props } from './model'
 
   export default {
     components: {
@@ -30,13 +30,19 @@
       }
     },
     data: () => ({
-      fields: [],
-      record: []
+      fields: {},
+      data: {}
     }),
     methods: {
       /**
        */
       renderElements () {
+        const map = item => {
+          return Object.assign({}, item.form, {field: item.form.field})
+        }
+        const filter = item => item.scopes.includes(this.scope)
+
+        this.fields = this.schemas.filter(filter).map(map)
       },
       /**
        * @param {AxiosResponse} response
@@ -66,7 +72,12 @@
       this.renderAll()
     },
     mounted () {
-      window.setTimeout(this.search, 100)
+      if (this.id && this.$route.params[this.id]) {
+        const fetch = () => {
+          this.read(this.$route.params[this.id])
+        }
+        window.setTimeout(fetch, 100)
+      }
     }
   }
 </script>

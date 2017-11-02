@@ -65,8 +65,8 @@
         responsive: false,
         pagination: undefined,
         messages: {
-          noData: '<i class="material-icons">error</i> Nenhum dado para exibir',
-          noDataAfterFiltering: '<i>error</i> Nenhum resultado. Por favor revise os dados informados'
+          noData: '<i class="material-icons text-primary">error</i> Nenhum dado para exibir',
+          noDataAfterFiltering: '<i class="material-icons text-primary">error</i> Nenhum resultado. Por favor revise os dados informados'
         },
         labels: {
           columns: 'Colunas',

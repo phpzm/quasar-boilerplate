@@ -107,29 +107,36 @@ export const money = (value, precision = 2) => {
 }
 
 /**
- * @param {Object} data
- * @param {Array} remove
+ * @param {*} element
+ * @returns {*}
  */
-export const clone = (data, remove = []) => {
-  const clone = JSON.parse(JSON.stringify(data))
-
-  const $clear = (object) => {
-    if (typeof object === 'object') {
-      Object.keys(object).forEach(property => {
-        if (remove.includes(property)) {
-          return delete object[property]
-        }
-        if (Array.isArray(object[property])) {
-          object[property].forEach((item, index) => {
-            object[property][index] = $clear(item, remove)
-          })
-        }
-      })
-    }
-    return object
+export const clone = (element) => {
+  // Handle the 3 simple types, and null or undefined
+  if (element === null || element === undefined || typeof element !== 'object') {
+    return element
   }
 
-  return $clear(clone, remove)
+  // Handle Date
+  if (element instanceof Date) {
+    const date = new Date()
+    date.setTime(element.getTime())
+    return date
+  }
+
+  // Handle Array
+  if (element instanceof Array) {
+    return element.map(clone)
+  }
+
+  // Handle Object
+  if (element instanceof Object) {
+    return Object.keys(element).reduce((accumulate, property) => {
+      accumulate[property] = clone(element[property])
+      return accumulate
+    }, {})
+  }
+
+  throw new Error('Unable to copy element! Its type isn\'t supported.')
 }
 
 /**

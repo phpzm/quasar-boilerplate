@@ -56,7 +56,7 @@ export const field = (field, label, component, scopes = []) => {
       this[property] = Object.assign({}, this[property], value)
       return this
     },
-    $validate (rule, value) {
+    $validate (rule, value = true) {
       if (!this.form.validate) {
         this.form.validate = {}
       }

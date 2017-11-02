@@ -76,7 +76,7 @@ export const fields = (scope) => {
   return model.filter(
     [
       model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
-      model.field('name', 'Nome', 'field-text').$grid({width: 100}).$render()
+      model.field('name', 'Nome', 'field-text').$validate('required').$grid({width: 100}).$render()
     ],
     scope
   )

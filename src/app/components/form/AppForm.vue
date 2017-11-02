@@ -1,25 +1,32 @@
 <template>
   <div class="app-form">
+    <!--<pre>{{ $v }}</pre>-->
     <q-tabs v-if="tabs.length">
       <!-- Tabs - notice slot="title" -->
       <q-tab v-for="tab in tabs" :key="tab.name" slot="title" v-bind="tab"/>
       <!-- Targets -->
-      <q-tab-pane v-for="tab in tabs" :name="tab.name">
-        <component v-for="field in fields[tab.name]" :key="field.field" :is="field.component"
-                   v-bind="field" v-model="record[field.name]" @input="input(field.name)"></component>
+      <q-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name">
+        <div class="form">
+          <component v-for="schema in components[tab]" :key="schema.field" :is="schema.component" v-bind="schema"
+                     v-model="record[schema.field]" @input="input(schema.field)" @event="event"></component>
+        </div>
       </q-tab-pane>
     </q-tabs>
-    <div v-else :class="'form'">
-      <component v-for="field in fields" :key="field.field" :is="field.component"
-                 v-bind="field" v-model="record[field.name]" @input="input(field.name)"></component>
+    <div v-else class="form">
+      <component v-for="schema in schemas" :key="schema.field" :is="schema.component"
+                 v-bind="schema" v-model="record[schema.field]" @input="input(schema.field)" @event="event"></component>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import 'src/app/components/fields'
+  import { validationMixin } from 'vuelidate'
   import * as Validators from 'vuelidate/lib/validators'
+  import { clone } from 'src/app/support/utils'
 
   export default {
+    mixins: [validationMixin],
     name: 'app-form',
     props: {
       tabs: {
@@ -31,11 +38,13 @@
         default: () => ([])
       },
       data: {
-        type: Array,
-        default: () => ([])
+        type: Object,
+        default: () => ({})
       }
     },
     data: () => ({
+      components: {},
+      schemas: {},
       record: {}
     }),
     validations () {
@@ -45,8 +54,16 @@
       }
     },
     methods: {
-      input (name) {
-        // react
+      input (field) {
+        if (this.$v.record[field]) {
+          this.$v.record[field].$touch()
+        }
+        if (typeof this.schemas[field].change === 'function') {
+          this.schemas[field].change(this.record, this.schemas, this)
+        }
+      },
+      event (event, field) {
+        // TODO: handler to generic events
       },
       /**
        * @param fields
@@ -80,6 +97,29 @@
         })
         return configure
       }
+    },
+    watch: {
+      data (data) {
+        this.record = clone(data)
+      }
+    },
+    created () {
+      const reduce = (accumulate, item) => {
+        accumulate[item.field] = item
+        return accumulate
+      }
+      this.schemas = this.fields.reduce(reduce, {})
+      if (this.tabs.length) {
+        const components = {}
+        this.tabs.forEach(tab => {
+          const filter = field => field.tab === tab.name
+          components[tab.name] = this.fields.filter(filter).reduce(reduce, {})
+        })
+        this.components = components
+      }
+      Object.keys(this.schemas).forEach(field => {
+        this.record[field] = this.schemas[field].default || this.$route.query[field]
+      })
     }
   }
 </script>
