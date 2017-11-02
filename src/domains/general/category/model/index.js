@@ -82,7 +82,7 @@ export const fields = (scope) => {
   return model.filter(
     [
       model.field('id', 'Código').$in('index').$grid({width: 10}).$link(path + '/{id}').$render(),
-      model.field('name', 'Nome').$grid({width: 30}).$form({width: 50}).$validate('required').$render(),
+      model.field('name', 'Nome').$form({icon: 'home', helper: 'Help me!', count: 100}).$validate('required').$render(),
       model.field('~', 'Dados').$separator().$render(),
       model.field('email', 'E-mail').$grid({width: 20}).$validate('required').$render(),
       model.field('telephone', 'Telefone').$phone().$grid({width: 10}).$form({width: 50}).$validate('required').$render(),
