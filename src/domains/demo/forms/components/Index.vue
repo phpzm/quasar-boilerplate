@@ -5,19 +5,21 @@
     </div>
     <div slot="content">
       <hr>
+      <pre>{{ model }}</pre>
+      <hr>
       <div class="form">
-        <field-checkbox v-bind="{label: 'Caixa de Seleção', width: 50, value: true}"></field-checkbox>
-        <field-color v-bind="{label: 'Cor', width: 50, value: '#ff0000'}"></field-color>
-        <field-date v-bind="{label: 'Data', width: 50}"></field-date>
-        <field-file v-bind="{label: 'Arquivo', width: 50}"></field-file>
+        <field-checkbox v-bind="{label: 'Caixa de Seleção', width: 50, value: true}" v-model="model.checkbox"></field-checkbox>
+        <field-color v-bind="{label: 'Cor', width: 50, value: '#ff0000'}" v-model="model.color"></field-color>
+        <field-date v-bind="{label: 'Data', width: 50}" v-model="model.date"></field-date>
+        <field-file v-bind="{label: 'Arquivo', width: 50}" v-model="model.file"></field-file>
         <field-separator v-bind="{label: 'Separador'}"/>
-        <field-html v-bind="{label: 'Html', width: 50, value: '<b>PHPZM Quasar Boilerplate</b>'}"></field-html>
-        <field-money v-bind="{label: 'Dinheiro', width: 50}"></field-money>
-        <field-select v-bind="{label: 'Seletor', width: 50, options: [{value: 'nada', label: 'Tudo'}]}"></field-select>
-        <field-text v-bind="{label: 'Texto', width: 50}"></field-text>
-        <field-textarea v-bind="{label: 'Texto Longo', width: 50}"></field-textarea>
-        <field-time v-bind="{label: 'Tempo', width: 50}"></field-time>
-        <field-toggle v-bind="{label: 'Alternador', width: 50}"></field-toggle>
+        <field-html v-bind="{label: 'Html', width: 50, value: '<b>PHPZM Quasar Boilerplate</b>'}" v-model="model.html"></field-html>
+        <field-money v-bind="{label: 'Dinheiro', width: 50}" v-model="model.money"></field-money>
+        <field-select v-bind="{label: 'Seletor', width: 50, options: [{value: 'nada', label: 'Tudo'}]}" v-model="model.select"></field-select>
+        <field-text v-bind="{label: 'Texto', width: 50}" v-model="model.text"></field-text>
+        <field-textarea v-bind="{label: 'Texto Longo', width: 50}" v-model="model.textarea"></field-textarea>
+        <field-time v-bind="{label: 'Tempo', width: 50}" v-model="model.time"></field-time>
+        <field-toggle v-bind="{label: 'Alternador', width: 50}" v-model="model.toggle"></field-toggle>
       </div>
       <hr>
       <q-btn color="negative" @click="setAppModified(true)">Forçar estado modificado</q-btn>
@@ -27,9 +29,9 @@
 
 <script type="text/javascript">
   import { mapActions } from 'vuex'
-  import 'src/app/components/fields/index'
-  import AppLayout from 'src/app/components/layout/AppLayout.vue'
-  import AppCard from 'src/app/components/card/AppCard.vue'
+  import 'src/themes/phpzm/components/fields/index'
+  import AppLayout from 'src/themes/phpzm/components/layout/AppLayout.vue'
+  import AppCard from 'src/themes/phpzm/components/card/AppCard.vue'
   import { icon, title } from '../model'
 
   export default {
@@ -40,7 +42,20 @@
     name: 'forms',
     data: () => ({
       icon,
-      title
+      title,
+      model: {
+        checkbox: undefined,
+        color: undefined,
+        date: undefined,
+        file: undefined,
+        html: undefined,
+        money: undefined,
+        select: undefined,
+        text: undefined,
+        textarea: undefined,
+        time: undefined,
+        toggle: undefined
+      }
     }),
     methods: {
       ...mapActions(['setAppModified'])

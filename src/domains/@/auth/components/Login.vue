@@ -42,7 +42,7 @@
 </template>
 
 <script type="text/javascript">
-  import 'src/app/components/fields/index'
+  import 'src/themes/phpzm/components/fields/index'
   import { login } from 'src/domains/@/auth/services'
   import { PATH_HOME } from 'src/app/support'
 

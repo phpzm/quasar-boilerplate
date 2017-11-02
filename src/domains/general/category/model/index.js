@@ -19,7 +19,7 @@ export const api = '/general/category'
 /**
  * @type {string}
  */
-export const path = '/dashboard/general/user'
+export const path = '/dashboard/general/category'
 
 /**
  * @type {Resource}
@@ -37,6 +37,11 @@ export const meta = model.meta(icon, label, 'Cadastro de Categorias')
 export const menu = model.menu(icon, label, path)
 
 /**
+ * @type {string}
+ */
+export const component = 'quasar'
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
@@ -45,9 +50,11 @@ export const grid = (scope, route) => {
   return {
     service,
     path,
+    component,
     pagination: true,
     search: true,
-    schemas: fields('index')
+    schemas: fields('index'),
+    debug: true
   }
 }
 
@@ -60,11 +67,10 @@ export const form = (scope, route) => {
   return {
     service,
     path,
+    component,
     scope: scope,
     schemas: fields(scope),
-    actions: ($this, actions) => {
-      return actions
-    }
+    debug: true
   }
 }
 
@@ -75,11 +81,12 @@ export const form = (scope, route) => {
 export const fields = (scope) => {
   return model.filter(
     [
-      model.field('id', 'Código', '').$in('index').$grid({width: 10}).$link(path + '/{id}').$render(),
-      model.field('name', 'Nome', 'field-text').$form({width: 50}).$validate('required').$render(),
-      model.field('email', 'E-mail', 'field-text').$form({width: 50}).$validate('required').$render(),
-      model.field('telephone', 'Telefone', 'field-phone').$form({width: 50}).$validate('required').$render(),
-      model.field('amount', 'Valor', 'field-money').$form({width: 50}).$validate('required').$render()
+      model.field('id', 'Código').$in('index').$grid({width: 10}).$link(path + '/{id}').$render(),
+      model.field('name', 'Nome').$grid({width: 30}).$form({width: 50}).$validate('required').$render(),
+      model.field('~', 'Dados').$separator().$render(),
+      model.field('email', 'E-mail').$grid({width: 20}).$validate('required').$render(),
+      model.field('telephone', 'Telefone').$phone().$grid({width: 10}).$form({width: 50}).$validate('required').$render(),
+      model.field('amount', 'Valor').$money().$grid({width: 10}).$form({width: 50}).$validate('required').$render()
     ],
     scope
   )

@@ -3,6 +3,8 @@
  * @param {string} scope
  * @returns {Array}
  */
+import { formatMoney, formatPhone, formatBoolean, formatDate, formatDateTime } from 'src/app/support/format'
+
 export const filter = (fields, scope) => {
   return fields.filter(field => scope ? field.scopes.includes(scope) : true)
 }
@@ -14,7 +16,7 @@ export const filter = (fields, scope) => {
  * @param scopes
  * @returns {object}
  */
-export const field = (field, label, component, scopes = []) => {
+export const field = (field, label, component = 'text', scopes = []) => {
   const defaults = ['index', 'view', 'create', 'edit']
 
   if (!Array.isArray(scopes)) {
@@ -71,6 +73,79 @@ export const field = (field, label, component, scopes = []) => {
         })
         return `<a href="#${href}">${value}</a>`
       }
+      return this
+    },
+    $checkbox () {
+      this.form.component = 'checkbox'
+      this.grid.format = formatBoolean
+      return this
+    },
+    $color () {
+      this.form.component = 'color'
+      return this
+    },
+    $date () {
+      this.form.component = 'date'
+      this.grid.format = formatDate
+      return this
+    },
+    $datetime () {
+      this.form.component = 'date'
+      this.grid.format = formatDateTime
+      return this
+    },
+    $file () {
+      this.form.component = 'file'
+      return this
+    },
+    $html () {
+      this.form.component = 'html'
+      return this
+    },
+    $input () {
+      this.form.component = 'input'
+      return this
+    },
+    $money () {
+      this.form.component = 'money'
+      this.grid.format = formatMoney
+      return this
+    },
+    $numeric () {
+      this.form.component = 'numeric'
+      return this
+    },
+    $phone () {
+      this.form.component = 'phone'
+      this.grid.format = formatPhone
+      return this
+    },
+    $select () {
+      this.form.component = 'select'
+      return this
+    },
+    $separator () {
+      this.form.component = 'separator'
+      return this
+    },
+    $text () {
+      this.form.component = 'text'
+      return this
+    },
+    $textarea () {
+      this.form.component = 'textarea'
+      return this
+    },
+    $time () {
+      this.form.component = 'time'
+      return this
+    },
+    $toggle () {
+      this.form.component = 'toggle'
+      return this
+    },
+    $wysiwyg () {
+      this.form.component = 'wysiwyg'
       return this
     },
     $render () {

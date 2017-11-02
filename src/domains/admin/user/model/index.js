@@ -70,9 +70,9 @@ export const fields = (scope) => {
   return model.filter(
     [
       model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
-      model.field('name', 'Nome', 'field-text').$render(),
-      model.field('email', 'E-mail', 'field-text').$render(),
-      model.field('password', 'Senha', 'field-text').$form({type: 'password'}).$out('index').$render()
+      model.field('name', 'Nome').$render(),
+      model.field('email', 'E-mail').$render(),
+      model.field('password', 'Senha').$form({type: 'password'}).$out('index').$render()
     ],
     scope
   )
