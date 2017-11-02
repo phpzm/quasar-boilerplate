@@ -77,9 +77,9 @@ export const fields = (scope) => {
     [
       model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
       model.field('name', 'Nome', 'field-text').$form({width: 50}).$validate('required').$render(),
-      model.field('aaa', 'aaa', 'field-text').$form({width: 50}).$validate('required').$render(),
-      model.field('bbb', 'bbb', 'field-text').$form({width: 50}).$validate('required').$render(),
-      model.field('ccc', 'ccc', 'field-text').$form({width: 50}).$validate('required').$render()
+      model.field('email', 'E-mail', 'field-text').$form({width: 50}).$validate('required').$render(),
+      model.field('telephone', 'Telefone', 'field-phone').$form({width: 50}).$validate('required').$render(),
+      model.field('amount', 'Valor', 'field-money').$form({width: 50}).$validate('required').$render()
     ],
     scope
   )

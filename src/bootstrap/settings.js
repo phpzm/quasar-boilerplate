@@ -55,13 +55,13 @@ export const populateGrid = ($component, response) => {
  * @param {Function} callback
  */
 export const populateForm = ($component, response, callback = null) => {
-  let record = {}
+  let data = {}
   const {body} = response.data
   if (Array.isArray(body)) {
-    record = body[0]
+    data = body[0]
   }
   // noinspection JSUndefinedPropertyAssignment
-  $component.record = record
+  $component.data = data
   if (typeof callback === 'function') {
     callback()
   }
