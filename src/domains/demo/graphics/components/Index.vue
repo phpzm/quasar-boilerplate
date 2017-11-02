@@ -1,5 +1,5 @@
 <template>
-  <common-card>
+  <app-card>
     <div slot="title">
       <q-icon name="pie_chart"></q-icon> Gráficos
     </div>
@@ -37,15 +37,15 @@
 
       <p>It's not just your name, sir. It's your father's name. And it's all that's left of him. Don't destroy it.</p>
     </div>
-  </common-card>
+  </app-card>
 </template>
 
 <script type="text/javascript">
-  import CommonCard from 'src/app/components/card/AppCard.vue'
+  import AppCard from 'src/app/components/card/AppCard.vue'
 
   export default {
     components: {
-      CommonCard
+      AppCard
     },
     name: 'graphics'
   }

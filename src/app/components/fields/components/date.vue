@@ -115,6 +115,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '~variables'
+
   .field-date
     .component
       position relative
@@ -125,7 +127,7 @@
         cursor pointer
         right 0
         top 0
-        background #3cb371
+        background $primary
         color #ffffff
         padding 7px 10px
         font-size 20px
@@ -140,6 +142,7 @@
         height 28px
         min-width inherit
         min-height inherit
+        overflow hidden
         margin 0
         padding 0
         box-shadow none

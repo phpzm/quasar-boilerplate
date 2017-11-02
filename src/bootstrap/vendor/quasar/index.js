@@ -5,5 +5,5 @@ import AppButton from 'src/app/components/button/AppButton.vue'
 const components = Object.assign({}, imports, {QButton: AppButton})
 
 Object.keys(components).forEach(key => {
-  Vue.component(key, imports[key])
+  Vue.component(key, components[key])
 })

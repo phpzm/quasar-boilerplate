@@ -1,7 +1,15 @@
 <template>
-  <app-card v-bind="{header: false}">
-    <router-view slot="content"></router-view>
+  <app-card>
+    <div slot="title">
+      <slot name="header">
+        {{ title }}
+      </slot>
+    </div>
+    <div slot="content">
+      <router-view></router-view>
+    </div>
   </app-card>
+
 </template>
 
 <script type="text/javascript">
@@ -11,7 +19,7 @@
     components: {
       AppCard
     },
-    name: 'app-base',
+    name: 'crud',
     props: {
       title: {
         default: ''

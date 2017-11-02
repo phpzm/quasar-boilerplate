@@ -1,7 +1,7 @@
 import http from 'src/app/infra/services/http'
-import { actions } from 'src/app/components/crud/model'
+import { actions } from 'src/app/components/-crud/model'
 import { map as _map } from 'lodash'
-import { defaults } from 'src/app/components/crud/components/grid/data'
+import { defaults } from 'src/app/components/-crud/components/grid/data'
 import { toast, undo } from 'src/app/support/message'
 import { populateGrid } from 'src/bootstrap/settings'
 

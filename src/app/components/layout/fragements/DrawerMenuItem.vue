@@ -70,5 +70,5 @@
         padding 0
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,cccccc+3,f3f1f1+8,f3f1f1+100 */
         background #fafafa
-        background linear-gradient(to bottom, #d4d4d4e8 0%, #eaeaea 3%, #fafafa 8%, #fafafa 100%)
+        background linear-gradient(to bottom, #c9c9c9 0%, #eaeaea 3%, #f8f8f8 10%, #fafafa 50%, #f8f8f8 90%, #efefef 98%, #c5c5c5 100%)
 </style>

@@ -1,25 +1,92 @@
 <template>
-  <div>
-    <!--[2] {{ $parent.$options.name }}.{{ $options.name }}: {{ scope }}-->
-    <app-form ref="form" :scope="scope" :schemas="schemas" :actions="actions" :stylish="stylish"
-                 v-model="record" :editable="editable" :debug="debug" :tabs="tabs" :fixed="fixed"
-                 @input="onchange"></app-form>
+  <div class="app-crud-grid">
+    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <hr>
+    <app-form v-bind="{fields, data}"></app-form>
+    <hr>
+    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <div class="fixed-bottom-right">
+      <app-button-bar :buttons="buttons.floating" :handler="handler"/>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
+  import { populateForm } from 'src/bootstrap/settings'
   import AppForm from 'src/app/components/form/AppForm.vue'
-  import Data from 'src/app/components/crud/components/form/data'
-  import Hooks from 'src/app/components/crud/components/form/hooks'
-  import Methods from 'src/app/components/crud/components/form/methods'
-  import Props from 'src/app/components/crud/components/form/props'
-  import Watch from 'src/app/components/crud/components/form/watch'
+  import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
+  import { data, methods, props } from './model'
 
   export default {
     components: {
+      AppButtonBar,
       AppForm
     },
-    mixins: [Data, Hooks, Methods, Props, Watch],
-    name: 'crud-form'
+    mixins: [data, methods, props],
+    name: 'app-crud-form',
+    props: {
+      scope: {
+        default: () => 'view'
+      }
+    },
+    data: () => ({
+      fields: {},
+      data: {}
+    }),
+    methods: {
+      /**
+       */
+      renderElements () {
+        const map = item => {
+          return Object.assign({}, item.form, {field: item.form.field})
+        }
+        const filter = item => item.scopes.includes(this.scope)
+
+        this.fields = this.schemas.filter(filter).map(map)
+      },
+      /**
+       * @param {AxiosResponse} response
+       * @param {string} method
+       */
+      then (response, method) {
+        const handlers = {
+          read: (response) => populateForm(this, response)
+        }
+        if (handlers[method]) {
+          handlers[method](response)
+        }
+      },
+      /**
+       * @param {AxiosError} error
+       * @param {string} method
+       * @param {Array} parameters
+       */
+      catch (error, method, parameters) {
+        const handlers = {}
+        if (handlers[method]) {
+          handlers[method](error)
+        }
+      }
+    },
+    created () {
+      this.renderAll()
+    },
+    mounted () {
+      if (this.id && this.$route.params[this.id]) {
+        const fetch = () => {
+          this.read(this.$route.params[this.id])
+        }
+        window.setTimeout(fetch, 100)
+      }
+    }
   }
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+  .app-crud-grid
+    padding 16px 0 0 0
+    hr
+      margin 10px 0
+    .fixed-bottom-right
+      margin 0 20px 10px 0
+</style>

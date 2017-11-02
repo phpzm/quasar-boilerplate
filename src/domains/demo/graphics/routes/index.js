@@ -1,9 +1,9 @@
-import { title } from 'src/domains/graphics/model/index'
+import { title } from 'src/domains/demo/graphics/model/index'
 
 export default [
   {
     path: 'graphics',
-    component: 'domains/graphics/components/Index',
+    component: 'domains/demo/graphics/components/Index',
     meta: {
       icon: 'pie_chart',
       label: title,

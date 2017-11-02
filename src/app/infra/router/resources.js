@@ -30,9 +30,10 @@ export const route = (props, path, uri, scope, component, label = '', icon = '',
  * @param {Function} grid
  * @param {Function} form
  * @param {Object} meta
+ * @param {string} components
  * @returns {Array}
  */
-export const crud = (path, grid, form, meta) => {
+export const crud = (path, grid, form, meta, components = 'crud') => {
   const create = 'Cria um novo registro no(a) ' + meta.tooltip
   const view = 'Visualiza um registro do(a) ' + meta.tooltip
   const edit = 'Edita um novo registro do(a) ' + meta.tooltip
@@ -45,10 +46,10 @@ export const crud = (path, grid, form, meta) => {
       },
       meta: meta,
       children: [
-        route(grid, path, '', 'index', 'app/components/crud/Grid', '', '', meta.tooltip),
-        route(form, path, 'create', 'create', 'app/components/crud/Form', 'Criar', 'add', create),
-        route(form, path, ':id', 'view', 'app/components/crud/Form', 'Visualizar', 'search', view),
-        route(form, path, ':id/edit', 'edit', 'app/components/crud/Form', 'Editar', 'edit', edit)
+        route(grid, path, '', 'index', 'app/components/' + components + '/Grid', '', '', meta.tooltip),
+        route(form, path, 'create', 'create', 'app/components/' + components + '/Form', 'Criar', 'add', create),
+        route(form, path, ':id', 'view', 'app/components/' + components + '/Form', 'Visualizar', 'search', view),
+        route(form, path, ':id/edit', 'edit', 'app/components/' + components + '/Form', 'Editar', 'edit', edit)
       ]
     }
   ]

@@ -1,4 +1,5 @@
 import { menu as user } from 'src/domains/admin/user/model'
+import { menu as category } from 'src/domains/general/category/model'
 
 export default to => [
   {
@@ -34,6 +35,19 @@ export default to => [
         icon: 'vpn_key',
         children: [
           user(to)
+        ]
+      }
+    ]
+  },
+  {
+    label: 'Cadastro',
+    icon: 'work',
+    children: [
+      {
+        label: 'Geral',
+        icon: 'list',
+        children: [
+          category(to)
         ]
       }
     ]

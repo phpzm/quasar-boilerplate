@@ -141,6 +141,6 @@
     .layout-default
       .breadcrumb-wrapper
         padding 0 7px 10px 7px
-      .layout-page > .transition-wrapper > div > .common-card.router-view
+      .layout-page > .transition-wrapper > div > .app-card.router-view
         padding 0 !important
 </style>

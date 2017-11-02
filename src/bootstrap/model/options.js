@@ -1,4 +1,4 @@
-import { logout } from 'src/domains/auth/services'
+import { logout } from 'src/domains/@/auth/services'
 
 export default () => {
   return [

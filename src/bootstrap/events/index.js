@@ -19,6 +19,6 @@ export const beforeUnload = (store, i18n) => {
  */
 export const errorHandler = (error, component, context) => {
   console.warn('[context] ~> ', context)
-  console.warn('[component] ~> ', component.$options.name)
+  console.warn('[component] ~> ', component ? component.$options.name : component)
   console.error('[error] ~> ', error.message)
 }

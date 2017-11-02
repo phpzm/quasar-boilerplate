@@ -4,31 +4,38 @@ import { resource } from 'src/app/infra/services/http/resource'
 /**
  * @type {string}
  */
-export const icon = 'supervisor_account'
+export const icon = 'extension'
+
 /**
  * @type {string}
  */
-export const label = 'Usuários'
+export const label = 'Categorias'
+
 /**
  * @type {string}
  */
-export const api = '/auth/user'
+export const api = '/general/category'
+
 /**
  * @type {string}
  */
-export const path = '/dashboard/user'
+export const path = '/dashboard/general/user'
+
 /**
  * @type {Resource}
  */
 export const service = resource(api)
+
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, 'Cadastro de Usuários')
+export const meta = model.meta(icon, label, 'Cadastro de Categorias')
+
 /**
  * @type {Function}
  */
 export const menu = model.menu(icon, label, path)
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -36,16 +43,14 @@ export const menu = model.menu(icon, label, path)
  */
 export const grid = (scope, route) => {
   return {
-    service: service,
-    path: path,
+    service,
+    path,
     pagination: true,
     search: true,
-    schemas: fields('index'),
-    actions: ($this, actions) => {
-      return actions
-    }
+    schemas: fields('index')
   }
 }
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -53,8 +58,8 @@ export const grid = (scope, route) => {
  */
 export const form = (scope, route) => {
   return {
-    service: service,
-    path: path,
+    service,
+    path,
     scope: scope,
     schemas: fields(scope),
     actions: ($this, actions) => {
@@ -62,6 +67,7 @@ export const form = (scope, route) => {
     }
   }
 }
+
 /**
  * @param {string} scope
  * @returns {Array}
@@ -70,9 +76,7 @@ export const fields = (scope) => {
   return model.filter(
     [
       model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
-      model.field('name', 'Nome', 'field-text').$render(),
-      model.field('email', 'E-mail', 'field-text').$render(),
-      model.field('password', 'Senha', 'field-text').$form({type: 'password'}).$out('index').$render()
+      model.field('name', 'Nome', 'field-text').$validate('required').$grid({width: 100}).$render()
     ],
     scope
   )

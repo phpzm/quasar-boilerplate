@@ -1,50 +1,92 @@
 <template>
-  <app-grid v-bind="bind"
-            @reload-records="fetchAll"
-            @change-search="changeSearch"
-            @change-page="changePage"
-            @change-sort="changeSort">
-    <div slot="custom">
-      <slot name="custom"></slot>
+  <div class="app-crud-grid">
+    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <hr>
+    <app-data-table v-bind="{columns, data, actions: buttons.middle}"></app-data-table>
+    <hr>
+    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <div class="fixed-bottom-right">
+      <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
-  </app-grid>
+  </div>
 </template>
 
 <script type="text/javascript">
-  import AppGrid from 'src/app/components/grid/AppGrid.vue'
-  import Data from 'src/app/components/crud/components/grid/data'
-  import Hooks from 'src/app/components/crud/components/grid/hooks'
-  import Methods from 'src/app/components/crud/components/grid/methods'
-  import Props from 'src/app/components/crud/components/grid/props'
-  import Watch from 'src/app/components/crud/components/grid/watch'
+  import { populateGrid } from 'src/bootstrap/settings'
+  import AppDataTable from 'src/app/components/data-table/AppDataTable.vue'
+  import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
+  import { data, methods, props } from './model'
 
   export default {
     components: {
-      AppGrid
+      AppButtonBar,
+      AppDataTable
     },
-    computed: {
-      bind () {
-        return {
-          scope: this.scope,
-          schemas: this.schemas,
-          actions: this.actions,
-          records: this.records,
-          header: this.header,
-          toolbar: this.toolbar,
-          visibility: this.visibility,
-          filter: this.filter,
-          search: this.search,
-          pagination: this.pagination,
-          sortable: this.sortable,
-          page: this.page,
-          pages: this.pages,
-          loaded: this.loaded,
-          height: this.height,
-          debug: this.debug
+    mixins: [data, methods, props],
+    name: 'app-crud-grid',
+    data: () => ({
+      columns: [],
+      data: [],
+      pagination: true,
+      page: 1,
+      pages: 1
+    }),
+    methods: {
+      /**
+       */
+      renderElements () {
+        const map = item => {
+          return Object.assign({}, item.grid, {
+            field: item.grid.field,
+            width: item.grid.width + 'vw',
+            sort: item.grid.sort ? () => {
+              this.$emit('grid.sort', item.grid.field)
+            } : undefined
+          })
+        }
+        const filter = item => item.scopes.includes(this.scope)
+
+        this.columns = this.schemas.filter(filter).map(map)
+        this.columns.unshift({field: 'options', label: 'Opções', width: '70px'})
+      },
+      /**
+       * @param {AxiosResponse} response
+       * @param {string} method
+       */
+      then (response, method) {
+        const handlers = {
+          read: (response) => populateGrid(this, response)
+        }
+        if (handlers[method]) {
+          handlers[method](response)
+        }
+      },
+      /**
+       * @param {AxiosError} error
+       * @param {string} method
+       * @param {Array} parameters
+       */
+      catch (error, method, parameters) {
+        const handlers = {}
+        if (handlers[method]) {
+          handlers[method](error)
         }
       }
     },
-    mixins: [Data, Hooks, Methods, Props, Watch],
-    name: 'crud-grid'
+    created () {
+      this.renderAll()
+    },
+    mounted () {
+      window.setTimeout(this.search, 100)
+    }
   }
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+  .app-crud-grid
+    padding 16px 0 0 0
+    hr
+      margin 10px 0
+    .fixed-bottom-right
+      margin 0 20px 10px 0
+</style>
