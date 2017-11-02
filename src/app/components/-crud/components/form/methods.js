@@ -1,8 +1,8 @@
 import api from 'src/app/infra/services/http'
 import { set as _set, findIndex as _findIndex, each as _each, unset as _unset, isObject as _isObject } from 'lodash'
-import { actions } from 'src/app/components/crud/model'
+import { actions } from 'src/app/components/-crud/model'
 import { confirm, toast, undo } from 'src/app/support/message'
-import { defaults } from 'src/app/components/crud/components/form/data'
+import { defaults } from 'src/app/components/-crud/components/form/data'
 import { populateForm } from 'src/bootstrap/settings'
 
 export default {

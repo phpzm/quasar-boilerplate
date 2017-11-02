@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
   import { mapActions } from 'vuex'
-  import 'src/app/components/fields'
+  import 'src/app/components/fields/index'
   import AppLayout from 'src/app/components/layout/AppLayout.vue'
   import AppCard from 'src/app/components/card/AppCard.vue'
   import { icon, title } from '../model'

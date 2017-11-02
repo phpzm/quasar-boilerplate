@@ -8,13 +8,13 @@ export const filter = (fields, scope) => {
 }
 
 /**
- * @param name
+ * @param field
  * @param label
  * @param component
  * @param scopes
  * @returns {object}
  */
-export const field = (name, label, component, scopes = []) => {
+export const field = (field, label, component, scopes = []) => {
   const defaults = ['index', 'view', 'create', 'edit']
 
   if (!Array.isArray(scopes)) {
@@ -25,7 +25,7 @@ export const field = (name, label, component, scopes = []) => {
   }
 
   return {
-    name: name,
+    field: field,
     label: label,
     scopes: scopes,
     form: {component: component},
@@ -78,7 +78,7 @@ export const field = (name, label, component, scopes = []) => {
     },
     $render () {
       const base = {
-        name: this.name,
+        field: this.field,
         label: this.label
       }
       return {

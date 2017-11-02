@@ -3,7 +3,7 @@ import { icon, title } from '../model/index'
 export default [
   {
     path: 'forms',
-    component: 'domains/forms/components/Index',
+    component: 'domains/demo/forms/components/Index',
     meta: {
       icon: icon,
       label: title,

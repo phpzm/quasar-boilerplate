@@ -30,23 +30,23 @@ export const configureDashboard = ($component) => {
  * @returns {Array}
  */
 export const populateGrid = ($component, response) => {
-  let records = []
+  let data = []
   if ($component.pagination) {
     const {body, meta} = response.data
     if (!Array.isArray(body)) {
       return []
     }
-    records = body
+    data = body
     // noinspection JSUndefinedPropertyAssignment
     $component.page = parseInt(meta.page)
     // noinspection JSUndefinedPropertyAssignment
     $component.pages = parseInt(meta.last)
   }
-  if (!records.length && Array.isArray(response)) {
-    records = response
+  if (!data.length && Array.isArray(response)) {
+    data = response
   }
   // noinspection JSUndefinedPropertyAssignment
-  $component.records = records
+  $component.data = data
 }
 
 /**

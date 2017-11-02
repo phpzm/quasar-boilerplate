@@ -1,6 +1,7 @@
 import user from 'src/domains/admin/user/routes'
-import graphics from 'src/domains/graphics/routes'
-import forms from 'src/domains/forms/routes'
+import categories from 'src/domains/general/category/routes'
+import graphics from 'src/domains/demo/graphics/routes'
+import forms from 'src/domains/demo/forms/routes'
 
 const root = [
   {
@@ -28,9 +29,10 @@ export default [
     },
     children: [
       ...root,
+      ...user,
+      ...categories,
       ...forms,
-      ...graphics,
-      ...user
+      ...graphics
     ]
   }
 ]
