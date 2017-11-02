@@ -11,7 +11,7 @@
     components: {
       AppCard
     },
-    name: 'app-base',
+    name: 'app-crud',
     props: {
       title: {
         default: ''

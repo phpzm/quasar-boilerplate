@@ -121,6 +121,9 @@ export default {
       if (this.mask) {
         value = unMask(this.mask, value)
       }
+      if (this.pattern) {
+        value = unMask(this.pattern, value)
+      }
       this.$emit('input', value, this)
     },
     /**

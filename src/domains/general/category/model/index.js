@@ -75,8 +75,11 @@ export const form = (scope, route) => {
 export const fields = (scope) => {
   return model.filter(
     [
-      model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
-      model.field('name', 'Nome', 'field-text').$validate('required').$grid({width: 100}).$render()
+      model.field('id', 'Código', '').$in('index').$grid({width: 10}).$link(path + '/{id}').$render(),
+      model.field('name', 'Nome', 'field-text').$form({width: 50}).$validate('required').$render(),
+      model.field('email', 'E-mail', 'field-text').$form({width: 50}).$validate('required').$render(),
+      model.field('telephone', 'Telefone', 'field-phone').$form({width: 50}).$validate('required').$render(),
+      model.field('amount', 'Valor', 'field-money').$form({width: 50}).$validate('required').$render()
     ],
     scope
   )

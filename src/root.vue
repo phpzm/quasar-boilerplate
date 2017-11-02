@@ -11,7 +11,7 @@
   import { Events, dom } from 'quasar-framework'
 
   export default {
-    name: 'root',
+    name: 'app-root',
     computed: {
       ...mapGetters(['AppTitle', 'AppName'])
     },

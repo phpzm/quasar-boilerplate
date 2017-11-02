@@ -1,5 +1,5 @@
 <template>
-  <div :class="classNames" v-show="dependsIsOk">
+  <div class="field-base" v-show="dependsIsOk">
     <slot name="label">
       <label :for="id" v-if="!inline" class="field-label" :class="{'label-with-error': problems.length}">
         {{ label }} <span v-if="!!validate" :title="title">*</span>

@@ -85,14 +85,32 @@ const buttons = ($this) => {
       color: 'primary',
       scopes: ['create', 'view', 'edit'],
       positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
       icon: '',
       label: 'Salvar',
       tooltip: 'Salvar as alterações feitas a este registro',
       handler: (record, schemas, $component) => {
-        if ($this.scope === 'create') {
-          return $this.create(record)
-        }
-        return $this.update(record)
+        $this.save(record)
+      }
+    },
+    {
+      id: 'save-and-create',
+      permission: 2,
+      color: 'white',
+      scopes: ['create', 'view', 'edit'],
+      positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
+      icon: '',
+      label: 'Salvar & Novo',
+      tooltip: 'Salva este registro e abre nova tela para criação de um novo registro',
+      handler: (record, schemas, $component) => {
+        $this.save(record, (response) => {
+          $this.browse($this.path + '/' + 'create')
+        })
       }
     },
     {

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-button-bar">
+  <div class="app-button-bar" :style="style">
     <q-button v-for="button in buttons" :key="button.id" v-bind="button" @click="handler(button)"></q-button>
   </div>
 </template>
@@ -16,6 +16,17 @@
       handler: {
         type: Function,
         required: true
+      },
+      direction: {
+        type: String,
+        default: () => 'right'
+      }
+    },
+    computed: {
+      style () {
+        return {
+          'text-align': this.direction
+        }
       }
     }
   }

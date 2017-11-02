@@ -30,20 +30,16 @@ export const configureDashboard = ($component) => {
  * @returns {Array}
  */
 export const populateGrid = ($component, response) => {
-  let data = []
-  if ($component.pagination) {
-    const {body, meta} = response.data
-    if (!Array.isArray(body)) {
-      return []
-    }
-    data = body
+  const {body, meta} = response.data
+  if (!Array.isArray(body)) {
+    return []
+  }
+  let data = body
+  if ($component.isPaginated()) {
     // noinspection JSUndefinedPropertyAssignment
     $component.page = parseInt(meta.page)
     // noinspection JSUndefinedPropertyAssignment
     $component.pages = parseInt(meta.last)
-  }
-  if (!data.length && Array.isArray(response)) {
-    data = response
   }
   // noinspection JSUndefinedPropertyAssignment
   $component.data = data
@@ -55,13 +51,13 @@ export const populateGrid = ($component, response) => {
  * @param {Function} callback
  */
 export const populateForm = ($component, response, callback = null) => {
-  let record = {}
+  let data = {}
   const {body} = response.data
   if (Array.isArray(body)) {
-    record = body[0]
+    data = body[0]
   }
   // noinspection JSUndefinedPropertyAssignment
-  $component.record = record
+  $component.data = data
   if (typeof callback === 'function') {
     callback()
   }

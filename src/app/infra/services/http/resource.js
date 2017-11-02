@@ -131,6 +131,26 @@ export const source = (api, value, label, extra = {}) => {
 }
 
 /**
+ * @param {AxiosResponse} response
+ * @returns {*}
+ */
+export const body = (response) => {
+  return response.data.body
+}
+
+/**
+ * @param {AxiosResponse} response
+ * @returns {*}
+ */
+export const first = (response) => {
+  const content = body(response)
+  if (Array.isArray(content)) {
+    return content.shift()
+  }
+  return {}
+}
+
+/**
  * @param path
  * @returns {Resource}
  */

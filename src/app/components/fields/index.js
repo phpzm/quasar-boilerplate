@@ -13,6 +13,8 @@ import FieldToggle from 'src/app/components/fields/components/toggle.vue'
 import FieldColor from 'src/app/components/fields/components/color.vue'
 import FieldTime from 'src/app/components/fields/components/time.vue'
 import FieldFile from 'src/app/components/fields/components/file.vue'
+import FieldPhone from 'src/app/components/fields/components/phone.vue'
+import FieldNumeric from 'src/app/components/fields/components/numeric.vue'
 
 import FieldFunctional from 'src/app/components/fields/functional'
 
@@ -29,5 +31,7 @@ Vue.component('field-toggle', FieldToggle)
 Vue.component('field-color', FieldColor)
 Vue.component('field-time', FieldTime)
 Vue.component('field-file', FieldFile)
+Vue.component('field-phone', FieldPhone)
+Vue.component('field-numeric', FieldNumeric)
 
 Vue.component('field-functional', FieldFunctional)
