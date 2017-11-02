@@ -64,15 +64,12 @@ export const field = (field, label, component, scopes = []) => {
       return this
     },
     $link (path) {
-      this.grid.component = 'router-link'
-      this.grid.binding = (record, schema) => {
-        let to = String(path)
-        Object.keys(record).forEach(property => {
-          to = to.replace(`{${property}}`, record[property])
+      this.grid.format = (value, row) => {
+        let href = String(path)
+        Object.keys(row).forEach(property => {
+          href = href.replace(`{${property}}`, row[property])
         })
-        return {
-          to: to
-        }
+        return `<a href="#${href}">${value}</a>`
       }
       return this
     },

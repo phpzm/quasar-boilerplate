@@ -1,10 +1,10 @@
 <template>
   <div class="app-crud-grid">
-    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <hr>
     <app-form ref="form" v-bind="{fields, data}" @input="data = $event" @form-valid="valid"></app-form>
     <hr>
-    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <div class="fixed-bottom-right">
       <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script type="text/javascript">
+  import { first } from 'src/app/infra/services/http/resource'
   import { populateForm } from 'src/bootstrap/settings'
   import AppForm from 'src/app/components/form/AppForm.vue'
   import AppButtonBar from 'src/app/components/button/AppButtonBar.vue'
@@ -19,14 +20,25 @@
 
   export default {
     components: {
-      AppButtonBar,
-      AppForm
+      AppForm, AppButtonBar
     },
     mixins: [data, methods, props],
     name: 'app-crud-form',
     props: {
       scope: {
         default: () => 'view'
+      },
+      handlers: {
+        type: Object,
+        default () {
+          return {
+            create: (response) => {
+              this.browse(this.path + '/' + first(response)[this.id])
+            },
+            read: (response) => populateForm(this, response),
+            delete: (response) => this.browse(this.path)
+          }
+        }
       }
     },
     data: () => ({
@@ -46,27 +58,12 @@
         this.fields = this.schemas.filter(filter).map(map)
       },
       /**
-       * @param {AxiosResponse} response
-       * @param {string} method
-       */
-      then (response, method) {
-        const handlers = {
-          read: (response) => populateForm(this, response)
-        }
-        if (handlers[method]) {
-          handlers[method](response)
-        }
-      },
-      /**
        * @param {AxiosError} error
        * @param {string} method
        * @param {Array} parameters
        */
       catch (error, method, parameters) {
-        const handlers = {}
-        if (handlers[method]) {
-          handlers[method](error)
-        }
+        console.log('~>', this.$options.name, error)
       },
       /**
        * @param {boolean} valid

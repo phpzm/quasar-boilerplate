@@ -1,10 +1,10 @@
 <template>
   <div class="app-crud-grid">
-    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <hr>
     <app-data-table ref="grid" v-bind="{columns, data, actions: buttons.middle}"></app-data-table>
     <hr>
-    <app-button-bar :buttons="buttons.top" :handler="handler"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <div class="fixed-bottom-right">
       <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
@@ -19,15 +19,30 @@
 
   export default {
     components: {
-      AppButtonBar,
-      AppDataTable
+      AppDataTable, AppButtonBar
     },
     mixins: [data, methods, props],
     name: 'app-crud-grid',
+    props: {
+      scope: {
+        default: () => 'index'
+      },
+      handlers: {
+        type: Object,
+        default () {
+          return {
+            read: (response) => populateGrid(this, response),
+            delete: (response) => this.search()
+          }
+        }
+      },
+      pagination: {
+        default: () => true
+      }
+    },
     data: () => ({
       columns: [],
       data: [],
-      pagination: true,
       page: 1,
       pages: 1
     }),
@@ -50,17 +65,10 @@
         this.columns.unshift({field: 'options', label: 'Opções', width: '70px'})
       },
       /**
-       * @param {AxiosResponse} response
-       * @param {string} method
+       * @returns {boolean}
        */
-      then (response, method) {
-        const handlers = {
-          read: (response) => populateGrid(this, response),
-          delete: () => this.search()
-        }
-        if (handlers[method]) {
-          handlers[method](response)
-        }
+      isPaginated () {
+        return this.pagination
       },
       /**
        * @param {AxiosError} error
@@ -68,10 +76,7 @@
        * @param {Array} parameters
        */
       catch (error, method, parameters) {
-        const handlers = {}
-        if (handlers[method]) {
-          handlers[method](error)
-        }
+        console.log('~>', this.$options.name, error)
       }
     },
     created () {

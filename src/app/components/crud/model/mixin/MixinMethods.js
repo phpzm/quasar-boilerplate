@@ -3,49 +3,64 @@ import { actions } from '../../model'
 export default {
   methods: {
     /**
-     * @param record
+     * @param {Object} record
+     * @param {Function} callback
      */
-    create (record) {
+    create (record, callback = null) {
       this.service
         .post(record)
-        .then(response => this.then(response, 'create'))
+        .then(response => this.then(response, 'create', callback))
         .catch(error => this.catch(error, 'create', [record]))
     },
     /**
-     * @param id
+     * @param {string} id
+     * @param {Function} callback
      */
-    read (id = '') {
+    read (id = '', callback = null) {
       this.service
         .get(id)
-        .then(response => this.then(response, 'read'))
+        .then(response => this.then(response, 'read', callback))
         .catch(error => this.catch(error, 'read', [id]))
     },
     /**
-     * @param record
+     * @param {Object} record
+     * @param {Function} callback
      */
-    update (record) {
+    update (record, callback = null) {
       this.service
         .put(record[this.id], record)
-        .then(response => this.then(response, 'update'))
+        .then(response => this.then(response, 'update', callback))
         .catch(error => this.catch(error, 'update', [record]))
     },
     /**
-     * @param id
+     * @param {string} id
+     * @param {Function} callback
      */
-    delete (id = '') {
+    delete (id = '', callback = null) {
       this.service
         .delete(id)
-        .then(response => this.then(response, 'delete'))
+        .then(response => this.then(response, 'delete', callback))
         .catch(error => this.catch(error, 'delete', [id]))
     },
     /**
-     * @param filters
+     * @param {Object} filters
      */
     search (filters = {}) {
       this.service
         .get('', filters)
         .then(response => this.then(response, 'read'))
         .catch(error => this.catch(error, 'search', [filters]))
+    },
+    /**
+     * @param {Object} record
+     * @param {Function} callback
+     * @returns {record}
+     */
+    save (record, callback) {
+      const scope = this.scopes[this.scope]
+      if (scope.method && typeof this[scope.method] === 'function') {
+        return this[scope.method](record, callback)
+      }
     },
     /**
      */
@@ -79,6 +94,19 @@ export default {
       this.buttons.middle = buttons.filter(button => button.positions.includes('middle'))
       this.buttons.bottom = buttons.filter(button => button.positions.includes('bottom'))
       this.buttons.floating = buttons.filter(button => button.positions.includes('floating'))
+    },
+    /**
+     * @param {AxiosResponse} response
+     * @param {string} method
+     * @param {Function} callback
+     */
+    then (response, method, callback = null) {
+      if (this.handlers[method]) {
+        this.handlers[method](response)
+      }
+      if (typeof callback === 'function') {
+        callback(response)
+      }
     },
     /**
      * @param {Object} action
