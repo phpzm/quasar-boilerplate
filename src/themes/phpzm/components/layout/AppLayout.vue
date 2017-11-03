@@ -110,7 +110,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .layout-default
     .q-scroll-area
       swidth 100%

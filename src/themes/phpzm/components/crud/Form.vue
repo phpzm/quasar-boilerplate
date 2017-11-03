@@ -97,7 +97,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .app-crud-grid
     padding 16px 0 0 0
     hr

@@ -38,7 +38,7 @@
       .q-btn-round.q-btn-standard
         height 40px
         width 40px
-        .q-icon, .q-spinner
+        q-icon, .q-spinner
           font-size 20px
     .q-data-table
       display flex
@@ -50,4 +50,10 @@
         overflow visible
       .q-data-table-body
         overflow visible
+
+  .production
+    .app-data-table-options
+      .q-btn-round.q-btn-standard
+        .q-fab-icon.q-icon
+          margin 6px 0 0 0
 </style>

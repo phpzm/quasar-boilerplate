@@ -74,7 +74,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   ul.breadcrumb li
     margin 0
   ul.breadcrumb li:last-child a

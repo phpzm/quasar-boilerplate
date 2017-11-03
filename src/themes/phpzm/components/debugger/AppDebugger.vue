@@ -43,7 +43,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .app-debugger
     border 1px dotted #d0d0d0
     margin 10px 0

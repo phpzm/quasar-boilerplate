@@ -23,7 +23,7 @@ export default {
     /**
      */
     filterClose () {
-      window.setTimeout(this.$refs.filter.close, 100)
+      window.setTimeout(this.$refs.filter.close, this.timeout)
     },
     /**
      */
@@ -99,7 +99,7 @@ export default {
       const search = () => {
         this.search(filters)
       }
-      window.setTimeout(search, 100)
+      window.setTimeout(search, this.timeout)
     }
   }
 }

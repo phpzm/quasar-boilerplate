@@ -34,6 +34,7 @@ export default {
     page: 1,
     pages: 1,
     uid: uniqid(),
+    timeout: 500,
     char: '~'
   }),
   methods: {

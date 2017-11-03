@@ -33,7 +33,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .app-button-bar
     button
       margin 0 5px
