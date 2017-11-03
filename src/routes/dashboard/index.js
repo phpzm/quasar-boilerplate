@@ -2,6 +2,7 @@ import user from 'src/domains/admin/user/routes'
 import categories from 'src/domains/general/category/routes'
 import graphics from 'src/domains/demo/graphics/routes'
 import forms from 'src/domains/demo/forms/routes'
+import calendar from 'src/domains/demo/calendar/routes'
 
 const root = [
   {
@@ -32,7 +33,8 @@ export default [
       ...user,
       ...categories,
       ...forms,
-      ...graphics
+      ...graphics,
+      ...calendar
     ]
   }
 ]

@@ -54,7 +54,14 @@ export default to => [
         label: 'Geral',
         icon: 'list',
         children: [
-          category(to)
+          category(to),
+          {
+            to: '/dashboard/calendar',
+            left: {
+              icon: 'today'
+            },
+            label: 'Agenda'
+          }
         ]
       }
     ]
