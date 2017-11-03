@@ -9,7 +9,7 @@
       <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
 
-    <template v-if="debug">
+    <template v-if="debugging">
       <app-debugger v-bind="{label: 'data', inspect: data}"></app-debugger>
       <app-debugger v-bind="{label: 'fields', inspect: fields}"></app-debugger>
     </template>

@@ -34,7 +34,7 @@
       </div>
     </q-modal>
 
-    <template v-if="debug">
+    <template v-if="debugging">
       <app-debugger v-bind="{label: 'data', inspect: data}"></app-debugger>
       <app-debugger v-bind="{label: 'columns', inspect: columns}"></app-debugger>
       <app-debugger v-bind="{label: 'filter', inspect: filter.record}"></app-debugger>

@@ -34,6 +34,12 @@ export const get = (index, keep = null) => {
  * @returns {*}
  */
 export const set = (index, value, keep = false) => {
+  if (value === undefined) {
+    if (keep) {
+      return LocalStorage.remove(index)
+    }
+    return SessionStorage.remove(index)
+  }
   if (keep) {
     return LocalStorage.set(index, value)
   }

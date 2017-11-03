@@ -22,26 +22,17 @@ const getters = {
 
 const actions = {
   setAuthUser: (context, user) => {
-    // noinspection JSUnresolvedFunction
     context.commit(CHANGE_USER, user)
-    if (user) {
-      set(APP_USER, user, state.remember)
-      return
-    }
-    [true, false].forEach(flag => set(APP_USER, undefined, flag))
+    set(APP_USER, user, state.remember)
   },
   setAuthToken: (context, token) => {
-    // noinspection JSUnresolvedFunction
     context.commit(CHANGE_TOKEN, token)
-    setToken(token)
+    set(APP_TOKEN, token, state.remember)
     if (token) {
-      set(APP_TOKEN, token, state.remember)
-      return
+      setToken(token)
     }
-    [true, false].forEach(flag => set(APP_TOKEN, undefined, flag))
   },
   setAuthRemember: (context, remember) => {
-    // noinspection JSUnresolvedFunction
     context.commit(CHANGE_REMEMBER, state.remember)
     set(APP_REMEMBER, remember, true)
   }

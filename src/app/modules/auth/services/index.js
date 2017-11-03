@@ -9,12 +9,15 @@ import { promise } from 'src/app/support/utils'
  * @param {Function} success
  */
 export const register = (user, token, remember, success) => {
-  // noinspection JSUnresolvedFunction
-  store.dispatch('setAuthUser', configureUser(user), remember)
-    .then(() => {
-      // noinspection JSUnresolvedFunction
-      store.dispatch('setAuthToken', token, remember).then(success)
-    })
+  store
+    .dispatch('setAuthRemember', remember)
+    .then(
+      store
+        .dispatch('setAuthUser', configureUser(user))
+        .then(
+          store.dispatch('setAuthToken', token).then(success)
+        )
+    )
 }
 
 /**
@@ -26,14 +29,11 @@ export const unRegister = (success) => {
       success()
       resolve()
     }
-    // noinspection JSUnresolvedFunction
-    store.dispatch('setAuthUser', undefined)
-      .then(() => {
-        // noinspection JSUnresolvedFunction
-        store.dispatch('setAuthToken', undefined)
-          .then(solver)
-          .catch(reject)
-      })
+    store
+      .dispatch('setAuthUser', undefined)
+      .then(
+        store.dispatch('setAuthToken', undefined).then(solver).catch(reject)
+      )
       .catch(reject)
   })
 }
