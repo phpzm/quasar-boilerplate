@@ -72,7 +72,6 @@ export default {
 
       const filterColumns = columns.filter(column => column.filter).map(this.mapFilters)
       const filterAdditional = this.filters.map(map).filter(this.filterColumns).map(this.mapColumns)
-      console.log('~> renderFilters', filterAdditional)
 
       const filters = []
       filters.push(...filterColumns)

@@ -1,3 +1,5 @@
+import { APP_DEV } from 'src/app/support/index'
+
 export default {
   data: () => ({
     buttons: {
@@ -6,7 +8,12 @@ export default {
       bottom: [],
       floating: []
     },
-    timeout: 500,
+    timeout: 1000,
     char: '~'
-  })
+  }),
+  computed: {
+    debugging () {
+      return this.debug && APP_DEV
+    }
+  }
 }

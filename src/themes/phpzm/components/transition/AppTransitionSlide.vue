@@ -67,7 +67,7 @@
     overflow-x hidden
     .router-view
       position absolute
-      transition transform .3s
+      transition transform .2s
 
   .slide-left-enter
     transform translate(100%, 0)

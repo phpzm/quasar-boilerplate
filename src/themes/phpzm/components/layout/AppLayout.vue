@@ -9,7 +9,7 @@
 
         <q-toolbar-title>
           {{ AppName }}
-          <div slot="subtitle">{{ AppTitle }} {{ $q.version }}</div>
+          <div slot="subtitle">{{ AppTitle }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
         </q-toolbar-title>
 
         <q-btn flat @click="">
@@ -87,7 +87,6 @@
     },
     computed: {
       environment () {
-        // noinspection ES6ModulesDependencies
         return process.env.NODE_ENV
       },
       classNames () {

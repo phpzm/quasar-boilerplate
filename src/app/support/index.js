@@ -13,6 +13,8 @@ export const APP_TOKEN = env.APP.TOKEN
 
 export const APP_REMEMBER = env.APP.REMEMBER
 
+export const APP_DEV = env.DEV
+
 /**
  * Basic routes
  */

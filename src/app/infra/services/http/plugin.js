@@ -16,7 +16,7 @@ export const interceptors = (http, store, router) => {
   const request = config => {
     // noinspection JSUnresolvedVariable
     if (!config.noLoading) {
-      loading(true, 1000)
+      loading(true, 100)
     }
     return httpRequest(config)
   }
