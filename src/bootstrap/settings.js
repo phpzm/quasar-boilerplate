@@ -90,6 +90,18 @@ export const configureButtons = ($this) => {
       }
     },
     {
+      id: 'add-inline',
+      permission: 2,
+      color: 'primary',
+      scopes: ['index'],
+      positions: ['top', 'bottom'],
+      icon: 'add',
+      tooltip: 'Inicie a criação de um novo registro',
+      handler: (record, schemas, $component) => {
+        $this.browse($this.path + '/' + 'create')
+      }
+    },
+    {
       id: 'retry',
       permission: 2,
       color: 'primary',
@@ -200,7 +212,7 @@ export const configureButtons = ($this) => {
     {
       id: 'start',
       permission: 1,
-      color: 'white',
+      color: 'positive',
       scopes: ['create', 'view', 'edit'],
       positions: ['top', 'bottom'],
       icon: 'subject',
@@ -214,7 +226,7 @@ export const configureButtons = ($this) => {
       'class': '--button-filter',
       id: 'filter',
       permission: 1,
-      color: 'white',
+      color: 'positive',
       scopes: ['index'],
       positions: ['top', 'bottom'],
       icon: 'filter_list',
