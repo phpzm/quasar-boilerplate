@@ -54,6 +54,6 @@
   .production
     .app-data-table-options
       .q-btn-round.q-btn-standard
-        .q-fab-icon.q-icon
+        .q-fab-icon.q-icon, .q-fab-active-icon.q-icon
           margin 6px 0 0 0
 </style>
