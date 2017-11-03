@@ -3,9 +3,9 @@
     <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
       <div v-if="actions.length" slot="col-options" slot-scope="cell">
         <div class="app-data-table-options">
-          <q-fab color="primary" direction="right">
+          <q-fab color="primary" icon="settings" direction="right" class="rotate">
             <q-fab-action v-if="permission(action, cell.row)" v-for="action in actions" :key="action.id"
-                          @click="handler(action, cell.row)" :color="action.color" :icon="action.icon">
+                          @click="handler(action, cell.row)" :color="action.color" :icon="action.icon" class="rotate">
               <q-tooltip :disabled="!action.tooltip">
                 {{ action.tooltip }}
               </q-tooltip>
@@ -14,7 +14,7 @@
         </div>
       </div>
       <!--<div v-for="slot in ['id']" :slot="'col-' + slot" slot-scope="cell">-->
-        <!--<component is="field-text" v-model="cell.data"></component>-->
+      <!--<component is="field-text" v-model="cell.data"></component>-->
       <!--</div>-->
     </q-data-table>
   </div>

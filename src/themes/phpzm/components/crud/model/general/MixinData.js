@@ -8,7 +8,7 @@ export default {
       bottom: [],
       floating: []
     },
-    timeout: 1000,
+    timeout: 100,
     char: '~'
   }),
   computed: {

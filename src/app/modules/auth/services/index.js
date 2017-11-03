@@ -1,5 +1,5 @@
 import store from 'src/app/infra/store'
-import { configureUser } from 'src/bootstrap/settings'
+import configureUser from 'src/bootstrap/configure/user'
 import { promise } from 'src/app/support/utils'
 
 /**

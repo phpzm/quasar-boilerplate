@@ -2,7 +2,7 @@
   <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" class="component" :class="{'has-error': problems.length}">
-        <i class="material-icons" @click="openWidget">&#xE878;</i>
+        <i class="material-icons bg-primary" @click="openWidget">&#xE878;</i>
         <q-datetime ref="widget" v-model="widget"
                     type="date" ok-label="Ok" cancel-label="Cancelar" clear-label="Limpar"></q-datetime>
         <input ref="input" class="input full-width" autocomplete="off"
@@ -93,9 +93,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-  @import '~variables'
-
+<style lang="stylus" rel="stylesheet/stylus">
   .field-date
     .component
       position relative
@@ -106,7 +104,6 @@
         cursor pointer
         right 0
         top 0
-        background $primary
         color #ffffff
         padding 7px 10px
         font-size 20px

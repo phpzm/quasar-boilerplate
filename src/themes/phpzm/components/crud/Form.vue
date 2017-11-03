@@ -2,7 +2,7 @@
   <div class="app-crud-grid">
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <hr>
-    <app-form ref="form" v-bind="{fields, data, debug}" @form~input="data = $event" @form~valid="valid"></app-form>
+    <app-form ref="form" v-bind="{fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
     <hr>
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <div class="fixed-bottom-right">
@@ -17,7 +17,8 @@
 </template>
 
 <script type="text/javascript">
-  import { populateForm } from 'src/bootstrap/settings'
+  import { mapActions } from 'vuex'
+  import populateForm from 'src/bootstrap/populate/form'
   import AppForm from 'src/themes/phpzm/components/form/AppForm.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
@@ -39,7 +40,9 @@
         type: Object,
         default () {
           return {
+            create: (response) => this.setAppModified(false),
             read: (response) => populateForm(this, response),
+            update: (response) => this.setAppModified(false),
             delete: (response) => this.browse(this.path)
           }
         }
@@ -55,8 +58,11 @@
        */
       renderElements () {
         const map = item => {
+          const readonly = this.scopes[this.scope] && this.scopes[this.scope].readonly
           return Object.assign({}, item.form, {
-            field: item.form.field, component: this.component + '-' + item.form.component
+            disabled: readonly ? true : item.form.disabled,
+            field: item.form.field,
+            component: this.component + '-' + item.form.component
           })
         }
         const filter = item => item.scopes.includes(this.scope)
@@ -71,12 +77,17 @@
       catch (error, method, parameters) {
         console.log('~>', this.$options.name, error)
       },
+      input (data) {
+        this.data = data
+        this.setAppModified(true)
+      },
       /**
        * @param {boolean} valid
        */
       valid (valid) {
         this.status = valid
-      }
+      },
+      ...mapActions(['setAppModified'])
     },
     watch: {
       status () {
@@ -103,5 +114,5 @@
     hr
       margin 10px 0
     .fixed-bottom-right
-      margin 0 20px 10px 0
+      margin 5px
 </style>

@@ -12,6 +12,8 @@
           <div slot="subtitle">{{ AppTitle }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
         </q-toolbar-title>
 
+        <slot name="header-content"></slot>
+
         <q-btn flat @click="">
           <q-icon name="more_vert"></q-icon>
           <q-popover ref="popover" class="q-popover-menu">
@@ -42,7 +44,7 @@
 
     <slot name="breadcrumb">
       <div class="breadcrumb-wrapper">
-        <app-breadcrumb></app-breadcrumb>
+        <app-breadcrumb v-bind="{icon: home}"></app-breadcrumb>
       </div>
     </slot>
 
@@ -67,16 +69,24 @@
     name: 'app-layout',
     props: {
       view: {
+        type: String,
         default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
       },
       reveal: {
+        type: Boolean,
         default: false
       },
       left: {
+        type: Boolean,
         default: true
       },
       leftBreakpoint: {
+        type: Number,
         default: 996
+      },
+      home: {
+        type: String,
+        default: 'home'
       },
       transition: {
         default: () => ({
@@ -125,15 +135,15 @@
       font-family play
     .breadcrumb-wrapper
       position absolute
-      padding 0 17px 10px 17px
-      box-shadow 0 0 4px 2px rgba(0,0,0,0.3)
+      padding 0 17px 0 17px
+      box-shadow 0 0 4px 2px rgba(0, 0, 0, 0.3)
       background #fff
       width 100%
-      height 55px
+      height 47px
       z-index 2
     .transition-wrapper
       position relative
-      margin 55px 0 0 0
+      margin 47px 0 0 0
 
   @media screen and (max-width 768px)
     .layout-default

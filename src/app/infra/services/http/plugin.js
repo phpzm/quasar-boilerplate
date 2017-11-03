@@ -1,7 +1,7 @@
 import http from 'src/app/infra/services/http/index'
 import { loading } from 'src/app/support/message/index'
 import { PATH_LOGIN } from 'src/app/support/index'
-import { httpRequest, httpResponse, httpError } from 'src/bootstrap/settings'
+import { httpRequest, httpResponse, httpError } from 'src/bootstrap/configure/http'
 
 /**
  * @param http
@@ -58,7 +58,7 @@ export const interceptors = (http, store, router) => {
  * @param router
  * @returns {AxiosInstance}
  */
-export default function install (Vue, {store, router}) {
+export default (Vue, {store, router}) => {
   interceptors(http, store, router)
   Object.defineProperty(Vue.prototype, '$http', {
     get () {

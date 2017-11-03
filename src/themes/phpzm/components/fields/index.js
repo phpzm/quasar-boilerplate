@@ -15,6 +15,8 @@ import FieldTime from 'src/themes/phpzm/components/fields/components/time.vue'
 import FieldFile from 'src/themes/phpzm/components/fields/components/file.vue'
 import FieldPhone from 'src/themes/phpzm/components/fields/components/phone.vue'
 import FieldNumeric from 'src/themes/phpzm/components/fields/components/numeric.vue'
+import FieldPassword from 'src/themes/phpzm/components/fields/components/password.vue'
+import FieldPivot from 'src/themes/phpzm/components/fields/components/pivot.vue'
 
 import FieldFunctional from 'src/themes/phpzm/components/fields/functional'
 
@@ -33,5 +35,7 @@ Vue.component('field-time', FieldTime)
 Vue.component('field-file', FieldFile)
 Vue.component('field-phone', FieldPhone)
 Vue.component('field-numeric', FieldNumeric)
+Vue.component('field-password', FieldPassword)
+Vue.component('field-pivot', FieldPivot)
 
 Vue.component('field-functional', FieldFunctional)

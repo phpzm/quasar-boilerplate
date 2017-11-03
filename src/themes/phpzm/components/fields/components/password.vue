@@ -2,8 +2,8 @@
   <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
-        <input ref="input" class="input full-width" autocomplete="off"
-               v-bind="{id, type, name, placeholder, maxlength, disabled}"
+        <input ref="input" class="input full-width" autocomplete="off" type="password"
+               v-bind="{id, name, placeholder, disabled}"
                @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
                @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
@@ -16,17 +16,15 @@
 <script type="text/javascript">
   import Field from 'src/themes/phpzm/components/fields/components/base.vue'
   import FieldAbstract from 'src/themes/phpzm/components/fields/abstract'
-  import { mask } from 'src/app/support/utils/index'
 
   export default {
     extends: FieldAbstract,
     components: {
       Field
     },
-    name: 'field-text',
+    name: 'field-password',
     data: () => ({
-      html: '',
-      maxlength: ''
+      html: ''
     }),
     methods: {
       /**
@@ -39,11 +37,6 @@
         if (value === null) {
           return
         }
-        if (this.mask) {
-          this.maxlength = this.mask.length
-          value = mask(this.mask, String(value))
-        }
-        this.html = value
         if (this.$refs.input) {
           this.$refs.input.value = value
         }
@@ -52,9 +45,6 @@
     watch: {
       value (value) {
         this.applyValue(value)
-      },
-      mask () {
-        this.applyValue(this.value)
       }
     },
     mounted () {

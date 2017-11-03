@@ -8,7 +8,7 @@ const messages = {
     events: {
       modified: {
         title: 'Modificações pendentes',
-        message: 'Você possui modificações pendentes.<br>Deseja descartar essas modificações?'
+        message: 'Você possui modificações pendentes.<br>Deseja descartar estas modificações?'
       }
     },
     validation: {
