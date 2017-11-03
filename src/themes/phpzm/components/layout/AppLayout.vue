@@ -90,7 +90,7 @@
       },
       transition: {
         default: () => ({
-          height: 'calc(100vh - 100px)',
+          height: 'calc(100vh - 105px)',
           padding: '0 10px'
         })
       }

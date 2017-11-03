@@ -208,9 +208,7 @@ export const field = (field, label, component = 'text', scopes = []) => {
  * @param {string} tooltip
  * @returns {Object}
  */
-export const meta = (icon, label, tooltip) => {
-  return {icon, label, tooltip}
-}
+export const meta = (icon, label, tooltip) => ({icon, label, tooltip})
 
 /**
  * @param {string} icon
@@ -236,6 +234,16 @@ export const menu = (icon, label, path, exact = false, tooltip = '', id = '') =>
   }
 }
 
+/**
+ * @param {string} uri
+ * @param {Object} reference
+ * @param {string} referenced
+ */
+export const pivot = (uri, reference, referenced) => ({uri, reference, referenced})
+
+/**
+ * @type {Object}
+ */
 export default {
-  filter, field, meta, menu
+  filter, field, meta, menu, pivot
 }
