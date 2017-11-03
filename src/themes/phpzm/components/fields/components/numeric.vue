@@ -75,7 +75,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-numeric
     .q-numeric
       margin 0

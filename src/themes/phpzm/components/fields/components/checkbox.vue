@@ -70,7 +70,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-checkbox
     .checkbox-wrapper
       margin-top 10px

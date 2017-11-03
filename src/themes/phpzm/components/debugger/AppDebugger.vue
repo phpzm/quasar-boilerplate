@@ -45,24 +45,26 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .app-debugger
-    border: 1px dotted #d0d0d0
-    margin: 10px 0
-    padding: 10px
-    border-radius: 2px
+    border 1px dotted #d0d0d0
+    margin 10px 0
+    padding 10px
+    border-radius 2px
     summary
-      cursor: pointer
-      padding: 5px 10px
+      cursor pointer
+      padding 5px 10px
     .pre
-      overflow: auto
-      white-space: pre
+      padding 0 20px
+      font-family monospace
+      overflow auto
+      white-space pre
       .string
-        color: #885800
+        color #cf8500
       .number
-        color: blue
+        color #d70000
       .boolean
-        color: magenta
+        color blue
       .null
-        color: red
+        color magenta
       .key
-        color: green
+        color green
 </style>

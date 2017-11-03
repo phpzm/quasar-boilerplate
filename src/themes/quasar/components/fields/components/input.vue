@@ -1,7 +1,7 @@
 <template>
   <field :class="classNames" v-bind="{id, inline, problems, validate, title, tooltip, editable, visible}">
-    <div slot="component">
-      <q-field v-bind="{icon, helper}">
+    <div slot="component" :class="{'field-required': validate}">
+      <q-field v-bind="{icon, helper, error, count}">
         <q-input v-model="model" v-bind="{'float-label': label, suffix}" @input="$emit('input', model)"/>
       </q-field>
     </div>
@@ -29,9 +29,25 @@
     },
     data: () => ({
       model: undefined
-    })
+    }),
+    computed: {
+      error () {
+        if (this.editable) {
+          return !!this.problems.length
+        }
+        return false
+      }
+    }
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  .quasar-input
+    .q-field
+      &.q-field-with-error
+        border none
+    .q-field-no-input
+      margin-top -1px
+    .q-field-no-input::not(.q-field-with-error)
+      border-top none
 </style>

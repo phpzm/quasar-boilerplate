@@ -86,11 +86,11 @@
         this.model = mask(this.pattern, padRight(unMask(this.pattern, value), 4))
       },
       /**
-       * @param {string} value
+       * @param {string} $event
        */
-      blur (value) {
-        this.padRight(value)
-        this.updateValue(value)
+      blur ($event) {
+        this.padRight($event.target.value)
+        this.updateValue($event.target.value)
       }
     },
     mounted () {
@@ -115,7 +115,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   @import '~variables'
 
   .field-time

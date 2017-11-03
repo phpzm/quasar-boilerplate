@@ -45,14 +45,14 @@
           uid: uid(),
           type: 'image'
         },
-//        toolbarButtons: [
-//          'undo', 'redo', '|',
-//          'bold', 'italic', 'underline', 'strikeThrough', 'paragraphFormat', '|',
-//          'subscript', 'superscript', '|',
-//          'outdent', 'indent', '|',
-//          'formatOL', 'formatUL', 'insertTable', 'insertLink', 'insertImage', '|',
-//          'clearFormatting', 'html'
-//        ],
+        // toolbarButtons: [
+        //   'undo', 'redo', '|',
+        //   'bold', 'italic', 'underline', 'strikeThrough', 'paragraphFormat', '|',
+        //   'subscript', 'superscript', '|',
+        //   'outdent', 'indent', '|',
+        //   'formatOL', 'formatUL', 'insertTable', 'insertLink', 'insertImage', '|',
+        //   'clearFormatting', 'html'
+        // ],
         toolbarButtonsXS: ['undo', 'redo', '-', 'bold', 'italic', 'underline']
       }
     }),
@@ -78,7 +78,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-wysiwyg
     .fr-wrapper
       min-height 300px

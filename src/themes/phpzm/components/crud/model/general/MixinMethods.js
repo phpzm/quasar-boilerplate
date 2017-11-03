@@ -1,5 +1,5 @@
 import { actions } from '../../model'
-import { uniqid } from 'src/app/support/utils/index'
+import { uniqid } from 'src/app/support/utils'
 
 export default {
   methods: {
@@ -64,6 +64,13 @@ export default {
       }
     },
     /**
+     * @param {string} component
+     * @returns {string}
+     */
+    componentName (component) {
+      return this.component + '-' + component
+    },
+    /**
      */
     renderAll () {
       this.renderElements()
@@ -122,7 +129,11 @@ export default {
      * @param {Object} query
      */
     browse (path, query = {}) {
-      const remove = query.new === false
+      let remove = false
+      if (query === false) {
+        query = {}
+      }
+
       if (query !== undefined) {
         query = Object.assign({}, query, this.$route.query)
       }
@@ -130,12 +141,16 @@ export default {
         query = {}
       }
       if (path === this.$route.path) {
-        query.new = uniqid()
+        query[this.char] = uniqid()
       }
       if (remove) {
-        delete query.new
+        delete query[this.char]
       }
-      this.$router.push({path, query})
+
+      const browse = () => {
+        this.$router.push({path, query})
+      }
+      window.setTimeout(browse, 100)
     }
   }
 }

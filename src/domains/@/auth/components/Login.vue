@@ -68,7 +68,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .sky
     .card-wrapper
       width 100vw

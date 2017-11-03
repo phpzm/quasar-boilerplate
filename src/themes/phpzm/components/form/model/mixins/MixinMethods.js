@@ -82,12 +82,12 @@ export default {
           components[tab.name] = this.fields.filter(field => field.tab === tab.name).reduce(reduce, {})
         })
       }
-      this.$set(this, 'components', components)
+      this.components = components
     },
     /**
      */
     updateSchemas () {
-      this.$set(this, 'schemas', this.fields.reduce(reduce, {}))
+      this.schemas = this.fields.reduce(reduce, {})
     },
     /**
      */
@@ -99,7 +99,7 @@ export default {
           record[field] = this.$route.query[field]
         }
       })
-      this.$set(this, 'record', record)
+      this.record = record
     },
     /**
      * @param {String} field

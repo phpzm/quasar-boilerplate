@@ -66,7 +66,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-toggle
     .toggle-wrapper
       margin-top 10px

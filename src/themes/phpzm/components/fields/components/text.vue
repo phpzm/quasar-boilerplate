@@ -24,7 +24,7 @@
     },
     data: () => ({
       html: '',
-      max: ''
+      maxlength: ''
     }),
     extends: FieldAbstract,
     methods: {
@@ -39,7 +39,7 @@
           return
         }
         if (this.mask) {
-          this.max = this.mask.length
+          this.maxlength = this.mask.length
           value = mask(this.mask, String(value))
         }
         this.html = value
@@ -63,7 +63,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-text
     .html
       height 38px

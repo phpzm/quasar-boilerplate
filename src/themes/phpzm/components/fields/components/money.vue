@@ -44,8 +44,7 @@
         // If mask is false, outputs the number to the model. Otherwise outputs the masked string.
         masked: false
       },
-      amount: 0,
-      max: ''
+      amount: undefined
     }),
     computed: {
       html () {
@@ -73,7 +72,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-money
     input
       text-align right

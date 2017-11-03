@@ -37,10 +37,14 @@
     },
     methods: {
       updateTransition (from, to) {
+        this.key = uid()
+        if (from === to) {
+          this.transition = ''
+          return
+        }
         const fromDepth = String(from).split('/').length
         const toDepth = String(to).split('/').length
         this.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-        this.key = uid()
       }
     },
     created () {
@@ -56,7 +60,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .transition-slide
     position relative
     overflow-y scroll

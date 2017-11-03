@@ -35,7 +35,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .drawer-menu
     border-width 0 0 1px 0
     border-color #ddd

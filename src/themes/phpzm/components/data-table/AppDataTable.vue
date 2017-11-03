@@ -1,7 +1,7 @@
 <template>
   <div class="app-data-table" :style="style">
     <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
-      <template v-if="actions.length" slot="col-options" scope="cell">
+      <div v-if="actions.length" slot="col-options" slot-scope="cell">
         <div class="app-data-table-options">
           <q-fab color="primary" direction="right">
             <q-fab-action v-if="permission(action, cell.row)" v-for="action in actions" :key="action.id"
@@ -12,7 +12,10 @@
             </q-fab-action>
           </q-fab>
         </div>
-      </template>
+      </div>
+      <!--<div v-for="slot in ['id']" :slot="'col-' + slot" slot-scope="cell">-->
+        <!--<component is="field-text" v-model="cell.data"></component>-->
+      <!--</div>-->
     </q-data-table>
   </div>
 </template>
@@ -35,7 +38,7 @@
       .q-btn-round.q-btn-standard
         height 40px
         width 40px
-        .q-icon, .q-spinner
+        q-icon, .q-spinner
           font-size 20px
     .q-data-table
       display flex
@@ -47,4 +50,10 @@
         overflow visible
       .q-data-table-body
         overflow visible
+
+  .production
+    .app-data-table-options
+      .q-btn-round.q-btn-standard
+        .q-fab-icon.q-icon, .q-fab-active-icon.q-icon
+          margin 6px 0 0 0
 </style>

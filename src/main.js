@@ -20,13 +20,10 @@ if (__THEME === 'mat') {
   require('quasar-extras/roboto-font')
 }
 import 'quasar-extras/material-icons'
-// import 'quasar-extras/ionicons'
-// import 'quasar-extras/fontawesome'
-// import 'quasar-extras/animate'
 
 const base = {
   el: '#q-app',
-  render: h => h(require('root.vue'))
+  render: h => h(require('./root.vue').default)
 }
 const options = Object.assign({}, base, bootstrap(Vue))
 

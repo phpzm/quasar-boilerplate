@@ -1,7 +1,7 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div>
-    <q-ajax-bar :size="'2px'" :color="'teal-10'" :delay="50"></q-ajax-bar>
+    <q-ajax-bar :size="'3px'" :color="'teal-10'" :delay="50"></q-ajax-bar>
     <router-view></router-view>
   </div>
 </template>

@@ -5,30 +5,37 @@ import { resource } from 'src/app/infra/services/http/resource'
  * @type {string}
  */
 export const icon = 'supervisor_account'
+
 /**
  * @type {string}
  */
 export const label = 'Usuários'
+
 /**
  * @type {string}
  */
 export const api = '/auth/user'
+
 /**
  * @type {string}
  */
 export const path = '/dashboard/user'
+
 /**
  * @type {Resource}
  */
 export const service = resource(api)
+
 /**
  * @type {Object}
  */
 export const meta = model.meta(icon, label, 'Cadastro de Usuários')
+
 /**
  * @type {Function}
  */
 export const menu = model.menu(icon, label, path)
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -41,11 +48,14 @@ export const grid = (scope, route) => {
     pagination: true,
     search: true,
     schemas: fields('index'),
+    filters: filters(scope, route),
     actions: ($this, actions) => {
       return actions
-    }
+    },
+    debug: true
   }
 }
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -59,14 +69,17 @@ export const form = (scope, route) => {
     schemas: fields(scope),
     actions: ($this, actions) => {
       return actions
-    }
+    },
+    debug: true
   }
 }
+
 /**
  * @param {string} scope
+ * @param {Route} route
  * @returns {Array}
  */
-export const fields = (scope) => {
+export const fields = (scope, route = null) => {
   return model.filter(
     [
       model.field('id', 'Código', '').$in('index').$grid({width: 10}).$render(),
@@ -76,4 +89,15 @@ export const fields = (scope) => {
     ],
     scope
   )
+}
+
+/**
+ * @param {string} scope
+ * @param {Route} route
+ * @returns {Array}
+ */
+export const filters = (scope, route = null) => {
+  return [
+    model.field('age', 'Idade').$render()
+  ]
 }

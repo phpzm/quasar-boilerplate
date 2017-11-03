@@ -64,7 +64,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .field-base
     .has-error input
       background rgba(249, 125, 125, 0.2)

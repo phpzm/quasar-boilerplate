@@ -1,9 +1,9 @@
 import { confirm } from 'src/app/support/message/index'
 import { first } from 'src/app/infra/services/http/resource'
 
-export { default as methods } from 'src/themes/phpzm/components/crud/model/mixin/MixinMethods'
-export { default as data } from 'src/themes/phpzm/components/crud/model/mixin/MixinData'
-export { default as props } from 'src/themes/phpzm/components/crud/model/mixin/MixinProps'
+export { default as MixinData } from 'src/themes/phpzm/components/crud/model/general/MixinData'
+export { default as MixinMethods } from 'src/themes/phpzm/components/crud/model/general/MixinMethods'
+export { default as MixinProps } from 'src/themes/phpzm/components/crud/model/general/MixinProps'
 
 /**
  * @param {Object} $this
@@ -174,6 +174,7 @@ const buttons = ($this) => {
         window.history.back()
       }
     },
+    // last buttons
     {
       id: 'start',
       permission: 1,
@@ -184,7 +185,21 @@ const buttons = ($this) => {
       label: '',
       tooltip: 'Abre a lista de registros',
       handler: (record, schemas, $component) => {
-        $this.browse($this.path, {new: false})
+        $this.browse($this.path, false)
+      }
+    },
+    {
+      'class': '--button-filter',
+      id: 'filter',
+      permission: 1,
+      color: 'white',
+      scopes: ['index'],
+      positions: ['top', 'bottom'],
+      icon: 'filter_list',
+      label: '',
+      tooltip: 'Abre o painel de filtros',
+      handler: (record, schemas, $component) => {
+        $this.filterOpen()
       }
     }
   ]
