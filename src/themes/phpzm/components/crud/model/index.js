@@ -171,7 +171,7 @@ const buttons = ($this) => {
       label: 'Voltar',
       tooltip: 'Voltar para a tela anterior',
       handler: (record, schemas, $component) => {
-        window.history.back()
+        $this.$router.go(-1)
       }
     },
     // last buttons

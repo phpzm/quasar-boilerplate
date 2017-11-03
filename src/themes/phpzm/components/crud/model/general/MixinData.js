@@ -6,7 +6,7 @@ export default {
       bottom: [],
       floating: []
     },
-    timeout: 500,
+    timeout: 1000,
     char: '~'
   })
 }
