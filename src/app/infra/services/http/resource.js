@@ -134,7 +134,7 @@ export const source = (api, value, label, extra = {}) => {
  * @param {AxiosResponse} response
  * @returns {*}
  */
-export const $get = (response) => {
+export const $body = (response) => {
   return http.$body(response)
 }
 

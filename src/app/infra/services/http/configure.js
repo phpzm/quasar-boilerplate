@@ -63,7 +63,7 @@ export default http => {
    * @returns {*}
    */
   http.$first = (response) => {
-    const content = http.$get(response)
+    const content = http.$body(response)
     if (Array.isArray(content)) {
       return content.shift()
     }
