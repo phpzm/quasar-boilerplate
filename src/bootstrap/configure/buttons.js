@@ -1,6 +1,8 @@
 import { confirm } from 'src/app/support/message/index'
 import { first } from 'src/app/infra/services/http/resource'
 
+const color = 'positive'
+
 /**
  * @param {Object} $this
  * @return {Array}
@@ -197,7 +199,7 @@ export default ($this) => {
     {
       id: 'start',
       permission: 1,
-      color: 'tertiary',
+      color: color,
       scopes: ['create', 'view', 'edit'],
       rotate: false,
       positions: ['top', 'bottom'],
@@ -212,7 +214,7 @@ export default ($this) => {
       'class': '--button-filter',
       id: 'filter',
       permission: 1,
-      color: 'tertiary',
+      color: color,
       scopes: ['index'],
       rotate: false,
       positions: ['top', 'bottom'],
