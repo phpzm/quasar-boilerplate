@@ -40,3 +40,9 @@
 .warning
   background $warning
   color #515151
+
+.q-btn.rotate > .q-btn-inner > i, .rotate .q-btn > .q-btn-inner > i
+  transition transform .6s
+  transform rotate(0deg)
+.q-btn.rotate:hover > .q-btn-inner > i, .rotate .q-btn:hover > .q-btn-inner > i
+    transform rotate(360deg)

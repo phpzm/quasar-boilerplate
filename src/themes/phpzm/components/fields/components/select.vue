@@ -2,7 +2,7 @@
   <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
-        <q-select ref="input" class="input full-width"
+        <q-select ref="input" class="input full-width" :class="{'disabled': disable}"
                   v-model="model" v-bind="{disable, options, type, name, placeholder}"
                   @input="$emit('input', model)"></q-select>
       </div>
@@ -27,7 +27,6 @@
         default: 'radio'
       },
       options: {
-        type: Array,
         default: () => ([])
       },
       source: {
@@ -53,15 +52,11 @@
         if (this.type === 'radio') {
           model = [this.model]
         }
-        const selected = this.options.filter(_option => model.includes(_option.value))
+        const selected = this.options.filter(option => model.includes(option.value))
         if (!selected.length) {
           return ''
         }
-        return selected
-          .map(_item => {
-            return _item.label
-          })
-          .join(', ')
+        return selected.map(item => item.label).join(', ')
       }
     },
     data: () => ({
@@ -96,6 +91,8 @@
       top 7px
 
   .field-select
+    .q-if-disabled:before
+      background none
     .q-select.q-if
       padding 6px 8px
     .has-error .q-picker-textfield

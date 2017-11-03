@@ -3,6 +3,7 @@ import canceler from 'axios-cancel'
 import configure from 'src/app/infra/services/http/configure'
 import { URL_API } from 'src/app/support/index'
 import { loading } from 'src/app/support/message/index'
+import configureToken from 'src/bootstrap/configure/token'
 
 const http = axios.create({
   baseURL: URL_API,
@@ -22,7 +23,7 @@ canceler(http, {
  * @param {string} token
  */
 export const setToken = token => {
-  http.defaults.headers.common.Authorization = `Bearer ${token}`
+  http.defaults.headers.common.Authorization = configureToken(token)
 }
 
 /**

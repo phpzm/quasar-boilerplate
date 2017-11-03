@@ -10,28 +10,8 @@
     </div>
 
     <q-modal ref="filter" position="right" :content-css="filter.css">
-      <div class="text-right">
-        <q-icon class="cursor-pointer" name="cancel" @click="filterClose()"></q-icon>
-      </div>
-      <hr class="light">
-      <h6>Filtros</h6>
-      <div class="form">
-        <component v-for="bind in filter.columns" :key="bind.field" :is="bind.component"
-                   v-model="filter.record[bind.field]" v-bind="bind"></component>
-      </div>
-      <hr>
-      <div class="form">
-        <div class="field has-100 text-right">
-          <span>
-            <q-btn color="primary" @click="filterApply">Pesquisar</q-btn>
-            <q-tooltip>Aplica a pesquisa a lista</q-tooltip>
-          </span>
-          <span>
-            <q-btn color="white" @click="filterClear">Limpar</q-btn>
-            <q-tooltip>Limpa os dados da pesquisa</q-tooltip>
-          </span>
-        </div>
-      </div>
+      <app-grid-filter :filters="filter.columns" :record="filter.record"
+                       @close="filterClose" @apply="filterApply" @clear="filterClear"></app-grid-filter>
     </q-modal>
 
     <template v-if="debugging">
@@ -46,12 +26,13 @@
   import AppDataTable from 'src/themes/phpzm/components/data-table/AppDataTable.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
+  import AppGridFilter from 'src/themes/phpzm/components/crud/components/grid/AppGridFilter'
   import { MixinData, MixinMethods, MixinProps } from './model'
   import { MixinGrid, MixinFilter } from './model/grid'
 
   export default {
     components: {
-      AppDataTable, AppButtonBar, AppDebugger
+      AppDataTable, AppButtonBar, AppGridFilter, AppDebugger
     },
     mixins: [
       MixinData, MixinMethods, MixinProps, MixinGrid, MixinFilter
@@ -61,13 +42,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import '~variables'
-
   .app-crud-grid
     padding 16px 0 0 0
     &.--grid-filtering
       .--button-filter
-        background $negative !important
+        background darkred !important
         i
           color white !important
     hr

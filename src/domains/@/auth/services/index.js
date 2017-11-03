@@ -21,6 +21,6 @@ export const login = (credentials, remember, success) => {
 export const logout = (success) => {
   unRegister(success)
     .then(() => {
-      http.post('/auth/logout', store.getters.getAuthUser, {requestId: ''})
+      http.post('/auth/logout', store.getters.getAuthUser, {noLoading: true, requestId: ''})
     })
 }

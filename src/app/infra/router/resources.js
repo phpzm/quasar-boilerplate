@@ -30,10 +30,11 @@ export const route = (props, path, uri, scope, component, label = '', icon = '',
  * @param {Function} grid
  * @param {Function} form
  * @param {Object} meta
+ * @param {string} id
  * @param {string} components
  * @returns {Array}
  */
-export const crud = (path, grid, form, meta, components = 'themes/phpzm/components/crud') => {
+export const crud = (path, grid, form, meta, id = 'id', components = 'themes/phpzm/components/crud') => {
   const create = 'Cria um novo registro no(a) ' + meta.tooltip
   const view = 'Visualiza um registro do(a) ' + meta.tooltip
   const edit = 'Edita um novo registro do(a) ' + meta.tooltip
@@ -48,8 +49,8 @@ export const crud = (path, grid, form, meta, components = 'themes/phpzm/componen
       children: [
         route(grid, path, '', 'index', components + '/Grid', '', '', meta.tooltip),
         route(form, path, 'create', 'create', components + '/Form', 'Criar', 'add', create),
-        route(form, path, ':id', 'view', components + '/Form', 'Visualizar', 'search', view),
-        route(form, path, ':id/edit', 'edit', components + '/Form', 'Editar', 'edit', edit)
+        route(form, path, ':' + id, 'view', components + '/Form', 'Visualizar', 'search', view),
+        route(form, path, ':' + id + '/edit', 'edit', components + '/Form', 'Editar', 'edit', edit)
       ]
     }
   ]

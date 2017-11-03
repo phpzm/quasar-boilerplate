@@ -21,7 +21,7 @@ const root = [
 export default [
   {
     path: '/dashboard',
-    component: 'app/modules/dashboard/Index',
+    component: 'domains/@/dashboard/components/Index',
     props: {
       view: 'lHh Lpr lFf',
       reveal: true,

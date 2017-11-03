@@ -1,10 +1,10 @@
 <template>
   <app-card>
     <div slot="title">
-      Home
+      <q-icon name="home"></q-icon> Home
     </div>
     <div slot="content">
-      <q-icon name="home"></q-icon>
+
     </div>
   </app-card>
 </template>

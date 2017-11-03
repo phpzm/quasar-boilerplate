@@ -43,4 +43,30 @@ export default http => {
   http.patch = function (url, data, config) {
     return _patch(url, data, Object.assign({}, {requestId: uid()}, config))
   }
+
+  /**
+   * @param {AxiosResponse} response
+   * @returns {*}
+   */
+  http.$body = (response) => {
+    if (!response.data) {
+      return {}
+    }
+    if (typeof response.data.body !== 'object') {
+      return {}
+    }
+    return response.data.body
+  }
+
+  /**
+   * @param {AxiosResponse} response
+   * @returns {*}
+   */
+  http.$first = (response) => {
+    const content = http.$get(response)
+    if (Array.isArray(content)) {
+      return content.shift()
+    }
+    return {}
+  }
 }

@@ -36,5 +36,6 @@ export {
   QToggle,
   QDataTable,
   QSlider,
-  QModal
+  QModal,
+  QChip
 } from 'quasar-framework'

@@ -8,22 +8,11 @@
         <q-icon name="error_outline" color="grey-5" />
         <p class="caption text-center">Oops. Nothing here...</p>
         <p class="text-center group">
-          <q-btn
-            v-if="canGoBack"
-            color="primary"
-            push
-            @click="goBack"
-            icon="keyboard_arrow_left"
-          >
-            Go back
+          <q-btn v-if="canGoBack" color="primary" raised @click="goBack" icon="keyboard_arrow_left">
+            Voltar
           </q-btn>
-          <q-btn
-            color="primary"
-            push
-            @click="$router.replace('/')"
-            icon-right="home"
-          >
-            Go home
+          <q-btn color="primary" raised @click="$router.replace('/')" icon-right="home">
+            Ir para a página incial
           </q-btn>
         </p>
       </div>

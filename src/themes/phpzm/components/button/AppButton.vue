@@ -1,5 +1,5 @@
 <template>
-  <q-btn :icon="inherit" :color="color" :round="round" :class="{'raised': raised}" :outline="outline"
+  <q-btn :icon="inherit" :color="color" :round="round" :class="{'raised': raised, 'rotate': rotate}" :outline="outline"
          @click="$emit('click')">
     <span v-if="label" v-html="label"></span>
     <q-icon v-else :name="icon"></q-icon>
@@ -9,24 +9,58 @@
 
 <script type="text/javascript">
   export default {
+    name: 'q-button',
     computed: {
       inherit () {
         return this.label ? this.icon : ''
       }
     },
     props: {
-      id: String,
-      permission: Number,
-      color: String,
-      scopes: Array,
-      positions: Array,
-      outline: Boolean,
-      round: Boolean,
-      raised: Boolean,
-      icon: String,
-      label: String
-    },
-    name: 'q-button'
+      id: {
+        type: String,
+        default: () => ''
+      },
+      permission: {
+        type: Number,
+        default: () => 0
+      },
+      color: {
+        type: String,
+        default: () => ''
+      },
+      scopes: {
+        type: Array,
+        default: () => ([])
+      },
+      positions: {
+        type: Array,
+        default: () => ([])
+      },
+      outline: {
+        type: Boolean,
+        default: () => false
+      },
+      round: {
+        type: Boolean,
+        default: () => false
+      },
+      rotate: {
+        type: Boolean,
+        default: () => true
+      },
+      raised: {
+        type: Boolean,
+        default: () => false
+      },
+      icon: {
+        type: String,
+        default: () => ''
+      },
+      label: {
+        type: String,
+        default: () => ''
+      }
+    }
   }
 </script>
 

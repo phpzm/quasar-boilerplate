@@ -134,8 +134,8 @@ export const source = (api, value, label, extra = {}) => {
  * @param {AxiosResponse} response
  * @returns {*}
  */
-export const body = (response) => {
-  return response.data.body
+export const $get = (response) => {
+  return http.$body(response)
 }
 
 /**
@@ -143,11 +143,7 @@ export const body = (response) => {
  * @returns {*}
  */
 export const first = (response) => {
-  const content = body(response)
-  if (Array.isArray(content)) {
-    return content.shift()
-  }
-  return {}
+  return http.$first(response)
 }
 
 /**

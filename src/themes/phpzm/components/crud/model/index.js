@@ -2,7 +2,7 @@ export { default as MixinData } from 'src/themes/phpzm/components/crud/model/gen
 export { default as MixinMethods } from 'src/themes/phpzm/components/crud/model/general/MixinMethods'
 export { default as MixinProps } from 'src/themes/phpzm/components/crud/model/general/MixinProps'
 
-import { configureButtons } from 'src/bootstrap/settings'
+import configureButtons from 'src/bootstrap/configure/buttons'
 
 /**
  * @param {Vue} $this

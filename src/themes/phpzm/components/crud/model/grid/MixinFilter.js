@@ -4,8 +4,9 @@ export default {
       active: false,
       columns: [],
       record: {},
+      rules: {},
       css: {
-        padding: '10px 20px 20px 20px',
+        padding: '0',
         height: '100vh',
         maxHeight: '100vh',
         width: '30vw',
@@ -47,6 +48,7 @@ export default {
       column.width = 100
       column.component = this.componentName(column.filter.component)
       column.value = column.filter.value
+      column.rule = column.filter.rule || 'like'
       delete column.filter
       return column
     },
@@ -55,8 +57,17 @@ export default {
      * @param {Object} filter
      * @returns {Object}
      */
-    reduceFilters (accumulate, filter) {
+    reduceFiltersRecord (accumulate, filter) {
       accumulate[filter.field] = filter.value
+      return accumulate
+    },
+    /**
+     * @param {Object} accumulate
+     * @param {Object} filter
+     * @returns {Object}
+     */
+    reduceFiltersRules (accumulate, filter) {
+      accumulate[filter.field] = filter.rule
       return accumulate
     },
     /**
@@ -79,21 +90,48 @@ export default {
 
       this.filter.columns = filters
 
-      this.filter.record = this.filter.columns.reduce(this.reduceFilters, {})
+      this.filter.record = this.filter.columns.reduce(this.reduceFiltersRecord, {})
+      this.filter.rules = this.filter.columns.reduce(this.reduceFiltersRules, {})
+    },
+    /**
+     * @param {*} value
+     * @param {string} char
+     * @returns {*}
+     */
+    clearFilter (value, char) {
+      if (value === undefined) {
+        return value
+      }
+      const split = String(value).split(char)
+      if (split.length < 2) {
+        return value
+      }
+      split.shift()
+      return split.join(char)
     },
     /**
      */
     applyFilters () {
-      const filters = {}
-      Object.keys(this.filter.record).forEach((key) => {
-        if (this.$route.query[key] === undefined) {
-          return
+      const char = '~>'
+      const record = Object.keys(this.filter.record).reduce((accumulate, key) => {
+        const value = this.clearFilter(this.$route.query[key], char)
+        if (value !== undefined) {
+          accumulate[key] = value
         }
-        filters[key] = this.$route.query[key]
-      })
-      this.$set(this.filter, 'record', filters)
+        return accumulate
+      }, {})
+      this.$set(this.filter, 'record', record)
 
-      this.filter.active = !!Object.keys(filters).length
+      this.filter.active = !!Object.keys(record).length
+
+      const filters = Object.keys(record).reduce((accumulate, key) => {
+        let value = record[key]
+        if (this.filter.rules[key]) {
+          value = this.filter.rules[key] + char + value
+        }
+        accumulate[key] = value
+        return accumulate
+      }, {})
 
       const search = () => {
         this.search(filters)

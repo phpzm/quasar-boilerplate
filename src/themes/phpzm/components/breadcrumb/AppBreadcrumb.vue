@@ -1,9 +1,8 @@
 <template>
   <ul class="breadcrumb">
     <li>
-      <!--suppress HtmlUnknownAnchorTarget -->
-      <router-link :to="home">
-        <q-icon name="home"></q-icon>
+      <router-link :to="path">
+        <q-icon :name="icon"></q-icon>
         <q-tooltip>Página Inicial</q-tooltip>
       </router-link>
     </li>
@@ -23,8 +22,14 @@
 
   export default {
     name: 'app-breadcrumb',
+    props: {
+      icon: {
+        type: String,
+        default: 'home'
+      }
+    },
     data: () => ({
-      home: PATH_HOME,
+      path: PATH_HOME,
       items: []
     }),
     methods: {
@@ -38,7 +43,7 @@
        * @returns {boolean}
        */
       filterBreadcrumb (match) {
-        return match.path !== this.home
+        return match.path !== this.path
       },
       /**
        * @param {Array} accumulate
@@ -75,8 +80,10 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  ul.breadcrumb li
-    margin 0
-  ul.breadcrumb li:last-child a
-    border-radius 2px
+  ul.breadcrumb
+    margin 7px 0 0 0
+    li
+      margin 0
+    &:last-child a
+      border-radius 2px
 </style>

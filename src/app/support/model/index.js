@@ -58,15 +58,28 @@ export const field = (field, label, component = 'text', scopes = []) => {
       this[property] = Object.assign({}, this[property], value)
       return this
     },
-    $filter (value = '', component = '') {
-      this.grid.filter = {value, component}
+    $filter (rule = 'like', value = '', component = '') {
+      this.grid.filter = {rule, value, component}
       return this
+    },
+    $readonly () {
+      this.form.disabled = true
+      return this
+    },
+    $pk () {
+      return this.$readonly().$out('create').$grid({width: '60px'})
     },
     $validate (rule, value = true) {
       if (!this.form.validate) {
         this.form.validate = {}
       }
       this.form.validate[rule] = value
+      return this
+    },
+    $required (require) {
+      if (require) {
+        this.$validate('required')
+      }
       return this
     },
     $link (path) {
@@ -95,6 +108,7 @@ export const field = (field, label, component = 'text', scopes = []) => {
     },
     $datetime () {
       this.form.component = 'date'
+      this.form.time = true
       this.grid.format = formatDateTime
       return this
     },
@@ -119,13 +133,31 @@ export const field = (field, label, component = 'text', scopes = []) => {
       this.form.component = 'numeric'
       return this
     },
+    $password () {
+      this.form.component = 'password'
+      return this
+    },
     $phone () {
       this.form.component = 'phone'
       this.grid.format = formatPhone
       return this
     },
-    $select () {
+    $select (type = 'radio', options = []) {
       this.form.component = 'select'
+      this.form.type = type
+      this.form.options = options
+      this.grid.format = value => {
+        if (Array.isArray(options)) {
+          const option = options.find(option => String(option.value) === String(value))
+          return option && option.label ? option.label : ''
+        }
+        return value
+      }
+      return this
+    },
+    $pivot (options = {}) {
+      this.form.component = 'pivot'
+      this.form.options = options
       return this
     },
     $separator () {
@@ -184,13 +216,19 @@ export const meta = (icon, label, tooltip) => {
  * @param {string} icon
  * @param {string} label
  * @param {string} path
+ * @param {Boolean} exact
+ * @param {string} tooltip
+ * @param {string} id
  * @returns {Function}
  */
-export const menu = (icon, label, path) => {
+export const menu = (icon, label, path, exact = false, tooltip = '', id = '') => {
   return to => {
     return {
       to: to(path),
       label: label,
+      exact: exact,
+      id: id,
+      tooltip: tooltip,
       left: {
         icon: icon
       }

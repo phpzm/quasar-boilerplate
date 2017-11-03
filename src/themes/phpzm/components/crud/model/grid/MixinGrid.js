@@ -1,4 +1,4 @@
-import { populateGrid } from 'src/bootstrap/settings'
+import populateGrid from 'src/bootstrap/populate/grid'
 
 export default {
   props: {
