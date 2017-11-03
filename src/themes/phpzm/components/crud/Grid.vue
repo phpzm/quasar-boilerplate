@@ -11,7 +11,7 @@
 
     <q-modal ref="filter" position="right" :content-css="filter.css">
       <div class="text-right">
-        <q-btn round small color="tertiary" icon="close" @click="filterClose()" class="btn-x-small"></q-btn>
+        <q-icon class="cursor-pointer" name="cancel" @click="filterClose()"></q-icon>
       </div>
       <hr class="light">
       <h6>Filtros</h6>
@@ -22,8 +22,14 @@
       <hr>
       <div class="form">
         <div class="field has-100 text-right">
-          <q-btn color="primary" icon="search" @click="filterApply">Pesquisar</q-btn>
-          <q-btn color="white" icon="cancel" @click="filterClear">Limpar</q-btn>
+          <span>
+            <q-btn color="primary" @click="filterApply">Pesquisar</q-btn>
+            <q-tooltip>Aplica a pesquisa a lista</q-tooltip>
+          </span>
+          <span>
+            <q-btn color="white" @click="filterClear">Limpar</q-btn>
+            <q-tooltip>Limpa os dados da pesquisa</q-tooltip>
+          </span>
         </div>
       </div>
     </q-modal>

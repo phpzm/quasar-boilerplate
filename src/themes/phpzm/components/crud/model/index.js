@@ -185,7 +185,7 @@ const buttons = ($this) => {
       label: '',
       tooltip: 'Abre a lista de registros',
       handler: (record, schemas, $component) => {
-        $this.browse($this.path, {new: false})
+        $this.browse($this.path, false)
       }
     },
     {

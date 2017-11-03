@@ -1,5 +1,4 @@
 import { populateGrid } from 'src/bootstrap/settings'
-import { uniqid } from 'src/app/support/utils'
 
 export default {
   props: {
@@ -32,10 +31,7 @@ export default {
     columns: [],
     data: [],
     page: 1,
-    pages: 1,
-    uid: uniqid(),
-    timeout: 500,
-    char: '~'
+    pages: 1
   }),
   methods: {
     /**

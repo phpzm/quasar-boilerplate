@@ -1,4 +1,5 @@
 import { actions } from '../../model'
+import { uniqid } from 'src/app/support/utils'
 
 export default {
   methods: {
@@ -128,7 +129,11 @@ export default {
      * @param {Object} query
      */
     browse (path, query = {}) {
-      const remove = query[this.char] === false
+      let remove = false
+      if (query === false) {
+        query = {}
+      }
+
       if (query !== undefined) {
         query = Object.assign({}, query, this.$route.query)
       }
@@ -136,7 +141,7 @@ export default {
         query = {}
       }
       if (path === this.$route.path) {
-        query[this.char] = this.uid
+        query[this.char] = uniqid()
       }
       if (remove) {
         delete query[this.char]
