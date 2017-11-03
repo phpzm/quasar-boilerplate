@@ -67,4 +67,15 @@
         color magenta
       .key
         color green
+
+  details[open] summary ~ *
+    animation debug .5s
+
+  @keyframes debug
+    0%
+      opacity 0
+      margin-top -10px
+    100%
+      opacity 1
+      margin-top 0
 </style>

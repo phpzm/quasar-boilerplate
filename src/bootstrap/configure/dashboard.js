@@ -22,4 +22,11 @@ export default ($component) => {
   store.dispatch('setAppMenu', menu(to))
   // noinspection JSIgnoredPromiseFromCall
   store.dispatch('setDashboardOptions', options())
+  // noinspection JSIgnoredPromiseFromCall
+  store.dispatch('setDashboardBadges', [
+    {
+      value: 'admin',
+      label: 'New'
+    }
+  ])
 }

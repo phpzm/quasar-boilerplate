@@ -24,8 +24,8 @@
     computed: {
       badges () {
         return this.getDashboardBadges.reduce((accumulate, item) => {
-          if (item.id) {
-            accumulate[item.id] = item.count
+          if (item.value) {
+            accumulate[item.value] = item.label
           }
           return accumulate
         }, {})

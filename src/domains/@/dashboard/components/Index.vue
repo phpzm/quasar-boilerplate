@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
   import LayoutDefault from 'src/themes/phpzm/components/layout/AppLayout.vue'
-  import { configureDashboard } from 'src/bootstrap/settings'
+  import configureDashboard from 'src/bootstrap/configure/dashboard'
 
   export default {
     name: 'dashboard',

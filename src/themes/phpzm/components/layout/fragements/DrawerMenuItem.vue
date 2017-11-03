@@ -82,8 +82,8 @@
   .drawer-menu-item
     position  relative
     .q-chip.floating
-      left 52px
-      top -2px
+      left 54px
+      top -4px
       padding 3px
       font-size 10px
     .q-collapsible-drawer

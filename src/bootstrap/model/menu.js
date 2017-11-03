@@ -3,6 +3,7 @@ import { menu as category } from 'src/domains/general/category/model'
 
 export default to => [
   {
+    id: 'dashboard',
     to: '/dashboard',
     label: 'Página Inicial',
     exact: true,
@@ -11,6 +12,7 @@ export default to => [
     }
   },
   {
+    id: 'forms',
     to: to('/dashboard/forms'),
     label: 'Formulários',
     exact: true,
@@ -19,6 +21,7 @@ export default to => [
     }
   },
   {
+    id: 'graphics',
     to: to('/dashboard/graphics'),
     label: 'Gráficos',
     exact: true,
@@ -27,10 +30,12 @@ export default to => [
     }
   },
   {
+    id: 'admin',
     label: 'Administração',
     icon: 'format_quote',
     children: [
       {
+        id: 'vpn_key',
         label: 'Autenticação',
         icon: 'vpn_key',
         children: [
@@ -40,10 +45,12 @@ export default to => [
     ]
   },
   {
+    id: 'work',
     label: 'Cadastro',
     icon: 'work',
     children: [
       {
+        id: 'list',
         label: 'Geral',
         icon: 'list',
         children: [
