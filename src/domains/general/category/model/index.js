@@ -54,7 +54,6 @@ export const grid = (scope, route) => {
     pagination: true,
     search: true,
     schemas: fields(scope, route),
-    filters: filters(scope, route),
     debug: true
   }
 }
@@ -92,15 +91,4 @@ export const fields = (scope, route = null) => {
     ],
     scope
   )
-}
-
-/**
- * @param {string} scope
- * @param {Route} route
- * @returns {Array}
- */
-export const filters = (scope, route = null) => {
-  return [
-    model.field('age', 'Idade').$render()
-  ]
 }

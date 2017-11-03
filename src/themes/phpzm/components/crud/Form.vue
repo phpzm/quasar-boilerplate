@@ -21,13 +21,15 @@
   import AppForm from 'src/themes/phpzm/components/form/AppForm.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
-  import { data, methods, props } from './model'
+  import { MixinData, MixinMethods, MixinProps } from './model'
 
   export default {
     components: {
       AppForm, AppButtonBar, AppDebugger
     },
-    mixins: [data, methods, props],
+    mixins: [
+      MixinData, MixinMethods, MixinProps
+    ],
     name: 'app-crud-form',
     props: {
       scope: {

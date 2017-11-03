@@ -13,6 +13,9 @@
           </q-fab>
         </div>
       </div>
+      <!--<div v-for="slot in ['id']" :slot="'col-' + slot" slot-scope="cell">-->
+        <!--<component is="field-text" v-model="cell.data"></component>-->
+      <!--</div>-->
     </q-data-table>
   </div>
 </template>

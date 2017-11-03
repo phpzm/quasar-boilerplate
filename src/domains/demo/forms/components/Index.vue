@@ -5,8 +5,6 @@
     </div>
     <div slot="content">
       <hr>
-      <pre>{{ model }}</pre>
-      <hr>
       <div class="form">
         <field-checkbox v-bind="{label: 'Caixa de Seleção', width: 50, value: true}" v-model="model.checkbox"></field-checkbox>
         <field-color v-bind="{label: 'Cor', width: 50, value: '#ff0000'}" v-model="model.color"></field-color>
@@ -21,6 +19,7 @@
         <field-time v-bind="{label: 'Tempo', width: 50}" v-model="model.time"></field-time>
         <field-toggle v-bind="{label: 'Alternador', width: 50}" v-model="model.toggle"></field-toggle>
       </div>
+      <app-debugger v-bind="{label: 'debug', inspect: model}"></app-debugger>
       <hr>
       <q-btn color="negative" @click="setAppModified(true)">Forçar estado modificado</q-btn>
     </div>
@@ -32,10 +31,12 @@
   import 'src/themes/phpzm/components/fields/index'
   import AppLayout from 'src/themes/phpzm/components/layout/AppLayout.vue'
   import AppCard from 'src/themes/phpzm/components/card/AppCard.vue'
+  import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
   import { icon, title } from '../model'
 
   export default {
     components: {
+      AppDebugger,
       AppLayout,
       AppCard
     },

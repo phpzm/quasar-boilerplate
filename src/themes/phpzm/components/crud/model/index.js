@@ -1,9 +1,9 @@
 import { confirm } from 'src/app/support/message/index'
 import { first } from 'src/app/infra/services/http/resource'
 
-export { default as methods } from 'src/themes/phpzm/components/crud/model/general/MixinMethods'
-export { default as data } from 'src/themes/phpzm/components/crud/model/general/MixinData'
-export { default as props } from 'src/themes/phpzm/components/crud/model/general/MixinProps'
+export { default as MixinData } from 'src/themes/phpzm/components/crud/model/general/MixinData'
+export { default as MixinMethods } from 'src/themes/phpzm/components/crud/model/general/MixinMethods'
+export { default as MixinProps } from 'src/themes/phpzm/components/crud/model/general/MixinProps'
 
 /**
  * @param {Object} $this
@@ -189,9 +189,10 @@ const buttons = ($this) => {
       }
     },
     {
+      'class': '--button-filter',
       id: 'filter',
       permission: 1,
-      color: $this.filter && $this.filter.active ? 'red' : 'white',
+      color: 'white',
       scopes: ['index'],
       positions: ['top', 'bottom'],
       icon: 'filter_list',
