@@ -1,4 +1,10 @@
 export default {
+  props: {
+    rule: {
+      type: String,
+      default: () => ''
+    }
+  },
   data: () => ({
     filter: {
       active: false,
@@ -48,7 +54,7 @@ export default {
       column.width = 100
       column.component = this.componentName(column.filter.component)
       column.value = column.filter.value
-      column.rule = column.filter.rule || 'like'
+      column.rule = column.filter.rule || this.rule
       delete column.filter
       return column
     },

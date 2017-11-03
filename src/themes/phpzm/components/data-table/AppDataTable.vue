@@ -1,5 +1,5 @@
 <template>
-  <div class="app-data-table" :style="style">
+  <div class="app-data-table" :style="config.styles">
     <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
       <div v-if="actions.length" slot="col-options" slot-scope="cell">
         <div class="app-data-table-options">
