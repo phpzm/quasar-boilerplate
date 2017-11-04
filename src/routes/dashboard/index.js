@@ -6,6 +6,16 @@ import user from 'src/domains/admin/user/routes'
 import organization from 'src/domains/admin/organization/routes'
 import categories from 'src/domains/general/category/routes'
 
+/*
+ * Configure the property meta with namespace and permission to access control
+ * The helper "crud" provided for src/app/infra/router/resources.js has that ability
+ * Example:
+ * meta: {
+ *   namespace: 'admin.user',
+ *   permission: [1 to 4]
+ * }
+ */
+
 /**
  * @type Array
  */

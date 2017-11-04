@@ -1,5 +1,15 @@
 /**
  * @param {string} path
+ * @param {string} name
+ * @param {string} component
+ * @param {Function} props
+ * @param {Object} meta
+ * @returns {Object}
+ */
+export const route = (path, name, component, props, meta) => ({path, name, component, props, meta})
+
+/**
+ * @param {string} path
  * @param {string} namespace
  * @param {Function} props
  * @param {string} uri
@@ -11,22 +21,15 @@
  * @param {string} tooltip
  * @returns {Object}
  */
-export const child = (path, namespace, props, uri, scope, component, permission, label = '', icon = '', tooltip = '') => {
-  return {
-    path: uri,
-    component: component,
-    name: namespace + '.' + scope,
-    props: (route) => {
-      return props(scope, route)
-    },
-    meta: {
-      icon: icon,
-      label: label,
-      tooltip: tooltip,
-      namespace: namespace,
-      permission: permission
-    }
-  }
+export const child = (path, namespace, props, uri, scope, component, permission, label = '', icon = '',
+  tooltip = '') => {
+  return route(
+    uri,
+    namespace + '.' + scope,
+    component,
+    (route) => props(scope, route),
+    {icon, label, tooltip, namespace, permission}
+  )
 }
 
 /**

@@ -13,9 +13,8 @@
         <br>
       </p>
       <pre>
-        É um projeto experimental e requer que haja revisões antes de ir para produção.
-        Não nos responsabilizamos por eventuais problemas!
-      </pre>
+        Este é um projeto experimental e requer que haja revisões antes de ir para produção.
+        Não nos responsabilizamos por eventuais problemas! Nenhum problema mesmo #ficadica.</pre>
       <hr>
         <p align="justify">
           Você pode ver o código-fonte do projeto aqui no <a href="https://github.com/phpzm/quasar-boilerplate" target="_blank">Github</a>

@@ -156,6 +156,24 @@ export default ($this) => {
       }
     },
     {
+      id: 'create-and-back',
+      permission: 2,
+      color: 'white',
+      scopes: ['create', 'edit'],
+      positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
+      icon: '',
+      label: 'Salvar & Voltar',
+      tooltip: 'Salva este registro e volta para a listagem de registros',
+      handler: (record, schemas, $component) => {
+        $this.save(record, (response) => {
+          $this.browse($this.path)
+        })
+      }
+    },
+    {
       id: 'editing',
       permission: 2,
       color: 'white',
