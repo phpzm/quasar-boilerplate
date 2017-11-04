@@ -1,4 +1,4 @@
-export { default as watch } from './mixins/MixinComputed'
+export { default as computed } from './mixins/MixinComputed'
 
 export { default as data } from './mixins/MixinData'
 

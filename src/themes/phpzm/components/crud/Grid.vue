@@ -2,7 +2,8 @@
   <div class="app-crud-grid" :class="{'--grid-filtering': filter.active}">
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <hr>
-    <app-data-table ref="grid" v-bind="{columns, data, debug, actions: buttons.middle}"></app-data-table>
+    <app-data-table ref="grid"
+                    v-bind="{columns, data, debug, position, actions: buttons.middle}"></app-data-table>
     <hr>
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
     <div class="fixed-bottom-right">

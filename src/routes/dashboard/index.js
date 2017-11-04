@@ -13,11 +13,6 @@ export default [
   {
     path: '/dashboard',
     component: 'domains/@/dashboard/components/Index',
-    props: {
-      view: 'lHh Lpr lFf',
-      reveal: true,
-      leftBreakpoint: 996
-    },
     children: [
       ...home,
       ...forms,

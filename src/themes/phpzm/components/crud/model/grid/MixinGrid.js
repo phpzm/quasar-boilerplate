@@ -38,7 +38,11 @@ export default {
      */
     renderElements () {
       this.columns = this.schemas.filter(this.filterColumns).map(this.mapColumns)
-      this.columns.unshift({field: 'options', label: 'Opções', width: '70px'})
+      let method = 'unshift'
+      if (this.position === 'right') {
+        method = 'push'
+      }
+      this.columns[method]({field: 'options', label: 'Opções', width: '70px'})
     },
     /**
      * @param {Object} item

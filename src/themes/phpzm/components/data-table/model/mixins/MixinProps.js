@@ -12,6 +12,10 @@ export default {
       type: Array,
       default: () => ([])
     },
+    position: {
+      type: String,
+      default: () => 'left'
+    },
     styles: {
       type: Object,
       default: () => ({

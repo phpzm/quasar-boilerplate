@@ -47,6 +47,24 @@ export const meta = model.meta(icon, label, 'Cadastro de Usuários')
  */
 export const menu = model.menu(icon, label, path)
 
+// configure buttons
+const actions = ($this, actions) => {
+  const map = button => {
+    if (['add'].includes(button.id)) {
+      button.permission = (record, $component, $user) => {
+        return $user.email !== 'contato@phpzm.rocks'
+      }
+    }
+    if (['edit', 'destroy'].includes(button.id)) {
+      button.permission = (record, $component, $user) => {
+        return record && String(record['id']) !== '2'
+      }
+    }
+    return button
+  }
+  return actions.map(map)
+}
+
 /**
  * @param {string} scope
  * @param {Route} route
@@ -57,14 +75,13 @@ export const grid = (scope, route) => {
     id: id,
     service: service,
     path: path,
+    position: 'left',
     rule: 'like',
     pagination: true,
     search: true,
     schemas: fields('index'),
     filters: filters(scope, route),
-    actions: ($this, actions) => {
-      return actions
-    },
+    actions: actions,
     debug: true
   }
 }

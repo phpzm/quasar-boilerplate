@@ -50,7 +50,7 @@
 
     <slot name="content">
       <div class="transition-wrapper">
-        <app-transition-slide v-bind="transition"></app-transition-slide>
+        <app-transition-slide v-bind="viewport"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -88,7 +88,8 @@
         type: String,
         default: 'home'
       },
-      transition: {
+      viewport: {
+        type: Object,
         default: () => ({
           height: 'calc(100vh - 105px)',
           padding: '0 10px'

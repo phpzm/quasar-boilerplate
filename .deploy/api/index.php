@@ -26,6 +26,15 @@ $returns = [
         'user' => [
             'name' => 'Grupo de PHP da Zona da Mata',
             'email' => 'contato@phpzm.rocks',
+            'profile' => 'admin',
+            'permissions' => [
+              'admin.organization' => [
+                'permission': 1
+              ],
+              'admin.user' => [
+                'permission': 2
+              ]
+            ],
         ],
         'token' => $token
     ]
