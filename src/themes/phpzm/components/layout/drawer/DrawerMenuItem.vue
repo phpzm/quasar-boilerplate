@@ -12,7 +12,7 @@
       </template>
     </div>
 
-    <q-collapsible v-else-if="isCollapsible" ref="collapsible" v-bind="collapsible">
+    <q-collapsible v-else-if="isCollapsible" ref="collapse" v-bind="collapsible">
       <template v-for="child in menu.children">
         <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
       </template>
@@ -88,14 +88,16 @@
         return false
       }
       if (this.menu.children.filter(this.filterChildren).length > 0) {
-        this.$refs.collapsible.open()
+        if (this.$refs.collapse) {
+          this.$refs.collapse.open()
+        }
       }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  $drawer-item-border = #ddd
+  $drawer-item-border = #dddddd
 
   .drawer-menu-item
     position relative
@@ -107,9 +109,18 @@
       border-radius 50%
       &.with-icon
         left 52px
-    .q-collapsible.q-item-division.q-collapsible-opened
+    .q-collapsible
+      &.q-collapsible-opened > .q-item:before
+        content ' '
+        position absolute
+        bottom 0
+        left 3px
+        width 5px
+        height 5px
+        border-radius 5px
+        background $drawer-item-border
       .q-collapsible-sub-item
-        margin 0 0 0 20px
+        margin 0 0 0 5px
         padding 0
         .drawer-menu-item
           border-left 1px solid $drawer-item-border

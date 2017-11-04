@@ -19,14 +19,14 @@ export const api = '/admin/organization'
 /**
  * @type {string}
  */
-export const id = '_id'
+export const id = 'id'
 
 /**
  * @type {Object}
  */
 export const reference = {
-  value: 'org_codigo',
-  label: 'org_nome'
+  value: 'id',
+  label: 'name'
 }
 
 /**
@@ -98,9 +98,11 @@ export const form = (scope, route) => {
 export const fields = (scope, route = null) => {
   return model.filter(
     [
-      model.field('org_codigo', 'Código').$pk().$render(),
-      model.field('org_nome', 'Nome').$filter().$required().$render(),
-      model.field('org_descricao', 'Descrição').$filter().$textarea().$render()
+      model.field('id', 'Código').$pk().$render(),
+      model.field('name', 'Nome').$filter().$required().$render(),
+      model.field('address', 'Endereço').$filter().$textarea().$render(),
+      model.field('telephone', 'Telefone').$phone().$out('index').$form({width: 25}).$render(),
+      model.field('celular', 'Celular').$phone().$out('index').$form({width: 25}).$render()
     ],
     scope
   )
