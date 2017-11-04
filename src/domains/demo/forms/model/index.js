@@ -1,11 +1,36 @@
-import { resource } from 'src/app/infra/services/http/resource'
+import model from 'src/app/support/model'
 
+/**
+ * @type {string}
+ */
 export const icon = 'subtitles'
 
-export const title = 'Formulários'
+/**
+ * @type {string}
+ */
+export const label = 'Formulários'
 
-export const api = '/graphics'
+/**
+ * @type {string}
+ */
+export const api = '/forms'
 
+/**
+ * @type {string}
+ */
 export const path = '/dashboard/forms'
 
-export const service = resource(api)
+/**
+ * @type {string}
+ */
+export const tooltip = 'Pequeno resumo dos campos pré-configurados que podem ser usados nos formulários'
+
+/**
+ * @type {Object}
+ */
+export const meta = model.meta(icon, label, tooltip)
+
+/**
+ * @type {Function}
+ */
+export const menu = model.menu(icon, label, path, true, tooltip, 'forms')

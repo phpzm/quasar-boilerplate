@@ -59,7 +59,7 @@
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
   import AppBreadcrumb from 'src/themes/phpzm/components/breadcrumb/AppBreadcrumb.vue'
-  import AppDrawerMenu from 'src/themes/phpzm/components/layout/fragements/DrawerMenu.vue'
+  import AppDrawerMenu from 'src/themes/phpzm/components/layout/drawer/DrawerMenu.vue'
   import AppTransitionSlide from 'src/themes/phpzm/components/transition/AppTransitionSlide.vue'
 
   export default {

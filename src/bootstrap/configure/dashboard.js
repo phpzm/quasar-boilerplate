@@ -1,6 +1,6 @@
 import store from 'src/app/infra/store'
-import menu from 'src/bootstrap/model/menu'
-import options from 'src/bootstrap/model/options'
+import menu from 'src/bootstrap/menus/drawer'
+import options from 'src/bootstrap/menus/options'
 
 /**
  * @param {string} path
@@ -27,6 +27,10 @@ export default ($component) => {
     {
       value: 'admin',
       label: 'New'
+    },
+    {
+      value: 'id-1-1-1',
+      label: '23'
     }
   ])
 }

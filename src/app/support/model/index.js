@@ -1,10 +1,11 @@
+import { formatMoney, formatPhone, formatBoolean, formatDate, formatDateTime } from 'src/app/support/format'
+import item from 'src/app/modules/dashboard/helper/item'
+
 /**
  * @param {Array} fields
  * @param {string} scope
  * @returns {Array}
  */
-import { formatMoney, formatPhone, formatBoolean, formatDate, formatDateTime } from 'src/app/support/format'
-
 export const filter = (fields, scope) => {
   return fields.filter(field => scope ? field.scopes.includes(scope) : true)
 }
@@ -220,18 +221,7 @@ export const meta = (icon, label, tooltip) => ({icon, label, tooltip})
  * @returns {Function}
  */
 export const menu = (icon, label, path, exact = false, tooltip = '', id = '') => {
-  return to => {
-    return {
-      to: to(path),
-      label: label,
-      exact: exact,
-      id: id,
-      tooltip: tooltip,
-      left: {
-        icon: icon
-      }
-    }
-  }
+  return (to) => item(id, to(path), label, icon, exact, tooltip)
 }
 
 /**

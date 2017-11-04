@@ -1,13 +1,10 @@
+import { path, meta } from '../model/index'
+
 export default [
   {
-    path: 'calendar',
+    path: path,
     component: 'domains/demo/calendar/components/Index',
-    meta: {
-      icon: 'today',
-      label: 'Agenda',
-      title: 'Controle seus compromissos',
-      tooltip: 'Controle seus compromissos e nunca mais perca a hora para aquela reunião'
-    },
+    meta: meta,
     name: 'dashboard.calendar'
   }
 ]

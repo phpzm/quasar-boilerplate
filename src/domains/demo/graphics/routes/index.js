@@ -1,15 +1,10 @@
-import { title } from 'src/domains/demo/graphics/model/index'
+import { path, meta } from '../model/index'
 
 export default [
   {
-    path: 'graphics',
+    path: path,
     component: 'domains/demo/graphics/components/Index',
-    meta: {
-      icon: 'pie_chart',
-      label: title,
-      title: 'Gráficos de exemplo usando e-charts',
-      tooltip: 'Gráficos de exemplo usando e-charts'
-    },
+    meta: meta,
     name: 'dashboard.graphics'
   }
 ]

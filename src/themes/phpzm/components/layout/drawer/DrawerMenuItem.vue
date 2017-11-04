@@ -3,15 +3,16 @@
 
     <div v-if="menu.group">
       <small>
-        {{ menu.label }} <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
+        {{ menu.label }}
+        <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
       </small>
       <hr>
-      <template v-for="item in menu.items">
+      <template v-for="item in menu.children">
         <app-drawer-menu-item :menu="item" :badges="badges"></app-drawer-menu-item>
       </template>
     </div>
 
-    <q-collapsible v-else-if="hasChildren" ref="collapsible" :icon="menu.icon" :label="menu.label" :class="classNames">
+    <q-collapsible v-else-if="isCollapsible" ref="collapsible" v-bind="collapsible">
       <template v-for="child in menu.children">
         <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
       </template>
@@ -23,7 +24,7 @@
       <q-item-side v-if="menu.right" v-bind="menu.right" right></q-item-side>
     </q-side-link>
 
-    <q-chip v-if="badges[menu.id]" floating color="red" class="info red pulse">{{ badges[menu.id] }}</q-chip>
+    <q-chip v-if="badges[menu.id]" v-bind="badge">{{ badges[menu.id] }}</q-chip>
 
     <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
   </div>
@@ -42,11 +43,26 @@
       }
     },
     computed: {
-      hasChildren () {
+      isCollapsible () {
         return this.menu.children && this.menu.children.length > 0
       },
-      classNames () {
-        return ['q-collapsible-drawer']
+      collapsible () {
+        const collapsible = {
+          'class': ['q-collapsible-drawer'],
+          'label': this.menu.label
+        }
+        if (this.menu.icon) {
+          collapsible['icon'] = this.menu.icon
+        }
+        return collapsible
+      },
+      badge () {
+        const withIcon = !!(this.menu.icon) || !!(this.menu.left && this.menu.left.icon)
+        return {
+          'floating': true,
+          'color': 'red',
+          'class': {'info red pulse': true, 'with-icon': withIcon}
+        }
       }
     },
     methods: {
@@ -79,19 +95,36 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  $drawer-item-border = #ddd
+
   .drawer-menu-item
-    position  relative
+    position relative
     .q-chip.floating
-      left 54px
       top -4px
-      padding 3px
+      left 23px
+      padding 0 6px
       font-size 10px
-    .q-collapsible-drawer
+      border-radius 50%
+      &.with-icon
+        left 52px
+    .q-collapsible.q-item-division.q-collapsible-opened
       .q-collapsible-sub-item
+        margin 0 0 0 20px
         padding 0
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,cccccc+3,f3f1f1+8,f3f1f1+100 */
-        background #fafafa
-        background linear-gradient(to bottom, #c9c9c9 0%, #eaeaea 3%, #f8f8f8 10%, #fafafa 50%, #f8f8f8 90%, #efefef 98%, #c5c5c5 100%)
+        .drawer-menu-item
+          border-left 1px solid $drawer-item-border
+          &:before
+            content ' '
+            position absolute
+            top 0
+            width 10px
+            height 20px
+            border-bottom 1px solid $drawer-item-border
+        .drawer-menu-item:last-child
+          border-left none
+          &:before
+            border-left 1px solid $drawer-item-border
+
     small
       color #9f9f9f
       display block

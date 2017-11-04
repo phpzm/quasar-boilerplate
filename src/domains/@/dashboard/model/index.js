@@ -13,7 +13,7 @@ export const label = 'Página Inicial'
 /**
  * @type {string}
  */
-export const tooltip = 'Fique atento a sua vida financeira e seus compromissos'
+export const tooltip = 'Breve explicação sobre o projeto'
 
 /**
  * @type {string}
