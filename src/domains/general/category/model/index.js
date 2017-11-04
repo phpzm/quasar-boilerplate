@@ -22,6 +22,11 @@ export const api = '/general/category'
 export const path = '/dashboard/general/category'
 
 /**
+ * @type {string}
+ */
+export const namespace = 'general.category'
+
+/**
  * @type {Resource}
  */
 export const service = resource(api)

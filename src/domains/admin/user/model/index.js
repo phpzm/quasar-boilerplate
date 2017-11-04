@@ -28,6 +28,11 @@ export const id = 'id'
 export const path = '/dashboard/admin/user'
 
 /**
+ * @type {string}
+ */
+export const namespace = 'admin.user'
+
+/**
  * @type {Resource}
  */
 export const service = resource(api)
@@ -50,13 +55,8 @@ export const menu = model.menu(icon, label, path)
 // configure buttons
 const actions = ($this, actions) => {
   const map = button => {
-    if (['add'].includes(button.id)) {
-      button.permission = (record, $component, $user) => {
-        return $user.email !== 'contato@phpzm.rocks'
-      }
-    }
     if (['edit', 'destroy'].includes(button.id)) {
-      button.permission = (record, $component, $user) => {
+      button.access = (record, $component, $user) => {
         return record && String(record['id']) !== '2'
       }
     }

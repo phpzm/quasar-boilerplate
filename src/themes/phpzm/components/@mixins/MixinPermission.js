@@ -1,4 +1,6 @@
+import { get } from 'lodash'
 import { mapGetters } from 'vuex'
+import permission from 'src/bootstrap/configure/permission'
 
 export default {
   computed: {
@@ -10,10 +12,21 @@ export default {
      * @param {Object} record
      */
     permission (action, record) {
-      if (typeof action.permission !== 'function') {
-        return true
+      const $route = get(this, '$route')
+      if (!$route) {
+        return false
       }
-      return action.permission(record, this, this.getAuthUser)
+      if (typeof action.permission === 'function') {
+        return action.permission(record, this, this.getAuthUser)
+      }
+      const access = permission(this.getAuthUser, $route, action)
+      if (!access) {
+        return false
+      }
+      if (typeof action.access === 'function') {
+        return action.access(record, this, this.getAuthUser)
+      }
+      return true
     }
   }
 }

@@ -25,7 +25,7 @@ export default ($this) => {
     },
     {
       id: 'edit',
-      permission: 2,
+      permission: 3,
       color: 'primary',
       scopes: ['index'],
       positions: ['middle'],
@@ -38,7 +38,7 @@ export default ($this) => {
     },
     {
       id: 'destroy',
-      permission: 3,
+      permission: 4,
       color: 'negative',
       scopes: ['index'],
       positions: ['middle'],
@@ -78,7 +78,7 @@ export default ($this) => {
     },
     {
       id: 'retry',
-      permission: 2,
+      permission: 1,
       color: 'primary',
       scopes: ['retry'],
       positions: ['center'],

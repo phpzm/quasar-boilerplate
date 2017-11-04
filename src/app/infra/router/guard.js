@@ -1,9 +1,11 @@
+import { Events } from 'quasar-framework'
 import store from 'src/app/infra/store'
 import { abort } from 'src/app/infra/services/http'
-import { PATH_LOGIN } from 'src/app/support'
+import { PATH_NO_ACCESS, PATH_LOGIN } from 'src/app/support'
 import { confirm } from 'src/app/support/message'
 import i18n from 'src/app/support/i18n'
-import { Events } from 'quasar-framework'
+import permission from 'src/bootstrap/configure/permission'
+import { unRegister } from 'src/app/modules/auth/services/index'
 
 /**
  * @param {Array} routes
@@ -14,7 +16,12 @@ export const protect = (routes) => {
 
   if (Array.isArray(routes)) {
     return routes.map(route => {
-      route.meta = route.meta ? Object.assign({}, route.meta, security) : security
+      if (!route.meta) {
+        route.meta = security
+      }
+      if (route.meta.security === undefined) {
+        route.meta.security = true
+      }
       if (route.children) {
         route.children = protect(route.children)
       }
@@ -30,6 +37,14 @@ export const protect = (routes) => {
 export const checkSession = () => {
   // noinspection JSUnresolvedVariable
   return store.getters.getAuthToken
+}
+
+/**
+ * @return {boolean}
+ */
+export const checkPermission = ($route) => {
+  // noinspection JSUnresolvedVariable
+  return permission(store.getters.getAuthUser, $route)
 }
 
 /**
@@ -53,6 +68,23 @@ export const checkModified = (next) => {
 }
 
 /**
+ * @param {Function} next
+ * @returns {*}
+ */
+export const exit = (next) => {
+  return unRegister(() => next(PATH_LOGIN))
+}
+
+/**
+ * @param {Function} next
+ * @param {string} blocked
+ * @returns {*}
+ */
+export const restrict = (next, blocked = '') => {
+  return next(Object.assign({}, PATH_NO_ACCESS, {query: {blocked}}))
+}
+
+/**
  * @param {Route} to
  * @param {Route} from
  * @param {Function} next
@@ -72,11 +104,15 @@ export const beforeEach = (to, from, next) => {
     return next(false)
   }
 
-  if (checkSession()) {
-    return toNext(to, next)
+  if (!checkSession()) {
+    return exit(next)
   }
 
-  return toNext(to, next, PATH_LOGIN)
+  if (!checkPermission(to)) {
+    return restrict(next, to.path)
+  }
+
+  return toNext(to, next)
 }
 
 /**

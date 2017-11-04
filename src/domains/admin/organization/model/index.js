@@ -35,6 +35,11 @@ export const reference = {
 export const path = '/dashboard/admin/organization'
 
 /**
+ * @type {string}
+ */
+export const namespace = 'admin.organization'
+
+/**
  * @type {Resource}
  */
 export const service = resource(api)
@@ -65,7 +70,14 @@ export const grid = (scope, route) => {
     schemas: fields('index'),
     filters: filters(scope, route),
     actions: ($this, actions) => {
-      return actions
+      return actions.map(button => {
+        if (button.id === 'destroy') {
+          button.permission = (record, $component, $user) => {
+            return record && String(record['id']) === '2'
+          }
+        }
+        return button
+      })
     },
     debug: true
   }

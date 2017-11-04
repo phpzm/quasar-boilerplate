@@ -29,10 +29,10 @@ $returns = [
             'profile' => 'admin',
             'permissions' => [
               'admin.organization' => [
-                'permission': 1
+                'permission' => 1
               ],
               'admin.user' => [
-                'permission': 2
+                'permission' => 4
               ]
             ],
         ],

@@ -1,32 +1,37 @@
 /**
- * @param {Function} props
  * @param {string} path
+ * @param {string} namespace
+ * @param {Function} props
  * @param {string} uri
  * @param {string} scope
  * @param {string} component
+ * @param {int} permission
  * @param {string} label
  * @param {string} icon
  * @param {string} tooltip
  * @returns {Object}
  */
-export const route = (props, path, uri, scope, component, label = '', icon = '', tooltip = '') => {
+export const child = (path, namespace, props, uri, scope, component, permission, label = '', icon = '', tooltip = '') => {
   return {
     path: uri,
     component: component,
-    name: String(path).replace(/\\/g, '.') + '.' + scope,
+    name: namespace + '.' + scope,
     props: (route) => {
       return props(scope, route)
     },
     meta: {
       icon: icon,
       label: label,
-      tooltip: tooltip
+      tooltip: tooltip,
+      namespace: namespace,
+      permission: permission
     }
   }
 }
 
 /**
  * @param {string} path
+ * @param {string} namespace
  * @param {Function} grid
  * @param {Function} form
  * @param {Object} meta
@@ -34,7 +39,7 @@ export const route = (props, path, uri, scope, component, label = '', icon = '',
  * @param {string} components
  * @returns {Array}
  */
-export const crud = (path, grid, form, meta, id = 'id', components = 'themes/phpzm/components/crud') => {
+export const crud = (path, namespace, grid, form, meta, id = 'id', components = 'themes/phpzm/components/crud') => {
   const create = 'Cria um novo registro no(a) ' + meta.tooltip
   const view = 'Visualiza um registro do(a) ' + meta.tooltip
   const edit = 'Edita um novo registro do(a) ' + meta.tooltip
@@ -47,10 +52,10 @@ export const crud = (path, grid, form, meta, id = 'id', components = 'themes/php
       },
       meta: meta,
       children: [
-        route(grid, path, '', 'index', components + '/Grid', '', '', meta.tooltip),
-        route(form, path, 'create', 'create', components + '/Form', 'Criar', 'add', create),
-        route(form, path, ':' + id, 'view', components + '/Form', 'Visualizar', 'search', view),
-        route(form, path, ':' + id + '/edit', 'edit', components + '/Form', 'Editar', 'edit', edit)
+        child(path, namespace, grid, '', 'index', components + '/Grid', 1, '', '', meta.tooltip),
+        child(path, namespace, form, 'create', 'create', components + '/Form', 2, 'Criar', 'add', create),
+        child(path, namespace, form, ':' + id, 'view', components + '/Form', 1, 'Visualizar', 'search', view),
+        child(path, namespace, form, ':' + id + '/edit', 'edit', components + '/Form', 3, 'Editar', 'edit', edit)
       ]
     }
   ]
