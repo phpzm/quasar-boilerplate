@@ -16,7 +16,7 @@ export const field = configureField
  * @returns {Array}
  */
 export const filter = (fields, scope) => {
-  return fields.filter(field => scope ? field.scopes.includes(scope) : true)
+  return fields.filter(field => scope ? field.scopes && field.scopes.includes(scope) : true)
 }
 
 /**
