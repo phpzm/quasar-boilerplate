@@ -1,5 +1,5 @@
 <template>
-  <app-card>
+  <app-card class="dashboard-home">
     <div slot="title">
       <q-icon name="home"></q-icon> Home
     </div>
@@ -10,7 +10,12 @@
         disponível para todos.
         <br>
         <small>Este projeto envolve algumas metodologias avançadas e pode não ser indicado para iniciantes.</small>
+        <br>
       </p>
+      <pre>
+        É um projeto experimental e requer que haja revisões antes de ir para produção.
+        Não nos responsabilizamos por eventuais problemas!
+      </pre>
       <hr>
         <p align="justify">
           Você pode ver o código-fonte do projeto aqui no <a href="https://github.com/phpzm/quasar-boilerplate" target="_blank">Github</a>
@@ -44,4 +49,12 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  .dashboard-home
+    font-size 14px
+    pre
+      background #e8e8e8
+      padding 10px
+      border-radius 3px
+    small
+      font-style italic
 </style>

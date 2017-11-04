@@ -1,5 +1,5 @@
 <template>
-  <div class="no-access">
+  <div class="dashboard-no-access">
     <app-card>
       <div slot="title">
         <q-icon name="error"></q-icon> Acesso Restrito
@@ -24,7 +24,7 @@
     components: {
       AppCard
     },
-    name: 'no-access',
+    name: 'dashboard-no-access',
     beforeRouteEnter (to, from, next) {
       if (!to.query.blocked) {
         return next(PATH_LOGIN)
@@ -37,7 +37,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .no-access
     font-size 14px
-    pre, small
+    pre
       background #e8e8e8
       padding 10px
       border-radius 3px
