@@ -3,7 +3,7 @@ version: '2'
 services:
 
   phpzm-node:
-    image: ambientum/node:7
+    image: ambientum/node:8
     container_name: phpzm-node
     command: ./script.start.sh
     volumes:
