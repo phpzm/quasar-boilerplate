@@ -37,5 +37,6 @@ export {
   QDataTable,
   QSlider,
   QModal,
-  QChip
+  QChip,
+  QPagination
 } from 'quasar-framework'

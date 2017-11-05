@@ -1,24 +1,34 @@
+<!--suppress RequiredAttributes -->
 <template>
   <div class="app-crud-grid" :class="{'--grid-filtering': filter.active}">
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
-    <hr>
+
+    <app-grid-toolbar v-if="top"
+                      v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top}"
+                      @change-page="changePage" @change-limit="changeLimit"/>
+    <hr v-if="top">
+
     <app-data-table ref="grid"
-                    v-bind="{columns, data, debug, position, actions: buttons.middle}"></app-data-table>
-    <hr>
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
-    <div class="fixed-bottom-right">
-      <app-button-bar :buttons="buttons.floating" :handler="handler"/>
+                    v-bind="{columns, data, debug, position, actions: buttons.middle, styles, bodyStyle}"/>
+
+    <hr v-if="bottom">
+
+    <app-grid-toolbar v-if="bottom"
+                      v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom}"
+                      @change-page="changePage" @change-limit="changeLimit"/>
+
+    <div class="fixed-bottom-right" v-if="floating">
+      <app-button-bar v-bind="{handler, buttons: buttons.floating}"/>
     </div>
 
     <q-modal ref="filter" position="right" :content-css="filter.css">
-      <app-grid-filter :filters="filter.columns" :record="filter.record"
-                       @close="filterClose" @apply="filterApply" @clear="filterClear"></app-grid-filter>
+      <app-grid-filter v-if="search" :filters="filter.columns" :record="filter.record"
+                       @close="filterClose" @apply="filterApply" @clear="filterClear"/>
     </q-modal>
 
     <template v-if="debugging">
-      <app-debugger v-bind="{label: 'data', inspect: data}"></app-debugger>
-      <app-debugger v-bind="{label: 'columns', inspect: columns}"></app-debugger>
-      <app-debugger v-bind="{label: 'filter', inspect: filter.record}"></app-debugger>
+      <app-debugger v-bind="{label: 'data', inspect: data}"/>
+      <app-debugger v-bind="{label: 'columns', inspect: columns}"/>
+      <app-debugger v-bind="{label: 'filter', inspect: filter.record}"/>
     </template>
   </div>
 </template>
@@ -28,18 +38,26 @@
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
   import AppGridFilter from 'src/themes/phpzm/components/crud/components/grid/AppGridFilter'
-  import { MixinData, MixinMethods, MixinProps } from './model'
+  import AppGridToolbar from 'src/themes/phpzm/components/crud/components/grid/AppGridToolbar.vue'
+  import { MixinComputed, MixinData, MixinMethods, MixinProps } from './model'
   import { MixinGrid, MixinFilter } from './model/grid'
 
-  export default {
+  /**
+   * @type {Object}
+   * @property data
+   * @property pages
+   * @property total
+   */
+  const AppCrudGrid = {
     components: {
-      AppDataTable, AppButtonBar, AppGridFilter, AppDebugger
+      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter, AppDebugger
     },
     mixins: [
-      MixinData, MixinMethods, MixinProps, MixinGrid, MixinFilter
+      MixinComputed, MixinData, MixinMethods, MixinProps, MixinGrid, MixinFilter
     ],
     name: 'app-crud-grid'
   }
+  export default AppCrudGrid
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

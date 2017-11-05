@@ -87,12 +87,11 @@ export const grid = (scope, route) => {
     path: path,
     position: 'left',
     rule: 'like',
-    pagination: true,
-    search: true,
+    paginate: true,
     schemas: fields('index'),
     filters: filters(scope, route),
     actions: actions,
-    debug: true
+    debug: false
   }
 }
 

@@ -16,6 +16,7 @@
         view: 'lHh Lpr lFf',
         reveal: true,
         leftBreakpoint: 996,
+        home: 'store',
         viewport: {
           height: 'calc(100vh - 100px)',
           padding: '0 10px'
