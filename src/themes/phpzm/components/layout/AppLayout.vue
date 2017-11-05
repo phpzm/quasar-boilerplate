@@ -9,7 +9,9 @@
 
         <q-toolbar-title>
           {{ AppName }}
-          <div slot="subtitle">{{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
+          <div slot="subtitle" class="hidden-medium">
+            {{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span>
+          </div>
         </q-toolbar-title>
 
         <slot name="header-content"></slot>
@@ -120,7 +122,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
   .layout-default
     .q-scroll-area
       swidth 100%

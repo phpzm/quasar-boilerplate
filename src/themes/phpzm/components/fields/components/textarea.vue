@@ -27,6 +27,11 @@
       html () {
         return this.value
       }
+    },
+    watch: {
+      value (value) {
+        this.$refs.input.value = value
+      }
     }
   }
 </script>

@@ -1,3 +1,5 @@
+import { route } from 'src/app/infra/router/resources'
+
 import home from 'src/domains/@/dashboard/routes'
 import forms from 'src/domains/demo/forms/routes'
 import graphics from 'src/domains/demo/graphics/routes'
@@ -20,17 +22,13 @@ import categories from 'src/domains/general/category/routes'
  * @type Array
  */
 export default [
-  {
-    path: '/dashboard',
-    component: 'domains/@/dashboard/components/Index',
-    children: [
-      ...home,
-      ...forms,
-      ...graphics,
-      ...calendar,
-      ...user,
-      ...organization,
-      ...categories
-    ]
-  }
+  route('/dashboard', '', 'domains/@/dashboard/components/Index', {}, {}, [
+    ...home,
+    ...forms,
+    ...graphics,
+    ...calendar,
+    ...user,
+    ...organization,
+    ...categories
+  ])
 ]

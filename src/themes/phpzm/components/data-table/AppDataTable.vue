@@ -31,30 +31,4 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .app-data-table
-    font-family Roboto
-    .app-data-table-options
-      position absolute
-      margin-top -20px
-      .q-btn-round.q-btn-standard
-        height 40px
-        width 40px
-        q-icon, .q-spinner
-          font-size 20px
-    .q-data-table
-      display flex
-      .q-data-table-toolbar.upper-toolbar
-        display none
-      .q-data-table-container
-        overflow auto
-      .q-data-table-head
-        overflow visible
-      .q-data-table-body
-        overflow visible
-
-  .production
-    .app-data-table-options
-      .q-btn-round.q-btn-standard
-        .q-fab-icon.q-icon, .q-fab-active-icon.q-icon
-          margin 6px 0 0 0
 </style>

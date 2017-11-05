@@ -1,17 +1,17 @@
 <!--suppress RequiredAttributes -->
 <template>
   <div class="form app-grid-toolbar">
-    <div v-if="paginate" class="field has-25 app-grid-pagination">
+    <div v-if="paginate" class="field has-25 xs-70 app-grid-pagination">
       <q-pagination v-model="pagination" v-bind="{max}" @input="emitPagination(pagination)"/>
     </div>
-    <div v-if="paginate" class="field has-10">
+    <div v-if="paginate" class="field has-15 xs-30">
       <q-select v-model="select" v-bind="{options}" @input="emitSelect(select)"></q-select>
     </div>
-    <div v-if="paginate" class="field has-20 app-grid-info">
+    <div v-if="paginate" class="field has-20 hidden-small app-grid-info">
       <div v-if="counter.total">{{ counter.start }} - {{ counter.end }} de {{ counter.total }}</div>
       <div v-else class="counter">Exibindo {{ counter.end }} registros</div>
     </div>
-    <div :class="['field',  paginate ? 'has-45' : 'has-100']">
+    <div :class="['field',  paginate ? 'has-40' : 'has-100']">
       <app-button-bar v-bind="{buttons, handler, direction}"/>
     </div>
   </div>
