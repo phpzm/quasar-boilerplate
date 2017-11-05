@@ -83,9 +83,9 @@ export default (field, label, component = 'text', scopes = []) => {
       }
       return this
     },
-    $img (classe = 'avatar') {
+    $img (className = 'avatar') {
       this.grid.format = (value) => {
-        return `<img class="grid-${classe}-image" src="${value}"/>`
+        return `<img class="grid-${className}-image" src="${value}"/>`
       }
       return this
     },
