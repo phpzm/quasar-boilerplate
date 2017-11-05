@@ -55,7 +55,7 @@
         Object.keys(this.$route.params).forEach(key => {
           to = to.replace(':' + key, this.$route.params[key])
         })
-        if (match.meta.icon) {
+        if (match.meta.icon && !match.meta.noBreadcrumb) {
           accumulate.push({
             icon: match.meta.icon,
             label: match.meta.label,

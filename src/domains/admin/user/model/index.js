@@ -15,6 +15,16 @@ export const label = 'Usuários'
 /**
  * @type {string}
  */
+export const title = 'Cadastro de Usuários'
+
+/**
+ * @type {string}
+ */
+export const tooltip = 'Defina quais usuários terão acesso a sua aplicação e gerencie-os'
+
+/**
+ * @type {string}
+ */
 export const api = '/admin/user'
 
 /**
@@ -40,17 +50,17 @@ export const service = resource(api)
 /**
  * @type {Object}
  */
-export const pivot = model.pivot(organization, reference, 'organization_id')
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, 'Cadastro de Usuários')
+export const pivot = model.pivot(organization, reference, 'organization_id')
 
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path)
+export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
 // configure buttons
 const actions = ($this, actions) => {

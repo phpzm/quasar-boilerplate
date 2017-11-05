@@ -15,6 +15,11 @@ export const AppTitle = ({ app }) => app.title
 /**
  * @param app
  */
+export const AppTooltip = ({ app }) => app.tooltip
+
+/**
+ * @param app
+ */
 export const AppWidth = ({ app }) => app.width
 
 /**

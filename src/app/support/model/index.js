@@ -22,10 +22,11 @@ export const filter = (fields, scope) => {
 /**
  * @param {string} icon
  * @param {string} label
+ * @param {string} title
  * @param {string} tooltip
  * @returns {Object}
  */
-export const meta = (icon, label, tooltip) => ({icon, label, tooltip})
+export const meta = (icon, label, title, tooltip) => ({icon, label, title, tooltip})
 
 /**
  * @param {string} icon
