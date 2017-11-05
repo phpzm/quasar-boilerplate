@@ -9,7 +9,7 @@
 
         <q-toolbar-title>
           {{ AppName }}
-          <div slot="subtitle">{{ AppTitle }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
+          <div slot="subtitle">{{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
         </q-toolbar-title>
 
         <slot name="header-content"></slot>
@@ -50,7 +50,7 @@
 
     <slot name="content">
       <div class="transition-wrapper">
-        <app-transition-slide v-bind="transition"></app-transition-slide>
+        <app-transition-slide v-bind="viewport"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -59,7 +59,7 @@
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
   import AppBreadcrumb from 'src/themes/phpzm/components/breadcrumb/AppBreadcrumb.vue'
-  import AppDrawerMenu from 'src/themes/phpzm/components/layout/fragements/DrawerMenu.vue'
+  import AppDrawerMenu from 'src/themes/phpzm/components/layout/drawer/DrawerMenu.vue'
   import AppTransitionSlide from 'src/themes/phpzm/components/transition/AppTransitionSlide.vue'
 
   export default {
@@ -88,7 +88,8 @@
         type: String,
         default: 'home'
       },
-      transition: {
+      viewport: {
+        type: Object,
         default: () => ({
           height: 'calc(100vh - 105px)',
           padding: '0 10px'
@@ -102,7 +103,7 @@
       classNames () {
         return ['layout-default', this.environment]
       },
-      ...mapGetters(['AppTitle', 'AppName', 'AppMenu', 'getDashboardOptions'])
+      ...mapGetters(['AppName', 'AppTooltip', 'AppMenu', 'getDashboardOptions'])
     },
     methods: {
       handlerMenu (menu) {

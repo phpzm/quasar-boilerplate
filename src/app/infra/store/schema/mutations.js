@@ -20,6 +20,13 @@ export default {
   },
   /**
    * @param state
+   * @param tooltip
+   */
+  [types.setAppTooltip] (state, tooltip) {
+    state.app.tooltip = tooltip
+  },
+  /**
+   * @param state
    * @param width
    */
   [types.setAppWidth] (state, width) {

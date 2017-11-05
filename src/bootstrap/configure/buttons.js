@@ -1,5 +1,5 @@
 import { confirm } from 'src/app/support/message/index'
-import { first } from 'src/app/infra/services/http/resource'
+import { $first } from 'src/app/infra/services/http/resource'
 
 const color = 'positive'
 
@@ -25,7 +25,7 @@ export default ($this) => {
     },
     {
       id: 'edit',
-      permission: 2,
+      permission: 3,
       color: 'primary',
       scopes: ['index'],
       positions: ['middle'],
@@ -38,7 +38,7 @@ export default ($this) => {
     },
     {
       id: 'destroy',
-      permission: 3,
+      permission: 4,
       color: 'negative',
       scopes: ['index'],
       positions: ['middle'],
@@ -78,7 +78,7 @@ export default ($this) => {
     },
     {
       id: 'retry',
-      permission: 2,
+      permission: 1,
       color: 'primary',
       scopes: ['retry'],
       positions: ['center'],
@@ -117,7 +117,7 @@ export default ($this) => {
       tooltip: 'Salvar as alterações feitas a este registro',
       handler: (record, schemas, $component) => {
         $this.save(record, (response) => {
-          $this.browse($this.path + '/' + first(response)[$this.id] + '/' + 'edit')
+          $this.browse($this.path + '/' + $first(response)[$this.id] + '/' + 'edit')
         })
       }
     },
@@ -152,6 +152,24 @@ export default ($this) => {
       handler: (record, schemas, $component) => {
         $this.save(record, (response) => {
           $this.browse($this.path + '/' + 'create')
+        })
+      }
+    },
+    {
+      id: 'create-and-back',
+      permission: 2,
+      color: 'white',
+      scopes: ['create', 'edit'],
+      positions: ['top', 'bottom'],
+      validate: (record, schemas, $component) => {
+        return !$component.status
+      },
+      icon: '',
+      label: 'Salvar & Voltar',
+      tooltip: 'Salva este registro e volta para a listagem de registros',
+      handler: (record, schemas, $component) => {
+        $this.save(record, (response) => {
+          $this.browse($this.path)
         })
       }
     },
@@ -203,7 +221,7 @@ export default ($this) => {
       scopes: ['create', 'view', 'edit'],
       rotate: false,
       positions: ['top', 'bottom'],
-      icon: 'subject',
+      icon: 'apps',
       label: '',
       tooltip: 'Abre a lista de registros',
       handler: (record, schemas, $component) => {

@@ -8,7 +8,7 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
-  import AppDrawerMenuItem from 'src/themes/phpzm/components/layout/fragements/DrawerMenuItem.vue'
+  import AppDrawerMenuItem from 'src/themes/phpzm/components/layout/drawer/DrawerMenuItem.vue'
 
   export default {
     components: {
@@ -24,8 +24,8 @@
     computed: {
       badges () {
         return this.getDashboardBadges.reduce((accumulate, item) => {
-          if (item.id) {
-            accumulate[item.id] = item.count
+          if (item.value) {
+            accumulate[item.value] = item.label
           }
           return accumulate
         }, {})

@@ -134,7 +134,7 @@ export const source = (api, value, label, extra = {}) => {
  * @param {AxiosResponse} response
  * @returns {*}
  */
-export const $get = (response) => {
+export const $body = (response) => {
   return http.$body(response)
 }
 
@@ -142,7 +142,15 @@ export const $get = (response) => {
  * @param {AxiosResponse} response
  * @returns {*}
  */
-export const first = (response) => {
+export const $meta = (response) => {
+  return http.$meta(response)
+}
+
+/**
+ * @param {AxiosResponse} response
+ * @returns {*}
+ */
+export const $first = (response) => {
   return http.$first(response)
 }
 
@@ -150,7 +158,7 @@ export const first = (response) => {
  * @param path
  * @returns {Resource}
  */
-export const resource = path => {
+export const resource = (path) => {
   return new Resource(path)
 }
 

@@ -14,12 +14,27 @@ export const label = 'Categorias'
 /**
  * @type {string}
  */
+export const title = 'Cadastro de Categorias'
+
+/**
+ * @type {string}
+ */
+export const tooltip = 'Categorias são usadas para classificar conteúdos'
+
+/**
+ * @type {string}
+ */
 export const api = '/general/category'
 
 /**
  * @type {string}
  */
 export const path = '/dashboard/general/category'
+
+/**
+ * @type {string}
+ */
+export const namespace = 'general.category'
 
 /**
  * @type {Resource}
@@ -29,12 +44,12 @@ export const service = resource(api)
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, 'Cadastro de Categorias')
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path)
+export const menu = model.menu(icon, label, path, false, 'Você não tem acesso a esse menu!')
 
 /**
  * @type {string}
@@ -51,8 +66,7 @@ export const grid = (scope, route) => {
     service,
     path,
     component,
-    pagination: true,
-    search: true,
+    paginate: true,
     schemas: fields(scope, route),
     debug: true
   }

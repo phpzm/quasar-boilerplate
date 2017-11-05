@@ -13,6 +13,14 @@ export const setAppTitle = (context, title) => {
 
 /**
  * @param context
+ * @param {string} tooltip
+ */
+export const setAppTooltip = (context, tooltip) => {
+  context.commit(types.setAppTooltip, tooltip)
+}
+
+/**
+ * @param context
  * @param {Object} width
  */
 export const setAppWidth = (context, width) => {

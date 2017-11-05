@@ -11,7 +11,7 @@ node_modules/
 /cordova/platforms
 /cordova/plugins
 /docker-compose.yml
-/node_modules.tar.gz
+/*node_modules*
 npm-debug.log*
 selenium-debug.log
 

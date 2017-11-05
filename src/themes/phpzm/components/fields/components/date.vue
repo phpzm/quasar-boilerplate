@@ -4,10 +4,10 @@
       <div v-show="editable" class="component" :class="{'has-error': problems.length}">
         <i class="material-icons bg-primary" @click="openWidget">&#xE878;</i>
         <q-datetime ref="widget" v-model="widget"
-                    type="date" ok-label="Ok" cancel-label="Cancelar" clear-label="Limpar"></q-datetime>
+                    v-bind="{type, format24h, okLabel, cancelLabel, clearLabel}"></q-datetime>
         <input ref="input" class="input full-width" autocomplete="off"
                v-mask="pattern"
-               v-model="model" v-bind="{id, type, name, placeholder, maxlength, disabled}"
+               v-model="model" v-bind="{id, name, placeholder, maxlength, disabled}"
                @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
                @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
@@ -23,6 +23,7 @@
   import { VueMaskDirective } from 'v-mask'
   import Field from 'src/themes/phpzm/components/fields/components/base.vue'
   import FieldAbstract from 'src/themes/phpzm/components/fields/abstract'
+  import { dayNames, monthNames } from 'src/bootstrap/i18n'
 
   export default {
     extends: FieldAbstract,
@@ -33,6 +34,36 @@
       'mask': VueMaskDirective
     },
     name: 'field-date',
+    props: {
+      type: {
+        type: String,
+        default: () => 'date'
+      },
+      format24h: {
+        type: Boolean,
+        default: () => true
+      },
+      okLabel: {
+        type: String,
+        default: () => 'Ok'
+      },
+      cancelLabel: {
+        type: String,
+        default: () => 'Cancelar'
+      },
+      clearLabel: {
+        type: String,
+        default: () => 'Limpar'
+      },
+      monthNames: {
+        type: Array,
+        default: () => monthNames
+      },
+      dayNames: {
+        type: Array,
+        default: () => dayNames
+      }
+    },
     data: () => ({
       widget: '',
       updated: false,

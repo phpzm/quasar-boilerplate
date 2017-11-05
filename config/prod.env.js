@@ -21,6 +21,9 @@ module.exports = {
     LOGIN: {
       name: "'auth.login'"
     },
+    NO_ACCESS: {
+      name: "'dashboard.no-access'"
+    },
     HOME: {
       name: "'dashboard.home'"
     }

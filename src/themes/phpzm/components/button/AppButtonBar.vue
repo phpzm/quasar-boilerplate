@@ -1,13 +1,19 @@
 <template>
   <div class="app-button-bar" :style="style">
-    <q-button v-for="button in buttons" :key="button.id" v-bind="button" @click="handler(button)">
+    <q-button v-if="permission(button, record)" v-for="button in buttons" :key="button.id" v-bind="button"
+              @click="handler(button)">
       <q-tooltip>{{ button.tooltip }}</q-tooltip>
     </q-button>
   </div>
 </template>
 
 <script type="text/javascript">
+  import MixinPermission from 'src/themes/phpzm/components/@mixins/MixinPermission'
+
   export default {
+    mixins: [
+      MixinPermission
+    ],
     name: 'app-button-bar',
     props: {
       buttons: {
@@ -21,6 +27,10 @@
       direction: {
         type: String,
         default: () => 'right'
+      },
+      record: {
+        type: Object,
+        default: () => ({})
       }
     },
     computed: {

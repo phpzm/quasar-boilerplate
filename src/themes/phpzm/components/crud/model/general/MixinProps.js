@@ -49,6 +49,10 @@ export default {
       type: String,
       default: () => 'right'
     },
+    position: {
+      type: String,
+      default: () => 'left'
+    },
     debug: {
       type: Boolean,
       default: () => false

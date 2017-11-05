@@ -31,6 +31,10 @@
       placeholderFalse: {
         type: String,
         default: 'Não'
+      },
+      init: {
+        type: Boolean,
+        default: () => true
       }
     },
     data: () => ({
@@ -59,9 +63,11 @@
         this.model = !!value
       }
     },
-    created () {
+    mounted () {
       this.model = !!this.value
-      this.$emit('input', this.model)
+      if (this.init) {
+        this.$emit('input', this.model)
+      }
     }
   }
 </script>

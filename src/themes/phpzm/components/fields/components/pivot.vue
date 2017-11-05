@@ -64,7 +64,7 @@
         }
 
         const options = body.map(row => ({
-          value: row[value],
+          value: String(row[value]),
           label: row[label],
           details: details
         }))
@@ -99,7 +99,7 @@
         if (!Array.isArray(value)) {
           return
         }
-        this.model = value.map(item => item[this.options.referenced])
+        this.model = value.map(item => String(item[this.options.referenced]))
       }
     },
     watch: {
@@ -129,6 +129,8 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .field-pivot
+    .input
+      height auto
     .q-if-control
       position absolute
       right 0

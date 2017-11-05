@@ -1,16 +1,18 @@
+import { $body } from 'src/app/infra/services/http/resource'
+
 /**
- * @param {Vue} $component
+ * @param {AppCrudForm} $component
  * @param {AxiosResponse} response
  * @param {Function} callback
  */
 export default ($component, response, callback = null) => {
-  let data = {}
-  const {body} = response.data
-  if (Array.isArray(body)) {
-    data = body[0]
+  let body = $body(response)
+  if (!Array.isArray(body)) {
+    $component.data = {}
+    return
   }
-  // noinspection JSUndefinedPropertyAssignment
-  $component.data = data
+  $component.data = body[0]
+
   if (typeof callback === 'function') {
     callback()
   }

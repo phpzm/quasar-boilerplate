@@ -1,30 +1,28 @@
 <template>
-  <layout-default
-    :view="view"
-    :left-breakpoint="leftBreakpoint"
-    :reveal="reveal"></layout-default>
+  <layout-default v-bind="bind"></layout-default>
 </template>
 
 <script type="text/javascript">
   import LayoutDefault from 'src/themes/phpzm/components/layout/AppLayout.vue'
-  import { configureDashboard } from 'src/bootstrap/settings'
+  import configureDashboard from 'src/bootstrap/configure/dashboard'
 
   export default {
     name: 'dashboard',
     components: {
       LayoutDefault
     },
-    props: {
-      view: {
-        default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
-      },
-      reveal: {
-        default: false
-      },
-      leftBreakpoint: {
-        default: 996
+    data: () => ({
+      bind: {
+        view: 'lHh Lpr lFf',
+        reveal: true,
+        leftBreakpoint: 996,
+        home: 'store',
+        viewport: {
+          height: 'calc(100vh - 100px)',
+          padding: '0 10px'
+        }
       }
-    },
+    }),
     created () {
       // noinspection JSCheckFunctionSignatures
       configureDashboard(this)

@@ -1,3 +1,4 @@
+export { default as MixinComputed } from 'src/themes/phpzm/components/crud/model/general/MixinComputed'
 export { default as MixinData } from 'src/themes/phpzm/components/crud/model/general/MixinData'
 export { default as MixinMethods } from 'src/themes/phpzm/components/crud/model/general/MixinMethods'
 export { default as MixinProps } from 'src/themes/phpzm/components/crud/model/general/MixinProps'

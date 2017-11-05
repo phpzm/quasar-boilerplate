@@ -1,7 +1,7 @@
-import { mapGetters } from 'vuex'
-
 export default {
   computed: {
-    ...mapGetters(['getAuthUser'])
+    direction () {
+      return this.position === 'left' ? 'right' : 'left'
+    }
   }
 }

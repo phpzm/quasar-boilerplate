@@ -12,6 +12,7 @@ import i18n from 'src/app/support/i18n'
 // settings of vendors
 import 'src/bootstrap/vendor/quasar'
 import 'src/bootstrap/vendor/froala'
+import 'src/bootstrap/vendor/fullcalendar'
 import 'src/themes/phpzm/components/fields'
 import 'src/themes/quasar/components/fields'
 

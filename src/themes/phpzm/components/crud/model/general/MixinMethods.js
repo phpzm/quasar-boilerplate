@@ -44,13 +44,13 @@ export default {
         .catch(error => this.catch(error, 'delete', [id]))
     },
     /**
-     * @param {Object} filters
+     * @param {Object} parameters
      */
-    search (filters = {}) {
+    search (parameters = {}) {
       this.service
-        .get('', filters)
+        .get('', parameters)
         .then(response => this.then(response, 'read'))
-        .catch(error => this.catch(error, 'search', [filters]))
+        .catch(error => this.catch(error, 'search', [parameters]))
     },
     /**
      * @param {Object} record
@@ -135,7 +135,7 @@ export default {
       }
 
       if (query !== undefined) {
-        query = Object.assign({}, query, this.$route.query)
+        query = Object.assign({}, this.$route.query, query)
       }
       if (query === undefined) {
         query = {}

@@ -1,10 +1,17 @@
 export default {
+  props: {
+    rule: {
+      type: String,
+      default: () => ''
+    }
+  },
   data: () => ({
     filter: {
       active: false,
       columns: [],
       record: {},
       rules: {},
+      char: '~>',
       css: {
         padding: '0',
         height: '100vh',
@@ -30,7 +37,23 @@ export default {
      */
     filterApply () {
       const query = this.$route.query
-      Object.keys(this.filter.record).forEach(key => (query[key] = this.filter.record[key]))
+
+      Object.keys(this.filter.record).forEach(key => (delete query[key]))
+
+      Object.keys(this.filter.record).forEach(key => {
+        let value = this.filter.record[key]
+        if (value === undefined) {
+          return
+        }
+        if (typeof value === 'string' && value.length === 0) {
+          return
+        }
+        if (typeof value === 'boolean') {
+          value = value ? '1' : '0'
+        }
+        query[key] = value
+      })
+
       this.browse(this.path, query)
     },
     /**
@@ -48,7 +71,7 @@ export default {
       column.width = 100
       column.component = this.componentName(column.filter.component)
       column.value = column.filter.value
-      column.rule = column.filter.rule || 'like'
+      column.rule = column.filter.rule || this.rule
       delete column.filter
       return column
     },
@@ -111,32 +134,16 @@ export default {
     },
     /**
      */
-    applyFilters () {
-      const char = '~>'
+    loadFilters () {
       const record = Object.keys(this.filter.record).reduce((accumulate, key) => {
-        const value = this.clearFilter(this.$route.query[key], char)
+        const value = this.clearFilter(this.$route.query[key], this.filter.char)
         if (value !== undefined) {
           accumulate[key] = value
         }
         return accumulate
       }, {})
-      this.$set(this.filter, 'record', record)
-
+      this.filter.record = record
       this.filter.active = !!Object.keys(record).length
-
-      const filters = Object.keys(record).reduce((accumulate, key) => {
-        let value = record[key]
-        if (this.filter.rules[key]) {
-          value = this.filter.rules[key] + char + value
-        }
-        accumulate[key] = value
-        return accumulate
-      }, {})
-
-      const search = () => {
-        this.search(filters)
-      }
-      window.setTimeout(search, this.timeout)
     }
   }
 }

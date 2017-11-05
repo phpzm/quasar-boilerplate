@@ -44,7 +44,8 @@
         // If mask is false, outputs the number to the model. Otherwise outputs the masked string.
         masked: false
       },
-      amount: undefined
+      amount: undefined,
+      activated: false
     }),
     computed: {
       html () {
@@ -55,19 +56,43 @@
       /**
        */
       updateValue () {
+        if (!this.activated) {
+          return
+        }
         const value = Number(String(this.amount).replace(/\./g, '').replace(',', '.'))
         if (value !== this.value) {
           this.$emit('input', value)
         }
+      },
+      /**
+       * @param {Number} value
+       */
+      applyValue (value) {
+        this.amount = Number(value).toFixed(this.settings.precision)
+      },
+      /**
+       */
+      activate () {
+        this.activated = true
+      },
+      /**
+       */
+      keypress () {
+        this.activate()
       }
     },
     watch: {
       value (value) {
-        this.amount = Number(value).toFixed(this.settings.precision)
+        this.activate()
+        if (value !== undefined) {
+          this.applyValue(value)
+        }
       }
     },
     mounted () {
-      this.amount = Number(this.value).toFixed(this.settings.precision)
+      if (this.value !== undefined) {
+        this.applyValue(this.value)
+      }
     }
   }
 </script>
