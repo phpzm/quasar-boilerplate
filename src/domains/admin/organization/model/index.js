@@ -75,6 +75,22 @@ export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 export const card = model.card(icon, label, path, tooltip, description, 50)
 
 /**
+ * @param {Vue} $this
+ * @param {Array} actions
+ */
+const actions = ($this, actions) => {
+  return actions.map(button => {
+    if (button.id === 'destroy') {
+      // override the access control system
+      button.permission = (record, $component, $user) => {
+        return record && String(record['id']) === '2'
+      }
+    }
+    return button
+  })
+}
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
@@ -93,7 +109,7 @@ export const grid = (scope, route) => {
     debug: false
   }
 
-  return model.grid(service, path, id, fields('index', route), filters(scope, route), null, options)
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, options)
 }
 
 /**
