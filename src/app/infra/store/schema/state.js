@@ -9,6 +9,7 @@ export default {
   app: {
     name: label,
     title: label,
+    tooltip: '',
     width: 0,
     height: 0,
     modified: false,

@@ -11,6 +11,11 @@ export const setAppTitle = 'app/setAppTitle'
 /**
  * @type {string}
  */
+export const setAppTooltip = 'app/setAppTooltip'
+
+/**
+ * @type {string}
+ */
 export const setAppWidth = 'app/setAppWidth'
 
 /**

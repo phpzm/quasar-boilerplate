@@ -93,25 +93,25 @@ export const restrict = (next, blocked = '') => {
 export const beforeEach = (to, from, next) => {
   // noinspection JSUnresolvedVariable
   const security = to.meta.security
-
+  // abort all requests xhr
   abort('The route where request was started was leaved, all requests was canceled')
-
+  // the target is not protected
   if (!security) {
     return toNext(to, next)
   }
-
+  // test if app is with state modified
   if (checkModified(next)) {
     return next(false)
   }
-
+  // if there is no session exit app
   if (!checkSession()) {
     return exit(next)
   }
-
+  // when target is not allowed the access will be restricted
   if (!checkPermission(to)) {
     return restrict(next, to.path)
   }
-
+  // all right, move on
   return toNext(to, next)
 }
 
@@ -135,26 +135,28 @@ const toNext = (to, next, path = '') => {
  * @returns {*}
  */
 export const afterEach = (to, from) => {
-  // noinspection JSIgnoredPromiseFromCall
-  store.dispatch('setAppMessages', [])
-
-  if (to.meta.title) {
-    return setTitle(to.meta.title)
+  const updateInfo = () => {
+    // update app title
+    setTitle(to.meta.title)
+    // update app tooltip
+    setTooltip(to.meta.tooltip)
   }
-  if (to.meta.tooltip) {
-    return setTitle(to.meta.tooltip)
-  }
-  if (to.meta.label) {
-    return setTitle(to.meta.label)
-  }
+  // clear messages
+  store.dispatch('setAppMessages', []).then(updateInfo)
 }
 
 /**
  * @param {string} title
  */
 const setTitle = (title) => {
-  if (title) {
-    // noinspection JSIgnoredPromiseFromCall
-    store.dispatch('setAppTitle', String(title))
-  }
+  // noinspection JSIgnoredPromiseFromCall
+  store.dispatch('setAppTitle', title || store.getters.AppName)
+}
+
+/**
+ * @param {string} tooltip
+ */
+const setTooltip = (tooltip) => {
+  // noinspection JSIgnoredPromiseFromCall
+  store.dispatch('setAppTooltip', tooltip || '')
 }

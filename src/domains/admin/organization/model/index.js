@@ -14,6 +14,16 @@ export const label = 'Organizações'
 /**
  * @type {string}
  */
+export const title = 'Cadastro de Organizações'
+
+/**
+ * @type {string}
+ */
+export const tooltip = 'Gerencie o organize o seu cadastro de Organizações'
+
+/**
+ * @type {string}
+ */
 export const api = '/admin/organization'
 
 /**
@@ -47,12 +57,12 @@ export const service = resource(api)
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, 'Cadastro de Organizações')
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path)
+export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
 /**
  * @param {string} scope

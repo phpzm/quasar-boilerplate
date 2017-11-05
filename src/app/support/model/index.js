@@ -16,16 +16,17 @@ export const field = configureField
  * @returns {Array}
  */
 export const filter = (fields, scope) => {
-  return fields.filter(field => scope ? field.scopes.includes(scope) : true)
+  return fields.filter(field => scope ? field.scopes && field.scopes.includes(scope) : true)
 }
 
 /**
  * @param {string} icon
  * @param {string} label
+ * @param {string} title
  * @param {string} tooltip
  * @returns {Object}
  */
-export const meta = (icon, label, tooltip) => ({icon, label, tooltip})
+export const meta = (icon, label, title, tooltip) => ({icon, label, title, tooltip})
 
 /**
  * @param {string} icon

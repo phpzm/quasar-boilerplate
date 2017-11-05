@@ -13,6 +13,11 @@ export const label = 'Página Inicial'
 /**
  * @type {string}
  */
+export const title = 'Página Inicial do app'
+
+/**
+ * @type {string}
+ */
 export const tooltip = 'Breve explicação sobre o projeto'
 
 /**
@@ -23,7 +28,7 @@ export const path = '/dashboard'
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, tooltip)
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Function}

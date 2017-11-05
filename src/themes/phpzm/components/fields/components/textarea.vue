@@ -4,7 +4,7 @@
       <div v-show="editable" :class="{'has-error': problems.length}">
         <textarea ref="input" class="input full-width" autocomplete="off"
                   v-bind="{id, name, placeholder, maxlength, disabled}"
-                  @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
+                  @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter="enter"
                   @input="updateValue($event.target.value)"></textarea>
         <div class="input-bar"></div>
       </div>

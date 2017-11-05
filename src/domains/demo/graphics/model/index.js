@@ -10,6 +10,11 @@ export const label = 'Gráficos'
 /**
  * @type {string}
  */
+export const title = 'Gráficos usando E-charts'
+
+/**
+ * @type {string}
+ */
 export const api = '/graphics'
 
 /**
@@ -25,7 +30,7 @@ export const tooltip = 'Exemplos básicos de gráficos'
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, tooltip)
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Function}

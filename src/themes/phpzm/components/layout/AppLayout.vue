@@ -9,7 +9,7 @@
 
         <q-toolbar-title>
           {{ AppName }}
-          <div slot="subtitle">{{ AppTitle }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
+          <div slot="subtitle">{{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span></div>
         </q-toolbar-title>
 
         <slot name="header-content"></slot>
@@ -103,7 +103,7 @@
       classNames () {
         return ['layout-default', this.environment]
       },
-      ...mapGetters(['AppTitle', 'AppName', 'AppMenu', 'getDashboardOptions'])
+      ...mapGetters(['AppName', 'AppTooltip', 'AppMenu', 'getDashboardOptions'])
     },
     methods: {
       handlerMenu (menu) {

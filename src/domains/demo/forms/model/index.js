@@ -13,6 +13,11 @@ export const label = 'Formulários'
 /**
  * @type {string}
  */
+export const title = 'Formulários de Exemplo'
+
+/**
+ * @type {string}
+ */
 export const api = '/forms'
 
 /**
@@ -28,7 +33,7 @@ export const tooltip = 'Pequeno resumo dos campos pré-configurados que podem se
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, tooltip)
+export const meta = model.meta(icon, label, title, tooltip)
 
 /**
  * @type {Function}
