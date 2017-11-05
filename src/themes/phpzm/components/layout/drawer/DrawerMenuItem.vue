@@ -122,8 +122,8 @@
       .q-collapsible-sub-item
         margin 0 0 0 5px
         padding 0
-        // box-shadow: inset 2px 1px 3px 1px rgba(0,0,0,0.16);
-        // background: #fafafa;
+        box-shadow inset 1px 1px 3px 1px rgba(0,0,0,0.16), inset 1px -1px 3px 1px rgba(0,0,0,0.1)
+        background #fafafa
         .drawer-menu-item
           border-left 1px solid $drawer-item-border
           &:before

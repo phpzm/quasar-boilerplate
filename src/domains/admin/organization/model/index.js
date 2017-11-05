@@ -24,6 +24,11 @@ export const tooltip = 'Gerencie o organize o seu cadastro de Organizações'
 /**
  * @type {string}
  */
+export const description = 'Organizações são grupos que existem dentro da sua Instituição. Ex.: Casa, Escritório, Filial de New York'
+
+/**
+ * @type {string}
+ */
 export const api = '/admin/organization'
 
 /**
@@ -65,17 +70,17 @@ export const meta = model.meta(icon, label, title, tooltip)
 export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
 /**
+ * @type {Function}
+ */
+export const card = model.card(icon, label, path, tooltip, description, 50)
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    rule: 'like',
-    paginate: false,
+  const options = {
     bottom: false,
     styles: {
       height: 'calc(100vh - 220px)',
@@ -85,20 +90,10 @@ export const grid = (scope, route) => {
       height: 'calc(100vh - 270px)',
       minHeight: '230px'
     },
-    schemas: fields('index'),
-    filters: filters(scope, route),
-    actions: ($this, actions) => {
-      return actions.map(button => {
-        if (button.id === 'destroy') {
-          button.permission = (record, $component, $user) => {
-            return record && String(record['id']) === '2'
-          }
-        }
-        return button
-      })
-    },
     debug: false
   }
+
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), null, options)
 }
 
 /**
@@ -107,17 +102,7 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    scope: scope,
-    schemas: fields(scope),
-    actions: ($this, actions) => {
-      return actions
-    },
-    debug: true
-  }
+  return model.form(service, scope, path, id, fields(scope, route))
 }
 
 /**
