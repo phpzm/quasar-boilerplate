@@ -15,12 +15,11 @@
       color #474747
       margin 0 0 5px 0
 
-.grid
-  .cell
-    for width in (1..20)
-      &.xs-{width * 5}
-        max-width width * 5%
-        min-width width * 5%
+.grid-avatar-image, .grid-simple-image
+  width 50x
+.grid-avatar-image
+  height 50px
+  border-radius 50%
 
 @media (max-width 768px)
   .grid
@@ -30,6 +29,13 @@
       max-width 100% !important
       min-width 100% !important
       width 100% !important
+
+  .grid
+    .cell
+      for width in (1..20)
+        &.xs-{width * 5}
+          max-width width * 5%
+          min-width width * 5%
 
 @media (min-width 768px)
   .grid

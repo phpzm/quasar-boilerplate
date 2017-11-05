@@ -1,7 +1,12 @@
-import configureField from 'src/bootstrap/configure/field'
 import item from 'src/app/modules/dashboard/helper/item'
 
+import configureField from 'src/bootstrap/configure/field'
+import configureGrid from 'src/bootstrap/configure/grid'
+import configureForm from 'src/bootstrap/configure/form'
+
 /**
+ * @type {Function}
+ *
  * @param field
  * @param label
  * @param component
@@ -9,6 +14,34 @@ import item from 'src/app/modules/dashboard/helper/item'
  * @returns {object}
  */
 export const field = configureField
+
+/**
+ * @type {Function}
+ *
+ * @param {Resource} service
+ * @param {string} path
+ * @param {string} id
+ * @param {Array} schemas
+ * @param {Array} filters
+ * @param {Array} actions
+ * @param {Object} options
+ * @returns {Object}
+ */
+export const grid = configureGrid
+
+/**
+ * @type {Function}
+ *
+ * @param {Resource} service
+ * @param {string} scope
+ * @param {string} path
+ * @param {string} id
+ * @param {Array} schemas
+ * @param {Array} actions
+ * @param {Object} options
+ * @returns {Object}
+ */
+export const form = configureForm
 
 /**
  * @param {Array} fields
@@ -49,8 +82,21 @@ export const menu = (icon, label, path, exact = false, tooltip = '', id = '') =>
 export const pivot = (uri, reference, referenced) => ({uri, reference, referenced})
 
 /**
+ * @param {string} icon
+ * @param {string} label
+ * @param {string} path
+ * @param {string} tooltip
+ * @param {string} description
+ * @param {int} width
+ * @returns {Function}
+ */
+export const card = (icon, label, path, tooltip, description, width) => {
+  return (to) => ({icon, label, to: to(path), tooltip, description, width})
+}
+
+/**
  * @type {Object}
  */
 export default {
-  filter, field, meta, menu, pivot
+  grid, form, field, filter, meta, menu, pivot, card
 }

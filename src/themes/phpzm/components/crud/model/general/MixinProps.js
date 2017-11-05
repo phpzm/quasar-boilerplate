@@ -53,6 +53,14 @@ export default {
       type: String,
       default: () => 'left'
     },
+    timeout: {
+      type: Number,
+      default: () => 100
+    },
+    changer: {
+      type: String,
+      default: () => '~'
+    },
     debug: {
       type: Boolean,
       default: () => false

@@ -83,6 +83,12 @@ export default (field, label, component = 'text', scopes = []) => {
       }
       return this
     },
+    $img (className = 'avatar') {
+      this.grid.format = (value) => {
+        return `<img class="grid-${className}-image" src="${value}"/>`
+      }
+      return this
+    },
     $checkbox () {
       this.form.component = 'checkbox'
       this.grid.format = formatBoolean

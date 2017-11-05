@@ -141,10 +141,10 @@ export default {
         query = {}
       }
       if (path === this.$route.path) {
-        query[this.char] = uniqid()
+        query[this.changer] = uniqid()
       }
       if (remove) {
-        delete query[this.char]
+        delete query[this.changer]
       }
 
       const browse = () => {

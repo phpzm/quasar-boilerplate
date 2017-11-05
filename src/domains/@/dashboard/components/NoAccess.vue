@@ -34,8 +34,8 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-  .no-access
+<style lang="stylus" rel="stylesheet/stylus" scope>
+  .dashboard-no-access
     font-size 14px
     pre
       background #e8e8e8
