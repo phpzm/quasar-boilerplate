@@ -221,7 +221,7 @@ export default ($this) => {
       scopes: ['create', 'view', 'edit'],
       rotate: false,
       positions: ['top', 'bottom'],
-      icon: 'subject',
+      icon: 'apps',
       label: '',
       tooltip: 'Abre a lista de registros',
       handler: (record, schemas, $component) => {
