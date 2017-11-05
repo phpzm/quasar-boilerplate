@@ -1,5 +1,5 @@
 <template>
-  <app-card v-bind="{header: false}">
+  <app-card v-bind="{header: false, style: styles}">
     <router-view slot="content"></router-view>
   </app-card>
 </template>
@@ -13,9 +13,15 @@
     },
     name: 'app-crud',
     props: {
-      title: {
-        default: ''
+      classes: {
+        default: () => ({})
+      },
+      styles: {
+        default: () => ({})
       }
     }
   }
 </script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+</style>

@@ -1,5 +1,5 @@
 import { confirm } from 'src/app/support/message/index'
-import { first } from 'src/app/infra/services/http/resource'
+import { $first } from 'src/app/infra/services/http/resource'
 
 const color = 'positive'
 
@@ -117,7 +117,7 @@ export default ($this) => {
       tooltip: 'Salvar as alterações feitas a este registro',
       handler: (record, schemas, $component) => {
         $this.save(record, (response) => {
-          $this.browse($this.path + '/' + first(response)[$this.id] + '/' + 'edit')
+          $this.browse($this.path + '/' + $first(response)[$this.id] + '/' + 'edit')
         })
       }
     },

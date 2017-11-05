@@ -62,6 +62,20 @@ export default http => {
    * @param {AxiosResponse} response
    * @returns {*}
    */
+  http.$meta = (response) => {
+    if (!response.data) {
+      return {}
+    }
+    if (typeof response.data.meta !== 'object') {
+      return {}
+    }
+    return response.data.meta
+  }
+
+  /**
+   * @param {AxiosResponse} response
+   * @returns {*}
+   */
   http.$first = (response) => {
     const content = http.$body(response)
     if (Array.isArray(content)) {

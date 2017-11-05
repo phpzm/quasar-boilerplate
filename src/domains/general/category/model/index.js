@@ -66,8 +66,7 @@ export const grid = (scope, route) => {
     service,
     path,
     component,
-    pagination: true,
-    search: true,
+    paginate: true,
     schemas: fields(scope, route),
     debug: true
   }

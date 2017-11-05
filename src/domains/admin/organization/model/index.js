@@ -75,8 +75,16 @@ export const grid = (scope, route) => {
     service: service,
     path: path,
     rule: 'like',
-    pagination: true,
-    search: true,
+    paginate: false,
+    bottom: false,
+    styles: {
+      height: 'calc(100vh - 220px)',
+      minHeight: '280px'
+    },
+    bodyStyle: {
+      height: 'calc(100vh - 270px)',
+      minHeight: '230px'
+    },
     schemas: fields('index'),
     filters: filters(scope, route),
     actions: ($this, actions) => {
@@ -89,7 +97,7 @@ export const grid = (scope, route) => {
         return button
       })
     },
-    debug: true
+    debug: false
   }
 }
 

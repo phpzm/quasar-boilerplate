@@ -1,20 +1,28 @@
+import { $body, $meta } from 'src/app/infra/services/http/resource'
+
 /**
- * @param {Vue} $component
+ * @param {AppCrudGrid} $component
  * @param {AxiosResponse} response
- * @returns {Array}
  */
 export default ($component, response) => {
-  const {body, meta} = response.data
+  if (!$component.isPaginated()) {
+    let data = response
+    if (!Array.isArray(data)) {
+      data = $body(response)
+    }
+    $component.data = data
+    return
+  }
+
+  const body = $body(response)
+  const meta = $meta(response)
+
   if (!Array.isArray(body)) {
-    return []
+    $component.data = []
+    return
   }
-  let data = body
-  if ($component.isPaginated()) {
-    // noinspection JSUndefinedPropertyAssignment
-    $component.page = parseInt(meta.page)
-    // noinspection JSUndefinedPropertyAssignment
-    $component.pages = parseInt(meta.last)
-  }
-  // noinspection JSUndefinedPropertyAssignment
-  $component.data = data
+
+  $component.pages = parseInt(meta.last)
+  $component.total = 96 // parseInt(meta.total)
+  $component.data = body
 }

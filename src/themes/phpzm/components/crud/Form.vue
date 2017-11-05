@@ -22,14 +22,18 @@
   import AppForm from 'src/themes/phpzm/components/form/AppForm.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
   import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
-  import { MixinData, MixinMethods, MixinProps } from './model'
+  import { MixinComputed, MixinData, MixinMethods, MixinProps } from './model'
 
-  export default {
+  /**
+   * @type {Object}
+   * @property data
+   */
+  const AppCrudForm = {
     components: {
       AppForm, AppButtonBar, AppDebugger
     },
     mixins: [
-      MixinData, MixinMethods, MixinProps
+      MixinComputed, MixinData, MixinMethods, MixinProps
     ],
     name: 'app-crud-form',
     props: {
@@ -106,6 +110,7 @@
       }
     }
   }
+  export default AppCrudForm
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
