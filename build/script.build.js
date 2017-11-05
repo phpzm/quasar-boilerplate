@@ -20,7 +20,7 @@ require('./script.clean.js')
 console.log((' Building Quasar App with "' + env.platform.theme + '" theme...\n').bold)
 
 shell.mkdir('-p', targetPath)
-shell.cp('-R', 'statics', targetPath)
+shell.cp('-R', 'src/statics', targetPath)
 
 function finalize () {
   console.log((
@@ -33,6 +33,7 @@ function finalize () {
 
 webpack(webpackConfig, function (err, stats) {
   if (err) throw err
+
   process.stdout.write(stats.toString({
     colors: true,
     modules: false,
@@ -40,6 +41,10 @@ webpack(webpackConfig, function (err, stats) {
     chunks: false,
     chunkModules: false
   }) + '\n')
+
+  if (stats.hasErrors()) {
+    process.exit(1)
+  }
 
   if (config.build.purifyCSS) {
     css.purify(finalize)
