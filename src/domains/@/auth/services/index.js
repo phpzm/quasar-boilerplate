@@ -10,8 +10,8 @@ import { register, unRegister } from 'src/app/modules/auth/services'
 export const login = (credentials, remember, success) => {
   http
     .post('/auth/login', credentials)
-    .then(({data}) => {
-      register(data.body.user, data.body.token, remember, success)
+    .then((response) => {
+      register(http.$body(response).user, http.$body(response).token, remember, success)
     })
 }
 

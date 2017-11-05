@@ -1,3 +1,4 @@
+import configureSearch from 'src/bootstrap/configure/search'
 import populateGrid from 'src/bootstrap/populate/grid'
 
 export default {
@@ -42,14 +43,14 @@ export default {
       type: Object,
       default: () => ({
         height: 'calc(100vh - 290px)',
-        minHeight: '270px'
+        minHeight: '200px'
       })
     },
     bodyStyle: {
       type: Object,
       default: () => ({
         height: 'calc(100vh - 330px)',
-        minHeight: '230px'
+        minHeight: '170px'
       })
     }
   },
@@ -111,16 +112,6 @@ export default {
       this.changePage(1)
     },
     loadData () {
-      let pagination = {}
-      if (this.page) {
-        pagination = {page: this.page}
-      }
-
-      let limiting = {}
-      if (this.limit) {
-        limiting = {limit: this.limit}
-      }
-
       const filters = Object.keys(this.filter.record).reduce((accumulate, key) => {
         let value = this.filter.record[key]
         if (this.filter.rules[key]) {
@@ -130,11 +121,10 @@ export default {
         return accumulate
       }, {})
 
-      const parameters = Object.assign({}, filters, pagination, limiting)
-
       const search = () => {
-        this.search(parameters)
+        this.search(configureSearch(this.page, this.limit, filters))
       }
+
       window.setTimeout(search, this.timeout)
     },
     /**
