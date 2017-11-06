@@ -8,7 +8,7 @@ import '../slots/MyButton'
 /**
  * @type {string}
  */
-export const icon = 'store_mall_directory'
+export const icon = 'account_balance'
 
 /**
  * @type {string}
@@ -130,6 +130,7 @@ const slots = [
  * @returns {Object}
  */
 export const grid = (scope, route) => {
+  // you can add settings default to grid in src/bootstrap/configure/grid
   const options = {
     slots: slots,
     bottom: false,
