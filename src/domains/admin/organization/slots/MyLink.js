@@ -1,7 +1,11 @@
 import Vue from 'vue'
 
 Vue.component('MyLink', {
-  template: `<div><router-link :to="to">{{ value }}</router-link><q-tooltip>{{ tooltip }}</q-tooltip></div>`,
+  template:
+  `<div>` +
+    `<router-link :to="to">{{ value }}</router-link>` +
+    `<q-tooltip>{{ tooltip }}</q-tooltip>` +
+  `</div>`,
   props: {
     path: {
       default: () => ''

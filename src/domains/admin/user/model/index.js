@@ -1,7 +1,6 @@
 import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
 import { reference, api as organization } from 'src/domains/admin/organization/model'
-import '../slots/MyLink'
 
 /**
  * @type {string}
@@ -87,31 +86,13 @@ const actions = ($this, actions) => {
   return actions.map(map)
 }
 
-const slots = [
-  {
-    field: 'id',
-    component: 'MyLink',
-    props: {
-      path: '/path/{id}/{name}'
-    },
-    on: {
-      click (record, schemas, $component) {
-        console.log('Clicou!')
-      }
-    }
-  }
-]
-
 /**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, {
-    slots,
-    position: 'right'
-  })
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, {position: 'right'})
 }
 
 /**

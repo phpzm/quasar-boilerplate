@@ -2,6 +2,8 @@ import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
 import { PATH_HOME } from 'src/app/support/index'
 import { button } from 'src/app/modules/dashboard'
+import '../slots/MyLink'
+import '../slots/MyButton'
 
 /**
  * @type {string}
@@ -101,12 +103,35 @@ const actions = ($this, actions) => {
 }
 
 /**
+ * @type {Array}
+ */
+const slots = [
+  {
+    field: 'id',
+    component: 'MyLink',
+    props: {
+      path: '/path/{id}/{name}'
+    }
+  },
+  {
+    field: 'name',
+    component: 'MyButton',
+    on: {
+      click (record, schemas, $component) {
+        console.log('Clicou!')
+      }
+    }
+  }
+]
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
   const options = {
+    slots: slots,
     bottom: false,
     styles: {
       height: 'calc(100vh - 220px)',
