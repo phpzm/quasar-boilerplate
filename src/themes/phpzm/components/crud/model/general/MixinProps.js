@@ -15,6 +15,10 @@ export default {
       required: true,
       default: () => ([])
     },
+    slots: {
+      type: Array,
+      default: () => ([])
+    },
     actions: {
       default: () => null
     },

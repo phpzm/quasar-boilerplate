@@ -1,5 +1,9 @@
 import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
+import { PATH_HOME } from 'src/app/support/index'
+import { button } from 'src/app/modules/dashboard'
+import '../slots/MyLink'
+import '../slots/MyButton'
 
 /**
  * @type {string}
@@ -75,12 +79,59 @@ export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 export const card = model.card(icon, label, path, tooltip, description, 50)
 
 /**
+ * @param {Vue} $this
+ * @param {Array} actions
+ */
+const actions = ($this, actions) => {
+  // permission handler
+  const permission = (record, $component, $user) => record && String(record['id']) === '1'
+  // go to home
+  const home = () => $this.$router.push(PATH_HOME)
+  // id, permission, label, handler, icon = '', tooltip = '', color = 'white'
+  const custom = button('go-home', 1, 'Início', home, 'store', 'Voltar para a Página Inicial', 'purple')
+    .$options({permission, rotate: false, raised: true}).$form() // , round: true, outline: true
+  // add new button
+  actions.unshift(custom)
+  // change permission of destroy button
+  return actions.map(button => {
+    if (button.id === 'destroy') {
+      // override the access control system
+      button.permission = permission
+    }
+    return button
+  })
+}
+
+/**
+ * @type {Array}
+ */
+const slots = [
+  {
+    field: 'id',
+    component: 'MyLink',
+    props: {
+      path: '/path/{id}/{name}'
+    }
+  },
+  {
+    field: 'name',
+    component: 'MyButton',
+    on: {
+      click (record, schemas, $component) {
+        console.log('Clicou!')
+      }
+    }
+  }
+]
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
   const options = {
+    slots: slots,
     bottom: false,
     styles: {
       height: 'calc(100vh - 220px)',
@@ -93,7 +144,7 @@ export const grid = (scope, route) => {
     debug: false
   }
 
-  return model.grid(service, path, id, fields('index', route), filters(scope, route), null, options)
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, options)
 }
 
 /**
@@ -102,7 +153,7 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return model.form(service, scope, path, id, fields(scope, route))
+  return model.form(service, scope, path, id, fields(scope, route), actions)
 }
 
 /**

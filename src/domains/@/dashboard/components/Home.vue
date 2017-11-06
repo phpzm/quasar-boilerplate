@@ -23,7 +23,7 @@
                                                            target="_blank">Github</a>
       </p>
       <p align="justify">
-        Os exemplos de <strong>Administração</strong> utilizam uma API "fake" que é provida por esse arquivo
+        Os exemplos da <strong>"API de Forms"</strong> utilizam uma API "fake" que é provida por esse arquivo
         <a href="https://github.com/phpzm/quasar-boilerplate/blob/master/.deploy/api/index.php">aqui</a>.
       </p>
       <hr>

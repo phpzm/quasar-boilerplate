@@ -76,6 +76,7 @@ export const card = model.card(icon, label, path, tooltip, description, 50)
 const actions = ($this, actions) => {
   const map = button => {
     if (['edit', 'destroy'].includes(button.id)) {
+      // keep the access control system and add other validation layer
       button.access = (record, $component, $user) => {
         return record && String(record['id']) !== '2'
       }
