@@ -84,7 +84,7 @@ export const card = model.card(icon, label, path, tooltip, description, 50)
  */
 const actions = ($this, actions) => {
   // permission handler
-  const permission = (record, $component, $user) => record && String(record['id']) === '2'
+  const permission = (record, $component, $user) => record && String(record['id']) === '1'
   // go to home
   const home = () => $this.$router.push(PATH_HOME)
   // id, permission, label, handler, icon = '', tooltip = '', color = 'white'

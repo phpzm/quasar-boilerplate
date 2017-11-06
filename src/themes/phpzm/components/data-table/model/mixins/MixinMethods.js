@@ -45,7 +45,7 @@ export default {
      */
     props (slot, cell) {
       const props = slot.props || {}
-      return {...props, value: cell.data, record: cell.row}
+      return {...props, value: cell.data, record: cell.row, user: this.getAuthUser}
     }
   }
 }
