@@ -1,5 +1,7 @@
 import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
+import { PATH_HOME } from 'src/app/support/index'
+import { button } from 'src/app/modules/dashboard'
 
 /**
  * @type {string}
@@ -79,12 +81,20 @@ export const card = model.card(icon, label, path, tooltip, description, 50)
  * @param {Array} actions
  */
 const actions = ($this, actions) => {
+  // permission handler
+  const permission = (record, $component, $user) => record && String(record['id']) === '2'
+  // go to home
+  const home = () => $this.$router.push(PATH_HOME)
+  // id, permission, label, handler, icon = '', tooltip = '', color = 'white'
+  const custom = button('go-home', 1, 'Início', home, 'store', 'Voltar para a Página Inicial', 'purple')
+    .$options({permission, rotate: false, raised: true}).$form() // , round: true, outline: true
+  // add new button
+  actions.unshift(custom)
+  // change permission of destroy button
   return actions.map(button => {
     if (button.id === 'destroy') {
       // override the access control system
-      button.permission = (record, $component, $user) => {
-        return record && String(record['id']) === '2'
-      }
+      button.permission = permission
     }
     return button
   })
@@ -118,7 +128,7 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return model.form(service, scope, path, id, fields(scope, route))
+  return model.form(service, scope, path, id, fields(scope, route), actions)
 }
 
 /**

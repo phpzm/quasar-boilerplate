@@ -1,12 +1,16 @@
 <template>
   <div class="app-crud-grid">
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
+
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
+
     <hr>
     <app-form ref="form" v-bind="{fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
     <hr>
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
+
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
+
     <div class="fixed-bottom-right">
-      <app-button-bar :buttons="buttons.floating" :handler="handler"/>
+      <app-button-bar :buttons="buttons.floating" :handler="handler" :record="data"/>
     </div>
 
     <template v-if="debugging">
@@ -73,14 +77,6 @@
 
         this.fields = this.schemas.filter(filter).map(map)
       },
-      /**
-       * @param {AxiosError} error
-       * @param {string} method
-       * @param {Array} parameters
-       */
-      catch (error, method, parameters) {
-        console.log('~>', this.$options.name, error)
-      },
       input (data) {
         this.data = data
         this.setAppModified(true)
@@ -91,10 +87,21 @@
       valid (valid) {
         this.status = valid
       },
+      /**
+       * @param {AxiosError} error
+       * @param {string} method
+       * @param {Array} parameters
+       */
+      catch (error, method, parameters) {
+        console.log('~>', this.$options.name, error)
+      },
       ...mapActions(['setAppModified'])
     },
     watch: {
       status () {
+        this.renderActions()
+      },
+      data () {
         this.renderActions()
       }
     },
