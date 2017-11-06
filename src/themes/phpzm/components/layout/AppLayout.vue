@@ -1,5 +1,5 @@
 <template>
-  <q-layout ref="layout" :class="classNames" :view="view" :left-breakpoint="leftBreakpoint" :reveal="reveal">
+  <q-layout ref="layout" :class="classNames" v-model="sides" v-bind="{view, leftBreakpoint, reveal}">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
@@ -40,7 +40,7 @@
       </slot>
       <slot name="drawer-left">
         <!--<q-list-header>Left Panel</q-list-header>-->
-        <app-drawer-menu :menus="AppMenu"></app-drawer-menu>
+        <app-drawer-menu :menus="AppMenu" :withShadow="withShadow"></app-drawer-menu>
       </slot>
     </q-scroll-area>
 
@@ -63,6 +63,7 @@
   import AppBreadcrumb from 'src/themes/phpzm/components/breadcrumb/AppBreadcrumb.vue'
   import AppDrawerMenu from 'src/themes/phpzm/components/layout/drawer/DrawerMenu.vue'
   import AppTransitionSlide from 'src/themes/phpzm/components/transition/AppTransitionSlide.vue'
+  import { set, get } from 'src/app/infra/storage'
 
   export default {
     components: {
@@ -96,8 +97,18 @@
           height: 'calc(100vh - 105px)',
           padding: '0 10px'
         })
+      },
+      withShadow: {
+        type: Boolean,
+        default: () => true
       }
     },
+    data: () => ({
+      sides: {
+        left: false,
+        right: true
+      }
+    }),
     computed: {
       environment () {
         return process.env.NODE_ENV
@@ -117,6 +128,20 @@
         if (this.left) {
           this.$refs.layout.toggleLeft()
         }
+      }
+    },
+    watch: {
+      sides: {
+        handler (sides) {
+          set('drawer.sides', sides, true)
+        },
+        deep: true
+      }
+    },
+    created () {
+      const sides = get('drawer.sides', true)
+      if (sides) {
+        this.sides = sides
       }
     }
   }
