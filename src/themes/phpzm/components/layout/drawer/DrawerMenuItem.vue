@@ -1,20 +1,17 @@
 <template>
-  <div class="drawer-menu-item">
+  <div class="drawer-menu-item" :class="{'with-shadow': withShadow}">
 
     <div v-if="menu.group">
-      <small>
-        {{ menu.label }}
-        <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
-      </small>
+      <small>{{ menu.label }}</small>
       <hr>
       <template v-for="item in menu.children">
-        <app-drawer-menu-item :menu="item" :badges="badges"></app-drawer-menu-item>
+        <app-drawer-menu-item :menu="item" :badges="badges" :withShadow="withShadow"></app-drawer-menu-item>
       </template>
     </div>
 
     <q-collapsible v-else-if="isCollapsible" ref="collapse" v-bind="collapsible">
       <template v-for="child in menu.children">
-        <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
+        <app-drawer-menu-item :menu="child" :badges="badges" :withShadow="withShadow"></app-drawer-menu-item>
       </template>
     </q-collapsible>
 
@@ -40,6 +37,10 @@
       badges: {
         type: Object,
         default: () => ({})
+      },
+      withShadow: {
+        type: Boolean,
+        default: () => true
       }
     },
     computed: {
@@ -97,7 +98,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  $drawer-item-border = #dddddd
+  $drawer-item-border = #a7a7a7
 
   .drawer-menu-item
     position relative
@@ -114,13 +115,13 @@
         content ' '
         position absolute
         bottom 0
-        left 3px
+        left 8px
         width 5px
         height 5px
         border-radius 5px
         background $drawer-item-border
       .q-collapsible-sub-item
-        margin 0 0 0 5px
+        margin 0 0 0 10px
         padding 0
         .drawer-menu-item
           border-left 1px solid $drawer-item-border
@@ -135,6 +136,18 @@
           border-left none
           &:before
             border-left 1px solid $drawer-item-border
+
+    &.with-shadow
+      .q-collapsible
+        .q-collapsible-sub-item
+          border-left 1px solid $drawer-item-border
+          background #fafafa
+          box-shadow inset 1px 1px 3px 1px rgba(0, 0, 0, 0.16), inset 1px -1px 3px 1px rgba(0, 0, 0, 0.1)
+          .drawer-menu-item
+            border-left none
+          .drawer-menu-item:last-child
+            &:before
+              border-left none
 
     small
       color #9f9f9f

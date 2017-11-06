@@ -5,7 +5,7 @@ import { reference, api as organization } from 'src/domains/admin/organization/m
 /**
  * @type {string}
  */
-export const icon = 'supervisor_account'
+export const icon = 'people'
 
 /**
  * @type {string}
@@ -21,6 +21,11 @@ export const title = 'Cadastro de Usuários'
  * @type {string}
  */
 export const tooltip = 'Defina quais usuários terão acesso a sua aplicação e gerencie-os'
+
+/**
+ * @type {string}
+ */
+export const description = 'Adicione e gerencie Usuários no sistema e defina como se comportam'
 
 /**
  * @type {string}
@@ -62,10 +67,16 @@ export const pivot = model.pivot(organization, reference, 'organization_id')
  */
 export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
+/**
+ * @type {Function}
+ */
+export const card = model.card(icon, label, path, tooltip, description, 50)
+
 // configure buttons
 const actions = ($this, actions) => {
   const map = button => {
     if (['edit', 'destroy'].includes(button.id)) {
+      // keep the access control system and add other validation layer
       button.access = (record, $component, $user) => {
         return record && String(record['id']) !== '2'
       }
@@ -81,18 +92,7 @@ const actions = ($this, actions) => {
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    position: 'left',
-    rule: 'like',
-    paginate: true,
-    schemas: fields('index'),
-    filters: filters(scope, route),
-    actions: actions,
-    debug: false
-  }
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, {position: 'right'})
 }
 
 /**
@@ -101,17 +101,7 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    scope: scope,
-    schemas: fields(scope),
-    actions: ($this, actions) => {
-      return actions
-    },
-    debug: true
-  }
+  return model.form(service, scope, path, id, fields(scope, route))
 }
 
 /**

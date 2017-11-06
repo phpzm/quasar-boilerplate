@@ -15,6 +15,10 @@ export default {
       required: true,
       default: () => ([])
     },
+    slots: {
+      type: Array,
+      default: () => ([])
+    },
     actions: {
       default: () => null
     },
@@ -52,6 +56,14 @@ export default {
     position: {
       type: String,
       default: () => 'left'
+    },
+    timeout: {
+      type: Number,
+      default: () => 100
+    },
+    changer: {
+      type: String,
+      default: () => '~'
     },
     debug: {
       type: Boolean,

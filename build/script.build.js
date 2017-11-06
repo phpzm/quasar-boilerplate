@@ -20,7 +20,7 @@ require('./script.clean.js')
 console.log((' Building Quasar App with "' + env.platform.theme + '" theme...\n').bold)
 
 shell.mkdir('-p', targetPath)
-shell.cp('-R', 'src/statics', targetPath)
+shell.cp('-R', './statics', targetPath)
 
 function finalize () {
   console.log((

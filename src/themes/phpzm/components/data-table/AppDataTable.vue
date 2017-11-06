@@ -13,9 +13,10 @@
           </q-fab>
         </div>
       </div>
-      <!--<div v-for="slot in ['id']" :slot="'col-' + slot" slot-scope="cell">-->
-      <!--<component is="field-text" v-model="cell.data"></component>-->
-      <!--</div>-->
+      <div v-for="slot in slots" :slot="'col-' + slot.field" slot-scope="cell">
+        <!--<component :is="slot.is" v-bind="slot.bind" v-model="cell.data" :row="cell.row"/>-->
+        <field-functional :component="slot.component" :on="on(slot, cell)" :props="props(slot, cell)"/>
+      </div>
     </q-data-table>
   </div>
 </template>
@@ -25,36 +26,12 @@
   import { computed, data, methods, props } from './model'
 
   export default {
-    mixins: [MixinPermission, computed, data, methods, props],
+    mixins: [
+      MixinPermission, computed, data, methods, props
+    ],
     name: 'app-data-table'
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .app-data-table
-    font-family Roboto
-    .app-data-table-options
-      position absolute
-      margin-top -20px
-      .q-btn-round.q-btn-standard
-        height 40px
-        width 40px
-        q-icon, .q-spinner
-          font-size 20px
-    .q-data-table
-      display flex
-      .q-data-table-toolbar.upper-toolbar
-        display none
-      .q-data-table-container
-        overflow auto
-      .q-data-table-head
-        overflow visible
-      .q-data-table-body
-        overflow visible
-
-  .production
-    .app-data-table-options
-      .q-btn-round.q-btn-standard
-        .q-fab-icon.q-icon, .q-fab-active-icon.q-icon
-          margin 6px 0 0 0
 </style>

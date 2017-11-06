@@ -23,3 +23,15 @@ export { default as menu } from './helper/menu'
  * @param {string} tooltip
  */
 export { default as item } from './helper/item'
+
+/**
+ * @param {string} id
+ * @param {int} permission
+ * @param {string} label
+ * @param {Function} handler
+ * @param {string} icon
+ * @param {string} tooltip
+ * @param {string} color
+ * @returns {Object}
+ */
+export { default as button } from './helper/button'

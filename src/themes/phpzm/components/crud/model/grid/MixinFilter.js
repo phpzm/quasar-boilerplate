@@ -1,6 +1,12 @@
+import { clone } from 'src/app/support/utils'
+
 export default {
   props: {
     rule: {
+      type: String,
+      default: () => ''
+    },
+    separator: {
       type: String,
       default: () => ''
     }
@@ -11,7 +17,6 @@ export default {
       columns: [],
       record: {},
       rules: {},
-      char: '~>',
       css: {
         padding: '0',
         height: '100vh',
@@ -96,7 +101,7 @@ export default {
     /**
      */
     renderFilters () {
-      const columns = this.columns.filter(column => true)
+      const columns = clone(this.columns)
       columns.shift()
 
       const map = item => {
@@ -118,25 +123,28 @@ export default {
     },
     /**
      * @param {*} value
-     * @param {string} char
+     * @param {string} separator
      * @returns {*}
      */
-    clearFilter (value, char) {
+    clearFilter (value, separator) {
       if (value === undefined) {
         return value
       }
-      const split = String(value).split(char)
+      if (!separator) {
+        return value
+      }
+      const split = String(value).split(separator)
       if (split.length < 2) {
         return value
       }
       split.shift()
-      return split.join(char)
+      return split.join(separator)
     },
     /**
      */
     loadFilters () {
       const record = Object.keys(this.filter.record).reduce((accumulate, key) => {
-        const value = this.clearFilter(this.$route.query[key], this.filter.char)
+        const value = this.clearFilter(this.$route.query[key], this.filter.separator)
         if (value !== undefined) {
           accumulate[key] = value
         }
