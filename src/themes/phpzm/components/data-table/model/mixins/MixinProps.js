@@ -4,6 +4,10 @@ export default {
       type: Array,
       default: () => ([])
     },
+    slots: {
+      type: Array,
+      default: () => ([])
+    },
     data: {
       type: Array,
       default: () => ([])

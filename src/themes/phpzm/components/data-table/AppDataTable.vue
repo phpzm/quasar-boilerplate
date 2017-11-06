@@ -13,9 +13,10 @@
           </q-fab>
         </div>
       </div>
-      <!--<div v-for="slot in ['id']" :slot="'col-' + slot" slot-scope="cell">-->
-      <!--<component is="field-text" v-model="cell.data"></component>-->
-      <!--</div>-->
+      <div v-for="slot in slots" :slot="'col-' + slot.field" slot-scope="cell">
+        <!--<component :is="slot.is" v-bind="slot.bind" v-model="cell.data" :row="cell.row"/>-->
+        <field-functional :component="slot.component" :on="on(slot, cell)" :props="props(slot, cell)"/>
+      </div>
     </q-data-table>
   </div>
 </template>
@@ -25,7 +26,9 @@
   import { computed, data, methods, props } from './model'
 
   export default {
-    mixins: [MixinPermission, computed, data, methods, props],
+    mixins: [
+      MixinPermission, computed, data, methods, props
+    ],
     name: 'app-data-table'
   }
 </script>
