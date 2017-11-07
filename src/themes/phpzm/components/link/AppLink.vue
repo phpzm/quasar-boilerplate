@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="to">{{ value }}</router-link>
-    <q-tooltip>{{ tooltip }}</q-tooltip>
+    <app-tooltip>{{ tooltip }}</app-tooltip>
   </div>
 </template>
 

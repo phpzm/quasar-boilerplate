@@ -4,9 +4,9 @@
       <div v-if="label" class="field-base-label">
         <label :for="id" v-if="!inline" class="field-label" :class="{'label-with-error': problems.length}">
           {{ label }} <span v-if="!!validate" :title="title">*</span>
-          <q-tooltip v-if="tooltip">
+          <app-tooltip v-if="tooltip">
             <span v-html="tooltip"></span>
-          </q-tooltip>
+          </app-tooltip>
         </label>
       </div>
     </slot>

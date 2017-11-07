@@ -4,7 +4,7 @@
     <div v-if="menu.group">
       <small>
         {{ menu.label }}
-        <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
+        <app-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</app-tooltip>
       </small>
       <hr>
       <template v-for="item in menu.children">
@@ -26,7 +26,7 @@
 
     <q-chip v-if="badges[menu.id]" v-bind="badge">{{ badges[menu.id] }}</q-chip>
 
-    <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
+    <app-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</app-tooltip>
   </div>
 </template>
 

@@ -6,9 +6,9 @@
           <q-fab color="primary" icon="settings" :direction="direction">
             <q-fab-action v-if="permission(action, cell.row)" v-for="action in actions" :key="action.id"
                           @click="handler(action, cell.row)" :color="action.color" :icon="action.icon" class="rotate">
-              <q-tooltip :disabled="!action.tooltip">
+              <app-tooltip :disabled="!action.tooltip">
                 {{ action.tooltip }}
-              </q-tooltip>
+              </app-tooltip>
             </q-fab-action>
           </q-fab>
         </div>
