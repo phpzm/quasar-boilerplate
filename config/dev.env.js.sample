@@ -4,10 +4,10 @@ var prodEnv = require('./prod.env')
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   API: {
-    PROTOCOL: '"https"',
-    DOMAIN: '"quasar.phpzm.rocks"',
+    PROTOCOL: '"http"',
+    DOMAIN: '"localhost"',
     PATH: '"/api/v1"',
-    PORT: '""'
+    PORT: '"3000"'
   },
   DEV: true
 })
