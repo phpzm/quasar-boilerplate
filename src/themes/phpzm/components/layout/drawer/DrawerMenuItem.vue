@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer-menu-item" :class="{'with-shadow': withShadow}">
+  <div class="drawer-menu-item" :class="{'with-shadow': shadow}">
 
     <div v-if="menu.group">
       <small>
@@ -35,11 +35,16 @@
     name: 'app-drawer-menu-item',
     props: {
       menu: {
-        type: Object
+        type: Object,
+        required: true
       },
       badges: {
         type: Object,
         default: () => ({})
+      },
+      shadow: {
+        type: Boolean,
+        default: () => true
       }
     },
     computed: {
@@ -114,16 +119,14 @@
         content ' '
         position absolute
         bottom 0
-        left 3px
+        left 8px
         width 5px
         height 5px
         border-radius 5px
         background $app-drawer-menu-item-border
       .q-collapsible-sub-item
-        margin 0 0 0 5px
+        margin 0 0 0 10px
         padding 0
-        // box-shadow: inset 2px 1px 3px 1px rgba(0,0,0,0.16);
-        // background: #fafafa;
         .drawer-menu-item
           border-left 1px solid $app-drawer-menu-item-border
           &:before
@@ -137,11 +140,23 @@
           border-left none
           &:before
             border-left 1px solid $app-drawer-menu-item-border
-
+    &.with-shadow
+      .q-collapsible
+        .q-collapsible-sub-item
+          border-left 1px solid $app-drawer-menu-item-border
+          border-bottom 1px solid $app-drawer-menu-item-border
+          border-radius 0 0 0 3px
+          background $app-drawer-menu-item-open
+          box-shadow $app-drawer-menu-item-shadow
+          .drawer-menu-item
+            border-left none
+          .drawer-menu-item:last-child
+            &:before
+              border-left none
     small
       color #9f9f9f
       display block
-      padding 5px 10px 3px 20px
+      padding 5px 10px 0 10px
     hr
       margin 0 0 5px 0
 </style>

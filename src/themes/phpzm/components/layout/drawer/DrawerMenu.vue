@@ -1,7 +1,7 @@
 <template>
   <div class="app-drawer-menu">
     <template v-for="menu in menus">
-      <app-drawer-menu-item v-bind="{menu, badges, withShadow}"></app-drawer-menu-item>
+      <app-drawer-menu-item v-bind="{menu, badges, shadow}"></app-drawer-menu-item>
     </template>
   </div>
 </template>
@@ -20,7 +20,7 @@
         required: true,
         type: Array
       },
-      withShadow: {
+      shadow: {
         type: Boolean,
         default: () => true
       }

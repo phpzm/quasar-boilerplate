@@ -39,7 +39,7 @@
         </div>
       </slot>
       <slot name="drawer-left">
-        <app-drawer-menu :menus="AppMenu" :withShadow="withShadow"></app-drawer-menu>
+        <app-drawer-menu :menus="AppMenu" :shadow="shadow"></app-drawer-menu>
       </slot>
     </q-scroll-area>
 
@@ -96,7 +96,7 @@
           padding: '0 10px'
         })
       },
-      withShadow: {
+      shadow: {
         type: Boolean,
         default: () => true
       }
