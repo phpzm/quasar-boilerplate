@@ -1,6 +1,6 @@
 import { group, menu, item } from 'src/app/modules/dashboard'
 
-import { menu as home } from 'src/domains/@/dashboard/model'
+import { menu as home } from 'src/domains/@/dashboard/model/home'
 import { menu as forms } from 'src/domains/demo/forms/model'
 import { menu as graphics } from 'src/domains/demo/graphics/model'
 import { menu as user } from 'src/domains/admin/user/model'
@@ -21,7 +21,12 @@ export default (to) => [
       menu('id-1-1', 'Menu 1.1', 'filter_2', [
         item('id-1-1-1', 'path', 'Menu 1.1.1', 'filter_3', true, 'Não clique! É apenas um exemplo!'),
         item('id-1-1-2', 'path', 'Menu 1.1.2', 'filter_3', true, 'Não clique! É apenas um exemplo!'),
-        item('id-1-1-3', 'path', 'Menu 1.1.3', 'filter_3', true, 'Não clique! É apenas um exemplo!')
+        item('id-1-1-3', 'path', 'Menu 1.1.3', 'filter_3', true, 'Não clique! É apenas um exemplo!'),
+        menu('id-1-1-4', 'Menu 1.1.4', 'filter_3', [
+          item('id-1-1-4-1', 'path', 'Menu 1.1.4.1', 'filter_4', true, 'Não clique! É apenas um exemplo!'),
+          item('id-1-1-4-2', 'path', 'Menu 1.1.4.2', 'filter_4', true, 'Não clique! É apenas um exemplo!'),
+          item('id-1-1-4-3', 'path', 'Menu 1.1.4.3', 'filter_4', true, 'Não clique! É apenas um exemplo!')
+        ])
       ]),
       item('id-1-2', 'path', 'Menu 1.2', 'filter_2', true, 'Não clique! É apenas um exemplo!'),
       item('id-1-3', 'path', 'Item 1.3', 'filter_2', true, 'Não clique! É apenas um exemplo!')

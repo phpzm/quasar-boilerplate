@@ -10,7 +10,7 @@
         <q-toolbar-title>
           {{ AppName }}
           <div slot="subtitle" class="hidden-medium">
-            {{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span>
+            {{ AppTooltip }} <span v-if="!dev">{{ $q.version }}</span>
           </div>
         </q-toolbar-title>
 
@@ -101,6 +101,9 @@
     computed: {
       environment () {
         return process.env.NODE_ENV
+      },
+      dev () {
+        return process.env.NODE_ENV !== 'production'
       },
       classNames () {
         return ['layout-default', this.environment]

@@ -1,5 +1,12 @@
 <template>
-  <layout-default v-bind="bind"></layout-default>
+  <layout-default v-bind="bind">
+    <div slot="drawer-left-top">
+      <div class="q-drawer-logo">
+        <!--suppress HtmlUnknownTarget -->
+        <img src="statics/logo/big.png" alt="logo">
+      </div>
+    </div>
+  </layout-default>
 </template>
 
 <script type="text/javascript">
@@ -20,7 +27,8 @@
         viewport: {
           height: 'calc(100vh - 100px)',
           padding: '0 10px'
-        }
+        },
+        withShadow: false
       }
     }),
     created () {

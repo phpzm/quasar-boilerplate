@@ -1,4 +1,5 @@
-import { $body, $meta } from 'src/app/infra/services/http/resource'
+import { $body, $meta } from 'src/bootstrap/configure/http'
+import { getDotNotation } from 'src/app/support/transform'
 
 /**
  * @param {AppCrudGrid} $component
@@ -23,6 +24,6 @@ export default ($component, response) => {
   }
 
   $component.pages = parseInt(meta.last)
-  $component.total = 96 // parseInt(meta.total)
-  $component.data = body
+  $component.total = parseInt(meta.total)
+  $component.data = body.map(record => getDotNotation($component.columns, record))
 }

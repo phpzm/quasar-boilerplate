@@ -28,7 +28,7 @@ export const path = '/dashboard'
 /**
  * @type {Object}
  */
-export const meta = model.meta(icon, label, title, tooltip)
+export const meta = Object.assign({}, model.meta(icon, label, title, tooltip), {noBreadcrumb: true})
 
 /**
  * @type {Function}

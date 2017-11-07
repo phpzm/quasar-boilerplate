@@ -1,4 +1,5 @@
 import { uid } from 'quasar-framework'
+import { $extract } from 'src/bootstrap/configure/http'
 
 /**
  * @param {Object} http
@@ -46,30 +47,30 @@ export default http => {
 
   /**
    * @param {AxiosResponse} response
+   * @param {string} property
+   * @param {*} fallback
    * @returns {*}
    */
-  http.$body = (response) => {
-    if (!response.data) {
-      return {}
-    }
-    if (typeof response.data.body !== 'object') {
-      return {}
-    }
-    return response.data.body
+  http.$extract = (response, property, fallback = {}) => {
+    return $extract(response, property, fallback)
   }
 
   /**
    * @param {AxiosResponse} response
+   * @param {*} fallback
    * @returns {*}
    */
-  http.$meta = (response) => {
-    if (!response.data) {
-      return {}
-    }
-    if (typeof response.data.meta !== 'object') {
-      return {}
-    }
-    return response.data.meta
+  http.$body = (response, fallback = {}) => {
+    return $extract(response, 'body', fallback)
+  }
+
+  /**
+   * @param {AxiosResponse} response
+   * @param {*} fallback
+   * @returns {*}
+   */
+  http.$meta = (response, fallback = {}) => {
+    return $extract(response, 'meta', fallback)
   }
 
   /**

@@ -1,16 +1,17 @@
-import { meta } from '../model/index'
+import { meta as home } from '../model/home'
+import { meta as noAccess, path } from '../model/no-access'
 
 export default [
   {
     path: '',
     component: 'domains/@/dashboard/components/Home',
     name: 'dashboard.home',
-    meta: meta
+    meta: home
   },
   {
-    path: 'no-access',
+    path: path,
     component: 'domains/@/dashboard/components/NoAccess',
     name: 'dashboard.no-access',
-    meta: meta // Object.assign({}, meta, {security: false})
+    meta: noAccess // Object.assign({}, meta, {security: false})
   }
 ]

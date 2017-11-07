@@ -1,23 +1,6 @@
 import Vue from 'vue'
+import './fields'
 
-import 'src/themes/phpzm/components/fields'
+import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
 
-Vue.component('app-link', {
-  template: `<router-link :to="to">{{ value }}</router-link>`,
-  props: {
-    value: {
-      default: () => ''
-    },
-    record: {
-      default: () => ({})
-    }
-  },
-  computed: {
-    to () {
-      return {
-        path: `/path/to/route/${this.value}`,
-        query: this.$route.query
-      }
-    }
-  }
-})
+Vue.component('app-debugger', AppDebugger)

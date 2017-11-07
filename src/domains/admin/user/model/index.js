@@ -121,6 +121,7 @@ export const fields = (scope, route = null) => {
           {label: 'Financeiro', value: 'financial'},
           {label: 'Contabilidade', value: 'accountant'}
         ]).$render(),
+      model.field('property.foo', 'Dot Notation').$filter().$text().$render(),
       model.field('email', 'E-mail').$text().$filter().$required().$form({width: 50}).$render(),
       model.field('password', 'Senha').$password().$required(scope === 'create')
         .$scopes(['create', 'edit']).$form({width: 50}).$render(),
