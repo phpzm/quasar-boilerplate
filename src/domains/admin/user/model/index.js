@@ -101,7 +101,8 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return model.form(service, scope, path, id, fields(scope, route))
+  // service, scope, path, id, schemas, actions = null, options = {}
+  return model.form(service, scope, path, id, fields(scope, route), null, {debug: true})
 }
 
 /**
@@ -114,14 +115,9 @@ export const fields = (scope, route = null) => {
     [
       model.field('id', 'Código').$pk().$render(),
       model.field('name', 'Nome').$text().$filter().$required().$form({width: 70}).$render(),
-      model.field('profile', 'Perfil').$required().$out('index').$form({width: 30})
-        .$select('list', [
-          {label: 'Geral', value: 'general'},
-          {label: 'Atendimento', value: 'support'},
-          {label: 'Financeiro', value: 'financial'},
-          {label: 'Contabilidade', value: 'accountant'}
-        ]).$render(),
-      model.field('property.foo', 'Dot Notation').$filter().$text().$render(),
+      model.field('profile', 'Perfil').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
+      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
+      model.field('property.foo', 'Dot Notation').$form({width: 70}).$filter().$text().$render(),
       model.field('email', 'E-mail').$text().$filter().$required().$form({width: 50}).$render(),
       model.field('password', 'Senha').$password().$required(scope === 'create')
         .$scopes(['create', 'edit']).$form({width: 50}).$render(),
@@ -141,3 +137,21 @@ export const fields = (scope, route = null) => {
 export const filters = (scope, route = null) => {
   return []
 }
+
+/**
+ * @type {Array}
+ */
+export const profiles = [
+  {label: 'Geral', value: 'general'},
+  {label: 'Atendimento', value: 'support'},
+  {label: 'Financeiro', value: 'financial'},
+  {label: 'Contabilidade', value: 'accountant'}
+]
+
+/**
+ * @type {Array}
+ */
+export const gender = [
+  {label: 'Masculino', value: 'M'},
+  {label: 'Feminino', value: 'F'}
+]

@@ -139,9 +139,9 @@ export default (field, label, component = 'text', scopes = []) => {
       this.grid.format = formatPhone
       return this
     },
-    $select (type = 'radio', options = []) {
+    $select (options = [], multiple = false) {
       this.form.component = 'select'
-      this.form.type = type
+      this.form.multiple = multiple
       this.form.options = options
       this.grid.format = value => {
         if (Array.isArray(options)) {
