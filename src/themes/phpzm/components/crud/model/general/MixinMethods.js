@@ -1,5 +1,6 @@
 import { actions } from '../../model'
 import { uniqid } from 'src/app/support/utils'
+import { setDotNotation } from 'src/app/support/transform'
 
 export default {
   methods: {
@@ -9,7 +10,7 @@ export default {
      */
     create (record, callback = null) {
       this.service
-        .post(record)
+        .post(setDotNotation(record))
         .then(response => this.then(response, 'create', callback))
         .catch(error => this.catch(error, 'create', [record]))
     },
@@ -29,7 +30,7 @@ export default {
      */
     update (record, callback = null) {
       this.service
-        .put(record[this.id], record)
+        .put(record[this.id], setDotNotation(record))
         .then(response => this.then(response, 'update', callback))
         .catch(error => this.catch(error, 'update', [record]))
     },

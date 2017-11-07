@@ -1,16 +1,15 @@
 <template>
   <div class="app-crud-grid">
-
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
 
     <hr>
-    <app-form ref="form" v-bind="{fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
+    <app-form ref="form" v-bind="{fields, data}" @form~input="input" @form~valid="valid"></app-form>
     <hr>
 
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
+    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction"/>
 
     <div class="fixed-bottom-right">
-      <app-button-bar :buttons="buttons.floating" :handler="handler" :record="data"/>
+      <app-button-bar :buttons="buttons.floating" :handler="handler"/>
     </div>
 
     <template v-if="debugging">
@@ -25,7 +24,6 @@
   import populateForm from 'src/bootstrap/populate/form'
   import AppForm from 'src/themes/phpzm/components/form/AppForm.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
-  import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
   import { MixinComputed, MixinData, MixinMethods, MixinProps } from './model'
 
   /**
@@ -34,7 +32,7 @@
    */
   const AppCrudForm = {
     components: {
-      AppForm, AppButtonBar, AppDebugger
+      AppForm, AppButtonBar
     },
     mixins: [
       MixinComputed, MixinData, MixinMethods, MixinProps
@@ -77,6 +75,14 @@
 
         this.fields = this.schemas.filter(filter).map(map)
       },
+      /**
+       * @param {AxiosError} error
+       * @param {string} method
+       * @param {Array} parameters
+       */
+      catch (error, method, parameters) {
+        console.log('~>', this.$options.name, error)
+      },
       input (data) {
         this.data = data
         this.setAppModified(true)
@@ -87,21 +93,10 @@
       valid (valid) {
         this.status = valid
       },
-      /**
-       * @param {AxiosError} error
-       * @param {string} method
-       * @param {Array} parameters
-       */
-      catch (error, method, parameters) {
-        console.log('~>', this.$options.name, error)
-      },
       ...mapActions(['setAppModified'])
     },
     watch: {
       status () {
-        this.renderActions()
-      },
-      data () {
         this.renderActions()
       }
     },
