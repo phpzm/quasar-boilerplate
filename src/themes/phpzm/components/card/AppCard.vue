@@ -42,7 +42,6 @@
       background #ffffff
       & .q-card--title
         min-height 60px
-        font-family play
       & .q-card--main
         padding-top 0
         overflow auto

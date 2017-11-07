@@ -15,6 +15,10 @@ export default {
         }
       }
     },
+    slots: {
+      type: Array,
+      default: () => ([])
+    },
     filters: {
       type: Array,
       default: () => ([])

@@ -1,5 +1,5 @@
 <template>
-  <q-layout ref="layout" :class="classNames" :view="view" :left-breakpoint="leftBreakpoint" :reveal="reveal">
+  <q-layout ref="layout" :class="classNames" v-bind="{view, leftBreakpoint, reveal}">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
@@ -10,7 +10,7 @@
         <q-toolbar-title>
           {{ AppName }}
           <div slot="subtitle" class="hidden-medium">
-            {{ AppTooltip }} <span v-if="!dev">{{ $q.version }}</span>
+            {{ AppTooltip }} <span v-if="environment !== 'production'">{{ $q.version }}</span>
           </div>
         </q-toolbar-title>
 
@@ -39,8 +39,7 @@
         </div>
       </slot>
       <slot name="drawer-left">
-        <!--<q-list-header>Left Panel</q-list-header>-->
-        <app-drawer-menu :menus="AppMenu"></app-drawer-menu>
+        <app-drawer-menu :menus="AppMenu" :withShadow="withShadow"></app-drawer-menu>
       </slot>
     </q-scroll-area>
 
@@ -96,6 +95,10 @@
           height: 'calc(100vh - 105px)',
           padding: '0 10px'
         })
+      },
+      withShadow: {
+        type: Boolean,
+        default: () => true
       }
     },
     computed: {
@@ -125,25 +128,27 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scope>
+  @import '~variables'
+
   .layout-default
+    .layout-aside
+      background-color $app-layout-drawer
     .q-scroll-area
       swidth 100%
       height 100%
     .q-drawer-logo
-      background #F7F7F7
+      background $app-layout-drawer-logo
       text-align center
       padding 20px
-      border-bottom 1px #ddd solid
+      border-bottom $app-layout-drawer-logo-border-bottom
       img
-        width 200px
-    .q-toolbar-title
-      font-family play
+        max-height 100px
     .breadcrumb-wrapper
       position absolute
       padding 0 17px 0 17px
       box-shadow 0 0 4px 2px rgba(0, 0, 0, 0.3)
-      background #fff
+      background $app-layout-breadcrumb-wrapper
       width 100%
       height 47px
       z-index 2
