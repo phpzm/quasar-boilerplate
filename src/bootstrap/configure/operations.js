@@ -1,5 +1,5 @@
 import { confirm } from 'src/app/support/message/index'
-import { $first } from 'src/app/infra/services/http/resource'
+import { $first } from 'src/bootstrap/configure/http'
 
 /**
  * @param {AppCrudGrid|AppCrudForm} $this

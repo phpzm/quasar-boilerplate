@@ -3,8 +3,8 @@
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
         <q-select ref="input" class="input full-width" :class="{'disabled': disable}"
-                  v-model="model" v-bind="{disable, options, type, name, placeholder}"
-                  @input="$emit('input', model)"></q-select>
+                  v-model="model" v-bind="{disable, options, multiple, name, placeholder}"
+                  @change="$emit('input', model)"/>
       </div>
       <div v-show="!editable" class="html ellipsis" v-html="html"></div>
     </div>
@@ -29,6 +29,34 @@
       options: {
         default: () => ([])
       },
+      multiple: {
+        type: Boolean,
+        default: () => false
+      },
+      radio: {
+        type: Boolean,
+        default: () => false
+      },
+      toggle: {
+        type: Boolean,
+        default: () => false
+      },
+      chips: {
+        type: Boolean,
+        default: () => false
+      },
+      filter: {
+        type: Boolean,
+        default: () => false
+      },
+      separator: {
+        type: Boolean,
+        default: () => false
+      },
+      clearable: {
+        type: Boolean,
+        default: () => false
+      },
       source: {
         type: Function
       },
@@ -37,6 +65,9 @@
         default: ''
       }
     },
+    data: () => ({
+      model: undefined
+    }),
     computed: {
       disable () {
         return this.disabled
@@ -48,37 +79,40 @@
         if (!this.options.length) {
           return ''
         }
-        let model = this.model
-        if (this.type === 'radio') {
-          model = [this.model]
-        }
-        const selected = this.options.filter(option => model.includes(option.value))
+        const selected = this.options.filter(option => this.model.includes(option.value))
         if (!selected.length) {
           return ''
         }
         return selected.map(item => item.label).join(', ')
       }
     },
-    data: () => ({
-      model: ''
-    }),
+    methods: {
+      applyValue (value) {
+        if (!this.multiple) {
+          this.model = value
+          return
+        }
+        if (Array.isArray(value)) {
+          this.model = value
+        }
+      }
+    },
     watch: {
       value (value) {
-        this.model = value
+        this.applyValue(value)
       }
     },
     created () {
-      this.model = this.value
-      if (this.type === 'checkbox') {
-        this.model = this.value || []
+      if (this.multiple) {
+        this.model = []
       }
       if (this.source) {
-        this.source(options => {
-          options.forEach(_option => {
-            this.options.push(_option)
-          })
-        })
+        this.options = []
+        this.source(options => options.forEach(option => this.options.push(option)))
       }
+    },
+    mounted () {
+      this.applyValue(this.value)
     }
   }
 </script>

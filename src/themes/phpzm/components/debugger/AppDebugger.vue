@@ -1,5 +1,5 @@
 <template>
-  <div class="app-debugger">
+  <div v-if="dev" class="app-debugger">
     <details>
       <summary>{{ label }}</summary>
       <div class="pre debug" v-html="beautify(inspect)"></div>
@@ -9,8 +9,16 @@
 
 <script type="text/javascript">
   export default {
+    extends: {},
+    mixins: {},
     name: 'app-debugger',
     props: ['label', 'inspect'],
+    data: () => ({}),
+    computed: {
+      dev () {
+        return process.env.NODE_ENV !== 'production'
+      }
+    },
     methods: {
       beautify (json) {
         if (!json) {
@@ -39,7 +47,12 @@
           return '<span class="' + cls + '">' + match + '</span>'
         })
       }
-    }
+    },
+    watch: {},
+    beforeRouteEnter (to, from, next) {},
+    created () {},
+    mounted () {},
+    destroyed () {}
   }
 </script>
 

@@ -8,7 +8,7 @@
     <hr v-if="top">
 
     <app-data-table ref="grid"
-                    v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
+                    v-bind="{columns, data, debug, position, actions: buttons.middle, styles, bodyStyle}"/>
 
     <hr v-if="bottom">
 
@@ -36,7 +36,6 @@
 <script type="text/javascript">
   import AppDataTable from 'src/themes/phpzm/components/data-table/AppDataTable.vue'
   import AppButtonBar from 'src/themes/phpzm/components/button/AppButtonBar.vue'
-  import AppDebugger from 'src/themes/phpzm/components/debugger/AppDebugger.vue'
   import AppGridFilter from 'src/themes/phpzm/components/crud/components/grid/AppGridFilter'
   import AppGridToolbar from 'src/themes/phpzm/components/crud/components/grid/AppGridToolbar.vue'
   import { MixinComputed, MixinData, MixinMethods, MixinProps } from './model'
@@ -50,7 +49,7 @@
    */
   const AppCrudGrid = {
     components: {
-      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter, AppDebugger
+      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter
     },
     mixins: [
       MixinComputed, MixinData, MixinMethods, MixinProps, MixinGrid, MixinFilter

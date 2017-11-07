@@ -131,30 +131,6 @@ export const source = (api, value, label, extra = {}) => {
 }
 
 /**
- * @param {AxiosResponse} response
- * @returns {*}
- */
-export const $body = (response) => {
-  return http.$body(response)
-}
-
-/**
- * @param {AxiosResponse} response
- * @returns {*}
- */
-export const $meta = (response) => {
-  return http.$meta(response)
-}
-
-/**
- * @param {AxiosResponse} response
- * @returns {*}
- */
-export const $first = (response) => {
-  return http.$first(response)
-}
-
-/**
  * @param path
  * @returns {Resource}
  */
