@@ -27,6 +27,7 @@
         default: 'radio'
       },
       options: {
+        type: Array,
         default: () => ([])
       },
       multiple: {
@@ -79,7 +80,11 @@
         if (!this.options.length) {
           return ''
         }
-        const selected = this.options.filter(option => this.model.includes(option.value))
+        let model = this.model
+        if (this.type === 'radio') {
+          model = [this.model]
+        }
+        const selected = this.options.filter(option => model.includes(option.value))
         if (!selected.length) {
           return ''
         }
@@ -107,7 +112,6 @@
         this.model = []
       }
       if (this.source) {
-        this.options = []
         this.source(options => options.forEach(option => this.options.push(option)))
       }
     },

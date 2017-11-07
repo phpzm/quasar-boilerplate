@@ -75,9 +75,9 @@
       .number
         color #d70000
       .boolean
-        color blue
+        color #0e12ca
       .null
-        color magenta
+        color #9a009a
       .key
         color green
 

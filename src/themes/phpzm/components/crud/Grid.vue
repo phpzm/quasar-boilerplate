@@ -8,7 +8,7 @@
     <hr v-if="top">
 
     <app-data-table ref="grid"
-                    v-bind="{columns, data, debug, position, actions: buttons.middle, styles, bodyStyle}"/>
+                    v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
 
     <hr v-if="bottom">
 
