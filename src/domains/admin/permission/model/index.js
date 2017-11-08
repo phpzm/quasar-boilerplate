@@ -1,8 +1,6 @@
 import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
-
-import 'src/domains/general/slots/MyButton'
-import { runSlot } from 'src/domains/general/services/activate'
+import { activate } from 'src/domains/general/slots/activate/services/activate'
 
 /**
  * @type {string}
@@ -66,6 +64,7 @@ export const menu = model.menu(icon, label, path, false, tooltip, namespace, nam
 
 // configure buttons
 /**
+ * @type {Function}
  * @param {AppCrudFrom|AppCrudGrid} $this
  * @param actions
  */
@@ -86,15 +85,7 @@ const actions = ($this, actions) => {
  * @type {Array}
  */
 const slots = [
-  {
-    field: 'name',
-    component: 'MyButton',
-    on: {
-      click (record, schemas, $component, $slot) {
-        runSlot(service, record, $slot)
-      }
-    }
-  }
+  activate(service)
 ]
 
 /**
@@ -127,11 +118,7 @@ export const fields = (scope, route = null) => {
       model.field('id', 'Código').$pk().$render(),
       model.field('name', 'Nome').$text().$filter().$required().$form({width: 70}).$render(),
       model.field('profile', 'Perfil').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
-      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
-      model.field('property.foo', 'Dot Notation').$form({width: 70}).$filter().$text().$render(),
-      model.field('email', 'E-mail').$text().$filter().$required().$form({width: 50}).$render(),
-      model.field('password', 'Senha').$password().$required(scope === 'create')
-        .$scopes(['create', 'edit']).$form({width: 50}).$render()
+      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render()
     ],
     scope
   )

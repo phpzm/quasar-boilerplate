@@ -45,8 +45,8 @@ export default (field, label, component = 'text', scopes = []) => {
     $all (all) {
       return this.$assign('all', all)
     },
-    $assign (property, value) {
-      this[property] = Object.assign({}, this[property], value)
+    $assign (property, options) {
+      this[property] = Object.assign({}, this[property], options)
       return this
     },
     $filter (rule = 'like', value = '', component = '') {

@@ -26,7 +26,11 @@
         home: 'store', // breadcrumb home icon
         viewport: { // viewport to middle of dashboard
           height: 'calc(100vh - 100px)',
-          padding: '0 10px'
+          padding: '10px'
+        },
+        mobile: { // viewport to middle of dashboard in mobile
+          height: 'calc(100vh - 100px)',
+          padding: '5px'
         },
         shadow: false
       }
