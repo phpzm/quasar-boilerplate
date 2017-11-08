@@ -33,7 +33,7 @@ export default {
       return Object.keys(slot.on).reduce((accumulate, key) => {
         const handler = slot.on[key]
         if (typeof handler === 'function') {
-          accumulate[key] = (event) => handler(cell.row, this.columns, this)
+          accumulate[key] = (event) => handler(cell.row, this.columns, this, event)
         }
         return accumulate
       }, {})

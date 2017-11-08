@@ -36,6 +36,9 @@ $returns = [
               'admin.organization' => [
                 'permission' => 1
               ],
+              'admin.permission' => [
+                'permission' => 3
+              ],
               'admin.user' => [
                 'permission' => 4
               ]
@@ -44,6 +47,10 @@ $returns = [
         'token' => $token
     ]
 ];
+
+if ($uri === '/api/v1/admin/permission/activate/2') {
+    http_response_code(412);
+}
 
 $body = isset($returns[$uri]) ? $returns[$uri] : json_decode(file_get_contents(__DIR__ . '/fake.json'));
 

@@ -88,6 +88,8 @@ export const menu = (icon, label, path, exact = false, tooltip = '', id = '', na
 }
 
 /**
+ * @type {Function}
+ *
  * @param {string} uri
  * @param {Object} reference
  * @param {string} referenced
@@ -95,6 +97,8 @@ export const menu = (icon, label, path, exact = false, tooltip = '', id = '', na
 export const pivot = (uri, reference, referenced) => ({uri, reference, referenced})
 
 /**
+ * @type {Function}
+ *
  * @param {string} icon
  * @param {string} label
  * @param {string} path

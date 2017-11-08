@@ -1,10 +1,10 @@
 <template>
-  <div class="drawer-menu-item">
+  <div class="drawer-menu-item" :class="{'with-shadow': shadow}">
 
     <div v-if="menu.group">
       <small>
         {{ menu.label }}
-        <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
+        <app-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</app-tooltip>
       </small>
       <hr>
       <template v-for="item in menu.children">
@@ -26,7 +26,7 @@
 
     <q-chip v-if="badges[menu.id]" v-bind="badge">{{ badges[menu.id] }}</q-chip>
 
-    <q-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</q-tooltip>
+    <app-tooltip :disable="!menu.tooltip">{{ menu.tooltip }}</app-tooltip>
   </div>
 </template>
 
@@ -35,11 +35,16 @@
     name: 'app-drawer-menu-item',
     props: {
       menu: {
-        type: Object
+        type: Object,
+        required: true
       },
       badges: {
         type: Object,
         default: () => ({})
+      },
+      shadow: {
+        type: Boolean,
+        default: () => true
       }
     },
     computed: {
@@ -97,7 +102,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  $drawer-item-border = #dddddd
+  @import '~variables'
 
   .drawer-menu-item
     position relative
@@ -114,30 +119,40 @@
         content ' '
         position absolute
         bottom 0
-        left 3px
+        left 8px
         width 5px
         height 5px
         border-radius 5px
-        background $drawer-item-border
+        background $app-drawer-menu-item-border
       .q-collapsible-sub-item
-        margin 0 0 0 5px
+        margin 0 0 0 10px
         padding 0
-        // box-shadow: inset 2px 1px 3px 1px rgba(0,0,0,0.16);
-        // background: #fafafa;
         .drawer-menu-item
-          border-left 1px solid $drawer-item-border
+          border-left 1px solid $app-drawer-menu-item-border
           &:before
             content ' '
             position absolute
             top 0
             width 10px
             height 20px
-            border-bottom 1px solid $drawer-item-border
+            border-bottom 1px solid $app-drawer-menu-item-border
         .drawer-menu-item:last-child
           border-left none
           &:before
-            border-left 1px solid $drawer-item-border
-
+            border-left 1px solid $app-drawer-menu-item-border
+    &.with-shadow
+      .q-collapsible
+        .q-collapsible-sub-item
+          border-left 1px solid $app-drawer-menu-item-border
+          border-bottom 1px solid $app-drawer-menu-item-border
+          border-radius 0 0 0 3px
+          background $app-drawer-menu-item-open
+          box-shadow $app-drawer-menu-item-shadow
+          .drawer-menu-item
+            border-left none
+          .drawer-menu-item:last-child
+            &:before
+              border-left none
     small
       color #9f9f9f
       display block

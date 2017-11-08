@@ -1,18 +1,18 @@
 <template>
   <div class="app-card">
-    <slot name="top"></slot>
+    <slot name="top"/>
     <q-card>
       <q-card-title v-if="header" class="q-card--title">
         <slot name="title">
-          <q-icon :name="icon"></q-icon> <span v-html="title"></span>
+          <q-icon :name="icon"/> <span v-if="label" v-html="label"/><span v-if="title" v-html="title"/>
         </slot>
       </q-card-title>
       <q-card-separator v-if="separator"/>
       <q-card-main class="q-card--main">
-        <slot name="content"></slot>
+        <slot name="content"/>
       </q-card-main>
     </q-card>
-    <slot name="bottom"></slot>
+    <slot name="bottom"/>
   </div>
 </template>
 
@@ -20,6 +20,9 @@
   export default {
     name: 'app-card',
     props: {
+      label: {
+        default: ''
+      },
       title: {
         default: ''
       },
@@ -42,7 +45,6 @@
       background #ffffff
       & .q-card--title
         min-height 60px
-        font-family play
       & .q-card--main
         padding-top 0
         overflow auto

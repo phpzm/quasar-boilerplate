@@ -1,34 +1,38 @@
 <template>
-  <layout-default v-bind="bind">
+  <app-layout v-bind="bind">
     <div slot="drawer-left-top">
       <div class="q-drawer-logo">
         <!--suppress HtmlUnknownTarget -->
         <img src="statics/logo/big.png" alt="logo">
       </div>
     </div>
-  </layout-default>
+  </app-layout>
 </template>
 
 <script type="text/javascript">
-  import LayoutDefault from 'src/themes/phpzm/components/layout/AppLayout.vue'
+  import AppLayout from 'src/themes/phpzm/components/layout/AppLayout.vue'
   import configureDashboard from 'src/bootstrap/configure/dashboard'
 
   export default {
     name: 'dashboard',
     components: {
-      LayoutDefault
+      AppLayout
     },
     data: () => ({
       bind: {
-        view: 'lHh Lpr lFf',
+        view: 'HHh Lpr lFf',
         reveal: true,
-        leftBreakpoint: 996,
-        home: 'store',
-        viewport: {
+        leftBreakpoint: 996, // min width to show drawer
+        home: 'store', // breadcrumb home icon
+        viewport: { // viewport to middle of dashboard
           height: 'calc(100vh - 100px)',
-          padding: '0 10px'
+          padding: '10px'
         },
-        withShadow: false
+        mobile: { // viewport to middle of dashboard in mobile
+          height: 'calc(100vh - 100px)',
+          padding: '5px'
+        },
+        shadow: false
       }
     }),
     created () {

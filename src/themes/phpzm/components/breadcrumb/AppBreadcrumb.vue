@@ -3,7 +3,7 @@
     <li>
       <router-link :to="path">
         <q-icon :name="icon"></q-icon>
-        <q-tooltip>Página Inicial</q-tooltip>
+        <app-tooltip>Página Inicial</app-tooltip>
       </router-link>
     </li>
     <li v-for="item in items">
@@ -11,7 +11,7 @@
         <q-icon :name="item.icon"></q-icon>
         <small>{{ item.label }}</small>
       </router-link>
-      <q-tooltip :disable="!item.tooltip">{{ item.tooltip }}</q-tooltip>
+      <app-tooltip :disable="!item.tooltip">{{ item.tooltip }}</app-tooltip>
     </li>
   </ul>
 </template>

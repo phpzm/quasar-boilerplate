@@ -1,4 +1,5 @@
 import http from 'src/app/infra/services/http/index'
+import { $body } from 'src/bootstrap/configure/http'
 
 /**
  * @param {object} object
@@ -98,36 +99,36 @@ export const destroy = (path) => {
  * @param {string} api - endpoint of api
  * @param {string} value - property what is the value in options
  * @param {string} label - property what is the label in options
- * @param {Object} extra - properties do be mapped
+ * @param {Object} more - properties do be mapped
  * @return {Function}
  */
-export const source = (api, value, label, extra = {}) => {
+export const source = (api, value, label, more = {}) => {
+  const map = (item) => {
+    const reduce = (accumulate, key) => {
+      if (item[more[key]]) {
+        accumulate[key] = item[more[key]]
+      }
+      return accumulate
+    }
+    const others = Object.keys(more).reduce(reduce, {})
+    const base = {
+      value: item[value],
+      label: item[label]
+    }
+    return Object.assign({}, base, others)
+  }
+  const success = (response, callback) => {
+    const data = $body(response)
+    let source = []
+    if (Array.isArray(data)) {
+      source = data.map(map)
+    }
+    callback(source)
+  }
   /**
    * @param {Function} callback
    */
-  return (callback) => {
-    return read(api)('')
-      .then((response) => {
-        const data = response.data.data
-        let source = []
-        if (Array.isArray(data)) {
-          source = data.map((item) => {
-            const base = {
-              value: item[value],
-              label: item[label]
-            }
-            const others = Object.keys(extra).reduce((accumulate, key) => {
-              if (item[extra[key]]) {
-                accumulate[key] = item[extra[key]]
-              }
-              return accumulate
-            }, {})
-            return Object.assign({}, base, others)
-          })
-        }
-        callback(source)
-      })
-  }
+  return (callback) => read(api)('').then(response => success(response, callback))
 }
 
 /**
