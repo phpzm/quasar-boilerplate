@@ -30,7 +30,7 @@ export const add = ($this) => {
  * @returns {Function}
  */
 export const read = ($this) => {
-  return (record, schemas, $component) => $this.search()
+  return (record, schemas, $component) => $this.fetchData()
 }
 
 /**

@@ -3,13 +3,12 @@
     <li>
       <router-link :to="path">
         <q-icon :name="icon"></q-icon>
-        <app-tooltip>Página Inicial</app-tooltip>
       </router-link>
     </li>
     <li v-for="item in items">
       <router-link :to="item.to">
         <q-icon :name="item.icon"></q-icon>
-        <small>{{ item.label }}</small>
+        <small class="breadcrumb-label">{{ item.label }}</small>
       </router-link>
       <app-tooltip :disable="!item.tooltip">{{ item.tooltip }}</app-tooltip>
     </li>
@@ -52,19 +51,33 @@
        */
       reduceBreadcrumb (accumulate, match) {
         let to = match.path
-        Object.keys(this.$route.params).forEach(key => {
-          to = to.replace(':' + key, this.$route.params[key])
-        })
-        if (match.meta.icon && !match.meta.noBreadcrumb) {
+        Object.keys(this.$route.params).forEach(key => (to = to.replace(':' + key, this.$route.params[key])))
+        if (this.isBreadcrumb(match)) {
           accumulate.push({
             icon: match.meta.icon,
             label: match.meta.label,
             tooltip: match.meta.tooltip,
             path: match.path,
-            to: to
+            to: !match.meta.noLink ? to : ''
           })
         }
         return accumulate
+      },
+      /**
+       * @param {Object} match
+       * @returns {boolean}
+       */
+      isBreadcrumb (match) {
+        if (!match.meta.icon) {
+          return false
+        }
+        if (match.meta.noBreadcrumb) {
+          return false
+        }
+        if (!Array.isArray(match.meta.avoid)) {
+          return true
+        }
+        return !match.meta.avoid.includes(this.$route.path)
       }
     },
     created () {
@@ -86,4 +99,10 @@
       margin 0
     &:last-child a
       border-radius 2px
+    @media screen and (max-width 768px)
+      small.breadcrumb-label
+        font-size 10px
+    @media screen and (max-width 480px)
+      small.breadcrumb-label
+        display none
 </style>

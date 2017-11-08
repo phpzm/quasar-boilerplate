@@ -48,7 +48,7 @@ $returns = [
     ]
 ];
 
-if ($uri === '/api/v1/admin/organization/activate/2') {
+if ($uri === '/api/v1/admin/permission/activate/2') {
     http_response_code(412);
 }
 

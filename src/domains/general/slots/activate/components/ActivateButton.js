@@ -1,10 +1,10 @@
 import Vue from 'vue'
 
-Vue.component('MyButton', {
+Vue.component('ActivateButton', {
   template:
   `<div>` +
-    `<q-btn @click="click" :color="color" small><q-icon name="stars"/></q-btn> {{ label }}` +
-    `<app-tooltip>Criado por {{ user.name }}</app-tooltip>` +
+    `<q-btn @click="click" :color="color" small><q-icon name="stars"/></q-btn> &nbsp; {{ value }}` +
+    `<app-tooltip>{{ message }}</app-tooltip>` +
   `</div>`,
   props: {
     value: {
@@ -18,19 +18,24 @@ Vue.component('MyButton', {
     }
   },
   data: () => ({
-    label: 'Ativo',
     color: 'green'
   }),
+  computed: {
+    message () {
+      if (this.color === 'green') {
+        return `Desativar ${this.value}`
+      }
+      return `Ativar ${this.value}`
+    }
+  },
   methods: {
     click () {
       this.$emit('click', this)
     },
     setActive () {
-      this.label = 'Ativo'
       this.color = 'green'
     },
     setInactive () {
-      this.label = 'Inativo'
       this.color = 'red'
     }
   },

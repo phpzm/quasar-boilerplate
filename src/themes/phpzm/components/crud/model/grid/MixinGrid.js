@@ -43,6 +43,10 @@ export default {
       type: Boolean,
       default: () => true
     },
+    filtering: {
+      type: Boolean,
+      default: () => true
+    },
     styles: {
       type: Object,
       default: () => ({
@@ -115,7 +119,9 @@ export default {
       this.limit = limit
       this.changePage(1)
     },
-    loadData () {
+    /**
+     */
+    fetchData () {
       const filters = Object.keys(this.filter.record).reduce((accumulate, key) => {
         let value = this.filter.record[key]
         if (this.filter.rules[key]) {
@@ -153,6 +159,6 @@ export default {
     this.loadFilters()
   },
   mounted () {
-    this.loadData()
+    this.fetchData()
   }
 }

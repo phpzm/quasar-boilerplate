@@ -14,7 +14,7 @@
   import configureDashboard from 'src/bootstrap/configure/dashboard'
 
   export default {
-    name: 'dashboard',
+    name: 'dashboard-index',
     components: {
       AppLayout
     },
@@ -26,9 +26,13 @@
         home: 'store', // breadcrumb home icon
         viewport: { // viewport to middle of dashboard
           height: 'calc(100vh - 100px)',
-          padding: '0 10px'
+          padding: '10px'
         },
-        shadow: false
+        mobile: { // viewport to middle of dashboard in mobile
+          height: 'calc(100vh - 100px)',
+          padding: '5px'
+        },
+        shadow: true
       }
     }),
     created () {

@@ -15,12 +15,12 @@ export default (service, path, id, schemas, filters, actions = null, options = {
     top: false,
     bottom: true,
     styles: {
-      height: 'calc(100vh - 220px)',
-      minHeight: '280px'
+      height: 'calc(100vh - 235px)',
+      minHeight: '250px'
     },
     bodyStyle: {
-      height: 'calc(100vh - 270px)',
-      minHeight: '230px'
+      height: 'calc(100vh - 285px)',
+      minHeight: '200px'
     },
     debug: false
   }

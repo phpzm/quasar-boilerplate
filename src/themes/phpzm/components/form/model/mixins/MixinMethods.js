@@ -117,11 +117,11 @@ export default {
       return errors
     },
     /**
-     * @param name
+     * @param tab
      * @returns {boolean}
      */
-    selected (name) {
-      return this.tabDefault === name
+    selected (tab) {
+      return this.tabDefault === tab.name
     }
   }
 }
