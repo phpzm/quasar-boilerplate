@@ -20,7 +20,7 @@
     },
     data: () => ({
       bind: {
-        view: 'HHh Lpr lFf',
+        view: 'lHh Lpr lFf',
         reveal: true,
         leftBreakpoint: 996, // min width to show drawer
         home: 'store', // breadcrumb home icon
