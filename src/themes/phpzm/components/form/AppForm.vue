@@ -40,7 +40,7 @@
 
       this.tabDefault = this.tab
       if (!this.tab) {
-        this.tabDefault = Array.isArray(this.tabs) && this.tabs[0] ? this.tabs[0].name : ''
+        this.tabDefault = (Array.isArray(this.tabs) && this.tabs[0]) ? this.tabs[0].name : ''
       }
       if (this.$route.query.tab) {
         this.tabDefault = this.$route.query.tab

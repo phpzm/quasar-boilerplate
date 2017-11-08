@@ -115,6 +115,8 @@ export default {
       this.limit = limit
       this.changePage(1)
     },
+    /**
+     */
     loadData () {
       const filters = Object.keys(this.filter.record).reduce((accumulate, key) => {
         let value = this.filter.record[key]
