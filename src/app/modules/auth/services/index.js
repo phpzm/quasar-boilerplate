@@ -11,6 +11,7 @@ import { promise } from 'src/app/support/utils'
 export const registerToken = (token, remember, success = () => ({})) => {
   return store.dispatch('setAuthRemember', remember).then(store.dispatch('setAuthToken', token).then(success))
 }
+
 /**
  * @param {Object} user
  * @param {Function} success

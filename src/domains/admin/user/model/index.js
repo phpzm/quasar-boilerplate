@@ -1,5 +1,5 @@
 import model from 'src/app/support/model'
-import { resource } from 'src/app/infra/services/http/resource'
+import { resource, source } from 'src/app/infra/services/http/resource'
 import { reference, api as organization } from 'src/domains/admin/organization/model'
 
 /**
@@ -72,27 +72,13 @@ export const menu = model.menu(icon, label, path, false, tooltip, namespace)
  */
 export const card = model.card(icon, label, path, tooltip, description, 50)
 
-// configure buttons
-const actions = ($this, actions) => {
-  const map = button => {
-    if (['edit', 'destroy'].includes(button.id)) {
-      // keep the access control system and add other validation layer
-      button.access = (record, $component, $user) => {
-        return record && String(record['id']) !== '2'
-      }
-    }
-    return button
-  }
-  return actions.map(map)
-}
-
 /**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, {position: 'right'})
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), null)
 }
 
 /**
@@ -101,8 +87,21 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
+  const options = {
+    tabs: [
+      {
+        name: 'principal',
+        label: 'Principal'
+      },
+      {
+        name: 'outros',
+        label: 'Outros'
+      }
+    ],
+    debug: true
+  }
   // service, scope, path, id, schemas, actions = null, options = {}
-  return model.form(service, scope, path, id, fields(scope, route), null, {debug: true})
+  return model.form(service, scope, path, id, fields(scope, route), null, options)
 }
 
 /**
@@ -113,14 +112,17 @@ export const form = (scope, route) => {
 export const fields = (scope, route = null) => {
   return model.filter(
     [
-      model.field('id', 'Código').$pk().$render(),
-      model.field('name', 'Nome').$text().$filter().$required().$form({width: 70}).$render(),
-      model.field('profile', 'Perfil').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
-      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
-      model.field('property.foo', 'Dot Notation').$form({width: 70}).$filter().$text().$render(),
-      model.field('email', 'E-mail').$text().$filter().$required().$form({width: 50}).$render(),
-      model.field('password', 'Senha').$password().$required(scope === 'create')
-        .$scopes(['create', 'edit']).$form({width: 50}).$render(),
+      model.field('id', 'Código').$pk().$tab('principal').$render(),
+      model.field('name', 'Nome').$text().$tab('principal').$filter().$required().$form({width: 70}).$render(),
+      // model.field('organization_id', 'Organização').$filter().$search(search).$required().$render(),
+      model.field('organization_id', 'Organização').$filter().$tab('principal')
+        .$form({source: source(organization, 'id', 'name'), width: 30}).$select().$required().$render(),
+      model.field('profile', 'Perfil').$tab('principal').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
+      model.field('gender', 'Sexo').$tab('principal').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
+      model.field('property.foo', 'Dot Notation').$tab('principal').$form({width: 40}).$filter().$text().$render(),
+      model.field('email', 'E-mail').$tab('outros').$text().$filter().$required().$form({width: 50}).$render(),
+      model.field('password', 'Senha').$tab('outros').$password().$required(scope === 'create')
+        .$scopes(['create', 'edit']).$tab('outros').$form({width: 50}).$render(),
       model.field('organizations', 'Organizações').$required().$out('index')
         .$form({width: 50, placeholder: '.: Selecione as Organizações :.'})
         .$pivot(pivot).$render()

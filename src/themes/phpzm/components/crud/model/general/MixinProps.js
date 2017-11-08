@@ -45,6 +45,10 @@ export default {
       type: String,
       default: () => 'id'
     },
+    tab: {
+      type: String,
+      default: () => ''
+    },
     direction: {
       type: String,
       default: () => 'right'

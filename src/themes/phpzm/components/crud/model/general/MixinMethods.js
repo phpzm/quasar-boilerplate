@@ -122,7 +122,7 @@ export default {
      */
     handler (action) {
       if (typeof action.handler === 'function') {
-        action.handler(this.data, this.columns, this)
+        action.handler(this.data, this.columns, this, action)
       }
     },
     /**

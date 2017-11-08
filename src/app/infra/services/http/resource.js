@@ -1,4 +1,5 @@
 import http from 'src/app/infra/services/http/index'
+import { $body } from 'src/bootstrap/configure/http'
 
 /**
  * @param {object} object
@@ -108,7 +109,7 @@ export const source = (api, value, label, extra = {}) => {
   return (callback) => {
     return read(api)('')
       .then((response) => {
-        const data = response.data.data
+        const data = $body(response)
         let source = []
         if (Array.isArray(data)) {
           source = data.map((item) => {

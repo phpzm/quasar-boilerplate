@@ -4,7 +4,7 @@
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
 
     <hr>
-    <app-form ref="form" v-bind="{fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
+    <app-form ref="form" v-bind="{tabs, tab, fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
     <hr>
 
     <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
@@ -42,6 +42,10 @@
     props: {
       scope: {
         default: () => 'view'
+      },
+      tabs: {
+        type: Array,
+        default: () => ([])
       },
       handlers: {
         type: Object,

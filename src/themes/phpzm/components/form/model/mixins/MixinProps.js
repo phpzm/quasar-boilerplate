@@ -4,6 +4,10 @@ export default {
       type: Array,
       default: () => ([])
     },
+    tab: {
+      type: String,
+      default: () => ''
+    },
     fields: {
       type: Array,
       default: () => ([])
