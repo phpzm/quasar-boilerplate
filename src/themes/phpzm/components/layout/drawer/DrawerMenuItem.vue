@@ -8,13 +8,13 @@
       </small>
       <hr>
       <template v-for="item in menu.children">
-        <app-drawer-menu-item :menu="item" :badges="badges"></app-drawer-menu-item>
+        <app-drawer-menu-item :menu="item" :badges="badges" :shadow="shadow"></app-drawer-menu-item>
       </template>
     </div>
 
     <q-collapsible v-else-if="isCollapsible" ref="collapse" v-bind="collapsible">
       <template v-for="child in menu.children">
-        <app-drawer-menu-item :menu="child" :badges="badges"></app-drawer-menu-item>
+        <app-drawer-menu-item :menu="child" :badges="badges" :shadow="shadow"></app-drawer-menu-item>
       </template>
     </q-collapsible>
 
@@ -106,6 +106,20 @@
 
   .drawer-menu-item
     position relative
+    .router-link-exact-active
+      background $app-drawer-menu-active
+      .q-item-side
+        .q-item-icon
+          color $app-drawer-menu-active-icon
+      .q-item-main
+        .q-item-label
+          color $app-drawer-menu-active-color
+    .q-item-side
+      .q-item-icon
+        color $app-drawer-menu-icon
+    .q-item-main
+      .q-item-label
+        color $app-drawer-menu-color
     .q-chip.floating
       top -4px
       left 23px
