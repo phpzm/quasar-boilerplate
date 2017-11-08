@@ -2,24 +2,31 @@
 <template>
   <div class="app-crud-grid" :class="{'--grid-filtering': filter.active}">
 
-    <app-grid-toolbar v-if="top"
-                      v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top}"
-                      @change-page="changePage" @change-limit="changeLimit"/>
+    <slot v-if="top" name="top">
+      <app-grid-toolbar v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top}"
+                        @change-page="changePage" @change-limit="changeLimit"/>
+    </slot>
     <hr v-if="top">
 
-    <app-data-table ref="grid"
-                    v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
+    <slot name="content">
+      <app-data-table ref="grid"
+                      v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
+    </slot>
 
     <hr v-if="bottom">
 
-    <app-grid-toolbar v-if="bottom"
-                      v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom}"
-                      @change-page="changePage" @change-limit="changeLimit"/>
+    <slot v-if="bottom" name="bottom">
+      <app-grid-toolbar v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom}"
+                        @change-page="changePage" @change-limit="changeLimit"/>
+    </slot>
 
-    <div class="fixed-bottom-right" v-if="floating">
-      <app-button-bar v-bind="{handler, buttons: buttons.floating}"/>
-    </div>
+    <slot v-if="floating" name="floating">
+      <div class="fixed-bottom-right">
+        <app-button-bar v-bind="{handler, buttons: buttons.floating}"/>
+      </div>
+    </slot>
 
+    <slot v-if="filtering" name="filter"></slot>
     <q-modal ref="filter" position="right" :content-css="filter.css">
       <app-grid-filter v-if="search" :filters="filter.columns" :record="filter.record"
                        @close="filterClose" @apply="filterApply" @clear="filterClear"/>
@@ -48,13 +55,13 @@
    * @property total
    */
   const AppCrudGrid = {
-    components: {
-      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter
-    },
     mixins: [
       MixinComputed, MixinData, MixinMethods, MixinProps, MixinGrid, MixinFilter
     ],
-    name: 'app-crud-grid'
+    name: 'app-crud-grid',
+    components: {
+      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter
+    }
   }
   export default AppCrudGrid
 </script>

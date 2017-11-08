@@ -15,9 +15,9 @@ export default (to) => [
   menu('admin', 'API de Forms', 'format_quote', [
     organization(to),
     permission(to),
-    user(to),
-    category(to)
+    user(to)
   ]),
+  category(to),
   group('Exemplo de Menu', [
     menu('id-1', 'Menu 1', 'filter_1', [
       menu('id-1-1', 'Menu 1.1', 'filter_2', [
