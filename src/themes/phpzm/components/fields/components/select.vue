@@ -3,7 +3,7 @@
     <div slot="component">
       <div v-show="editable" :class="{'has-error': problems.length}">
         <q-select ref="input" class="input full-width" :class="{'disabled': disable}"
-                  v-model="model" v-bind="{disable, options, multiple, name, placeholder}"
+                  v-model="model" v-bind="{disable, options, multiple, chips, name, placeholder}"
                   @change="$emit('input', model)"/>
       </div>
       <div v-show="!editable" class="html ellipsis" v-html="html"></div>
