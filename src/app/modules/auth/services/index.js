@@ -3,25 +3,27 @@ import configureUser from 'src/bootstrap/configure/user'
 import { promise } from 'src/app/support/utils'
 
 /**
- * @param {Object} user
  * @param {string} token
  * @param {boolean} remember
  * @param {Function} success
+ * @returns {Promise}
  */
-export const register = (user, token, remember, success) => {
-  store
-    .dispatch('setAuthRemember', remember)
-    .then(
-      store
-        .dispatch('setAuthUser', configureUser(user))
-        .then(
-          store.dispatch('setAuthToken', token).then(success)
-        )
-    )
+export const registerToken = (token, remember, success = () => ({})) => {
+  return store.dispatch('setAuthRemember', remember).then(store.dispatch('setAuthToken', token).then(success))
+}
+
+/**
+ * @param {Object} user
+ * @param {Function} success
+ * @returns {Promise}
+ */
+export const registerUser = (user, success = () => ({})) => {
+  return store.dispatch('setAuthUser', configureUser(user)).then(success)
 }
 
 /**
  * @param {Function} success
+ * @returns {Promise}
  */
 export const unRegister = (success) => {
   return promise((resolve, reject) => {
@@ -31,9 +33,7 @@ export const unRegister = (success) => {
     }
     store
       .dispatch('setAuthUser', undefined)
-      .then(
-        store.dispatch('setAuthToken', undefined).then(solver).catch(reject)
-      )
+      .then(store.dispatch('setAuthToken', undefined).then(solver).catch(reject))
       .catch(reject)
   })
 }

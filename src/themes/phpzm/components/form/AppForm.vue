@@ -1,12 +1,12 @@
 <template>
   <div class="app-form">
-    <q-tabs v-if="tabs.length">
+    <q-tabs v-if="tabs.length" inverted>
       <!-- Tabs - notice slot="title" -->
-      <q-tab v-for="tab in tabs" :key="tab.name" slot="title" v-bind="tab"/>
+      <q-tab v-for="tab in tabs" :default="selected(tab)" :key="tab.name" slot="title" v-bind="tab"/>
       <!-- Targets -->
       <q-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name">
         <div class="form">
-          <component v-for="schema in components[tab]" :key="schema.field" :is="schema.component"
+          <component v-for="schema in components[tab.name]" :key="schema.field" :is="schema.component"
                      v-bind="schema" v-model="record[schema.field]"
                      @input="formInput(schema.field)" @event="formEvent"></component>
         </div>
@@ -37,6 +37,11 @@
       this.updateComponents()
       this.updateSchemas()
       this.updateRecord()
+
+      this.tabDefault = this.tab
+      if (!this.tab) {
+        this.tabDefault = Array.isArray(this.tabs) ? this.tabs[0] : ''
+      }
     }
   }
 </script>

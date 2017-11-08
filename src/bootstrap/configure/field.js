@@ -53,6 +53,10 @@ export default (field, label, component = 'text', scopes = []) => {
       this.grid.filter = {rule, value, component}
       return this
     },
+    $tab (name) {
+      this.form.tab = name
+      return this
+    },
     $readonly () {
       this.form.disabled = true
       return this

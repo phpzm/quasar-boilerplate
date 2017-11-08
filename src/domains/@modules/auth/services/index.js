@@ -1,6 +1,6 @@
 import http from 'src/app/infra/services/http'
-import store from 'src/app/infra/store'
-import { register, unRegister } from 'src/app/modules/auth/services'
+import store from 'src/app/infra/store/index'
+import { registerToken, registerUser, unRegister } from 'src/app/modules/auth/services/index'
 
 /**
  * @param {Object} credentials
@@ -8,10 +8,11 @@ import { register, unRegister } from 'src/app/modules/auth/services'
  * @param {Function} success
  */
 export const login = (credentials, remember, success) => {
-  http
+  return http
     .post('/auth/login', credentials)
     .then((response) => {
-      register(http.$body(response).user, http.$body(response).token, remember, success)
+      const body = http.$body(response)
+      registerToken(body.token, remember).then(() => registerUser(body.user).then(success))
     })
 }
 
@@ -19,8 +20,8 @@ export const login = (credentials, remember, success) => {
  * @param {Function} success
  */
 export const logout = (success) => {
-  unRegister(success)
+  return unRegister(success)
     .then(() => {
-      http.post('/auth/logout', store.getters.getAuthUser, {noLoading: true, requestId: ''})
+      http.post('/auth/logout', store.getters.getAuthUser, {requestId: '', noLoading: true})
     })
 }

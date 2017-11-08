@@ -4,6 +4,7 @@ import { menu as home } from 'src/domains/@modules/dashboard/model/home'
 import { menu as forms } from 'src/domains/demo/forms/model'
 import { menu as graphics } from 'src/domains/demo/graphics/model'
 import { menu as user } from 'src/domains/admin/user/model'
+import { menu as permission } from 'src/domains/admin/permission/model'
 import { menu as organization } from 'src/domains/admin/organization/model'
 import { menu as category } from 'src/domains/general/category/model'
 
@@ -13,6 +14,7 @@ export default (to) => [
   graphics(to),
   menu('admin', 'API de Forms', 'format_quote', [
     organization(to),
+    permission(to),
     user(to),
     category(to)
   ]),

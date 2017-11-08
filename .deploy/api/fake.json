@@ -9,6 +9,7 @@
     "property": {
       "foo": "bar"
     },
+    "organization_id": 2,
     "amount": "5.41",
     "organizations": [
       {

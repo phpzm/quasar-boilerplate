@@ -38,5 +38,7 @@ export {
   QSlider,
   QModal,
   QChip,
-  QPagination
+  QPagination,
+  QTab,
+  QTabPane
 } from 'quasar-framework'

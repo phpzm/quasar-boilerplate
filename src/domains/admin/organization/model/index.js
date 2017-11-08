@@ -1,9 +1,10 @@
 import model from 'src/app/support/model'
 import { resource } from 'src/app/infra/services/http/resource'
-import { PATH_HOME } from 'src/app/support/index'
-import { button } from 'src/app/modules/dashboard'
-import '../slots/MyLink'
-import '../slots/MyButton'
+// import { PATH_HOME } from 'src/app/support/index'
+import 'src/domains/general/slots/MyLink'
+
+import 'src/domains/general/slots/MyButton'
+import { activate, runSlot } from 'src/domains/general/services/activate'
 
 /**
  * @type {string}
@@ -34,6 +35,18 @@ export const description = 'Organizações são grupos que existem dentro da sua
  * @type {string}
  */
 export const api = '/admin/organization'
+
+/**
+ * @type {Object}
+ */
+export const search = {
+  api: api,
+  reference: {
+    value: 'id',
+    label: 'name'
+  },
+  search: ['name', 'telephone', 'celular']
+}
 
 /**
  * @type {string}
@@ -85,11 +98,9 @@ export const card = model.card(icon, label, path, tooltip, description, 50)
 const actions = ($this, actions) => {
   // permission handler
   const permission = (record, $component, $user) => record && String(record['id']) === '1'
-  // go to home
-  const home = () => $this.$router.push(PATH_HOME)
-  // id, permission, label, handler, icon = '', tooltip = '', color = 'white'
-  const custom = button('go-home', 1, 'Início', home, 'store', 'Voltar para a Página Inicial', 'purple')
-    .$options({permission, rotate: false, raised: true}).$form() // , round: true, outline: true
+
+  const custom = activate(service)
+
   // add new button
   actions.unshift(custom)
   // change permission of destroy button
@@ -117,8 +128,8 @@ const slots = [
     field: 'name',
     component: 'MyButton',
     on: {
-      click (record, schemas, $component) {
-        console.log('Clicou!')
+      click (record, schemas, $component, $slot) {
+        runSlot(service, record, $slot)
       }
     }
   }
@@ -132,17 +143,7 @@ const slots = [
 export const grid = (scope, route) => {
   // you can add settings default to grid in src/bootstrap/configure/grid
   const options = {
-    slots: slots,
-    bottom: false,
-    styles: {
-      height: 'calc(100vh - 220px)',
-      minHeight: '280px'
-    },
-    bodyStyle: {
-      height: 'calc(100vh - 270px)',
-      minHeight: '230px'
-    },
-    debug: false
+    slots: slots
   }
 
   return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, options)

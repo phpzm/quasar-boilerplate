@@ -5,6 +5,7 @@ import forms from 'src/domains/demo/forms/routes'
 import graphics from 'src/domains/demo/graphics/routes'
 import calendar from 'src/domains/demo/calendar/routes'
 import user from 'src/domains/admin/user/routes'
+import permission from 'src/domains/admin/permission/routes'
 import organization from 'src/domains/admin/organization/routes'
 import categories from 'src/domains/general/category/routes'
 
@@ -28,6 +29,7 @@ export default [
     ...graphics,
     ...calendar,
     ...user,
+    ...permission,
     ...organization,
     ...categories
   ])

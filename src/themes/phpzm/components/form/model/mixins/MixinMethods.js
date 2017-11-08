@@ -115,6 +115,13 @@ export default {
         })
       }
       return errors
+    },
+    /**
+     * @param name
+     * @returns {boolean}
+     */
+    selected (name) {
+      return this.tabDefault === name
     }
   }
 }
