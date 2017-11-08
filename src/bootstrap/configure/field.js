@@ -147,6 +147,7 @@ export default (field, label, component = 'text', scopes = []) => {
       this.form.component = 'select'
       this.form.multiple = multiple
       this.form.options = options
+      this.form.chips = multiple
       this.grid.format = value => {
         if (Array.isArray(options)) {
           const option = options.find(option => String(option.value) === String(value))
