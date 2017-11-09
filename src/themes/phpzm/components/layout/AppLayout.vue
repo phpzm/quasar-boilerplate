@@ -51,7 +51,7 @@
 
     <slot name="content">
       <div class="transition-wrapper">
-        <app-transition-slide v-bind="viewport"></app-transition-slide>
+        <app-transition-slide v-bind="style"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -93,8 +93,15 @@
       viewport: {
         type: Object,
         default: () => ({
-          height: 'calc(100vh - 105px)',
-          padding: '0 10px'
+          height: 'calc(100vh - 95px)',
+          padding: '10px'
+        })
+      },
+      mobile: {
+        type: Object,
+        default: () => ({
+          height: 'calc(100vh - 95px)',
+          padding: '0'
         })
       },
       shadow: {
@@ -117,6 +124,9 @@
       },
       classNames () {
         return ['layout-default', this.environment]
+      },
+      style () {
+        return this.$q.platform.is.mobile ? this.mobile : this.viewport
       },
       ...mapGetters(['AppName', 'AppTooltip', 'AppMenu', 'getDashboardOptions'])
     },
@@ -171,16 +181,14 @@
       box-shadow 0 0 4px 2px rgba(0, 0, 0, 0.3)
       background $app-layout-breadcrumb-wrapper
       width 100%
-      height 47px
+      height 45px
       z-index 2
     .transition-wrapper
       position relative
-      margin 47px 0 0 0
+      margin 45px 0 0 0
 
   @media screen and (max-width 768px)
     .layout-default
       .breadcrumb-wrapper
-        padding 0 7px 10px 7px
-      .layout-page > .transition-wrapper > div > .app-card.router-view
-        padding 0 !important
+        padding 0 7px 0 7px
 </style>
