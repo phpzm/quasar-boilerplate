@@ -1,5 +1,5 @@
 <template>
-  <q-layout ref="layout" :class="classNames" v-bind="{view, leftBreakpoint, reveal}">
+  <q-layout ref="layout" v-model="sides" v-bind="{view, leftBreakpoint, reveal}" :class="classNames">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
@@ -59,6 +59,7 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
+  import { set, get } from 'src/app/infra/storage'
   import AppBreadcrumb from 'src/themes/phpzm/components/breadcrumb/AppBreadcrumb.vue'
   import AppDrawerMenu from 'src/themes/phpzm/components/layout/drawer/DrawerMenu.vue'
   import AppTransitionSlide from 'src/themes/phpzm/components/transition/AppTransitionSlide.vue'
@@ -101,6 +102,12 @@
         default: () => true
       }
     },
+    data: () => ({
+      sides: {
+        left: false,
+        right: true
+      }
+    }),
     computed: {
       environment () {
         return process.env.NODE_ENV
@@ -123,6 +130,20 @@
         if (this.left) {
           this.$refs.layout.toggleLeft()
         }
+      }
+    },
+    watch: {
+      sides: {
+        handler (sides) {
+          set('drawer.sides', sides, true)
+        },
+        deep: true
+      }
+    },
+    created () {
+      const sides = get('drawer.sides', true)
+      if (sides) {
+        this.sides = sides
       }
     }
   }
