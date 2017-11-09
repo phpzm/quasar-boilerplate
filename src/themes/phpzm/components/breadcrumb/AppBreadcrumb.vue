@@ -94,7 +94,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   ul.breadcrumb
-    margin 7px 0 0 0
+    margin 5px 0 0 0
     li
       margin 0
     &:last-child a
