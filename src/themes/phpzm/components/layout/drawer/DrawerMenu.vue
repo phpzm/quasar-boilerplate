@@ -50,6 +50,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+  @import '~variables'
   .app-drawer-menu
     color $app-drawer-menu-color
 </style>
