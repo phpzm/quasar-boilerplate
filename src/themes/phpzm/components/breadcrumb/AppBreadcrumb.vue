@@ -1,5 +1,5 @@
 <template>
-  <ul class="breadcrumb">
+  <ul class="app-breadcrumb breadcrumb">
     <li>
       <router-link :to="path">
         <q-icon :name="icon"></q-icon>
@@ -93,8 +93,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  ul.breadcrumb
-    margin 5px 0 0 0
+  ul.app-breadcrumb.breadcrumb
+    margin 6px 0 0 0
     li
       margin 0
     &:last-child a

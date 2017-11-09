@@ -1,8 +1,8 @@
 <template>
   <div class="app-form">
-    <q-tabs v-if="tabs.length" inverted>
+    <q-tabs v-if="tabs.length" v-model="tabDefault" inverted>
       <!-- Tabs - notice slot="title" -->
-      <q-tab v-for="tab in tabs" :default="selected(tab)" :key="tab.name" slot="title" v-bind="tab"/>
+      <q-tab v-for="tab in tabs" :key="tab.name" slot="title" v-bind="tab"/>
       <!-- Targets -->
       <q-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name">
         <div class="form">
