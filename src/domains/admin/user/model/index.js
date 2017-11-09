@@ -146,8 +146,10 @@ export const fields = (scope, route = null) => {
         .$grid({format: (value) => get(organizations.find(item => item.value === value), 'label')})
         .$render(),
 
-      model.field('profile', 'Perfil').$tab('principal').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
-      model.field('gender', 'Sexo').$tab('principal').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
+      model.field('profile', 'Perfil').$tab('principal').$required().$out('index').$form({width: 30})
+        .$select(profiles, true).$render(),
+      model.field('gender', 'Sexo').$tab('principal').$required().$out('index').$form({width: 30})
+        .$select(gender, false).$render(),
       model.field('property.foo', 'Dot Notation').$tab('principal').$form({width: 40}).$filter().$text().$render(),
       model.field('email', 'E-mail').$tab('outros').$text().$filter().$required().$form({width: 50}).$render(),
       model.field('password', 'Senha').$tab('outros').$password().$required(scope === 'create')

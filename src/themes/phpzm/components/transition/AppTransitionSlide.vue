@@ -20,6 +20,9 @@
       },
       padding: {
         default: '0'
+      },
+      margin: {
+        default: '0'
       }
     },
     data: () => ({
@@ -31,7 +34,8 @@
         return {
           width: this.width,
           height: this.height,
-          padding: this.padding
+          padding: this.padding,
+          margin: this.margin
         }
       }
     },

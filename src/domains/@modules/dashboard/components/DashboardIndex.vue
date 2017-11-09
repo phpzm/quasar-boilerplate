@@ -20,17 +20,17 @@
     },
     data: () => ({
       bind: {
-        view: 'HHh Lpr lFf',
+        view: 'lHh Lpr lFf',
         reveal: true,
         leftBreakpoint: 996, // min width to show drawer
         home: 'store', // breadcrumb home icon
         viewport: { // viewport to middle of dashboard
-          height: 'calc(100vh - 100px)',
+          height: 'calc(100vh - 95px)',
           padding: '10px'
         },
         mobile: { // viewport to middle of dashboard in mobile
-          height: 'calc(100vh - 100px)',
-          padding: '5px'
+          height: 'calc(100vh - 95px)',
+          padding: '0'
         },
         shadow: true
       }

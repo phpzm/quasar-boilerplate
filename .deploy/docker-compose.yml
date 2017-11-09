@@ -9,4 +9,3 @@ services:
       - .:/var/www/app/public
     ports:
       - 3000:8080
-

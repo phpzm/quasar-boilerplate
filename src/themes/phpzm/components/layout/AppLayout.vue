@@ -1,5 +1,5 @@
 <template>
-  <q-layout ref="layout" :class="classNames" v-bind="{view, leftBreakpoint, reveal}">
+  <q-layout ref="layout" v-model="sides" v-bind="{view, leftBreakpoint, reveal}" :class="classNames">
 
     <q-toolbar slot="header" class="">
       <slot name="header">
@@ -51,7 +51,7 @@
 
     <slot name="content">
       <div class="transition-wrapper">
-        <app-transition-slide v-bind="viewport"></app-transition-slide>
+        <app-transition-slide v-bind="style"></app-transition-slide>
       </div>
     </slot>
   </q-layout>
@@ -59,6 +59,7 @@
 
 <script type="text/javascript">
   import { mapGetters } from 'vuex'
+  import { set, get } from 'src/app/infra/storage'
   import AppBreadcrumb from 'src/themes/phpzm/components/breadcrumb/AppBreadcrumb.vue'
   import AppDrawerMenu from 'src/themes/phpzm/components/layout/drawer/DrawerMenu.vue'
   import AppTransitionSlide from 'src/themes/phpzm/components/transition/AppTransitionSlide.vue'
@@ -92,8 +93,15 @@
       viewport: {
         type: Object,
         default: () => ({
-          height: 'calc(100vh - 105px)',
-          padding: '0 10px'
+          height: 'calc(100vh - 95px)',
+          padding: '10px'
+        })
+      },
+      mobile: {
+        type: Object,
+        default: () => ({
+          height: 'calc(100vh - 95px)',
+          padding: '0'
         })
       },
       shadow: {
@@ -101,6 +109,12 @@
         default: () => true
       }
     },
+    data: () => ({
+      sides: {
+        left: false,
+        right: true
+      }
+    }),
     computed: {
       environment () {
         return process.env.NODE_ENV
@@ -110,6 +124,9 @@
       },
       classNames () {
         return ['layout-default', this.environment]
+      },
+      style () {
+        return this.$q.platform.is.mobile ? this.mobile : this.viewport
       },
       ...mapGetters(['AppName', 'AppTooltip', 'AppMenu', 'getDashboardOptions'])
     },
@@ -123,6 +140,20 @@
         if (this.left) {
           this.$refs.layout.toggleLeft()
         }
+      }
+    },
+    watch: {
+      sides: {
+        handler (sides) {
+          set('drawer.sides', sides, true)
+        },
+        deep: true
+      }
+    },
+    created () {
+      const sides = get('drawer.sides', true)
+      if (sides) {
+        this.sides = sides
       }
     }
   }
@@ -150,16 +181,14 @@
       box-shadow 0 0 4px 2px rgba(0, 0, 0, 0.3)
       background $app-layout-breadcrumb-wrapper
       width 100%
-      height 47px
+      height 45px
       z-index 2
     .transition-wrapper
       position relative
-      margin 47px 0 0 0
+      margin 45px 0 0 0
 
   @media screen and (max-width 768px)
     .layout-default
       .breadcrumb-wrapper
-        padding 0 7px 10px 7px
-      .layout-page > .transition-wrapper > div > .app-card.router-view
-        padding 0 !important
+        padding 0 7px 0 7px
 </style>
