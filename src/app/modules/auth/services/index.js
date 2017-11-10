@@ -1,39 +1,27 @@
-import store from 'src/app/infra/store'
-import configureUser from 'src/bootstrap/configure/user'
-import { promise } from 'src/app/support/utils'
+import http from 'phpzm/infra/services/http'
+import store from 'phpzm/infra/store/index'
+import { registerToken, registerUser, unRegister } from 'phpzm/modules/auth/services/index'
 
 /**
- * @param {string} token
+ * @param {Object} credentials
  * @param {boolean} remember
  * @param {Function} success
- * @returns {Promise}
  */
-export const registerToken = (token, remember, success = () => ({})) => {
-  return store.dispatch('setAuthRemember', remember).then(store.dispatch('setAuthToken', token).then(success))
-}
-
-/**
- * @param {Object} user
- * @param {Function} success
- * @returns {Promise}
- */
-export const registerUser = (user, success = () => ({})) => {
-  return store.dispatch('setAuthUser', configureUser(user)).then(success)
+export const login = (credentials, remember, success) => {
+  return http
+    .post('/auth/login', credentials)
+    .then((response) => {
+      const body = http.$body(response)
+      registerToken(body.token, remember).then(() => registerUser(body.user).then(success))
+    })
 }
 
 /**
  * @param {Function} success
- * @returns {Promise}
  */
-export const unRegister = (success) => {
-  return promise((resolve, reject) => {
-    const solver = () => {
-      success()
-      resolve()
-    }
-    store
-      .dispatch('setAuthUser', undefined)
-      .then(store.dispatch('setAuthToken', undefined).then(solver).catch(reject))
-      .catch(reject)
-  })
+export const logout = (success) => {
+  return unRegister(success)
+    .then(() => {
+      http.post('/auth/logout', store.getters.getAuthUser, {requestId: '', noLoading: true})
+    })
 }

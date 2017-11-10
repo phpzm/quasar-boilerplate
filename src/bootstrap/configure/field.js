@@ -1,4 +1,12 @@
-import { formatMoney, formatPhone, formatBoolean, formatDate, formatDateTime } from 'src/app/support/format'
+import {
+  formatMoney,
+  formatPhone,
+  formatBoolean,
+  formatDate,
+  formatDateTime,
+  formatOptions
+} from 'phpzm/support/format/index'
+import { mask } from 'phpzm/support/utils/index'
 
 /**
  * @param field
@@ -143,18 +151,26 @@ export default (field, label, component = 'text', scopes = []) => {
       this.grid.format = formatPhone
       return this
     },
+    $radio (options = []) {
+      this.form.component = 'radio'
+      if (!options.length) {
+        options = [{value: 1, label: 'Sim'}, {value: 0, label: 'Não'}]
+      }
+      this.form.options = options
+      this.grid.format = formatOptions(options)
+      return this
+    },
+    $search () {
+      this.form.component = 'select'
+      return this
+    },
     $select (options = [], multiple = false) {
       this.form.component = 'select'
+      this.form.placeholder = '.:. Selecione uma opção .:.'
       this.form.multiple = multiple
       this.form.options = options
-      this.form.chips = multiple
-      this.grid.format = value => {
-        if (Array.isArray(options)) {
-          const option = options.find(option => String(option.value) === String(value))
-          return option && option.label ? option.label : ''
-        }
-        return value
-      }
+      this.form.chips = true
+      this.grid.format = formatOptions(options)
       return this
     },
     $pivot (options = {}) {
@@ -184,6 +200,31 @@ export default (field, label, component = 'text', scopes = []) => {
     },
     $wysiwyg () {
       this.form.component = 'wysiwyg'
+      return this
+    },
+    $cep () {
+      this.form.component = 'text'
+      this.form.mask = '#####-###'
+      this.grid.format = value => mask('#####-###', value)
+      return this
+    },
+    $cpf () {
+      this.form.component = 'text'
+      this.form.mask = '###.###.###-##'
+      this.grid.format = value => mask('###.###.###-##', value)
+      return this
+    },
+    $cnpj () {
+      this.form.component = 'text'
+      this.form.mask = '##.###.###/####-##'
+      this.grid.format = value => mask('##.###.###/####-##', value)
+      return this
+    },
+    $event (type, action) {
+      if (!this.form.events) {
+        this.form.events = {}
+      }
+      this.form.events[type] = action
       return this
     },
     $render () {
