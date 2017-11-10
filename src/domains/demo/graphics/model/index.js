@@ -1,4 +1,4 @@
-import model from 'src/app/support/model'
+import model from 'phpzm/support/model'
 
 export const icon = 'pie_chart'
 

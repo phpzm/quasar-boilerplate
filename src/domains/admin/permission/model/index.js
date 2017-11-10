@@ -1,5 +1,5 @@
-import model from 'src/app/support/model'
-import { resource } from 'src/app/infra/services/http/resource'
+import model from 'phpzm/support/model'
+import { resource } from 'phpzm/infra/services/http/resource'
 import { activate } from 'src/domains/general/slots/activate/services/activate'
 
 /**

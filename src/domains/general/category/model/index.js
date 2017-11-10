@@ -1,5 +1,5 @@
-import model from 'src/app/support/model/index'
-import { resource } from 'src/app/infra/services/http/resource'
+import model from 'phpzm/support/model/index'
+import { resource } from 'phpzm/infra/services/http/resource'
 
 /**
  * @type {string}

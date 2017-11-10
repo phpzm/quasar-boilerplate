@@ -11,8 +11,8 @@
 </template>
 
 <script type="text/javascript">
-  import AppCard from 'src/themes/phpzm/components/card/AppCard.vue'
-  import AppCalendar from 'src/themes/phpzm/components/calendar/AppCalendar.vue'
+  import AppCard from 'phpzm/components/card/AppCard.vue'
+  import AppCalendar from 'phpzm/components/calendar/AppCalendar.vue'
 
   export default {
     components: {

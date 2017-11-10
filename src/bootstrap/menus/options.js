@@ -1,4 +1,4 @@
-import { logout } from 'src/domains/@modules/auth/services'
+import { logout } from 'src/app/modules/auth/services'
 
 export default () => {
   return [

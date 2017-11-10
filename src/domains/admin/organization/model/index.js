@@ -1,8 +1,8 @@
-import model from 'src/app/support/model'
-import { resource, source } from 'src/app/infra/services/http/resource'
-import { button } from 'src/app/modules/dashboard'
+import model from 'phpzm/support/model'
+import { resource, source } from 'phpzm/infra/services/http/resource'
+import { button } from 'phpzm/modules/dashboard'
 import 'src/domains/general/slots/MyLink'
-import { PATH_HOME } from 'src/app/support/index'
+import { PATH_HOME } from 'phpzm/support/index'
 
 /**
  * @type {string}
