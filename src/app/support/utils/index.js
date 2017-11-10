@@ -175,14 +175,3 @@ export const uniqid = (prefix = '', entropy = false) => {
   }
   return result
 }
-
-/**
- * @param {string} string
- * @param {Object} object
- * @returns {string}
- */
-export const wildcard = (string, object) => {
-  return Object.keys(object).reduce((accumulate, property) => {
-    return accumulate.replace(new RegExp(`{${property}}`, 'g'), object[property])
-  }, string)
-}
