@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+
+  phpzm-api:
+    image: ambientum/php:7.0-apache
+    container_name: phpzm-api
+    volumes:
+      - .:/var/www/app/public
+    ports:
+      - 3000:8080

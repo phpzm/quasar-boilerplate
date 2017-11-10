@@ -1,6 +1,8 @@
 <?php
 
-header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+  header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+}
 header("Access-Control-Allow-Headers: Authorization, Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
@@ -19,7 +21,10 @@ header("Access-Control-Expose-Headers: Authorization");
 header("Content-Type: application/json");
 header("Authorization: {$token}");
 
-$uri = $_SERVER['REQUEST_URI'];
+$uri = '';
+if (isset($_SERVER['REQUEST_URI'])) {
+  $uri = $_SERVER['REQUEST_URI'];
+}
 
 $returns = [
     '/api/v1/auth/login' => [
@@ -31,6 +36,9 @@ $returns = [
               'admin.organization' => [
                 'permission' => 1
               ],
+              'admin.permission' => [
+                'permission' => 3
+              ],
               'admin.user' => [
                 'permission' => 4
               ]
@@ -40,10 +48,14 @@ $returns = [
     ]
 ];
 
+if ($uri === '/api/v1/admin/permission/activate/2') {
+    http_response_code(412);
+}
+
 $body = isset($returns[$uri]) ? $returns[$uri] : json_decode(file_get_contents(__DIR__ . '/fake.json'));
 
 echo json_encode([
     'body' => $body,
-    'meta' => ['total' => 100, 'page' => 1, 'last' => 4],
+    'meta' => ['total' => 96, 'page' => 1, 'last' => 4],
     'status' => ['code' => '200'],
 ]);

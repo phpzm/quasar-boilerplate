@@ -1,4 +1,5 @@
-import { $body } from 'src/app/infra/services/http/resource'
+import { $body } from 'src/bootstrap/configure/http'
+import { getDotNotation } from 'phpzm/support/transform'
 
 /**
  * @param {AppCrudForm} $component
@@ -8,10 +9,10 @@ import { $body } from 'src/app/infra/services/http/resource'
 export default ($component, response, callback = null) => {
   let body = $body(response)
   if (!Array.isArray(body)) {
-    $component.data = {}
+    $component.data = getDotNotation($component.fields, body)
     return
   }
-  $component.data = body[0]
+  $component.data = getDotNotation($component.fields, body[0])
 
   if (typeof callback === 'function') {
     callback()

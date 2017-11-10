@@ -1,11 +1,17 @@
-import model from 'src/app/support/model'
-import { resource } from 'src/app/infra/services/http/resource'
-import { reference, api as organization } from 'src/domains/admin/organization/model'
+import { get } from 'lodash'
+import model from 'phpzm/support/model'
+import { resource } from 'phpzm/infra/services/http/resource'
+import {
+  reference as organizationReference,
+  api as organizationApi,
+  path as organizationPath,
+  sources as organizationSource
+} from 'src/domains/admin/organization/model'
 
 /**
  * @type {string}
  */
-export const icon = 'supervisor_account'
+export const icon = 'people'
 
 /**
  * @type {string}
@@ -21,6 +27,11 @@ export const title = 'Cadastro de Usuários'
  * @type {string}
  */
 export const tooltip = 'Defina quais usuários terão acesso a sua aplicação e gerencie-os'
+
+/**
+ * @type {string}
+ */
+export const description = 'Adicione e gerencie Usuários no sistema e defina como se comportam'
 
 /**
  * @type {string}
@@ -53,27 +64,32 @@ export const service = resource(api)
 export const meta = model.meta(icon, label, title, tooltip)
 
 /**
+ * @type {string}
+ */
+const organizationFk = 'organization_id'
+
+/**
  * @type {Object}
  */
-export const pivot = model.pivot(organization, reference, 'organization_id')
+export const pivot = model.pivot(organizationApi, organizationReference, organizationFk)
 
 /**
  * @type {Function}
  */
 export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
-// configure buttons
-const actions = ($this, actions) => {
-  const map = button => {
-    if (['edit', 'destroy'].includes(button.id)) {
-      button.access = (record, $component, $user) => {
-        return record && String(record['id']) !== '2'
-      }
+/**
+ * @type {Array}
+ */
+const slots = [
+  {
+    field: 'name',
+    component: 'MyLink',
+    props: {
+      path: `${organizationPath}/{${organizationFk}}`
     }
-    return button
   }
-  return actions.map(map)
-}
+]
 
 /**
  * @param {string} scope
@@ -81,18 +97,7 @@ const actions = ($this, actions) => {
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    position: 'left',
-    rule: 'like',
-    paginate: true,
-    schemas: fields('index'),
-    filters: filters(scope, route),
-    actions: actions,
-    debug: false
-  }
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), null, {slots})
 }
 
 /**
@@ -101,17 +106,22 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    scope: scope,
-    schemas: fields(scope),
-    actions: ($this, actions) => {
-      return actions
-    },
+  const options = {
+    tab: 'outros',
+    tabs: [
+      {
+        name: 'principal',
+        label: 'Principal'
+      },
+      {
+        name: 'outros',
+        label: 'Outros'
+      }
+    ],
     debug: true
   }
+  // service, scope, path, id, schemas, actions = null, options = {}
+  return model.form(service, scope, path, id, fields(scope, route), null, options)
 }
 
 /**
@@ -120,20 +130,32 @@ export const form = (scope, route) => {
  * @returns {Array}
  */
 export const fields = (scope, route = null) => {
+  let organizations = []
+  if (scope === 'index') {
+    organizationSource((source) => {
+      organizations = source
+    })
+  }
   return model.filter(
     [
-      model.field('id', 'Código').$pk().$render(),
-      model.field('name', 'Nome').$text().$filter().$required().$form({width: 70}).$render(),
-      model.field('profile', 'Perfil').$required().$out('index').$form({width: 30})
-        .$select('list', [
-          {label: 'Geral', value: 'general'},
-          {label: 'Atendimento', value: 'support'},
-          {label: 'Financeiro', value: 'financial'},
-          {label: 'Contabilidade', value: 'accountant'}
-        ]).$render(),
-      model.field('email', 'E-mail').$text().$filter().$required().$form({width: 50}).$render(),
-      model.field('password', 'Senha').$password().$required(scope === 'create')
-        .$scopes(['create', 'edit']).$form({width: 50}).$render(),
+      model.field('id', 'Código').$pk().$tab('principal').$render(),
+      model.field('name', 'Nome').$text().$tab('principal').$filter().$required().$form({width: 70}).$render(),
+      // relationship with organization using source (useful to small datasets)
+      model.field('organization_id', 'Organização').$filter().$tab('principal').$select().$required()
+        .$form({source: organizationSource, width: 30})
+        .$grid({format: (value) => get(organizations.find(item => item.value === value), 'label')})
+        .$render(),
+
+      model.field('profile', 'Perfil').$tab('principal').$required().$out('index').$form({width: 30})
+        .$select(profiles, true).$render(),
+      model.field('gender', 'Sexo').$tab('principal').$required().$out('index').$form({width: 30})
+        .$select(gender, false).$render(),
+      model.field('property.foo', 'Dot Notation').$tab('principal').$form({width: 40}).$filter().$text().$render(),
+      model.field('email', 'E-mail').$tab('outros').$text().$filter().$required().$form({width: 50}).$render(),
+      model.field('password', 'Senha').$tab('outros').$password().$required(scope === 'create')
+        .$scopes(['create', 'edit']).$tab('outros').$form({width: 50}).$render(),
+
+      // using pivot to solve relationships
       model.field('organizations', 'Organizações').$required().$out('index')
         .$form({width: 50, placeholder: '.: Selecione as Organizações :.'})
         .$pivot(pivot).$render()
@@ -150,3 +172,21 @@ export const fields = (scope, route = null) => {
 export const filters = (scope, route = null) => {
   return []
 }
+
+/**
+ * @type {Array}
+ */
+export const profiles = [
+  {label: 'Geral', value: 'general'},
+  {label: 'Atendimento', value: 'support'},
+  {label: 'Financeiro', value: 'financial'},
+  {label: 'Contabilidade', value: 'accountant'}
+]
+
+/**
+ * @type {Array}
+ */
+export const gender = [
+  {label: 'Masculino', value: 'M'},
+  {label: 'Feminino', value: 'F'}
+]

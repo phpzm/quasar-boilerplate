@@ -1,10 +1,13 @@
-import model from 'src/app/support/model'
-import { resource } from 'src/app/infra/services/http/resource'
+import model from 'phpzm/support/model'
+import { resource, source } from 'phpzm/infra/services/http/resource'
+import { button } from 'phpzm/modules/dashboard'
+import 'src/domains/general/slots/MyLink'
+import { PATH_HOME } from 'phpzm/support/index'
 
 /**
  * @type {string}
  */
-export const icon = 'store_mall_directory'
+export const icon = 'account_balance'
 
 /**
  * @type {string}
@@ -20,6 +23,11 @@ export const title = 'Cadastro de Organizações'
  * @type {string}
  */
 export const tooltip = 'Gerencie o organize o seu cadastro de Organizações'
+
+/**
+ * @type {string}
+ */
+export const description = 'Organizações são grupos que existem dentro da sua Instituição. Ex.: Casa, Escritório, Filial de New York'
 
 /**
  * @type {string}
@@ -65,40 +73,64 @@ export const meta = model.meta(icon, label, title, tooltip)
 export const menu = model.menu(icon, label, path, false, tooltip, namespace)
 
 /**
+ * @type {Object}
+ */
+export const sources = source(api, 'id', 'name')
+
+/**
+ * @param {Vue} $this
+ * @param {Array} actions
+ */
+const actions = ($this, actions) => {
+  // const permission = (record, $component, $user) => record && String(record['id']) === '2'
+  const permission = record => record && String(record['id']) === '1'
+
+  const home = () => $this.$router.push(PATH_HOME)
+
+  // id, permission, label, handler, icon = '', tooltip = '', color = 'white'
+  const custom = button('go-home', 1, 'Início', home, 'store', 'Voltar para a Página Inicial', 'warning')
+    .$options({permission, rotate: false, raised: true}).$form() // , round: true, outline: true
+
+  actions.unshift(custom)
+
+  return actions.map(button => {
+    if (button.id === 'destroy') {
+      // override the access control system
+      button.permission = permission
+    }
+    return button
+  })
+}
+
+/**
+ * @type {Array}
+ */
+const slots = []
+
+/**
  * @param {string} scope
  * @param {Route} route
  * @returns {Object}
  */
 export const grid = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    rule: 'like',
-    paginate: false,
+  // you can add settings default to grid in src/bootstrap/configure/grid
+  const options = {
+    slots: slots,
+    position: 'right',
+    top: true,
     bottom: false,
     styles: {
-      height: 'calc(100vh - 220px)',
+      height: 'calc(100vh - 235px)',
       minHeight: '280px'
     },
     bodyStyle: {
-      height: 'calc(100vh - 270px)',
+      height: 'calc(100vh - 285px)',
       minHeight: '230px'
-    },
-    schemas: fields('index'),
-    filters: filters(scope, route),
-    actions: ($this, actions) => {
-      return actions.map(button => {
-        if (button.id === 'destroy') {
-          button.permission = (record, $component, $user) => {
-            return record && String(record['id']) === '2'
-          }
-        }
-        return button
-      })
     },
     debug: false
   }
+
+  return model.grid(service, path, id, fields('index', route), filters(scope, route), actions, options)
 }
 
 /**
@@ -107,17 +139,7 @@ export const grid = (scope, route) => {
  * @returns {Object}
  */
 export const form = (scope, route) => {
-  return {
-    id: id,
-    service: service,
-    path: path,
-    scope: scope,
-    schemas: fields(scope),
-    actions: ($this, actions) => {
-      return actions
-    },
-    debug: true
-  }
+  return model.form(service, scope, path, id, fields(scope, route), actions)
 }
 
 /**
