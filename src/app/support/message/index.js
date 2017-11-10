@@ -68,7 +68,7 @@ export const loading = (status = true, delay = 0, message = '') => {
  * @param {String} color
  * @param {String} bgColor
  */
-export const toast = (html, icon = 'done', timeout = 6000, color = '#ffffff', bgColor = '#000000') => {
+export const toast = (html, icon = 'done', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
   Toast.create({
     html, icon, timeout, color, bgColor
   })
@@ -76,21 +76,48 @@ export const toast = (html, icon = 'done', timeout = 6000, color = '#ffffff', bg
 
 /**
  * @param {String} html
- * @param {Function} action
+ * @param {Object} button
  * @param {String} icon
  * @param {Number} timeout
  * @param {String} color
  * @param {String} bgColor
  */
-export const undo = (html, action, icon = 'warning', timeout = 6000, color = '#ffffff', bgColor = '#000000') => {
-  const button = {
-    label: 'Repetir',
-    handler () {
-      action()
-    },
-    color: '#ffffff'
-  }
+export const toastWithButton = (html, button, icon = 'warning', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
   Toast.create({
     html, button, icon, timeout, color, bgColor
   })
+}
+
+/**
+ * @param {String} html
+ * @param {Function} handler
+ * @param {String} icon
+ * @param {Number} timeout
+ * @param {String} color
+ * @param {String} bgColor
+ */
+export const undo = (html, handler, icon = 'warning', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
+  const button = {
+    label: 'Desfazer',
+    handler: handler,
+    color: color
+  }
+  return toastWithButton(html, button, icon, timeout, color, bgColor)
+}
+
+/**
+ * @param {String} html
+ * @param {Function} handler
+ * @param {String} icon
+ * @param {Number} timeout
+ * @param {String} color
+ * @param {String} bgColor
+ */
+export const repeat = (html, handler, icon = 'error', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
+  const button = {
+    label: 'Tentar Novamente',
+    handler: handler,
+    color: color
+  }
+  return toastWithButton(html, button, icon, timeout, color, bgColor)
 }

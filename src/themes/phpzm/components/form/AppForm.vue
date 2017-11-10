@@ -1,16 +1,19 @@
 <template>
   <div class="app-form">
+    {{ tabDefault }}
     <q-tabs v-if="tabs.length" v-model="tabDefault" inverted>
       <!-- Tabs - notice slot="title" -->
       <q-tab v-for="tab in tabs" :key="tab.name" slot="title" v-bind="tab"/>
-      <!-- Targets -->
-      <q-tab-pane v-for="tab in tabs" :key="tab.name" :name="tab.name">
-        <div class="form">
-          <component v-for="schema in components[tab.name]" :key="schema.field" :is="schema.component"
-                     v-bind="schema" v-model="record[schema.field]"
-                     @input="formInput(schema.field)" @event="formEvent"></component>
+
+      <div class="q-tabs-panes">
+        <div v-show="tabDefault === tab.name" v-for="tab in tabs" :key="tab.name" :name="tab.name" class="q-tabs-pane">
+          <div class="form">
+            <component v-for="schema in components[tab.name]" :key="schema.field" :is="schema.component"
+                       v-bind="schema" v-model="record[schema.field]"
+                       @input="formInput(schema.field)" @event="formEvent"></component>
+          </div>
         </div>
-      </q-tab-pane>
+      </div>
     </q-tabs>
     <div v-else class="form">
       <component v-for="schema in schemas" :key="schema.field" :is="schema.component"
