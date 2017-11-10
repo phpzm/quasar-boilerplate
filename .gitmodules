@@ -1,0 +1,3 @@
+[submodule "src/vendor/phpzm"]
+	path = src/vendor/phpzm
+	url = git@github.com:phpzm/genesis.git

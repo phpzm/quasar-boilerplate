@@ -3,18 +3,17 @@ import Vuelidate from 'vuelidate'
 import VueFroala from 'vue-froala-wysiwyg'
 import moment from 'moment'
 
-// modules to install
-import Http from 'src/app/infra/services/http/plugin'
-import router from 'src/app/infra/router'
-import store from 'src/app/infra/store'
-import i18n from 'src/app/support/i18n'
-
 // settings of vendors
-import 'src/bootstrap/vendor/quasar'
-import 'src/bootstrap/vendor/froala'
-import 'src/bootstrap/vendor/fullcalendar'
-import 'src/themes/phpzm/components'
-import 'src/themes/quasar/components'
+import 'src/vendor/quasar'
+import 'src/vendor/froala'
+import 'src/vendor/fullcalendar'
+import 'src/vendor/phpzm'
+
+// modules to install
+import Http from 'phpzm/infra/services/http/plugin'
+import router from 'phpzm/infra/router'
+import store from 'phpzm/infra/store'
+import i18n from 'phpzm/support/i18n'
 
 // events to boot
 import { beforeUnload, errorHandler } from 'src/bootstrap/events'

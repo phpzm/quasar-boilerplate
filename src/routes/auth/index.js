@@ -1,4 +1,4 @@
-const base = 'domains/@modules/auth/components'
+const base = 'app/modules/auth/components'
 
 /**
  * @type Array
