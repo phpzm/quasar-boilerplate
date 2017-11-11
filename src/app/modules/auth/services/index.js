@@ -1,6 +1,7 @@
 import http from 'phpzm/infra/services/http'
 import store from 'phpzm/infra/store/index'
 import { registerToken, registerUser, unRegister } from 'phpzm/modules/auth/services/index'
+import { configureAuth } from 'src/bootstrap/configure/auth'
 
 /**
  * @param {Object} credentials
@@ -9,7 +10,7 @@ import { registerToken, registerUser, unRegister } from 'phpzm/modules/auth/serv
  */
 export const login = (credentials, remember, success) => {
   return http
-    .post('/auth/login', credentials)
+    .post('/auth/login', configureAuth(credentials))
     .then((response) => {
       const body = http.$body(response)
       registerToken(body.token, remember).then(() => registerUser(body.user).then(success))
