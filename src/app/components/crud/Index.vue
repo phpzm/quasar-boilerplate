@@ -11,7 +11,7 @@
     components: {
       AppCard
     },
-    name: 'app-crud',
+    name: 'crud-index',
     props: {
       classes: {
         default: () => ({})

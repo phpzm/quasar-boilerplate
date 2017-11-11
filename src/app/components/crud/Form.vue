@@ -1,53 +1,93 @@
 <template>
-  <div class="app-crud-grid">
-
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
-
-    <hr>
-    <app-form ref="form" v-bind="{tabs, tab, fields, data, debug}" @form~input="input" @form~valid="valid"></app-form>
-    <hr>
-
-    <app-button-bar :buttons="buttons.top" :handler="handler" :direction="direction" :record="data"/>
-
-    <div class="fixed-bottom-right">
-      <app-button-bar :buttons="buttons.floating" :handler="handler" :record="data"/>
-    </div>
-
-    <template v-if="debugging">
-      <app-debugger v-bind="{label: 'data', inspect: data}"></app-debugger>
-      <app-debugger v-bind="{label: 'fields', inspect: fields}"></app-debugger>
-    </template>
-  </div>
+  <app-crud-form v-bind="$props"></app-crud-form>
 </template>
 
 <script type="text/javascript">
-  import AppForm from 'genesis/components/form/AppForm.vue'
-  import AppButtonBar from 'genesis/components/button/AppButtonBar.vue'
-  import MixinNavigation from 'genesis/components/@mixins/MixinNavigation'
-  import { MixinComputed, MixinData, MixinMethods, MixinProps } from 'genesis/components/crud/model'
-  import { MixinForm } from 'genesis/components/crud/model/form'
+  import AppCrudForm from 'genesis/components/crud/Form.vue'
 
-  /**
-   * @type {Object}
-   * @property data
-   */
-  const AppCrudForm = {
-    mixins: [
-      MixinComputed, MixinData, MixinMethods, MixinProps, MixinNavigation, MixinForm
-    ],
-    name: 'app-crud-form',
+  export default {
+    name: 'crud-form',
     components: {
-      AppForm, AppButtonBar
+      AppCrudForm
+    },
+    props: {
+      scopes: {
+        type: Object,
+        default: () => ({
+          index: {},
+          create: {
+            method: 'create'
+          },
+          edit: {
+            method: 'update'
+          },
+          view: {
+            readonly: true
+          }
+        })
+      },
+      service: {
+        type: Object,
+        required: true,
+        default: () => ({})
+      },
+      path: {
+        type: String,
+        required: true,
+        default: () => ''
+      },
+      schemas: {
+        type: Array,
+        required: true,
+        default: () => ([])
+      },
+      actions: {
+        default: () => null
+      },
+      component: {
+        type: String,
+        default: () => 'field'
+      },
+      id: {
+        type: String,
+        default: () => 'id'
+      },
+      timeout: {
+        type: Number,
+        default: () => 100
+      },
+      debug: {
+        type: Boolean,
+        default: () => false
+      },
+
+      scope: {
+        type: String,
+        default: () => 'view'
+      },
+      messages: {
+        type: Object,
+        default: () => ({
+          create: 'Registro criado com sucesso',
+          read: '',
+          update: 'Registro atualizado com sucesso',
+          delete: 'Registro apagado com sucesso'
+        })
+      },
+      handlers: {
+        type: Object
+      },
+      tabs: {
+        type: Array,
+        default: () => ([])
+      },
+      tab: {
+        type: String,
+        default: () => ''
+      }
     }
   }
-  export default AppCrudForm
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  .app-crud-grid
-    padding 16px 0 0 0
-    hr
-      margin 10px 0
-    .fixed-bottom-right
-      margin 5px
 </style>

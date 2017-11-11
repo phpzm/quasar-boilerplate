@@ -1,70 +1,132 @@
-<!--suppress RequiredAttributes -->
 <template>
-  <div class="app-crud-grid" :class="{'--grid-filtering': filter.active}">
-
-    <slot v-if="top" name="top">
-      <app-grid-toolbar v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top}"
-                        @change-page="changePage" @change-limit="changeLimit"/>
-    </slot>
-    <hr v-if="top">
-
-    <slot name="content">
-      <app-data-table ref="grid"
-                      v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
-    </slot>
-
-    <hr v-if="bottom">
-
-    <slot v-if="bottom" name="bottom">
-      <app-grid-toolbar v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom}"
-                        @change-page="changePage" @change-limit="changeLimit"/>
-    </slot>
-
-    <slot v-if="floating" name="floating">
-      <div class="fixed-bottom-right">
-        <app-button-bar v-bind="{handler, buttons: buttons.floating}"/>
-      </div>
-    </slot>
-
-    <slot v-if="filtering" name="filter"></slot>
-    <q-modal ref="filter" position="right" :content-css="filter.css">
-      <app-grid-filter v-if="search" :filters="filter.columns" :record="filter.record"
-                       @close="filterClose" @apply="filterApply" @clear="filterClear"/>
-    </q-modal>
-
-    <template v-if="debugging">
-      <app-debugger v-bind="{label: 'data', inspect: data}"/>
-      <app-debugger v-bind="{label: 'columns', inspect: columns}"/>
-      <app-debugger v-bind="{label: 'filter', inspect: filter.record}"/>
-    </template>
-  </div>
+  <app-crud-grid v-bind="$props"></app-crud-grid>
 </template>
 
 <script type="text/javascript">
-  import AppDataTable from 'genesis/components/data-table/AppDataTable.vue'
-  import AppButtonBar from 'genesis/components/button/AppButtonBar.vue'
-  import AppGridFilter from 'genesis/components/crud/components/grid/AppGridFilter'
-  import AppGridToolbar from 'genesis/components/crud/components/grid/AppGridToolbar.vue'
-  import MixinNavigation from 'genesis/components/@mixins/MixinNavigation'
-  import { MixinComputed, MixinData, MixinMethods, MixinProps } from 'genesis/components/crud/model'
-  import { MixinGrid, MixinFilter } from 'genesis/components/crud/model/grid'
+  import AppCrudGrid from 'genesis/components/crud/Grid.vue'
 
-  /**
-   * @type {Object}
-   * @property data
-   * @property pages
-   * @property total
-   */
-  const AppCrudGrid = {
-    mixins: [
-      MixinComputed, MixinData, MixinMethods, MixinProps, MixinNavigation, MixinFilter, MixinGrid
-    ],
-    name: 'app-crud-grid',
+  export default {
+    name: 'crud-grid',
     components: {
-      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter
+      AppCrudGrid
+    },
+    props: {
+      scopes: {
+        type: Object,
+        default: () => ({
+          index: {},
+          create: {
+            method: 'create'
+          },
+          edit: {
+            method: 'update'
+          },
+          view: {
+            readonly: true
+          }
+        })
+      },
+      service: {
+        type: Object,
+        required: true,
+        default: () => ({})
+      },
+      path: {
+        type: String,
+        required: true,
+        default: () => ''
+      },
+      schemas: {
+        type: Array,
+        required: true,
+        default: () => ([])
+      },
+      actions: {
+        default: () => null
+      },
+      component: {
+        type: String,
+        default: () => 'field'
+      },
+      id: {
+        type: String,
+        default: () => 'id'
+      },
+      timeout: {
+        type: Number,
+        default: () => 100
+      },
+      debug: {
+        type: Boolean,
+        default: () => false
+      },
+
+      scope: {
+        type: String,
+        default: () => 'index'
+      },
+      messages: {
+        type: Object,
+        default: () => ({
+          read: '',
+          delete: 'Registro apagado com sucesso'
+        })
+      },
+      handlers: {
+        type: Object
+      },
+      position: {
+        type: String,
+        default: () => 'left'
+      },
+      slots: {
+        type: Array,
+        default: () => ([])
+      },
+      filters: {
+        type: Array,
+        default: () => ([])
+      },
+      paginate: {
+        type: Boolean,
+        default: () => true
+      },
+      unity: {
+        type: String,
+        default: () => 'vw'
+      },
+      bottom: {
+        type: Boolean,
+        default: () => true
+      },
+      top: {
+        type: Boolean,
+        default: () => true
+      },
+      floating: {
+        type: Boolean,
+        default: () => true
+      },
+      filtering: {
+        type: Boolean,
+        default: () => true
+      },
+      styles: {
+        type: Object,
+        default: () => ({
+          height: 'calc(100vh - 290px)',
+          minHeight: '200px'
+        })
+      },
+      bodyStyle: {
+        type: Object,
+        default: () => ({
+          height: 'calc(100vh - 330px)',
+          minHeight: '170px'
+        })
+      }
     }
   }
-  export default AppCrudGrid
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
