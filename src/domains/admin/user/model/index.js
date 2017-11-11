@@ -1,6 +1,6 @@
 import { get } from 'lodash'
-import model from 'phpzm/support/model'
-import { resource } from 'phpzm/infra/services/http/resource'
+import model from 'genesis/support/model'
+import { resource } from 'genesis/infra/services/http/resource'
 import {
   reference as organizationReference,
   api as organizationApi,

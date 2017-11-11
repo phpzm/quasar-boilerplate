@@ -1,5 +1,5 @@
 import { $body } from 'src/bootstrap/configure/http'
-import { getDotNotation } from 'phpzm/support/transform'
+import { getDotNotation } from 'genesis/support/transform'
 
 /**
  * @param {AppCrudForm} $component

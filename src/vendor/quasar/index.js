@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import * as imports from 'src/vendor/quasar/imports'
-import AppButton from 'phpzm/components/button/AppButton.vue'
+import AppButton from 'genesis/components/button/AppButton.vue'
 
 const components = Object.assign({}, imports, {QButton: AppButton})
 

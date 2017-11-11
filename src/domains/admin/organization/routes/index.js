@@ -1,5 +1,5 @@
 import configureCrud from 'src/bootstrap/configure/crud'
-import { route, factory, child } from 'src/vendor/phpzm/infra/router/resources'
+import { route, factory, child } from 'genesis/infra/router/resources'
 import { path, namespace, grid, form, meta, label, id } from 'src/domains/admin/organization/model'
 
 const resources = factory(path, namespace, grid, form, meta)

@@ -7,7 +7,8 @@
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "build": "node build/script.build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "postinstall": "cp config/dev.env.js.sample config/dev.env.js"
   },
   "dependencies": {
     "axios": "^0.17.0",
@@ -16,6 +17,7 @@
     "bulma": "^0.6.0",
     "froala-editor": "^2.7.1",
     "fullcalendar": "^3.6.2",
+    "genesis": "github:phpzm/genesis",
     "jquery": "^3.2.1",
     "lodash": "latest",
     "moment": "^2.19.1",

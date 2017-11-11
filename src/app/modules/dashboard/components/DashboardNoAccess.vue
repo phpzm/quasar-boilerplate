@@ -17,8 +17,8 @@
 </template>
 
 <script type="text/javascript">
-  import AppCard from 'phpzm/components/card/AppCard.vue'
-  import { PATH_LOGIN } from 'phpzm/support'
+  import AppCard from 'genesis/components/card/AppCard.vue'
+  import { PATH_LOGIN } from 'genesis/support'
 
   export default {
     components: {

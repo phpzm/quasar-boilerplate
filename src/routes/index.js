@@ -1,5 +1,5 @@
-import { protect } from 'phpzm/infra/router/guard'
-export { beforeEach, afterEach } from 'phpzm/infra/router/guard'
+import { protect } from 'genesis/infra/router/guard'
+export { beforeEach, afterEach } from 'genesis/infra/router/guard'
 
 /**
  * @type Array

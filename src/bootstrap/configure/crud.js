@@ -1,4 +1,4 @@
-import { __CRUD__ } from 'phpzm/index'
+import { __CRUD__ } from 'phpzm'
 
 /**
  * @param {string} component

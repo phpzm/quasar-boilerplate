@@ -42,9 +42,8 @@
 </template>
 
 <script type="text/javascript">
-  import 'phpzm/components/fields/index'
   import { login } from 'src/app/modules/auth/services/index'
-  import { PATH_HOME } from 'phpzm/support'
+  import { PATH_HOME } from 'genesis/support'
   import { configureAuthData } from 'src/bootstrap/configure/auth'
 
   export default {

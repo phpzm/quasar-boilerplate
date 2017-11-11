@@ -10,10 +10,10 @@ import 'src/vendor/fullcalendar'
 import 'src/vendor/phpzm'
 
 // modules to install
-import Http from 'phpzm/infra/services/http/plugin'
-import router from 'phpzm/infra/router'
-import store from 'phpzm/infra/store'
-import i18n from 'phpzm/support/i18n'
+import Http from 'genesis/infra/services/http/plugin'
+import router from 'genesis/infra/router'
+import store from 'genesis/infra/store'
+import i18n from 'genesis/support/i18n'
 
 // events to boot
 import { beforeUnload, errorHandler } from 'src/bootstrap/events'
