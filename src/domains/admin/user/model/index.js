@@ -141,14 +141,14 @@ export const fields = (scope, route = null) => {
       model.field('id', 'Código').$pk().$tab('principal').$render(),
       model.field('name', 'Nome').$text().$tab('principal').$filter().$required().$form({width: 70}).$render(),
       // relationship with organization using source (useful to small datasets)
-      model.field('organization_id', 'Organização').$filter().$tab('principal').$select().$required()
+      model.field('organization_id', 'Organização').$tab('principal').$select().$required()
         .$form({source: organizationSource, width: 30})
         .$grid({format: (value) => get(organizations.find(item => item.value === value), 'label')})
         .$render(),
 
       model.field('profile', 'Perfil').$tab('principal').$required().$out('index').$form({width: 30})
         .$select(profiles, true).$render(),
-      model.field('gender', 'Sexo').$tab('principal').$required().$out('index').$form({width: 30})
+      model.field('gender', 'Sexo').$tab('principal').$filter().$required().$form({width: 30, hidden: true})
         .$select(gender, false).$render(),
       model.field('property.foo', 'Dot Notation').$tab('principal').$form({width: 40}).$filter().$text().$render(),
       model.field('email', 'E-mail').$tab('outros').$text().$filter().$required().$form({width: 50}).$render(),
