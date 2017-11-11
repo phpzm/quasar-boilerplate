@@ -1,7 +1,7 @@
 .DS_Store
 .idea
 .thumbs.db
-node_modules/
+/vendor
 /dist
 /deploy
 /.dev
