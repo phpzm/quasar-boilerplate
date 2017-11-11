@@ -45,16 +45,18 @@
   import 'phpzm/components/fields/index'
   import { login } from 'src/app/modules/auth/services/index'
   import { PATH_HOME } from 'phpzm/support'
+  import {configureAuthData} from 'src/bootstrap/configure/auth'
 
   export default {
     name: 'auth-login',
     data: () => ({
-      user: '',
-      password: '',
+      user: configureAuthData.user,
+      password: configureAuthData.password,
       remember: false
     }),
     methods: {
       attempt () {
+        console.log(configureAuthData.user)
         const credential = {
           user: this.user,
           password: this.password
