@@ -7,9 +7,11 @@
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "build": "node build/script.build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
     "postinstall": "cp config/dev.env.js.sample config/dev.env.js"
   },
+  "repository": {},
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.17.0",
     "axios-cancel": "^0.2.2",
