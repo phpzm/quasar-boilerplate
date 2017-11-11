@@ -52,6 +52,11 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: path.resolve(__dirname, '../node_modules/genesis/')
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {

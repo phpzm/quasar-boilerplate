@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
   import { mapActions } from 'vuex'
-  import AppCard from 'phpzm/components/card/AppCard.vue'
+  import AppCard from 'genesis/components/card/AppCard.vue'
   import { icon, label } from '../model'
 
   const html = `<b>PHPZM Quasar Boilerplate</b>

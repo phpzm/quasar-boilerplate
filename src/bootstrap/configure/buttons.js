@@ -1,4 +1,4 @@
-import { button } from 'phpzm/modules/dashboard/index'
+import { button } from 'genesis/modules/dashboard/index'
 import { view, edit, add, create, read, update, destroy } from 'src/bootstrap/configure/operations'
 
 const color = 'positive'

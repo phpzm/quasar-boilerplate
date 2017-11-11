@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/javascript">
-  import AppCard from 'phpzm/components/card/AppCard.vue'
+  import AppCard from 'genesis/components/card/AppCard.vue'
 
   export default {
     components: {

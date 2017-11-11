@@ -1,5 +1,5 @@
-import model from 'phpzm/support/model/index'
-import { resource } from 'phpzm/infra/services/http/resource'
+import model from 'genesis/support/model/index'
+import { resource } from 'genesis/infra/services/http/resource'
 
 /**
  * @type {string}

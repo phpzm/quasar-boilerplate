@@ -1,4 +1,4 @@
-import { group, menu, item } from 'phpzm/modules/dashboard'
+import { group, menu, item } from 'genesis/modules/dashboard'
 
 import { menu as home } from 'src/app/modules/dashboard/model/home'
 import { menu as forms } from 'src/domains/demo/forms/model'

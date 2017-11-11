@@ -1,4 +1,4 @@
-import { confirm } from 'phpzm/support/message/index'
+import { confirm } from 'genesis/support/message/index'
 import { $first } from 'src/bootstrap/configure/http'
 
 /**

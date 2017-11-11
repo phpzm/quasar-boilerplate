@@ -1,6 +1,6 @@
-import http from 'phpzm/infra/services/http'
-import store from 'phpzm/infra/store/index'
-import { registerToken, registerUser, unRegister } from 'phpzm/modules/auth/services/index'
+import http from 'genesis/infra/services/http'
+import store from 'genesis/infra/store/index'
+import { registerToken, registerUser, unRegister } from 'genesis/modules/auth/services/index'
 import { configureAuth } from 'src/bootstrap/configure/auth'
 
 /**

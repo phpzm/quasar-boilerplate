@@ -1,5 +1,5 @@
-import { meta } from 'phpzm/support/model'
-import { route } from 'phpzm/infra/router/resources'
+import { meta } from 'genesis/support/model'
+import { route } from 'genesis/infra/router/resources'
 
 import user from 'src/domains/admin/user/routes'
 import permission from 'src/domains/admin/permission/routes'
