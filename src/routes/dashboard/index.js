@@ -1,4 +1,4 @@
-import { route } from 'phpzm/infra/router/resources'
+import { route } from 'genesis/infra/router/resources'
 
 import home from 'src/app/modules/dashboard/routes'
 import forms from 'src/domains/demo/forms/routes'
@@ -9,7 +9,7 @@ import categories from 'src/domains/general/category/routes'
 
 /*
  * Configure the property meta with namespace and permission to access control
- * The helper "crud" provided for phpzm/infra/router/resources.js has that ability
+ * The helper "crud" provided for genesis/infra/router/resources.js has that ability
  * Example:
  * meta: {
  *   namespace: 'admin.user',

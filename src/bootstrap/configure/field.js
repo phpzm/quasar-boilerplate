@@ -5,8 +5,8 @@ import {
   formatDate,
   formatDateTime,
   formatOptions
-} from 'phpzm/support/format/index'
-import { mask } from 'phpzm/support/utils/index'
+} from 'genesis/support/format/index'
+import { mask } from 'genesis/support/utils/index'
 
 /**
  * @param field

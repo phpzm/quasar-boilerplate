@@ -2,9 +2,8 @@
  * @param {object} credentials
  * @returns {object}
  */
-export const configureAuth = (data) => {
-  const auth = { user: data.user, password: data.password }
-  return auth
+export const configureAuth = (credentials) => {
+  return { user: credentials.user, password: credentials.password }
 }
 
 /**

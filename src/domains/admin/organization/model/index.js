@@ -1,8 +1,8 @@
-import model from 'phpzm/support/model'
-import { resource, source } from 'phpzm/infra/services/http/resource'
-import { button } from 'phpzm/modules/dashboard'
+import model from 'genesis/support/model'
+import { resource, source } from 'genesis/infra/services/http/resource'
+import { button } from 'genesis/modules/dashboard'
 import 'src/domains/general/slots/MyLink'
-import { PATH_HOME } from 'phpzm/support/index'
+import { PATH_HOME } from 'genesis/support/index'
 
 /**
  * @type {string}

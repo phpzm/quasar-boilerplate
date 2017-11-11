@@ -16,6 +16,7 @@
     "bulma": "^0.6.0",
     "froala-editor": "^2.7.1",
     "fullcalendar": "^3.6.2",
+    "genesis": "github:phpzm/genesis",
     "jquery": "^3.2.1",
     "lodash": "latest",
     "moment": "^2.19.1",

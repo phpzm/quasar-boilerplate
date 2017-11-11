@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/javascript">
-  import AppLayout from 'phpzm/components/layout/AppLayout.vue'
+  import AppLayout from 'genesis/components/layout/AppLayout.vue'
   import configureDashboard from 'src/bootstrap/configure/dashboard'
 
   export default {

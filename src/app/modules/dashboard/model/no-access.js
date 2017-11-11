@@ -1,4 +1,4 @@
-import model from 'phpzm/support/model'
+import model from 'genesis/support/model'
 
 /**
  * @type {string}

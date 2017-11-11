@@ -19,12 +19,12 @@
       </div>
       <hr>
       <p align="justify">
-        Você pode ver o código-fonte do projeto aqui no <a href="https://github.com/phpzm/quasar-boilerplate"
+        Você pode ver o código-fonte do projeto aqui no <a href="https://github.com/genesis/quasar-boilerplate"
                                                            target="_blank">Github</a>
       </p>
       <p align="justify">
         Os exemplos da <strong>"API de Forms"</strong> utilizam uma API "fake" que é provida por esse arquivo
-        <a href="https://github.com/phpzm/quasar-boilerplate/blob/master/.deploy/api/index.php">aqui</a>.
+        <a href="https://github.com/genesis/quasar-boilerplate/blob/master/.deploy/api/index.php">aqui</a>.
       </p>
       <hr>
       <p align="justify">
@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/javascript">
-  import AppCard from 'phpzm/components/card/AppCard.vue'
+  import AppCard from 'genesis/components/card/AppCard.vue'
 
   export default {
     components: {
