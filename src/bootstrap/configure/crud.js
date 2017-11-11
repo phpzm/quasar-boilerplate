@@ -1,4 +1,4 @@
-import { __CRUD__ } from 'phpzm'
+export const crud = 'app/components/crud'
 
 /**
  * @param {string} component
@@ -7,7 +7,7 @@ import { __CRUD__ } from 'phpzm'
  */
 export default (component, path = '') => {
   if (!path) {
-    path = __CRUD__
+    path = crud
   }
   return `${path}/${component}`
 }
