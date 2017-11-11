@@ -56,7 +56,6 @@
     }),
     methods: {
       attempt () {
-        console.log(configureAuthData.user)
         const credential = {
           user: this.user,
           password: this.password
