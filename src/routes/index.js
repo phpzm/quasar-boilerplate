@@ -17,6 +17,17 @@ import dashboard from 'src/routes/dashboard'
 import error from 'src/routes/errors'
 
 /**
+ * @param {string} component
+ * @returns {*}
+ */
+export const load = (component) => {
+  if (!component) {
+    return
+  }
+  return () => System.import(`src/${component}.vue`)
+}
+
+/**
  * @type Array
  */
 export const routes = [

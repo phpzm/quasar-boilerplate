@@ -57,7 +57,7 @@ export default (field, label, component = 'text', scopes = []) => {
       this[property] = Object.assign({}, this[property], options)
       return this
     },
-    $filter (rule = '', value = '', component = '') {
+    $filter (rule = 'like', value = '', component = '') {
       this.grid.filter = {rule, value, component}
       return this
     },
@@ -70,6 +70,7 @@ export default (field, label, component = 'text', scopes = []) => {
       return this
     },
     $pk () {
+      this.primaryKey = true
       return this.$readonly().$out('create').$grid({width: '60px'})
     },
     $validate (rule, value = true) {
@@ -230,7 +231,8 @@ export default (field, label, component = 'text', scopes = []) => {
     $render () {
       const base = {
         field: this.field,
-        label: this.label
+        label: this.label,
+        primaryKey: this.primaryKey
       }
       if (this.grid.filter && !this.grid.filter.component) {
         this.grid.filter.component = this.form.component
