@@ -20,7 +20,7 @@ export default ($this) => {
 
     // ********************************* grid *********************************
 
-    button('refresh', 1, '', read($this), 'refresh', 'Recarregar os dados', 'primary').$grid(),
+    button('refresh', 1, '', read($this, true), 'refresh', 'Recarregar os dados', 'primary').$grid(),
 
     button('add-inline', 2, '', add($this), 'add', 'Inicie a criação de um novo registro', 'primary').$grid(),
 

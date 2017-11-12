@@ -1,4 +1,4 @@
-import { $body, $meta, $extract, $first, httpError, httpRequest, httpResponse } from 'genesis/bootstrap/configure/http'
+import { $body, $meta, $extract, $first, httpError, httpRequest, httpResponse } from 'src/bootstrap/configure/http'
 
 /**
  * @param {Object} environment
