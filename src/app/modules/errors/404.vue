@@ -12,7 +12,7 @@
             Voltar
           </q-btn>
           <q-btn color="primary" raised @click="$router.replace('/')" icon-right="home">
-            Ir para a página incial
+            Ir para a página inicial
           </q-btn>
         </p>
       </div>
