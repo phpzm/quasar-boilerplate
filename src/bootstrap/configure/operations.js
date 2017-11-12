@@ -27,10 +27,11 @@ export const add = ($this) => {
 
 /**
  * @param {AppCrudGrid|AppCrudForm} $this
+ * @param {boolean} noCache
  * @returns {Function}
  */
-export const read = ($this) => {
-  return (record, schemas, $component) => $this.fetchData()
+export const read = ($this, noCache = false) => {
+  return (record, schemas, $component) => $this.fetchData(noCache)
 }
 
 /**
