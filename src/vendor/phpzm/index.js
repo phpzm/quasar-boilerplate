@@ -15,6 +15,9 @@ import _i18n from 'genesis/support/i18n'
 import bootstrap from 'src/bootstrap/store'
 import messages from 'src/bootstrap/i18n'
 
+import { APP_USER, APP_TOKEN } from 'genesis/support/index'
+import { get } from 'genesis/infra/storage'
+
 // noinspection JSUnresolvedVariable, ES6ModulesDependencies
 const i18n = _i18n(process.env.LOCALE, messages)
 
@@ -26,6 +29,15 @@ store.registerModule('bootstrap', bootstrap)
  * @returns {Object}
  */
 export const install = (Vue, beforeUnload) => {
+  const user = get(APP_USER)
+  if (user) {
+    store.dispatch('setAuthUser', user)
+  }
+  const token = get(APP_TOKEN)
+  if (token) {
+    store.dispatch('setAuthToken', token)
+  }
+
   Vue.use(Vuelidate)
   Vue.use(VueFroala)
   Vue.use(http, {store, router})
