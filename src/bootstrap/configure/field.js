@@ -1,3 +1,4 @@
+import { get } from 'lodash'
 import {
   formatMoney,
   formatPhone,
@@ -70,6 +71,7 @@ export default (field, label, component = 'text', scopes = []) => {
       return this
     },
     $pk () {
+      this.primaryKey = true
       return this.$readonly().$out('create').$grid({width: '60px'})
     },
     $validate (rule, value = true) {
@@ -220,6 +222,16 @@ export default (field, label, component = 'text', scopes = []) => {
       this.grid.format = value => mask('##.###.###/####-##', value)
       return this
     },
+    $source (source, scope, label = 'label') {
+      let options = []
+      if (scope === 'index') {
+        source(data => (options = data))
+      }
+      this.form.component = 'select'
+      this.form.source = source
+      this.form.format = (value) => get(options.find(item => item.value === value), label)
+      return this
+    },
     $event (type, action) {
       if (!this.form.events) {
         this.form.events = {}
@@ -230,7 +242,8 @@ export default (field, label, component = 'text', scopes = []) => {
     $render () {
       const base = {
         field: this.field,
-        label: this.label
+        label: this.label,
+        primaryKey: this.primaryKey
       }
       if (this.grid.filter && !this.grid.filter.component) {
         this.grid.filter.component = this.form.component
