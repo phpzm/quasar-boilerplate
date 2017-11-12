@@ -9,7 +9,10 @@
  * @returns {Object}
  */
 export default (service, scope, path, id, schemas, actions = null, options = {}) => {
-  const base = {}
+  const base = {
+    changer: '~',
+    timeout: 1
+  }
 
   const settings = {service, scope, path, id, schemas, actions}
 

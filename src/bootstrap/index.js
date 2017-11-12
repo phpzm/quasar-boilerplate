@@ -1,45 +1,26 @@
-// main dependencies
-import Vuelidate from 'vuelidate'
-import VueFroala from 'vue-froala-wysiwyg'
-import moment from 'moment'
-
 // settings of vendors
 import 'src/vendor/quasar'
 import 'src/vendor/froala'
 import 'src/vendor/fullcalendar'
-import 'src/vendor/phpzm'
-
-// modules to install
-import Http from 'genesis/infra/services/http/plugin'
-import router from 'genesis/infra/router'
-import store from 'genesis/infra/store'
-import i18n from 'genesis/support/i18n'
+import { install } from 'src/vendor/phpzm'
 
 // events to boot
 import { beforeUnload, errorHandler } from 'src/bootstrap/events'
 
 const dev = process.env.DEV
 
-const boot = (Vue) => {
-  Vue.use(Vuelidate)
-  Vue.use(VueFroala)
-  Vue.use(Http, { store, router })
-
-  moment.locale('pt-BR')
-
-  window.addEventListener('beforeunload', beforeUnload(store, i18n))
-
+/**
+ * @param Vue
+ * @returns {Object}
+ */
+const bootstrap = (Vue) => {
   Vue.config.productionTip = !dev
   Vue.config.silent = !dev
   Vue.config.devtools = dev
   Vue.config.productionTip = dev
   Vue.config.errorHandler = errorHandler
 
-  return {
-    router,
-    store,
-    i18n
-  }
+  return install(Vue, beforeUnload)
 }
 
-export default boot
+export default bootstrap

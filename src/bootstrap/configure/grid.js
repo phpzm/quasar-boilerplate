@@ -1,3 +1,5 @@
+import { get } from 'lodash'
+
 /**
  * @param {Resource} service
  * @param {string} path
@@ -9,9 +11,19 @@
  * @returns {Object}
  */
 export default (service, path, id, schemas, filters, actions = null, options = {}) => {
+  const primaryKey = get(schemas.find(schema => schema.primaryKey), 'field')
   const base = {
-    scope: 'index',
-    timeout: 200,
+    slots: [
+      {
+        field: primaryKey,
+        component: 'AppLink',
+        props: {
+          path: `${path}/{_id}`,
+          label: ''
+        }
+      }
+    ],
+    timeout: 150,
     top: false,
     bottom: true,
     styles: {

@@ -1,11 +1,12 @@
+import { View } from 'genesis'
 /**
  * @param {Store<any>} store
- * @param {Object} i18n
  */
-export const beforeUnload = (store, i18n) => {
+export const beforeUnload = (store) => {
   return event => {
+    // noinspection JSUnresolvedVariable
     if (store.getters.AppModified) {
-      const returnValue = i18n.t('events.modified.message')
+      const returnValue = View.get('locales.events.modified.message')
       event.returnValue = returnValue
       return returnValue
     }

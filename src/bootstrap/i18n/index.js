@@ -1,17 +1,17 @@
 /**
- * @type {Array}
+ * @type {Object}
  */
-export const dayNames = [
-  'domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'
-]
-
-/**
- * @type {Array}
- */
-export const monthNames = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
-  'Dezembro'
-]
+export const date = {
+  days: {
+    week: [
+      'domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'
+    ]
+  },
+  months: [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
+    'Dezembro'
+  ]
+}
 
 /**
  * @type {Object}
@@ -54,13 +54,17 @@ export const crud = {
   }
 }
 
-// process.env.LOCALE
+/**
+ * @type {Object}
+ */
+export const locales = {
+  date, events, validation, crud
+}
 
 /**
  * @type {Object}
  */
 export default {
-  pt_BR: {
-    monthNames, dayNames, events, validation, crud
-  }
+  // process.env.LOCALE
+  pt_BR: locales
 }
