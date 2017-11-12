@@ -133,7 +133,7 @@ export const fields = (scope, route = null) => {
     [
       model.field('id', 'Código').$pk().$tab('principal').$render(),
       model.field('name', 'Nome').$text().$tab('principal').$filter().$required()
-        .$event('change', (record, schemas, $component) => schemas['gender'].hidden = !schemas['gender'].hidden)
+        .$event('change', (record, schemas, $component) => (schemas['gender'].hidden = !schemas['gender'].hidden))
         .$form({width: 70}).$render(),
       // relationship with organization using source (useful to small datasets)
       model.field('organization_id', 'Organização').$tab('principal').$form({width: 30})
