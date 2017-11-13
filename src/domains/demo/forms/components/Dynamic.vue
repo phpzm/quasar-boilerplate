@@ -55,10 +55,7 @@
           }
         }
       ],
-      data: {
-        id: '',
-        name: ''
-      }
+      data: {}
     }),
     methods: {
       /**
@@ -83,6 +80,12 @@
           this.setAppModified(true)
         },
         deep: true
+      }
+    },
+    mounted () {
+      this.data = {
+        id: 'wilcorrea',
+        name: 'William'
       }
     }
   }
