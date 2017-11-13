@@ -228,7 +228,7 @@ export default (field, label, component = 'text', scopes = []) => {
     },
     $source (source, scope, label = 'label') {
       let options = []
-      if (scope === 'index') {
+      if (scope === 'index' && typeof source === 'function') {
         source(data => (options = data))
       }
       this.form.component = 'select'
