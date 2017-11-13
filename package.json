@@ -21,6 +21,7 @@
     "fullcalendar": "^3.6.2",
     "genesis": "github:phpzm/genesis",
     "jquery": "^3.2.1",
+    "js-cache": "^1.0.2",
     "lodash": "latest",
     "moment": "^2.19.1",
     "node-sass": "^4.5.3",

@@ -42,6 +42,7 @@
 </template>
 
 <script type="text/javascript">
+  import store from 'genesis/infra/store'
   import { login } from 'src/app/modules/auth/services/index'
   import { PATH_HOME } from 'genesis/support'
   import { configureAuthData } from 'src/bootstrap/configure/auth'
@@ -64,6 +65,12 @@
       success (response) {
         this.$router.push(PATH_HOME)
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      if (!store.getters.getAuthToken) {
+        return next()
+      }
+      next(PATH_HOME)
     }
   }
 </script>

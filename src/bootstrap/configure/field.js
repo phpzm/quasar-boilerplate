@@ -229,7 +229,7 @@ export default (field, label, component = 'text', scopes = []) => {
       }
       this.form.component = 'select'
       this.form.source = source
-      this.form.format = (value) => get(options.find(item => item.value === value), label)
+      this.grid.format = (value) => get(options.find(item => String(item.value) === String(value)), label)
       return this
     },
     $event (type, action) {
