@@ -76,7 +76,7 @@
       ...mapActions(['setAppModified'])
     },
     watch: {
-      model: {
+      data: {
         handler () {
           this.setAppModified(true)
         },
