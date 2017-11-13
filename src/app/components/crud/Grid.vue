@@ -52,6 +52,18 @@
         type: String,
         default: () => 'id'
       },
+      bottom: {
+        type: Boolean,
+        default: () => true
+      },
+      top: {
+        type: Boolean,
+        default: () => true
+      },
+      floating: {
+        type: Boolean,
+        default: () => true
+      },
       timeout: {
         type: Number,
         default: () => 100
@@ -59,6 +71,19 @@
       debug: {
         type: Boolean,
         default: () => false
+      },
+
+      rule: {
+        type: String,
+        default: () => ''
+      },
+      separator: {
+        type: String,
+        default: () => ''
+      },
+      changer: {
+        type: String,
+        default: () => '~'
       },
 
       scope: {
@@ -95,21 +120,13 @@
         type: String,
         default: () => 'vw'
       },
-      bottom: {
-        type: Boolean,
-        default: () => true
-      },
-      top: {
-        type: Boolean,
-        default: () => true
-      },
-      floating: {
-        type: Boolean,
-        default: () => true
-      },
       filtering: {
         type: Boolean,
         default: () => true
+      },
+      limiting: {
+        type: Number,
+        default: () => (25)
       },
       styles: {
         type: Object,
