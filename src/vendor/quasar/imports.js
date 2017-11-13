@@ -19,6 +19,7 @@ export {
   QBtn,
   QItemSide,
   QItemMain,
+  QItemTile,
   QSideLink,
   QListHeader,
   QScrollArea,

@@ -40,14 +40,6 @@ export const api = '/admin/organization'
 export const id = 'id'
 
 /**
- * @type {Object}
- */
-export const reference = {
-  value: 'id',
-  label: 'name'
-}
-
-/**
  * @type {string}
  */
 export const path = '/dashboard/admin/organization'
@@ -61,6 +53,23 @@ export const namespace = 'admin.organization'
  * @type {Resource}
  */
 export const service = resource(api)
+
+/**
+ * @type {Object}
+ */
+export const reference = {
+  value: 'id',
+  label: 'name'
+}
+
+/**
+ * @type {Object}
+ */
+export const remote = {
+  service: service,
+  reference: reference,
+  query: ['pln_codigo', 'pln_descricao', 'pln_descricaoReal']
+}
 
 /**
  * @type {Object}
