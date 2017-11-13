@@ -1,6 +1,7 @@
 import model from 'genesis/support/model'
 import { resource } from 'genesis/infra/services/http/resource'
 import { activate } from 'src/domains/general/slots/activate/services/activate'
+import { remote as organizationRemote } from 'src/domains/admin/organization/model'
 
 /**
  * @type {string}
@@ -118,7 +119,9 @@ export const fields = (scope, route = null) => {
       model.field('id', 'Código').$pk().$render(),
       model.field('name', 'Nome').$text().$filter().$required().$form({width: 70}).$render(),
       model.field('profile', 'Perfil').$required().$out('index').$form({width: 30}).$select(profiles, true).$render(),
-      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render()
+      model.field('gender', 'Sexo').$required().$out('index').$form({width: 30}).$select(gender, false).$render(),
+      model.field('organization', 'Organização')
+        .$required().$out('index').$form({width: 70}).$search(organizationRemote).$render()
     ],
     scope
   )
