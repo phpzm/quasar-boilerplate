@@ -40,6 +40,7 @@
           component: 'field-text',
           field: 'id',
           label: 'ID',
+          width: 75,
           validate: {
             required: true
           }
@@ -48,6 +49,7 @@
           component: 'field-text',
           field: 'name',
           label: 'Nome',
+          width: 50,
           validate: {
             required: true
           }
@@ -76,7 +78,7 @@
       ...mapActions(['setAppModified'])
     },
     watch: {
-      model: {
+      data: {
         handler () {
           this.setAppModified(true)
         },
