@@ -18,11 +18,6 @@ export const title = 'Formulários de Exemplo'
 /**
  * @type {string}
  */
-export const api = '/forms'
-
-/**
- * @type {string}
- */
 export const path = '/dashboard/forms'
 
 /**
