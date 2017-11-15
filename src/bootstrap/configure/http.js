@@ -1,7 +1,9 @@
 import { serialize } from 'genesis/infra/services/http/resource'
-const ttl = 60000 // one minute
+
+const ttl = 60000
 
 /**
+ * @link https://www.npmjs.com/package/js-cache
  * @param {AxiosRequestConfig} request
  * @param {Cache} cache
  * @returns {AxiosRequestConfig}
@@ -9,9 +11,13 @@ const ttl = 60000 // one minute
 export const httpRequest = (request, cache) => {
   // Only cache GET requests
   if (request.method !== 'get') {
+    // TODO: think about a way to clear by namespace
+    cache.clear()
     return request
   }
 
+  // turn off cache
+  // request.noCache = true
   if (request.noCache) {
     return request
   }
@@ -43,6 +49,7 @@ export const httpRequest = (request, cache) => {
 }
 
 /**
+ * @link https://www.npmjs.com/package/js-cache
  * @param {AxiosResponse} response
  * @param {Cache} cache
  * @returns {AxiosResponse}
@@ -50,9 +57,13 @@ export const httpRequest = (request, cache) => {
 export const httpResponse = (response, cache) => {
   // Only cache GET responses
   if (response.config.method !== 'get') {
+    // TODO: think about a way to clear by namespace
+    cache.clear()
     return response
   }
 
+  // turn off cache
+  // response.config.noCache = true
   if (response.config.noCache) {
     return response
   }
@@ -62,7 +73,7 @@ export const httpResponse = (response, cache) => {
     url += '?' + serialize(response.config.params)
   }
 
-  cache.set(url, response.data, ttl)
+  cache.set(url, response.data, response.config.ttl || ttl)
 
   return response
 }

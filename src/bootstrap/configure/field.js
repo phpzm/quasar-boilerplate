@@ -162,8 +162,12 @@ export default (field, label, component = 'text', scopes = []) => {
       this.grid.format = formatOptions(options)
       return this
     },
-    $search () {
-      this.form.component = 'select'
+    $search (remote) {
+      this.form.component = 'search'
+      this.form.remote = remote
+      this.form.parameters = (query, remote, filters) => {
+        return Object.assign({}, {query}, {order: remote.reference.label}, filters)
+      }
       return this
     },
     $select (options = [], multiple = false) {
@@ -224,7 +228,7 @@ export default (field, label, component = 'text', scopes = []) => {
     },
     $source (source, scope, label = 'label') {
       let options = []
-      if (scope === 'index') {
+      if (scope === 'index' && typeof source === 'function') {
         source(data => (options = data))
       }
       this.form.component = 'select'
