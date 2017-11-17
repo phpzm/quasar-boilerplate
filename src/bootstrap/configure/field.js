@@ -10,6 +10,16 @@ import {
 import { mask } from 'genesis/support/utils/index'
 
 /**
+ * @param {string} query
+ * @param {Object} remote
+ * @param {Object} filters
+ * @returns {Object}
+ */
+export const parameters = (query, remote, filters) => {
+  return Object.assign({}, {query}, {order: remote.reference.label}, filters)
+}
+
+/**
  * @param field
  * @param label
  * @param component
@@ -165,9 +175,7 @@ export default (field, label, component = 'text', scopes = []) => {
     $search (remote) {
       this.form.component = 'search'
       this.form.remote = remote
-      this.form.parameters = (query, remote, filters) => {
-        return Object.assign({}, {query}, {order: remote.reference.label}, filters)
-      }
+      this.form.parameters = parameters
       return this
     },
     $select (options = [], multiple = false) {

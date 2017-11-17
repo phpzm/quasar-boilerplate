@@ -40,8 +40,8 @@ export const read = ($this, noCache = false) => {
  * @returns {Function}
  */
 export const create = ($this, callback = null) => {
-  callback = callback || ((response) => $this.browse($this.path + '/' + $first(response)[$this.id] + '/' + 'edit'))
-  return (record, schemas, $component) => $this.create(record, callback)
+  const after = response => $this.browse($this.path + '/' + $first(response)[$this.id] + '/' + 'edit')
+  return (record, schemas, $component) => $this.create(record, callback || after)
 }
 
 /**
@@ -55,12 +55,12 @@ export const update = ($this, callback = (() => null)) => {
 
 /**
  * @param {AppCrudGrid|AppCrudForm} $this
- * @param {Function} callback
  * @param {string} title
  * @param {string} message
+ * @param {Function} callback
  * @returns {Function}
  */
-export const destroy = ($this, callback = (() => null), title, message) => {
+export const destroy = ($this, title, message, callback = (() => null)) => {
   return (record, schemas, $component) => {
     confirm(title, message, () => $this.delete(record[$this.id], callback))
   }

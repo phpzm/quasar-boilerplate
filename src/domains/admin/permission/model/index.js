@@ -61,7 +61,7 @@ export const meta = model.meta(icon, label, title, tooltip)
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path, false, tooltip, namespace, namespace, 4)
+export const menu = model.menu(icon, label, path, false, tooltip, 'permission', namespace, 4)
 
 // configure buttons
 /**
@@ -79,7 +79,7 @@ const actions = ($this, actions) => {
     }
     return button
   }
-  return actions.map(map)
+  return actions.map(map).filter(action => !['view', 'edit', 'destroy'].includes(action.id))
 }
 
 /**
