@@ -68,7 +68,7 @@ export default (field, label, component = 'text', scopes = []) => {
       this[property] = Object.assign({}, this[property], options)
       return this
     },
-    $filter (rule = 'like', value = '', component = '') {
+    $filter (rule = '', value = '', component = '') {
       this.grid.filter = {rule, value, component}
       return this
     },
