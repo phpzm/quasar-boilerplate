@@ -49,7 +49,7 @@ export const meta = model.meta(icon, label, title, tooltip)
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path, false, 'Você não tem acesso a esse menu!')
+export const menu = model.menu(icon, label, path, false, 'Você não tem acesso a esse menu!', 'category', namespace, 1)
 
 /**
  * @type {string}
