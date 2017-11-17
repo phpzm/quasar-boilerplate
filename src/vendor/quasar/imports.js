@@ -38,6 +38,7 @@ export {
   QDataTable,
   QSlider,
   QModal,
+  QModalLayout,
   QChip,
   QPagination,
   QTab,
