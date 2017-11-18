@@ -4,102 +4,17 @@
 
 <script type="text/javascript">
   import AppCrudGrid from 'genesis/components/crud/Grid.vue'
+  import MixinProps from './mixins/MixinProps'
 
   export default {
+    mixins: [
+      MixinProps
+    ],
     name: 'crud-grid',
     components: {
       AppCrudGrid
     },
     props: {
-      scopes: {
-        type: Object,
-        default: () => ({
-          index: {},
-          create: {
-            method: 'create'
-          },
-          edit: {
-            method: 'update'
-          },
-          view: {
-            readonly: true
-          }
-        })
-      },
-      service: {
-        type: Object,
-        required: true,
-        default: () => ({})
-      },
-      path: {
-        type: String,
-        required: true,
-        default: () => ''
-      },
-      schemas: {
-        type: Array,
-        required: true,
-        default: () => ([])
-      },
-      actions: {
-        default: () => null
-      },
-      component: {
-        type: String,
-        default: () => 'field'
-      },
-      id: {
-        type: String,
-        default: () => 'id'
-      },
-      bottom: {
-        type: Boolean,
-        default: () => true
-      },
-      top: {
-        type: Boolean,
-        default: () => true
-      },
-      floating: {
-        type: Boolean,
-        default: () => true
-      },
-      timeout: {
-        type: Number,
-        default: () => 100
-      },
-      debug: {
-        type: Boolean,
-        default: () => false
-      },
-
-      rule: {
-        type: String,
-        default: () => ''
-      },
-      separator: {
-        type: String,
-        default: () => ''
-      },
-      changer: {
-        type: String,
-        default: () => '~'
-      },
-
-      scope: {
-        type: String,
-        default: () => 'index'
-      },
-      messages: {
-        type: Object,
-        default: () => ({
-          read: '',
-          delete: 'Registro apagado com sucesso'
-        })
-      },
-      handlers: {
-        type: Object
-      },
       position: {
         type: String,
         default: () => 'left'
@@ -147,15 +62,4 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .app-crud-grid
-    padding 16px 0 0 0
-    &.--grid-filtering
-      .--button-filter
-        background darkred !important
-        i
-          color white !important
-    hr
-      margin 10px 0
-    .fixed-bottom-right
-      margin 5px
 </style>
