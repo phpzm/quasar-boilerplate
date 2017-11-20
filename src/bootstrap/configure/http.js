@@ -89,6 +89,42 @@ export const httpResponse = (response, cache) => {
  * @returns {AxiosError}
  */
 export const httpError = (error, router, store) => {
+  /**
+   * @param {error}
+   * @default {NetWorkError}
+   * @returns {toast}
+   */
+  if (!error.response) {
+    toast('Net Work Error!', 'warning', 10000, 'white', 'rgb(173, 27, 27)')
+  }
+
+  /**
+   * @param {error.response.status}
+   * @default {Error500}
+   * @returns {toast}
+   */
+  if (error.response.status === 500) {
+    toast('Error in server!', 'warning', 10000, 'white', 'rgb(244, 185, 66)')
+  }
+
+  /**
+   * @param {error.response.status}
+   * @default {Error301}
+   * @returns {toast}
+   */
+  if (error.response.status === 301) {
+    toast('This url does not exist or has been changed.', 'warning', 10000, 'white', 'rgb(244, 185, 66)')
+  }
+
+  /**
+   * @param {error.response.status}
+   * @default {Error401}
+   * @returns {toast}
+   */
+  if (error.response.status === 401) {
+    toast('Error invalid authentication credentials!', 'warning', 10000, 'white', 'rgb(244, 185, 66)')
+  }
+
   return error
 }
 
