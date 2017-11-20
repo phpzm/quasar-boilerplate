@@ -27,6 +27,15 @@ const base = {
 }
 const options = Object.assign({}, base, bootstrap(Vue))
 
+const dev = process.env.DEV
+
+console.warn('~> process.env.DEV', dev)
+
+Vue.config.productionTip = !dev
+Vue.config.silent = !dev
+Vue.config.devtools = dev
+Vue.config.productionTip = dev
+
 Quasar.start(() => {
   /* eslint-disable no-new */
   new Vue(options)
