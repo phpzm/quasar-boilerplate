@@ -9,6 +9,10 @@ const ttl = 60000
  * @returns {AxiosRequestConfig}
  */
 export const httpRequest = (request, cache) => {
+  // force log
+  if (process.env.DEV) {
+    // request.url = request.url + (request.url.indexOf('?') !== -1 ? '&' : '?') + 'log=1'
+  }
   // Only cache GET requests
   if (request.method !== 'get') {
     // TODO: think about a way to clear by namespace
@@ -17,7 +21,7 @@ export const httpRequest = (request, cache) => {
   }
 
   // turn off cache
-  // request.noCache = true
+  // request.noCache = process.env.DEV
   if (request.noCache) {
     return request
   }
@@ -63,7 +67,7 @@ export const httpResponse = (response, cache) => {
   }
 
   // turn off cache
-  // response.config.noCache = true
+  // response.config.noCache = process.env.DEV
   if (response.config.noCache) {
     return response
   }
@@ -98,9 +102,6 @@ export const $extract = (response, property, fallback = {}) => {
   if (!response.data) {
     return {}
   }
-  if (typeof response.data.body !== 'object') {
-    return fallback
-  }
   if (!response.data.hasOwnProperty(property)) {
     return fallback
   }
@@ -134,5 +135,5 @@ export const $first = (response) => {
   if (Array.isArray(content)) {
     return content.shift()
   }
-  return {}
+  return content
 }

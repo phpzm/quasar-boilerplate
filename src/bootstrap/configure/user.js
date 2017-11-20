@@ -13,5 +13,7 @@ export default (user) => {
    * }
    */
 
+  delete user.permissions['admin.organization']
+
   return user
 }

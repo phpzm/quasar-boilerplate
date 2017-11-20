@@ -75,7 +75,7 @@ export const pivot = model.pivot(organizationApi, organizationReference, organiz
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path, false, tooltip, namespace)
+export const menu = model.menu(icon, label, path, false, tooltip, 'user', namespace, 1)
 
 /**
  * @type {Array}

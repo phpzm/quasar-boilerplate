@@ -7,6 +7,7 @@ import VueFroala from 'vue-froala-wysiwyg'
 import moment from 'moment'
 
 // modules to install
+import plugin from 'genesis/plugin'
 import http from 'genesis/infra/services/http/plugin'
 import router from 'genesis/infra/router'
 import store from 'genesis/infra/store'
@@ -18,7 +19,6 @@ import messages from 'src/bootstrap/i18n'
 import { APP_USER, APP_TOKEN } from 'genesis/support/index'
 import { get } from 'genesis/infra/storage'
 
-// noinspection JSUnresolvedVariable, ES6ModulesDependencies
 const i18n = _i18n(process.env.LOCALE, messages)
 
 store.registerModule('bootstrap', bootstrap)
@@ -40,6 +40,7 @@ export const install = (Vue, beforeUnload) => {
 
   Vue.use(Vuelidate)
   Vue.use(VueFroala)
+  Vue.use(plugin)
   Vue.use(http, {store, router})
 
   moment.locale('pt-BR')

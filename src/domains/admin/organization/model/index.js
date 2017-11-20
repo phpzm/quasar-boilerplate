@@ -79,7 +79,7 @@ export const meta = model.meta(icon, label, title, tooltip)
 /**
  * @type {Function}
  */
-export const menu = model.menu(icon, label, path, false, tooltip, namespace)
+export const menu = model.menu(icon, label, path, false, tooltip, 'organization', namespace, 1)
 
 /**
  * @type {Object}
