@@ -95,7 +95,7 @@ export const httpError = (error, router, store) => {
    * @returns {toast}
    */
   if (!error.response) {
-    toast('Net Work Error!', 'warning', 10000, 'white', 'rgb(173, 27, 27)')
+    toast('NetWork Error!', 'warning', 10000, 'white', 'rgb(173, 27, 27)')
   }
 
   /**
