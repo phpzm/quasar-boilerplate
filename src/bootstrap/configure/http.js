@@ -1,4 +1,5 @@
 import { serialize } from 'genesis/infra/services/http/resource'
+import { toast } from 'genesis/support/message'
 
 const ttl = 60000
 
