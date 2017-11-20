@@ -128,6 +128,15 @@ export const $meta = (response, fallback = {}) => {
 
 /**
  * @param {AxiosResponse} response
+ * @param {*} fallback
+ * @returns {*}
+ */
+export const $status = (response, fallback = {}) => {
+  return $extract(response, 'status', fallback)
+}
+
+/**
+ * @param {AxiosResponse} response
  * @returns {*}
  */
 export const $first = (response) => {
