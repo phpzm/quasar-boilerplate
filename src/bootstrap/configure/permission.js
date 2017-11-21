@@ -18,13 +18,26 @@ export default ($user, $route, action = null) => {
     return true
   }
   // extract of permissions the access level
-  const expected = parseInt(get(permissions[namespace], 'permission'))
+  const expected = permissions[namespace]
   // intercept in meta the required access level
   let required = parseInt(get($route, 'meta.permission'))
+
   if (action) {
     // when the is to action, get from action the access level required
     required = parseInt(action.permission)
   }
+
+  let verified
   // return granted or not access
-  return required <= expected
+  if (expected) {
+    expected.filter((p) => {
+      if (required === p.permission) {
+        verified = true
+      }
+    })
+    if (verified) {
+      return true
+    }
+  }
+  return false
 }
