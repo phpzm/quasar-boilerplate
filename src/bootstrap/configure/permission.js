@@ -1,5 +1,6 @@
 import { get } from 'lodash'
 import store from 'genesis/infra/store/index'
+import { bypass } from 'src/bootstrap/configure/dashboard'
 
 /**
  * @param {Object} $user
@@ -41,5 +42,5 @@ export default ($user = null, $route, action = null) => {
       return true
     }
   }
-  return true // false for use use ACL routes / true for bypass ACL routes
+  return bypass
 }

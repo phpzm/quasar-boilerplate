@@ -3,7 +3,7 @@ import store from 'genesis/infra/store/index'
 import menu from 'src/bootstrap/menus/drawer'
 import options from 'src/bootstrap/menus/options'
 import configurePath from 'src/bootstrap/configure/path'
-const bypass = true // true for bypass drawer menu / false for use ACL
+export const bypass = true // true bypass ACL / false for use ACL
 
 export default ($component) => {
   const items = menu(configurePath)
