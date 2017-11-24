@@ -3,6 +3,7 @@ import store from 'genesis/infra/store/index'
 import menu from 'src/bootstrap/menus/drawer'
 import options from 'src/bootstrap/menus/options'
 import configurePath from 'src/bootstrap/configure/path'
+const bypass = true // bypass drawer menu / false for use ACL
 
 export default ($component) => {
   const items = menu(configurePath)
@@ -28,6 +29,9 @@ const reduce = (accumulate, menu) => {
     accumulate.push(menu)
   }
   else if (get(permissions, menu.namespace, false)) {
+    accumulate.push(menu)
+  }
+  else if (bypass) {
     accumulate.push(menu)
   }
   return accumulate
