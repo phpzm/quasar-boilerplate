@@ -41,5 +41,5 @@ export default ($user = null, $route, action = null) => {
       return true
     }
   }
-  return false
+  return false // true for bypass ACL routes
 }
