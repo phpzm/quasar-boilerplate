@@ -1,6 +1,7 @@
 import http from 'genesis/infra/services/http'
 import store from 'genesis/infra/store/index'
 import { registerToken, registerUser, unRegister } from 'genesis/modules/auth/services/index'
+import { setPermissions, unPermissions } from 'genesis/modules/permission/services/index'
 import { configureAuth } from 'src/bootstrap/configure/auth'
 
 /**
@@ -13,7 +14,10 @@ export const login = (credentials, remember, success) => {
     .post('/auth/login', configureAuth(credentials))
     .then((response) => {
       const body = http.$body(response)
-      registerToken(body.token, remember).then(() => registerUser(body.user).then(success))
+      registerToken(body.token, remember).then(() => {
+        registerUser(body.user).then(success)
+        setPermissions(body.permissions).then(success)
+      })
     })
 }
 
@@ -24,5 +28,6 @@ export const logout = (success) => {
   return unRegister(success)
     .then(() => {
       http.post('/auth/logout', store.getters.getAuthUser, {requestId: '', noLoading: true})
+      unPermissions(success)
     })
 }

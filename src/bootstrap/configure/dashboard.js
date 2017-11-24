@@ -20,14 +20,14 @@ export default ($component) => {
  * @returns {Array}
  */
 const reduce = (accumulate, menu) => {
-  const user = store.getters.getAuthUser
+  const permissions = store.getters.getAuthPermission
   if (menu.children) {
     menu.children = menu.children.reduce(reduce, [])
   }
   if (!menu.namespace) {
     accumulate.push(menu)
   }
-  else if (get(user.permissions, menu.namespace, false)) {
+  else if (get(permissions, menu.namespace, false)) {
     accumulate.push(menu)
   }
   return accumulate

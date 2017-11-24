@@ -7,6 +7,7 @@ module.exports = {
     TOKEN: '"appAuth"',
     USER: '"appUser"',
     REMEMBER: '"appRemember"',
+    PERMISSIONS: '"appPermission"'
   },
   API: {
     PROTOCOL: '"https"',
