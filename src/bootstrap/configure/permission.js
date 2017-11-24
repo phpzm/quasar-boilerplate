@@ -1,4 +1,5 @@
 import { get } from 'lodash'
+import store from 'genesis/infra/store/index'
 
 /**
  * @param {Object} $user
@@ -6,14 +7,15 @@ import { get } from 'lodash'
  * @param {Object} action
  * @returns {boolean}
  */
-export default ($user, $route, action = null) => {
+export default ($user = null, $route, action = null) => {
   // get namespace from meta, if don't have namespace in meta property confirm
   const namespace = get($route, 'meta.namespace', false)
   if (!namespace) {
     return true
   }
   // get permissions of current user, again confirm when is not defined
-  const permissions = get($user, 'permissions', false)
+  const permissions = store.getters.getAuthPermission
+
   if (!permissions) {
     return true
   }

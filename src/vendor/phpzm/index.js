@@ -16,7 +16,7 @@ import _i18n from 'genesis/support/i18n'
 import bootstrap from 'src/bootstrap/store'
 import messages from 'src/bootstrap/i18n'
 
-import { APP_USER, APP_TOKEN } from 'genesis/support/index'
+import { APP_USER, APP_TOKEN, APP_PERMISSIONS } from 'genesis/support/index'
 import { get } from 'genesis/infra/storage'
 
 const i18n = _i18n(process.env.LOCALE, messages)
@@ -36,6 +36,10 @@ export const install = (Vue, beforeUnload) => {
   const token = get(APP_TOKEN)
   if (token) {
     store.dispatch('setAuthToken', token)
+  }
+  const permission = get(APP_PERMISSIONS)
+  if (permission) {
+    store.dispatch('setAuthPermission', permission)
   }
 
   Vue.use(Vuelidate)
