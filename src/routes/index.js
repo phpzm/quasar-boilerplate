@@ -24,7 +24,7 @@ export const load = (component) => {
   if (!component) {
     return
   }
-  return () => System.import(`src/${component}.vue`)
+  return () => import(`src/${component}.vue`)
 }
 
 /**
